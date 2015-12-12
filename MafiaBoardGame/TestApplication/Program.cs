@@ -14,7 +14,10 @@ namespace TestApplication
         static void Main(string[] args)
         {
             ServiceReference1.GestionJoueurImplClient proxy = new ServiceReference1.GestionJoueurImplClient();
-            proxy.InscriptionJoueur("kev","kev");
+            proxy.InscriptionJoueur("Milenko", "Milenko");
+
+            ServiceReference2.GestionPartieClient proxy2 = new ServiceReference2.GestionPartieClient();
+            proxy2.CreerPartie("fifa","Milenko");
         }
     }
 }
