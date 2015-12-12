@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7f4f7b07-fe5f-49cd-beb3-dcf1b2cd200d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="45480dd0-d611-4001-b3e6-f75504955a30" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:50368/GestionPartieImpl.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GestionPartieImpl.wsdl" MetadataType="Wsdl" ID="2d9094b1-e239-4217-a433-79ef4c23eb90" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?wsdl" />
-    <MetadataFile FileName="GestionPartieImpl.xsd" MetadataType="Schema" ID="46c97e72-da99-4fb9-b505-fa65a310e3d0" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd0" />
-    <MetadataFile FileName="GestionPartieImpl.disco" MetadataType="Disco" ID="7c8693c9-dc9a-4969-b0d7-dadb00bc78a1" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?disco" />
-    <MetadataFile FileName="GestionPartieImpl1.xsd" MetadataType="Schema" ID="4be81209-6a5e-4a9b-90da-34f0d94eef19" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd1" />
+    <MetadataFile FileName="GestionPartieImpl.wsdl" MetadataType="Wsdl" ID="8180299a-b475-4ac8-98f6-580cd29413ca" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?wsdl" />
+    <MetadataFile FileName="GestionPartieImpl.xsd" MetadataType="Schema" ID="a47d6f25-c798-400e-b997-c63852bec565" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd0" />
+    <MetadataFile FileName="GestionPartieImpl.disco" MetadataType="Disco" ID="2590371c-debe-4eca-b149-4e3a56ffb52b" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?disco" />
+    <MetadataFile FileName="GestionPartieImpl1.xsd" MetadataType="Schema" ID="89325713-fc11-403c-b3d7-f375d4b0db1b" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd1" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

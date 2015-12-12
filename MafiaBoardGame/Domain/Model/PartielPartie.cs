@@ -34,7 +34,7 @@ namespace Domain.Model
             
             this.JoueurPartie = new HashSet<JoueurPartie>();
             this.Carte = new HashSet<Carte>();
-
+            this.Nom = nom;
             this.Sens = "Gauche";
             this.DateHeureCreation = DateTime.Now;
 

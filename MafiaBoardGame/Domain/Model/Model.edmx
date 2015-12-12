@@ -468,12 +468,12 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="51f01e98238f4017a78d234a40f7c7d8" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.Joueur" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Partie" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.JoueurPartie" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.De" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Carte" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+      <Diagram DiagramId="51f01e98238f4017a78d234a40f7c7d8" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="Model.Joueur" Width="1.5" PointX="6.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Partie" Width="1.5" PointX="3.625" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.JoueurPartie" Width="1.5" PointX="3.625" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.De" Width="1.5" PointX="5.625" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Carte" Width="1.5" PointX="1.625" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="Model.vainqueur" ManuallyRouted="false" />
         <AssociationConnector Association="Model.JoueurJoueurPartie" ManuallyRouted="false" />
         <AssociationConnector Association="Model.joueurCourant" ManuallyRouted="false" />
