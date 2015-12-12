@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3a83c16b-a4dd-44c1-b65f-517a7e0e55ea" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="55e30eb5-668e-4de1-831b-02c2293116ae" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,10 +22,10 @@
     <MetadataSource Address="http://localhost:50368/GestionJoueurImpl.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="GestionJoueurImpl.disco" MetadataType="Disco" ID="070558d4-a60c-457f-9f04-93391fe440d0" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?disco" />
-    <MetadataFile FileName="GestionJoueurImpl.wsdl" MetadataType="Wsdl" ID="7113ecf6-4178-4b0d-bab9-111c85a7bfb1" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?wsdl" />
-    <MetadataFile FileName="GestionJoueurImpl.xsd" MetadataType="Schema" ID="19ba39d0-f79d-4d18-a542-878e45faf98e" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?xsd=xsd1" />
-    <MetadataFile FileName="GestionJoueurImpl1.xsd" MetadataType="Schema" ID="fa8447d2-130e-47b2-bef9-2b28e5ffe970" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?xsd=xsd0" />
+    <MetadataFile FileName="GestionJoueurImpl.disco" MetadataType="Disco" ID="595ba32c-07dd-4fe1-810b-4b2774da6abc" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?disco" />
+    <MetadataFile FileName="GestionJoueurImpl.wsdl" MetadataType="Wsdl" ID="f4867020-8053-4acd-9cce-4faf91cae44d" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?wsdl" />
+    <MetadataFile FileName="GestionJoueurImpl.xsd" MetadataType="Schema" ID="4a492358-db00-4eb8-ba3a-f845227bc5ad" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?xsd=xsd1" />
+    <MetadataFile FileName="GestionJoueurImpl1.xsd" MetadataType="Schema" ID="a33013f6-8a85-4fe7-9b6e-f8f5d0e3f35c" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

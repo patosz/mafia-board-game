@@ -12,40 +12,40 @@ namespace TestApplication.ServiceReference1 {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IGestionJoueurImpl")]
-    public interface IGestionJoueurImpl {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IGestionJoueur")]
+    public interface IGestionJoueur {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionJoueurImpl/InscriptionJoueur", ReplyAction="http://tempuri.org/IGestionJoueurImpl/InscriptionJoueurResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionJoueur/InscriptionJoueur", ReplyAction="http://tempuri.org/IGestionJoueur/InscriptionJoueurResponse")]
         bool InscriptionJoueur(string pseudo, string mdp);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionJoueurImpl/InscriptionJoueur", ReplyAction="http://tempuri.org/IGestionJoueurImpl/InscriptionJoueurResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionJoueur/InscriptionJoueur", ReplyAction="http://tempuri.org/IGestionJoueur/InscriptionJoueurResponse")]
         System.Threading.Tasks.Task<bool> InscriptionJoueurAsync(string pseudo, string mdp);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IGestionJoueurImplChannel : TestApplication.ServiceReference1.IGestionJoueurImpl, System.ServiceModel.IClientChannel {
+    public interface IGestionJoueurChannel : TestApplication.ServiceReference1.IGestionJoueur, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GestionJoueurImplClient : System.ServiceModel.ClientBase<TestApplication.ServiceReference1.IGestionJoueurImpl>, TestApplication.ServiceReference1.IGestionJoueurImpl {
+    public partial class GestionJoueurClient : System.ServiceModel.ClientBase<TestApplication.ServiceReference1.IGestionJoueur>, TestApplication.ServiceReference1.IGestionJoueur {
         
-        public GestionJoueurImplClient() {
+        public GestionJoueurClient() {
         }
         
-        public GestionJoueurImplClient(string endpointConfigurationName) : 
+        public GestionJoueurClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public GestionJoueurImplClient(string endpointConfigurationName, string remoteAddress) : 
+        public GestionJoueurClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public GestionJoueurImplClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public GestionJoueurClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public GestionJoueurImplClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public GestionJoueurClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         

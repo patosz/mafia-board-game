@@ -1,6 +1,7 @@
 ﻿using Domain.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -24,11 +25,12 @@ namespace Domain
             throw new NotImplementedException();
         }
 
-        public bool CreerPartie(String nomPartie,String nomJoueur)
+        public bool CreerPartie(String nomPartie, String nomJoueur)
         {
+
             Joueur joueur = (from Joueur j in dbcontext.JoueurSet
-                           where j.Pseudo.Equals(nomJoueur)
-                           select j).FirstOrDefault();
+                             where j.Pseudo.Equals(nomJoueur)
+                             select j).FirstOrDefault();
             if (joueur == null)
             {
                 //erreur a géré 
@@ -38,31 +40,58 @@ namespace Domain
                 return false;
             if (partie == null || (int)partie.etat == (int)Partie.ETAT.TERMINE)
             {
-                partie = new Partie(nomPartie);
+                partie = new Partie (nomPartie);
                 partie.etat = (int)Partie.ETAT.INSCRIPTION;
                 // relation PartieJoueur 0..1 sinon EF demandera une référence joueur pour ce champ
                 //partie.JoueurCourant = joueur;
-                
+
+                try
+                {
+
+                    JoueurPartie joueurPartie = new JoueurPartie();
+                    //Joueur
+                    joueur.JoueurPartie.Add(joueurPartie);
+                    joueur.Partie.Add(partie);
+                    //JoueurPartie
+                    joueurPartie.Partie = partie;
+                    joueurPartie.Joueur = joueur;
+                    joueurPartie.JoueurId = joueur.Id;
+
+                    //Partie
+                    partie.JoueurPartie.Add(joueurPartie);
+                    partie.JoueurCourantPartie = joueurPartie;
+                    partie.JoueurId = joueur.Id;
+                    //JoueurPartie
+                    joueurPartie.OrdreJoueurs = partie.JoueurPartie.Count;
+                    joueurPartie.JoueurId = joueur.Id;
+
+                    dbcontext.JoueurPartieSet.Add(joueurPartie);
+                   // dbcontext.SaveChanges();
+                    dbcontext.JoueurSet.Add(joueur);
+                   // dbcontext.SaveChanges();
+                  //  dbcontext.Entry(joueur).State = System.Data.Entity.EntityState.Modified;
+                    dbcontext.PartieSet.Add(partie);
 
 
-                JoueurPartie joueurPartie = new JoueurPartie();
-                //Joueur
-                joueur.JoueurPartie.Add(joueurPartie);
-                joueur.Partie.Add(partie);
-                //JoueurPartie
-                joueurPartie.Partie = partie;
-                joueurPartie.Joueur = joueur;
+                    dbcontext.SaveChanges();
 
-                //Partie
-                partie.JoueurPartie.Add(joueurPartie);
-                //JoueurPartie
-                joueurPartie.OrdreJoueurs = partie.JoueurPartie.Count;
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (var eve in e.EntityValidationErrors)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                ve.PropertyName, ve.ErrorMessage);
+                        }
+                    }
+                    throw;
 
-                dbcontext.JoueurPartieSet.Add(joueurPartie);
-                dbcontext.JoueurSet.Add(joueur);
-                dbcontext.PartieSet.Add(partie);
-                dbcontext.SaveChanges();
 
+                }
             }
             return true;
         }

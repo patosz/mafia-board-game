@@ -6,22 +6,22 @@
       <xsd:import schemaLocation="http://localhost:50368/GestionJoueurImpl.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IGestionJoueurImpl_InscriptionJoueur_InputMessage">
+  <wsdl:message name="IGestionJoueur_InscriptionJoueur_InputMessage">
     <wsdl:part name="parameters" element="tns:InscriptionJoueur" />
   </wsdl:message>
-  <wsdl:message name="IGestionJoueurImpl_InscriptionJoueur_OutputMessage">
+  <wsdl:message name="IGestionJoueur_InscriptionJoueur_OutputMessage">
     <wsdl:part name="parameters" element="tns:InscriptionJoueurResponse" />
   </wsdl:message>
-  <wsdl:portType name="IGestionJoueurImpl">
+  <wsdl:portType name="IGestionJoueur">
     <wsdl:operation name="InscriptionJoueur">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestionJoueurImpl/InscriptionJoueur" message="tns:IGestionJoueurImpl_InscriptionJoueur_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestionJoueurImpl/InscriptionJoueurResponse" message="tns:IGestionJoueurImpl_InscriptionJoueur_OutputMessage" />
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionJoueur/InscriptionJoueur" message="tns:IGestionJoueur_InscriptionJoueur_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionJoueur/InscriptionJoueurResponse" message="tns:IGestionJoueur_InscriptionJoueur_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="BasicHttpBinding_IGestionJoueurImpl" type="tns:IGestionJoueurImpl">
+  <wsdl:binding name="BasicHttpBinding_IGestionJoueur" type="tns:IGestionJoueur">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="InscriptionJoueur">
-      <soap:operation soapAction="http://tempuri.org/IGestionJoueurImpl/InscriptionJoueur" style="document" />
+      <soap:operation soapAction="http://tempuri.org/IGestionJoueur/InscriptionJoueur" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -31,7 +31,7 @@
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="GestionJoueurImpl">
-    <wsdl:port name="BasicHttpBinding_IGestionJoueurImpl" binding="tns:BasicHttpBinding_IGestionJoueurImpl">
+    <wsdl:port name="BasicHttpBinding_IGestionJoueur" binding="tns:BasicHttpBinding_IGestionJoueur">
       <soap:address location="http://localhost:50368/GestionJoueurImpl.svc" />
     </wsdl:port>
   </wsdl:service>
