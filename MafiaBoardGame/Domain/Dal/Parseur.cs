@@ -2,8 +2,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Hosting;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -12,7 +14,7 @@ namespace Domain.Dal
     public class Parseur
     {
         //Load xml
-        private XDocument xdoc = XDocument.Load("D:\\projet13\\MafiaBoardGame\\Domain\\Xml\\wazabi.xml");
+        private XDocument xdoc = XDocument.Load(HostingEnvironment.ApplicationPhysicalPath+"Xml/wazabi.xml");
 
         public List<Carte> loadCarte()
         {

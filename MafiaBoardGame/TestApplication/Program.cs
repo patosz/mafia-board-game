@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-
 namespace TestApplication
 {
     class Program
@@ -15,12 +14,10 @@ namespace TestApplication
         static void Main(string[] args)
         {
             ServiceReference1.GestionJoueurClient proxy = new ServiceReference1.GestionJoueurClient();
-            proxy.InscriptionJoueur("Gio", "gigi");
+            proxy.InscriptionJoueur("Milenko5", "Milenko2");
 
             ServiceReference2.GestionPartieClient proxy2 = new ServiceReference2.GestionPartieClient();
-
-            proxy2.CreerPartie("Starfoulaaa", "Gio");
-
+            proxy2.CreerPartie("fifa","Milenko");
         }
     }
 }
