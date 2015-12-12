@@ -1,7 +1,24 @@
-﻿
+﻿@model Domain.Model.Joueur
+
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-<h2>Hello World !</h2>
+<div class="wrapper">
+    <div class="logo">
+    </div>
+    <div class="login-div">
+        @using (Html.BeginForm("Inscrire", "Joueur", FormMethod.Post))
+        {
+            @Html.LabelFor(m => Model.Pseudo, "Nom d'utilisateur")
+            <br />
+            @Html.TextBoxFor(m => Model.Pseudo)
+            <br />
+            @Html.LabelFor(m => Model.Mdp, "Mot de passe")
+            <br />
+            @Html.TextBoxFor(m => Model.Mdp)
+            <br />
+            <input type="submit" value="Se connecter" class="btn btn-primary" />
+        }
+    </div>
+</div>
