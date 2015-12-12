@@ -12,7 +12,7 @@ namespace Domain.Dal
     public class Parseur
     {
         //Load xml
-        private XDocument xdoc = XDocument.Load(@"..\\..\\..\\Domain\\Xml\\wazabi.xml");
+        private XDocument xdoc = XDocument.Load("wazabi.xml");
 
         public List<Carte> loadCarte()
         {
