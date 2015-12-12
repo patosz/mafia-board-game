@@ -71,6 +71,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GestionJoueurImpl.svc" />
+    <Content Include="GestionPartieImpl.svc" />
     <Content Include="Model\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model.Context.cs</LastGenOutput>
@@ -82,10 +84,20 @@
       <LastGenOutput>Model.cs</LastGenOutput>
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
-    <Content Include="Service1.svc" />
     <Content Include="Web.config" />
+    <Content Include="Xml\wazabi.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dal\Parseur.cs" />
+    <Compile Include="GestionJoueurImpl.svc.cs">
+      <DependentUpon>GestionJoueurImpl.svc</DependentUpon>
+    </Compile>
+    <Compile Include="GestionPartieImpl.svc.cs">
+      <DependentUpon>GestionPartieImpl.svc</DependentUpon>
+    </Compile>
+    <Compile Include="IGestionJoueur.cs" />
+    <Compile Include="IGestionPartie.cs" />
+    <Compile Include="JoueurClient.cs" />
     <Compile Include="Model\Carte.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -116,10 +128,8 @@
     <Compile Include="Model\Partie.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
-    </Compile>
-    <Compile Include="IService1.cs" />
+    <Compile Include="Model\PartielCarte.cs" />
+    <Compile Include="Model\PartielPartie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +149,9 @@
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Xml\wazabi.xsd">
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
