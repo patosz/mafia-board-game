@@ -1,22 +1,30 @@
 ﻿@model Domain.JoueurDto
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Welcome";
 }
-
-<div class="wrapper">
-    <div class="logo">
+<div class="panel">
+    <div class="panel-heading">
+        <h2>Mafia Board Game - Connexion</h2>
     </div>
-    <div class="login-div">
+    <div class="panel-body">
+        @if (TempData["error"] != null)
+        {
+        <div class="alert alert-danger">
+            @TempData["error"]
+        </div>
+        }
+
         @using (Html.BeginForm("Inscrire", "Joueur", FormMethod.Post))
         {
-            @Html.LabelFor(m => Model.Pseudo, "Nom d'utilisateur")
-            <br />
-            @Html.TextBoxFor(m => Model.Pseudo)
-            <br />
-            @Html.LabelFor(m => Model.Mdp, "Mot de passe")
-            <br />
-            @Html.TextBoxFor(m => Model.Mdp)
+            <div class="form-group">
+                @Html.LabelFor(m => Model.Pseudo, "Nom d'utilisateur")
+                @Html.TextBoxFor(m => Model.Pseudo, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => Model.Mdp, "Mot de passe")
+                @Html.TextBoxFor(m => Model.Mdp, new { @class = "form-control" })
+            </div>
             <br />
             <input type="submit" value="Se connecter" class="btn btn-primary" />
         }

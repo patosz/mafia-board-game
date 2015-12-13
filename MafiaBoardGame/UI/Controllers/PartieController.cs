@@ -12,10 +12,22 @@ namespace UI.Controllers
         // GET: Partie
         public ActionResult Index(String pseudo)
         {
-            if (TempData["myUser"] == null)
-                throw new Exception("ViewData null :p");
+            if (Session[pseudo] == null)
+                throw new Exception("Session is null :p");
 
-            return View((JoueurDto) TempData["myUser"]);
+            return View((JoueurDto) Session["user"]);
+        }
+
+        public bool Rejoindre(string pseudo)
+        {
+
+            return false;
+        }
+
+        [HttpPost]
+        public bool Creer(string nom)
+        {
+            return false;
         }
     }
 }
