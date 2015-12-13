@@ -91,6 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dal\Parseur.cs" />
+    <Compile Include="Dto\CarteDto.cs" />
+    <Compile Include="Dto\DeDto.cs" />
+    <Compile Include="Dto\JoueurPartieDto.cs" />
+    <Compile Include="Dto\PartieDto.cs" />
     <Compile Include="GestionJoueurImpl.svc.cs">
       <DependentUpon>GestionJoueurImpl.svc</DependentUpon>
     </Compile>

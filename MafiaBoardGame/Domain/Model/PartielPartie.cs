@@ -18,11 +18,11 @@ namespace Domain.Model
         {
             get; set;
         }
-        private int minJoueurs
+        public int minJoueurs
         {
             get; set;
         }
-        private int maxJoueur
+        public int maxJoueur
         {
             get; set;
         }
