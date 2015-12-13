@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(m => Model.Mdp, "Mot de passe")
-                @Html.TextBoxFor(m => Model.Mdp, new { @class = "form-control" })
+                @Html.PasswordFor(m => Model.Mdp, new { @class = "form-control" })
             </div>
             <br />
             <input type="submit" value="Se connecter" class="btn btn-primary" />
