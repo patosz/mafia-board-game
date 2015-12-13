@@ -99,7 +99,7 @@
     </Compile>
     <Compile Include="IGestionJoueur.cs" />
     <Compile Include="IGestionPartie.cs" />
-    <Compile Include="JoueurClient.cs" />
+    <Compile Include="Dto\JoueurDto.cs" />
     <Compile Include="Model\Carte.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>

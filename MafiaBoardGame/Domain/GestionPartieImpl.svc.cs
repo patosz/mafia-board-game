@@ -104,6 +104,9 @@ namespace Domain
             return true;
         }
 
+
+
+
         public string GetPartie()
         {
             string str = "";

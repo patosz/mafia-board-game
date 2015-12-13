@@ -7,11 +7,11 @@ namespace Domain.Model
 {
     public partial class Carte
     {
-        private string Effet
+        public string Effet
         {
             get; set;
         }
-        private string EffetComplet
+        public string EffetComplet
         {
             get; set;
         }

@@ -7,9 +7,11 @@ using System.Web;
 namespace Domain
 {
 
-    //pas utile je pense
+    //TODO ID useless ?
+    //TODO Etendre Biz au DTO ??
+
     [DataContract]
-    public class JoueurClient
+    public class JoueurDto
     {
         [DataMember]
         public int Id { get; set; }
