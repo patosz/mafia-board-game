@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UI.UCCPartieRef {
+namespace UI.UccPartieRef {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UCCPartieRef.IGestionPartie")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="UccPartieRef.IGestionPartie")]
     public interface IGestionPartie {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/CreerPartie", ReplyAction="http://tempuri.org/IGestionPartie/CreerPartieResponse")]
@@ -41,12 +41,12 @@ namespace UI.UCCPartieRef {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IGestionPartieChannel : UI.UCCPartieRef.IGestionPartie, System.ServiceModel.IClientChannel {
+    public interface IGestionPartieChannel : UI.UccPartieRef.IGestionPartie, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class GestionPartieClient : System.ServiceModel.ClientBase<UI.UCCPartieRef.IGestionPartie>, UI.UCCPartieRef.IGestionPartie {
+    public partial class GestionPartieClient : System.ServiceModel.ClientBase<UI.UccPartieRef.IGestionPartie>, UI.UccPartieRef.IGestionPartie {
         
         public GestionPartieClient() {
         }

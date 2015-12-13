@@ -9,19 +9,21 @@ namespace UI.Controllers
 {
     public class JoueurController : Controller
     {
-        private UCCJoueurRef.GestionJoueurClient uccJoueur;
-
-        public JoueurController(UCCJoueurRef.GestionJoueurClient uccJoueur)
-        {
-            this.uccJoueur = uccJoueur;
-        }
+        private UccJoueurRef.GestionJoueurClient uccJoueur = new UccJoueurRef.GestionJoueurClient();
 
         [HttpPost]
         public ActionResult Inscrire(string pseudo, string mdp)
         {
+            JoueurDto jDto = uccJoueur.ConnexionJoueur(pseudo, mdp);
 
-            //JoueurClient jc = uccJoueur.InscriptionJoueur(pseudo, mdp);
-            return RedirectToAction("Partie",new { controller = "Index" });
+            if (jDto == null)
+                return RedirectToAction("Index", new { controller = "Index" });
+
+            //Session["username"] = jDto.Pseudo;
+
+            TempData.Add("myUser", jDto);
+
+            return RedirectToAction("Index", "Partie",new { pseudo = jDto.Pseudo });
         }
     }
 }
