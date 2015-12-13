@@ -14,6 +14,6 @@ namespace Domain
         [OperationContract]
         bool InscriptionJoueur(String pseudo, String mdp);
         [OperationContract]
-        bool ConnexionJoueur(String pseudo, String mdp);
+        JoueurDto ConnexionJoueur(String pseudo, String mdp);
     }
 }

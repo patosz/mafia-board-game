@@ -21,7 +21,7 @@ namespace TestApplication
                 Console.WriteLine("Joueur Déjà Inscrit!");
 
             ServiceReference2.GestionPartieClient proxy2 = new ServiceReference2.GestionPartieClient();
-            ok = proxy2.CreerPartie("bri","bru");
+            ok = proxy2.CreerPartie("sdvcggg","bru");
             if (ok)
                 Console.WriteLine("Partie crée correctement :)");
             else

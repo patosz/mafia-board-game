@@ -37,6 +37,7 @@ namespace Domain.Dal
                                select xml2).FirstOrDefault();
 
             List<int> list = new List<int>();
+            
             list.Add(int.Parse(cartes.Attribute("nbCartesParJoueur").Value));
             list.Add(int.Parse(cartes.Attribute("nbCartesTotal").Value));
             list.Add(int.Parse(cartes.Attribute("minJoueurs").Value));

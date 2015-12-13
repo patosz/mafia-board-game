@@ -33,7 +33,7 @@ namespace Domain.Model
             // ligne du contructeur généré
             
             this.JoueursParticipants = new HashSet<JoueurPartie>();
-            this.CartesPioche = new HashSet<Carte>();
+            this.CartesPioche = new List<Carte>();
             this.Nom = nom;
             this.Sens = true;
             this.DateHeureCreation = DateTime.Now;
@@ -44,23 +44,18 @@ namespace Domain.Model
             nbCartesTotal = cartesInfo.ElementAt(1);
             minJoueurs = cartesInfo.ElementAt(2);
             maxJoueur = cartesInfo.ElementAt(3);
-            //TODO init des cartes => lecture du fichier xml pour le nombre de carte
-            //TODO creation des cartes et ajout
 
             List<Carte> listeTypeCarte = parseur.loadCarte();
+
             for (int i = 0; i < nbCartesTotal; i++)
              {
-
-                 this.CartesPioche.Add(listeTypeCarte.ElementAt(i % 10));
-
+                Carte carte = new Carte(listeTypeCarte.ElementAt(i%10).CodeEffet, listeTypeCarte.ElementAt(i%10).Cout,listeTypeCarte.ElementAt(i%10).Effet, listeTypeCarte.ElementAt(i % 10).EffetComplet);
+                this.CartesPioche.Add(carte);       
              }
-            
-
         }
       
         public bool CommencerPartie()
         {
-            
             return true;
         }
     }
