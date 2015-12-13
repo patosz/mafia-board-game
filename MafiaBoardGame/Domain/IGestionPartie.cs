@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -17,7 +18,8 @@ namespace Domain
         bool RejoindrePartie(String pseudo);
         [OperationContract]
         bool CommencerPartie();
-        
+        [OperationContract]
+        string GetPartie();
 
 
     }

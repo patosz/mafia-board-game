@@ -32,10 +32,10 @@ namespace Domain.Model
         {
             // ligne du contructeur généré
             
-            this.JoueurPartie = new HashSet<JoueurPartie>();
-            this.Carte = new HashSet<Carte>();
+            this.JoueursParticipants = new HashSet<JoueurPartie>();
+            this.CartesPioche = new HashSet<Carte>();
             this.Nom = nom;
-            this.Sens = "Gauche";
+            this.Sens = true;
             this.DateHeureCreation = DateTime.Now;
 
             List<int> cartesInfo = parseur.loadInfoCartes();
@@ -44,14 +44,14 @@ namespace Domain.Model
             nbCartesTotal = cartesInfo.ElementAt(1);
             minJoueurs = cartesInfo.ElementAt(2);
             maxJoueur = cartesInfo.ElementAt(3);
-            //init des cartes => lecture du fichier xml pour le nombre de carte
-            // creation des cartes et ajout
+            //TODO init des cartes => lecture du fichier xml pour le nombre de carte
+            //TODO creation des cartes et ajout
 
             List<Carte> listeTypeCarte = parseur.loadCarte();
             for (int i = 0; i < nbCartesTotal; i++)
              {
 
-                 this.Carte.Add(listeTypeCarte.ElementAt(i % 10));
+                 this.CartesPioche.Add(listeTypeCarte.ElementAt(i % 10));
 
              }
             

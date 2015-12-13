@@ -17,7 +17,7 @@ namespace Domain
         public bool InscriptionJoueur(string pseudo, string mdp)
         {
             Joueur joueur;
-            Joueur temp = (from Joueur j in dbcontext.JoueurSet
+            Joueur temp = (from Joueur j in dbcontext.Joueurs
                            where j.Pseudo.Equals(pseudo)
                            select j).FirstOrDefault();
             if (temp == null)
@@ -25,7 +25,7 @@ namespace Domain
                 joueur = new Joueur();
                 joueur.Pseudo = pseudo;
                 joueur.Mdp = mdp;
-                dbcontext.JoueurSet.Add(joueur);
+                dbcontext.Joueurs.Add(joueur);
                 dbcontext.SaveChanges();
                 return true;
             }

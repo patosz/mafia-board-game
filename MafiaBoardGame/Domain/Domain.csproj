@@ -73,16 +73,16 @@
   <ItemGroup>
     <Content Include="GestionJoueurImpl.svc" />
     <Content Include="GestionPartieImpl.svc" />
-    <Content Include="Model\Model.Context.tt">
+    <Content Include="Model\Model2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
-      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model2.Context.cs</LastGenOutput>
+      <DependentUpon>Model2.edmx</DependentUpon>
     </Content>
-    <Content Include="Model\Model.edmx.sql" />
-    <Content Include="Model\Model.tt">
+    <Content Include="Model\Model2.edmx.sql" />
+    <Content Include="Model\Model2.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model.cs</LastGenOutput>
-      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model2.cs</LastGenOutput>
+      <DependentUpon>Model2.edmx</DependentUpon>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Xml\wazabi.xml">
@@ -101,34 +101,34 @@
     <Compile Include="IGestionPartie.cs" />
     <Compile Include="JoueurClient.cs" />
     <Compile Include="Model\Carte.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\De.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Joueur.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\JoueurPartie.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model.Context.cs">
+    <Compile Include="Model\Model2.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
+      <DependentUpon>Model2.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model.cs">
+    <Compile Include="Model\Model2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model.Designer.cs">
+    <Compile Include="Model\Model21.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
+      <DependentUpon>Model2.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\Partie.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PartielCarte.cs" />
     <Compile Include="Model\PartielPartie.cs" />
@@ -144,13 +144,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <EntityDeploy Include="Model\Model.edmx">
+    <EntityDeploy Include="Model\Model2.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>Model21.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Model\Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

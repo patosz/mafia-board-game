@@ -24,6 +24,12 @@
   <wsdl:message name="IGestionPartie_CommencerPartie_OutputMessage">
     <wsdl:part name="parameters" element="tns:CommencerPartieResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionPartie_GetPartie_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPartie" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_GetPartie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPartieResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionPartie">
     <wsdl:operation name="CreerPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/CreerPartie" message="tns:IGestionPartie_CreerPartie_InputMessage" />
@@ -36,6 +42,10 @@
     <wsdl:operation name="CommencerPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/CommencerPartie" message="tns:IGestionPartie_CommencerPartie_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/CommencerPartieResponse" message="tns:IGestionPartie_CommencerPartie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPartie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/GetPartie" message="tns:IGestionPartie_GetPartie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/GetPartieResponse" message="tns:IGestionPartie_GetPartie_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGestionPartie" type="tns:IGestionPartie">
@@ -60,6 +70,15 @@
     </wsdl:operation>
     <wsdl:operation name="CommencerPartie">
       <soap:operation soapAction="http://tempuri.org/IGestionPartie/CommencerPartie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPartie">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/GetPartie" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

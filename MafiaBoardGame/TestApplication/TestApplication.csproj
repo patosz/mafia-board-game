@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\DataSources\Domain.Model.Partie.datasource" />
     <None Include="Service References\ServiceReference1\GestionJoueurImpl.wsdl" />
     <None Include="Service References\ServiceReference1\GestionJoueurImpl.xsd">
       <SubType>Designer</SubType>

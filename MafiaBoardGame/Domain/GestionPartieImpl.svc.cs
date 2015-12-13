@@ -15,7 +15,7 @@ namespace Domain
     {
 
         private static ModelContainer dbcontext;
-        private Partie partie;
+        private static Partie partie;
         public GestionPartieImpl()
         {
             dbcontext = new ModelContainer();
@@ -28,19 +28,24 @@ namespace Domain
         public bool CreerPartie(String nomPartie, String nomJoueur)
         {
 
-            Joueur joueur = (from Joueur j in dbcontext.JoueurSet
+            Joueur joueur = (from Joueur j in dbcontext.Joueurs
                              where j.Pseudo.Equals(nomJoueur)
                              select j).FirstOrDefault();
+
             if (joueur == null)
             {
-                //erreur a géré 
+                //TODO erreur a géré 
                 return false;
             }
+
             if (partie != null && (int)partie.etat == (int)Partie.ETAT.EN_COURS)
+            {
                 return false;
+            }
+
             if (partie == null || (int)partie.etat == (int)Partie.ETAT.TERMINE)
             {
-                partie = new Partie (nomPartie);
+                partie = new Partie(nomPartie);
                 partie.etat = (int)Partie.ETAT.INSCRIPTION;
                 // relation PartieJoueur 0..1 sinon EF demandera une référence joueur pour ce champ
                 //partie.JoueurCourant = joueur;
@@ -49,28 +54,31 @@ namespace Domain
                 {
 
                     JoueurPartie joueurPartie = new JoueurPartie();
+
                     //Joueur
-                    joueur.JoueurPartie.Add(joueurPartie);
-                    joueur.Partie.Add(partie);
+                    joueur.PartiesJouees.Add(joueurPartie);
+                    //joueur.PartiesGagnees.Add(partie);
+
                     //JoueurPartie
                     joueurPartie.Partie = partie;
                     joueurPartie.Joueur = joueur;
-                    joueurPartie.JoueurId = joueur.Id;
+                    joueurPartie.PartieCourant = partie;
+                    //joueurPartie.JoueurId = joueur.Id;
+
 
                     //Partie
-                    partie.JoueurPartie.Add(joueurPartie);
-                    partie.JoueurCourantPartie = joueurPartie;
-                    partie.JoueurId = joueur.Id;
-                    //JoueurPartie
-                    joueurPartie.OrdreJoueurs = partie.JoueurPartie.Count;
-                    joueurPartie.JoueurId = joueur.Id;
+                    partie.JoueursParticipants.Add(joueurPartie);
+                    partie.JoueurCourant = joueurPartie;
+                    //partie.JoueurId = joueur.Id;
 
-                    dbcontext.JoueurPartieSet.Add(joueurPartie);
-                   // dbcontext.SaveChanges();
-                    dbcontext.JoueurSet.Add(joueur);
-                   // dbcontext.SaveChanges();
-                  //  dbcontext.Entry(joueur).State = System.Data.Entity.EntityState.Modified;
-                    dbcontext.PartieSet.Add(partie);
+                    //JoueurPartie
+                    joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
+                    //joueurPartie.JoueurId = joueur.Id;
+
+                    dbcontext.JoueurParties.Add(joueurPartie);
+                    //dbcontext.Joueurs.Add(joueur);
+                    dbcontext.Entry(joueur).State = System.Data.Entity.EntityState.Modified;
+                    dbcontext.Parties.Add(partie);
 
 
                     dbcontext.SaveChanges();
@@ -94,6 +102,20 @@ namespace Domain
                 }
             }
             return true;
+        }
+
+        public string GetPartie()
+        {
+            string str = "";
+            str += "Détails de la partie : \n";
+            str += "Id : " + partie.Id + "\n";
+            str += "Nom : " + partie.Nom + "\n";
+            str += "Sens : " + partie.Sens + "\n";
+            str += "Etat : " + partie.etat + "\n";
+            str += "Heure de création : " + partie.DateHeureCreation + "\n";
+            str += "Joueur Courant :" + partie.JoueurCourant.Joueur.Pseudo + "\n";
+            str += "Nb de participants : " + partie.JoueursParticipants.Count + "\n";
+            return str;
         }
 
         public bool RejoindrePartie(string pseudo)
