@@ -31,5 +31,18 @@ namespace Domain
             }
             return false;
         }
+        public bool ConnexionJoueur(string pseudo, string mdp)
+        {
+            
+            Joueur joueur = (from Joueur j in dbcontext.Joueurs
+                           where j.Pseudo.Equals(pseudo)
+                           select j).FirstOrDefault();
+            if (joueur == null)
+            {
+                
+                return false;
+            }
+            return true;
+        }
     }
 }

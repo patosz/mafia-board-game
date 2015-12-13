@@ -15,7 +15,7 @@ namespace Domain
     {
 
         private static ModelContainer dbcontext;
-        private static Partie partie;
+        private Partie partie;
         public GestionPartieImpl()
         {
             dbcontext = new ModelContainer();
