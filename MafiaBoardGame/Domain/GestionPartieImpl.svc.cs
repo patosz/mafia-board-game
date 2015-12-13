@@ -1,4 +1,6 @@
-﻿using Domain.Model;
+﻿using Domain.Dto;
+using Domain.Model;
+using Domain.Util;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -16,6 +18,7 @@ namespace Domain
 
         private static ModelContainer dbcontext;
         private Partie partie;
+        private PartieDto partieDto;
         public GestionPartieImpl()
         {
             dbcontext = new ModelContainer();
@@ -50,56 +53,59 @@ namespace Domain
                 // relation PartieJoueur 0..1 sinon EF demandera une référence joueur pour ce champ
                 //partie.JoueurCourant = joueur;
 
-                try
-                {
+                /*try
+                {*/
 
-                    JoueurPartie joueurPartie = new JoueurPartie();
+                JoueurPartie joueurPartie = new JoueurPartie();
 
-                    //Joueur
-                    joueur.PartiesJouees.Add(joueurPartie);
-                    //joueur.PartiesGagnees.Add(partie);
+                //Joueur
+                joueur.PartiesJouees.Add(joueurPartie);
+                //joueur.PartiesGagnees.Add(partie);
 
-                    //JoueurPartie
-                    joueurPartie.Partie = partie;
-                    joueurPartie.Joueur = joueur;
-                    joueurPartie.PartieCourant = partie;
-                    //joueurPartie.JoueurId = joueur.Id;
-
-
-                    //Partie
-                    partie.JoueursParticipants.Add(joueurPartie);
-                    partie.JoueurCourant = joueurPartie;
-                    //partie.JoueurId = joueur.Id;
-
-                    //JoueurPartie
-                    joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
-                    //joueurPartie.JoueurId = joueur.Id;
-
-                    dbcontext.JoueurParties.Add(joueurPartie);
-                    //dbcontext.Joueurs.Add(joueur);
-                    dbcontext.Entry(joueur).State = System.Data.Entity.EntityState.Modified;
-                    dbcontext.Parties.Add(partie);
+                //JoueurPartie
+                joueurPartie.Partie = partie;
+                joueurPartie.Joueur = joueur;
+                joueurPartie.PartieCourant = partie;
+                //joueurPartie.JoueurId = joueur.Id;
 
 
-                    dbcontext.SaveChanges();
+                //Partie
+                partie.JoueursParticipants.Add(joueurPartie);
+                partie.JoueurCourant = joueurPartie;
+                //partie.JoueurId = joueur.Id;
 
-                }
-                catch (DbEntityValidationException e)
-                {
-                    foreach (var eve in e.EntityValidationErrors)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
-                            eve.Entry.Entity.GetType().Name, eve.Entry.State);
-                        foreach (var ve in eve.ValidationErrors)
-                        {
-                            System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
-                                ve.PropertyName, ve.ErrorMessage);
-                        }
-                    }
-                    throw;
+                //JoueurPartie
+                joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
+                //joueurPartie.JoueurId = joueur.Id;
+
+                dbcontext.JoueurParties.Add(joueurPartie);
+                //dbcontext.Joueurs.Add(joueur);
+                dbcontext.Entry(joueur).State = System.Data.Entity.EntityState.Modified;
+                dbcontext.Parties.Add(partie);
 
 
-                }
+                dbcontext.SaveChanges();
+
+                //création de la partieDto et on charge la partie
+                //partieDto = BizToDto.ToPartieDto(partie);
+
+                //    }
+                /* catch (DbEntityValidationException e)
+                 {
+                     foreach (var eve in e.EntityValidationErrors)
+                     {
+                         System.Diagnostics.Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                             eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                         foreach (var ve in eve.ValidationErrors)
+                         {
+                             System.Diagnostics.Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                                 ve.PropertyName, ve.ErrorMessage);
+                         }
+                     }
+                     throw;
+
+
+                 }*/
             }
             return true;
         }
@@ -121,9 +127,49 @@ namespace Domain
             return str;
         }
 
+        //on donne quoi le string un objet??
         public bool RejoindrePartie(string pseudo)
         {
-            return false;
+            
+            Joueur joueur = (from Joueur j in dbcontext.Joueurs
+                           where j.Pseudo.Equals(pseudo)
+                           select j).FirstOrDefault();
+            //Pas de création!
+            if (partie == null)
+            {
+                return false;
+            }
+            if (partie != null && (int)partie.etat == (int)Partie.ETAT.EN_COURS)
+            {
+                return false;
+            }
+
+            if ((int)partie.etat == (int)Partie.ETAT.INSCRIPTION)
+            {
+                JoueurPartie joueurPartie = new JoueurPartie();
+                joueur.PartiesJouees.Add(joueurPartie);
+                //est ce que je dois vraiment mettre la partie courante?
+                joueurPartie.Partie = partie;
+                joueurPartie.Joueur = joueur;
+                joueurPartie.PartieCourant = partie;
+
+                //est ce que je dois vraiment mettre la JoueurCourant courante?
+                partie.JoueursParticipants.Add(joueurPartie);
+                partie.JoueurCourant = joueurPartie;
+
+                joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
+
+                dbcontext.JoueurParties.Add(joueurPartie);
+                //dbcontext.Joueurs.Add(joueur);
+                dbcontext.Entry(joueur).State = System.Data.Entity.EntityState.Modified;
+                dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                //dbcontext.Parties.Add(partie);
+
+
+                dbcontext.SaveChanges();
+            }
+
+                return true;
         }
     }
 }

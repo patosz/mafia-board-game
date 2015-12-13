@@ -1,4 +1,5 @@
 ﻿using Domain.Dal;
+using Domain.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,10 @@ namespace Domain.Model
         {
             return true;
         }
+
+       
+
+        
     }
     
 }
