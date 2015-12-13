@@ -17,13 +17,14 @@ namespace UI.Controllers
             JoueurDto jDto = uccJoueur.ConnexionJoueur(pseudo, mdp);
 
             if (jDto == null)
+            {
+                TempData["error"] = "Erreur de login ou mot de passe";
                 return RedirectToAction("Index", new { controller = "Index" });
+            }
 
-            //Session["username"] = jDto.Pseudo;
+            Session["user"] = jDto;
 
-            TempData.Add("myUser", jDto);
-
-            return RedirectToAction("Index", "Partie",new { pseudo = jDto.Pseudo });
+            return RedirectToAction("Index", "Partie");
         }
     }
 }

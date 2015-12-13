@@ -141,6 +141,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\myAjaxCalls.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +168,9 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_LayoutBckp2.cshtml" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
-    <Content Include="Views\Shared\_LayoutBckp.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Index\Index.cshtml" />
     <None Include="Service References\UccJoueurRef\GestionJoueurImpl.wsdl" />
     <None Include="Service References\UccJoueurRef\GestionJoueurImpl.xsd">
@@ -199,7 +200,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Joueur\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

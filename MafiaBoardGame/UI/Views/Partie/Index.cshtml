@@ -1,17 +1,33 @@
 ﻿@model Domain.JoueurDto
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Your Account";
 }
 
-<h2 style="color:white;">Mafia Game Board</h2>
+<h2>Mafia Game Board</h2>
+<h3>Bienvenue @Model.Pseudo</h3>
 
-<p style="color:white;">
-    <!-- @Session["username"] -->
-    @Model.Pseudo
-</p>
-<p style="color:white;">
-    Vous avez réussi à vous connecter à votre compte :)
-</p>
+<div class="alert alert-danger">
+    <h1>!!! ACHTUNG !!!</h1>
+    <p>
+        Ne pas clicker sur les liens. Ils sont en cours d'implémentation !!!
+    </p>
+</div>
+
+
+@using (Html.BeginForm("Creer", "Partie", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Nom partie")
+        @Html.TextBox("nomPartie", new { @id = "nomPartie", @class = "form - control" })
+    </div>
+    <input type="submit" value="Creer Partie" />
+}
+
+
+<br />
+<button onclick="@Url.Action("Rejoindre","Partie",new { pseudo = Model.Pseudo})"> Rejoindre Partie</button>
+<br />
+<button> Voir parties</button>
 
 
