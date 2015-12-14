@@ -12,7 +12,7 @@ namespace UI.Controllers
         private UccJoueurRef.GestionJoueurClient uccJoueur = new UccJoueurRef.GestionJoueurClient();
 
         [HttpPost]
-        public ActionResult Inscrire(string pseudo, string mdp)
+        public ActionResult LogIn(string pseudo, string mdp)
         {
             JoueurDto jDto = uccJoueur.ConnexionJoueur(pseudo, mdp);
 
@@ -25,6 +25,13 @@ namespace UI.Controllers
             Session["user"] = jDto;
 
             return RedirectToAction("Index", "Partie");
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            Session.Abandon();
+            return RedirectToAction("Index", new { controller = "Index" });
         }
     }
 }
