@@ -298,7 +298,7 @@ namespace Domain
 
         //Service des Get Objet
 
-        public JoueurPartieDto getJoueurPartieDto(int IdJoueurPartie)
+        public JoueurPartieDto getJoueurParticipantDto(int IdJoueurPartie)
         {
             JoueurPartie joueurPartie = (from JoueurPartie j in dbcontext.JoueurParties
                                          where j.Id.Equals(IdJoueurPartie)
@@ -308,7 +308,7 @@ namespace Domain
 
         }
 
-        public List<JoueurPartieDto> getListJoueurPartieDto(int IdPartie)
+        public List<JoueurPartieDto> getListJoueurParticipantsDto(int IdPartie)
         {
             List<JoueurPartieDto> listJoueurPartie = new List<JoueurPartieDto>();
            var list = (from JoueurPartie j in dbcontext.JoueurParties
@@ -323,9 +323,46 @@ namespace Domain
             return listJoueurPartie;
         }
 
-        
+        public List<DeDto> getListDesDto(int IdJoueurPartie)
+        {
+            List<DeDto> listDeDto = new List<DeDto>();
+            JoueurPartie joueurPartie = (from JoueurPartie j in dbcontext.JoueurParties
+                                         where j.Id.Equals(IdJoueurPartie)
+                                         select j).FirstOrDefault();
+            foreach (De de in joueurPartie.DesMain)
+            {
+                listDeDto.Add(BizToDto.ToDeDto(de));
+            }
 
 
+            return listDeDto;
+        }
 
+        public List<CarteDto> getListCartesDto(int IdJoueurPartie)
+        {
+            List<CarteDto> listDeDto = new List<CarteDto>();
+            JoueurPartie joueurPartie = (from JoueurPartie j in dbcontext.JoueurParties
+                                         where j.Id.Equals(IdJoueurPartie)
+                                         select j).FirstOrDefault();
+            foreach (Carte carte in joueurPartie.CartesMain)
+            {
+                listDeDto.Add(BizToDto.ToCarteDto(carte));
+            }
+
+
+            return listDeDto;
+        }
+
+        public JoueurDto getJoueurDto(int IdJoueurPartie)
+        {
+            JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartie)
+                                         select jp).FirstOrDefault();
+
+            Joueur joueur = (from Joueur j in dbcontext.Joueurs
+                                         where j.Id.Equals(joueurPartie.JoueurId)
+                                         select j).FirstOrDefault();
+            return BizToDto.ToJoueurDto(joueur);
+        }
     }
 }
