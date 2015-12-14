@@ -126,6 +126,13 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <None Include="Service References\UccJoueurRef\GestionJoueurImpl.disco" />
     <None Include="Service References\UccJoueurRef\configuration91.svcinfo" />
@@ -190,6 +197,9 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Partie\Index.cshtml" />
+    <Content Include="Views\Partie\Rejoindre.cshtml" />
+    <Content Include="Views\Partie\CreerForm.cshtml" />
+    <Content Include="Views\Partie\VoirParties.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
