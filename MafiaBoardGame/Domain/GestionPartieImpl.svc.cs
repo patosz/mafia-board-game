@@ -352,5 +352,17 @@ namespace Domain
 
             return listDeDto;
         }
+
+        public JoueurDto getJoueurDto(int IdJoueurPartie)
+        {
+            JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartie)
+                                         select jp).FirstOrDefault();
+
+            Joueur joueur = (from Joueur j in dbcontext.Joueurs
+                                         where j.Id.Equals(joueurPartie.JoueurId)
+                                         select j).FirstOrDefault();
+            return BizToDto.ToJoueurDto(joueur);
+        }
     }
 }
