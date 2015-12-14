@@ -28,9 +28,27 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        public bool Creer(string nomPartie)
+        public ActionResult Creer(string nomPartie)
         {
-            return false;
+            string pseudo = ((JoueurDto)Session["user"]).Pseudo;
+            bool res = UccPartie.CreerPartie(nomPartie, pseudo);
+            if (res)
+            {
+                //TODO need méthode pour avoir le nom/id de la partie
+                //Session["partie"] = UccPartie.GetPartie();
+                return RedirectToAction("WaitForStart");
+            }
+            else
+            {
+                TempData["error"] = "Un problème est servenu lors de la création de la partie";
+                return RedirectToAction("Creer");
+            }
+        }
+
+        public ViewResult WaitForStart()
+        {
+            //TODO passer le nom de la partie à la vue
+            return View();   
         }
 
         public ViewResult Rejoindre(string pseudo)

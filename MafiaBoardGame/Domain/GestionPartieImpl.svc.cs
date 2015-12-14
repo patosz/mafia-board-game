@@ -115,7 +115,7 @@ namespace Domain
 
 
 
-        public string GetPartie()
+        public string GetPartieDebug()
         {
             string str = "";
             str += "Détails de la partie : \n";
