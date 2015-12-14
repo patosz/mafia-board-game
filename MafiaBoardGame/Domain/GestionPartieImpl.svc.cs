@@ -149,6 +149,7 @@ namespace Domain
             if ((int)partie.etat == (int)Partie.ETAT.INSCRIPTION)
             {
 
+                //TODO Debug exception de merde
                 JoueurPartie joueurPartie = new JoueurPartie();
                 joueurPartie.Partie = partie;
                 dbcontext.JoueurParties.Add(joueurPartie);
@@ -234,7 +235,40 @@ namespace Domain
 
         }
 
+        public PartieDto LancerPartie()
+        {
+            List<JoueurPartie> listeJoueurPartie =partie.JoueursParticipants.ToList();
+            for (int i= 0; i < listeJoueurPartie.Count; i++)
+            {
+                JoueurPartie joueurPartie =listeJoueurPartie.ElementAt(i);
+                //recupere le nombre de carte
+                int numCarteParjoueur = partie.nbCartesParJoueur;
+                for(int j=0; j < numCarteParjoueur; j++)
+                {
+                    //piocher Carte
+                    //joueurPartie.
 
+                }
+                
+            }
+            
 
+            return null;
+        }
+
+        public Carte piocherCarte(int idJoueurPartie)
+        {
+
+            JoueurPartie joueurPartie= (from JoueurPartie j in dbcontext.JoueurParties
+                                        where j.Id.Equals(idJoueurPartie)
+                                        select j).FirstOrDefault();
+
+            CartePartie cartePartie = partie.CartePartie.First();
+            Carte carte= cartePartie.Carte;
+
+            partie.CartePartie.Remove(cartePartie);
+
+            return null;
+        }
     }
 }

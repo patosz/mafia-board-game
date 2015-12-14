@@ -9,9 +9,10 @@ namespace Domain.Model
 {
     public partial class Partie
     {
+        
         public enum ETAT { INSCRIPTION = 0, EN_COURS = 1, TERMINE = 2 };
         public ETAT etat { get; set; }
-        private int nbCartesParJoueur
+        public int nbCartesParJoueur
         {
             get; set;
         }
@@ -49,6 +50,8 @@ namespace Domain.Model
             maxJoueur = cartesInfo.ElementAt(3);
 
             List<Carte> listeTypeCarte = parseur.loadCarte();
+
+
             this.CartesPioche = listeTypeCarte;
 
         }

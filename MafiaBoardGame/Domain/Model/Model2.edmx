@@ -11,7 +11,6 @@
     <EntitySet Name="Cartes" EntityType="Model.Store.Cartes" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="JoueurParties" EntityType="Model.Store.JoueurParties" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Des" EntityType="Model.Store.Des" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="CartePartieSet" EntityType="Model.Store.CartePartieSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="JoueurPartieCarte" EntityType="Model.Store.JoueurPartieCarte" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="JoueurPartieDe" EntityType="Model.Store.JoueurPartieDe" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="JoueurPartieJoueur" Association="Model.Store.PartiesJoueesJoueur">
@@ -46,15 +45,7 @@
       <End Role="JoueurPartie" EntitySet="JoueurParties" />
       <End Role="Partie" EntitySet="Parties" />
     </AssociationSet>
-    <AssociationSet Name="PartieCartePartie" Association="Model.Store.PartieCartePartie">
-      <End Role="Partie" EntitySet="Parties" />
-      <End Role="CartePartie" EntitySet="CartePartieSet" />
-    </AssociationSet>
-    <AssociationSet Name="CartePartieCarte" Association="Model.Store.CartePartieCarte">
-      <End Role="CartePartie" EntitySet="CartePartieSet" />
-      <End Role="Carte" EntitySet="Cartes" />
-    </AssociationSet>
-  </EntityContainer>
+    </EntityContainer>
   <EntityType Name="Joueurs">
     <Key>
       <PropertyRef Name="Id" />
@@ -99,14 +90,6 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Valeur" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="CartePartieSet">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PartieId" Type="int" Nullable="false" />
-    <Property Name="Carte_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="JoueurPartieCarte">
     <Key>
@@ -169,30 +152,6 @@
       </Principal>
       <Dependent Role="Partie">
         <PropertyRef Name="JoueurCourant_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PartieCartePartie">
-    <End Role="Partie" Type="Model.Store.Parties" Multiplicity="1" />
-    <End Role="CartePartie" Type="Model.Store.CartePartieSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Partie">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CartePartie">
-        <PropertyRef Name="PartieId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="CartePartieCarte">
-    <End Role="CartePartie" Type="Model.Store.CartePartieSet" Multiplicity="*" />
-    <End Role="Carte" Type="Model.Store.Cartes" Multiplicity="1" />
-    <ReferentialConstraint>
-      <Principal Role="Carte">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CartePartie">
-        <PropertyRef Name="Carte_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -278,13 +237,8 @@
             <End Role="JoueurPartie" EntitySet="JoueurParties" />
             <End Role="Partie" EntitySet="Parties" />
           </AssociationSet>
-          <EntitySet Name="CartePartieSet" EntityType="Model.CartePartie" />
-          <AssociationSet Name="PartieCartePartie" Association="Model.PartieCartePartie">
+          <AssociationSet Name="PartieCarte" Association="Model.PartieCarte">
             <End Role="Partie" EntitySet="Parties" />
-            <End Role="CartePartie" EntitySet="CartePartieSet" />
-          </AssociationSet>
-          <AssociationSet Name="CartePartieCarte" Association="Model.CartePartieCarte">
-            <End Role="CartePartie" EntitySet="CartePartieSet" />
             <End Role="Carte" EntitySet="Cartes" />
           </AssociationSet>
         </EntityContainer>
@@ -310,7 +264,7 @@
           <NavigationProperty Name="Vainqueur" Relationship="Model.JoueurPartie1" FromRole="Partie" ToRole="Joueur" />
           <Property Name="JoueurId" Type="Int32" Nullable="true" />
           <NavigationProperty Name="JoueurCourant" Relationship="Model.JoueurPartiePartie" FromRole="Partie" ToRole="JoueurPartie" />
-          <NavigationProperty Name="CartePartie" Relationship="Model.PartieCartePartie" FromRole="Partie" ToRole="CartePartie" />
+          <NavigationProperty Name="Carte" Relationship="Model.PartieCarte" FromRole="Partie" ToRole="Carte" />
         </EntityType>
         <EntityType Name="Carte">
           <Key>
@@ -319,10 +273,8 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CodeEffet" Type="Int32" Nullable="false" />
           <Property Name="Cout" Type="Int32" Nullable="false" />
-          <Property Name="PartieId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="JoueurParties" Relationship="Model.JoueurPartieCarte" FromRole="Carte" ToRole="JoueurPartie" />
-          <Property Name="CartePartieId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CartePartie" Relationship="Model.CartePartieCarte" FromRole="Carte" ToRole="CartePartie" />
+          <NavigationProperty Name="Partie" Relationship="Model.PartieCarte" FromRole="Carte" ToRole="Partie" />
         </EntityType>
         <EntityType Name="JoueurPartie">
           <Key>
@@ -394,30 +346,9 @@
           <End Type="Model.JoueurPartie" Role="JoueurPartie" Multiplicity="0..1" />
           <End Type="Model.Partie" Role="Partie" Multiplicity="0..1" />
         </Association>
-        <EntityType Name="CartePartie">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="Partie" Relationship="Model.PartieCartePartie" FromRole="CartePartie" ToRole="Partie" />
-          <Property Name="PartieId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Carte" Relationship="Model.CartePartieCarte" FromRole="CartePartie" ToRole="Carte" />
-        </EntityType>
-        <Association Name="PartieCartePartie">
-          <End Type="Model.Partie" Role="Partie" Multiplicity="1" />
-          <End Type="Model.CartePartie" Role="CartePartie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Partie">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CartePartie">
-              <PropertyRef Name="PartieId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="CartePartieCarte">
-          <End Type="Model.CartePartie" Role="CartePartie" Multiplicity="*" />
-          <End Type="Model.Carte" Role="Carte" Multiplicity="1" />
+        <Association Name="PartieCarte">
+          <End Type="Model.Partie" Role="Partie" Multiplicity="*" />
+          <End Type="Model.Carte" Role="Carte" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -451,8 +382,6 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CodeEffet" ColumnName="CodeEffet" />
           <ScalarProperty Name="Cout" ColumnName="Cout" />
-          <ScalarProperty Name="PartieId" ColumnName="PartieId" />
-          <ScalarProperty Name="CartePartieId" ColumnName="CartePartieId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -471,14 +400,6 @@
         <MappingFragment StoreEntitySet="Des">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Valeur" ColumnName="Valeur" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CartePartieSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.CartePartie)">
-        <MappingFragment StoreEntitySet="CartePartieSet">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="PartieId" ColumnName="PartieId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -507,14 +428,6 @@
       </EndProperty>
       <Condition ColumnName="JoueurCourant_Id" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="CartePartieCarte" TypeName="Model.CartePartieCarte" StoreEntitySet="CartePartieSet">
-      <EndProperty Name="Carte">
-        <ScalarProperty Name="Id" ColumnName="Carte_Id" />
-      </EndProperty>
-      <EndProperty Name="CartePartie">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -538,7 +451,7 @@
       <Diagram DiagramId="f7968c05e6f441c2a7293d1faafd58a4" Name="Diagram1" ZoomLevel="84">
         <EntityTypeShape EntityType="Model.Joueur" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Partie" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Carte" Width="1.5" PointX="11" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Carte" Width="1.5" PointX="8.625" PointY="2.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.JoueurPartie" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.De" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
         <AssociationConnector Association="Model.PartiesJoueesJoueur" ManuallyRouted="false" />
@@ -547,10 +460,9 @@
         <AssociationConnector Association="Model.JoueurPartieDe" ManuallyRouted="false" />
         <AssociationConnector Association="Model.JoueurPartie1" ManuallyRouted="false" />
         <AssociationConnector Association="Model.JoueurPartiePartie" />
-        <EntityTypeShape EntityType="Model.CartePartie" Width="1.5" PointX="8" PointY="2.875" />
-        <AssociationConnector Association="Model.PartieCartePartie" />
-        <AssociationConnector Association="Model.CartePartieCarte" />
-      </Diagram>
+        <AssociationConnector Association="Model.PartieCarte" ManuallyRouted="false" >
+        </AssociationConnector>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
