@@ -19,7 +19,8 @@ namespace Domain.Model
         {
             this.Sens = true;
             this.JoueursParticipants = new HashSet<JoueurPartie>();
-            this.Carte = new HashSet<Carte>();
+            this.CartesPioche = new HashSet<Carte>();
+            this.CartesPoubelle = new HashSet<Carte>();
         }
     
         public int Id { get; set; }
@@ -33,6 +34,8 @@ namespace Domain.Model
         public virtual Joueur Vainqueur { get; set; }
         public virtual JoueurPartie JoueurCourant { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Carte> Carte { get; set; }
+        public virtual ICollection<Carte> CartesPioche { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carte> CartesPoubelle { get; set; }
     }
 }

@@ -14,16 +14,7 @@ namespace Domain.Model
     
     public partial class De
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public De()
-        {
-            this.JoueurParties = new HashSet<JoueurPartie>();
-        }
-    
         public int Id { get; set; }
         public string Valeur { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<JoueurPartie> JoueurParties { get; set; }
     }
 }

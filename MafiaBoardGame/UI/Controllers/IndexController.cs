@@ -12,6 +12,9 @@ namespace UI.Controllers
         // GET: Index
         public ActionResult Index(JoueurDto j)
         {
+            if (Session["user"] != null)
+                return RedirectToAction("Index", new { controller = "Partie" });
+
             return View(j);
         }
     }

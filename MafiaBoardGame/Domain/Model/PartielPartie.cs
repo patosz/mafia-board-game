@@ -28,6 +28,9 @@ namespace Domain.Model
         {
             get; set;
         }
+        public int nbParJoueur { get; set; }
+
+        public int nbTotalDes { get; set; }
         private Parseur parseur=new Parseur();
 
         private static Random rng = new Random();
@@ -37,18 +40,19 @@ namespace Domain.Model
             // ligne du contructeur généré
             
             this.JoueursParticipants = new HashSet<JoueurPartie>();
+            this.CartesPoubelle = new List<Carte>();
             this.CartesPioche = new List<Carte>();
             this.Nom = nom;
             this.Sens = true;
             this.DateHeureCreation = DateTime.Now;
-
-            List<int> cartesInfo = parseur.loadInfoCartes();
-
-            nbCartesParJoueur = cartesInfo.ElementAt(0);
-            nbCartesTotal = cartesInfo.ElementAt(1);
-            minJoueurs = cartesInfo.ElementAt(2);
-            maxJoueur = cartesInfo.ElementAt(3);
-
+            Dictionary<string, int> dico = parseur.loadInfos();
+           
+            nbCartesParJoueur = dico["nbCartesParJoueur"];
+            nbCartesTotal = dico["nbCartesTotal"];
+            minJoueurs = dico["minJoueurs"];
+            maxJoueur = dico["maxJoueur"];
+            nbParJoueur = dico["nbParJoueur"];
+            nbTotalDes = dico["nbTotalDes"];
             List<Carte> listeTypeCarte = parseur.loadCarte();
 
 

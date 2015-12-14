@@ -16,8 +16,6 @@ namespace Domain.Dto
         [DataMember]
         public int Cout { get; set; }
         [DataMember]
-        public int PartieId { get; set; }
-        [DataMember]
         public string Effet
         {
             get; set;
@@ -27,7 +25,5 @@ namespace Domain.Dto
         {
             get; set;
         }
-        [DataMember]
-        public List<JoueurPartieDto> JoueurParties { get; set; }
     }
 }

@@ -28,7 +28,10 @@ namespace Domain
         [OperationContract]
         PartieDto LancerPartie();
 
+        [OperationContract]
+        CarteDto piocherCarte(int IdJoueurPartie);
 
+        void initDe(int IdJoueurPartie);
 
     }
 }

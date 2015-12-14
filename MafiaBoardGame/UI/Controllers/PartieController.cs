@@ -4,30 +4,47 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Domain;
+using Domain.Dto;
 
 namespace UI.Controllers
 {
     public class PartieController : Controller
     {
+        private UccPartieRef.GestionPartieClient UccPartie = new UccPartieRef.GestionPartieClient();
+        private UccJoueurRef.GestionJoueurClient UccJoueur = new UccJoueurRef.GestionJoueurClient();
+
         // GET: Partie
         public ActionResult Index(String pseudo)
         {
             if (Session["user"] == null)
-                throw new Exception("Session is null :p");
+                return RedirectToAction("Index", new { controller = "Index" });
 
-            return View((JoueurDto) Session["user"]);
+            return View((JoueurDto)Session["user"]);
         }
 
-        public bool Rejoindre(string pseudo)
+        public ActionResult Creer()
         {
-
-            return false;
+            return PartialView("CreerForm");
         }
 
         [HttpPost]
-        public bool Creer(string nom)
+        public bool Creer(string nomPartie)
         {
             return false;
+        }
+
+        public ViewResult Rejoindre(string pseudo)
+        {
+            return View();
+        }
+
+
+        public ActionResult VoirParties()
+        {
+            JoueurDto j = (JoueurDto)Session["user"];
+            List<PartieDto> parties = new List<PartieDto>();
+            //= UccJoueur.GetPartiesJouees(j.Pseudo);
+            return PartialView("VoirParties", parties);
         }
     }
 }

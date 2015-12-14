@@ -21,9 +21,6 @@ namespace Domain.Dto
         public JoueurDto Joueur { get; set; }
         [DataMember]
         public PartieDto PartieCourante { get; set; }
-        [DataMember]
-        public List<CarteDto> CartesMain { get; set; }
-        [DataMember]
-        public List<DeDto> DesMain { get; set; }
+       
     }
 }

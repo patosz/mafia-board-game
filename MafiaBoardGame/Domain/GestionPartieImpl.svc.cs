@@ -245,30 +245,52 @@ namespace Domain
                 int numCarteParjoueur = partie.nbCartesParJoueur;
                 for(int j=0; j < numCarteParjoueur; j++)
                 {
-                    //piocher Carte
-                    //joueurPartie.
-
+                    piocherCarte(joueurPartie.Id);
                 }
-                
+                int numDeParJoueur = partie.nbParJoueur;
+                for (int j = 0; j < numDeParJoueur; j++)
+                {
+                    initDe(joueurPartie.Id);
+                }
             }
-            
 
-            return null;
+            return BizToDto.ToPartieDto(partie); ;
         }
 
-        public Carte piocherCarte(int idJoueurPartie)
+        public CarteDto piocherCarte(int idJoueurPartie)
         {
 
-            JoueurPartie joueurPartie= (from JoueurPartie j in dbcontext.JoueurParties
-                                        where j.Id.Equals(idJoueurPartie)
-                                        select j).FirstOrDefault();
 
-            CartePartie cartePartie = partie.CartePartie.First();
-            Carte carte= cartePartie.Carte;
+            JoueurPartie joueurPartie = (from JoueurPartie j in dbcontext.JoueurParties
+                                         where j.Id.Equals(idJoueurPartie)
+                                         select j).FirstOrDefault();
 
-            partie.CartePartie.Remove(cartePartie);
+            Carte carte = partie.CartesPioche.First();
 
-            return null;
+            partie.CartesPioche.Remove(carte);
+
+            partie.CartesPoubelle.Add(carte);
+
+            dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+
+            dbcontext.SaveChanges();
+            CarteDto carteDto = BizToDto.ToCarteDto(carte);
+            return carteDto;
+
+        }
+
+        public void initDe(int IdJoueurPartie)
+        {
+            JoueurPartie joueurPartie = (from JoueurPartie j in dbcontext.JoueurParties
+                                         where j.Id.Equals(IdJoueurPartie)
+                                         select j).FirstOrDefault();
+            De de = new De();
+            joueurPartie.DesMain.Add(de);
+            dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.Des.Add(de);
+            dbcontext.SaveChanges();
+
         }
     }
 }
