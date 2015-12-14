@@ -26,5 +26,7 @@ namespace Domain
         List<PartieDto> VoirPartie(string pseudo);
 
 
+
+
     }
 }

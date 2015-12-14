@@ -18,15 +18,18 @@ namespace Domain.Model
         public Carte()
         {
             this.JoueurParties = new HashSet<JoueurPartie>();
+            this.CartePartie = new HashSet<CartePartie>();
         }
     
         public int Id { get; set; }
         public int CodeEffet { get; set; }
         public int Cout { get; set; }
         public int PartieId { get; set; }
+        public int CartePartieId { get; set; }
     
-        public virtual Partie Partie { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JoueurPartie> JoueurParties { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartePartie> CartePartie { get; set; }
     }
 }

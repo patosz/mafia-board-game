@@ -30,5 +30,6 @@ namespace Domain.Model
         public virtual DbSet<Carte> Cartes { get; set; }
         public virtual DbSet<JoueurPartie> JoueurParties { get; set; }
         public virtual DbSet<De> Des { get; set; }
+        public virtual DbSet<CartePartie> CartePartieSet { get; set; }
     }
 }

@@ -28,8 +28,6 @@ namespace Domain.Dto
             get; set;
         }
         [DataMember]
-        public PartieDto Partie { get; set; }
-        [DataMember]
         public List<JoueurPartieDto> JoueurParties { get; set; }
     }
 }

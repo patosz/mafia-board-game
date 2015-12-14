@@ -149,7 +149,6 @@ namespace Domain
             if ((int)partie.etat == (int)Partie.ETAT.INSCRIPTION)
             {
 
-                //TODO Debug exception de merde
                 JoueurPartie joueurPartie = new JoueurPartie();
                 joueurPartie.Partie = partie;
                 dbcontext.JoueurParties.Add(joueurPartie);
@@ -234,5 +233,8 @@ namespace Domain
             return list;
 
         }
+
+
+
     }
 }

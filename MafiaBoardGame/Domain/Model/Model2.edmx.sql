@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/14/2015 11:24:05
--- Generated from EDMX file: C:\Users\pdolega15\Source\Repos\mafia-board-game\MafiaBoardGame\Domain\Model\Model2.edmx
+-- Date Created: 12/14/2015 14:14:04
+-- Generated from EDMX file: C:\Users\Giordano\Source\Repos\mafia-board-game\MafiaBoardGame\Domain\Model\Model2.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -99,7 +99,8 @@ CREATE TABLE [dbo].[Cartes] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [CodeEffet] int  NOT NULL,
     [Cout] int  NOT NULL,
-    [PartieId] int  NOT NULL
+    [PartieId] int  NOT NULL,
+    [CartePartieId] int  NOT NULL
 );
 GO
 
@@ -116,6 +117,14 @@ GO
 CREATE TABLE [dbo].[Des] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Valeur] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'CartePartieSet'
+CREATE TABLE [dbo].[CartePartieSet] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [PartieId] int  NOT NULL,
+    [Carte_Id] int  NOT NULL
 );
 GO
 
@@ -167,6 +176,12 @@ ADD CONSTRAINT [PK_Des]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'CartePartieSet'
+ALTER TABLE [dbo].[CartePartieSet]
+ADD CONSTRAINT [PK_CartePartieSet]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- Creating primary key on [JoueurParties_Id], [CartesMain_Id] in table 'JoueurPartieCarte'
 ALTER TABLE [dbo].[JoueurPartieCarte]
 ADD CONSTRAINT [PK_JoueurPartieCarte]
@@ -182,21 +197,6 @@ GO
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
-
--- Creating foreign key on [PartieId] in table 'Cartes'
-ALTER TABLE [dbo].[Cartes]
-ADD CONSTRAINT [FK_PartieCarte]
-    FOREIGN KEY ([PartieId])
-    REFERENCES [dbo].[Parties]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PartieCarte'
-CREATE INDEX [IX_FK_PartieCarte]
-ON [dbo].[Cartes]
-    ([PartieId]);
-GO
 
 -- Creating foreign key on [JoueurId] in table 'JoueurParties'
 ALTER TABLE [dbo].[JoueurParties]
@@ -304,6 +304,36 @@ GO
 CREATE INDEX [IX_FK_JoueurPartiePartie]
 ON [dbo].[Parties]
     ([JoueurCourant_Id]);
+GO
+
+-- Creating foreign key on [PartieId] in table 'CartePartieSet'
+ALTER TABLE [dbo].[CartePartieSet]
+ADD CONSTRAINT [FK_PartieCartePartie]
+    FOREIGN KEY ([PartieId])
+    REFERENCES [dbo].[Parties]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PartieCartePartie'
+CREATE INDEX [IX_FK_PartieCartePartie]
+ON [dbo].[CartePartieSet]
+    ([PartieId]);
+GO
+
+-- Creating foreign key on [Carte_Id] in table 'CartePartieSet'
+ALTER TABLE [dbo].[CartePartieSet]
+ADD CONSTRAINT [FK_CartePartieCarte]
+    FOREIGN KEY ([Carte_Id])
+    REFERENCES [dbo].[Cartes]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_CartePartieCarte'
+CREATE INDEX [IX_FK_CartePartieCarte]
+ON [dbo].[CartePartieSet]
+    ([Carte_Id]);
 GO
 
 -- --------------------------------------------------
