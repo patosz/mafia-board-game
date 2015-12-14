@@ -13,6 +13,7 @@
     <EntitySet Name="Des" EntityType="Model.Store.Des" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="JoueurPartieCarte" EntityType="Model.Store.JoueurPartieCarte" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="JoueurPartieDe" EntityType="Model.Store.JoueurPartieDe" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PartieCarte" EntityType="Model.Store.PartieCarte" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="JoueurPartieJoueur" Association="Model.Store.PartiesJoueesJoueur">
       <End Role="Joueur" EntitySet="Joueurs" />
       <End Role="PartieJoueur" EntitySet="JoueurParties" />
@@ -45,7 +46,15 @@
       <End Role="JoueurPartie" EntitySet="JoueurParties" />
       <End Role="Partie" EntitySet="Parties" />
     </AssociationSet>
-    </EntityContainer>
+    <AssociationSet Name="FK_PartieCarte_Partie" Association="Model.Store.FK_PartieCarte_Partie">
+      <End Role="Partie" EntitySet="Parties" />
+      <End Role="PartieCarte" EntitySet="PartieCarte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PartieCarte_Carte" Association="Model.Store.FK_PartieCarte_Carte">
+      <End Role="Carte" EntitySet="Cartes" />
+      <End Role="PartieCarte" EntitySet="PartieCarte" />
+    </AssociationSet>
+  </EntityContainer>
   <EntityType Name="Joueurs">
     <Key>
       <PropertyRef Name="Id" />
@@ -72,8 +81,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CodeEffet" Type="int" Nullable="false" />
     <Property Name="Cout" Type="int" Nullable="false" />
-    <Property Name="PartieId" Type="int" Nullable="false" />
-    <Property Name="CartePartieId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="JoueurParties">
     <Key>
@@ -106,6 +113,14 @@
     </Key>
     <Property Name="JoueurParties_Id" Type="int" Nullable="false" />
     <Property Name="DesMain_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PartieCarte">
+    <Key>
+      <PropertyRef Name="Partie_Id" />
+      <PropertyRef Name="Carte_Id" />
+    </Key>
+    <Property Name="Partie_Id" Type="int" Nullable="false" />
+    <Property Name="Carte_Id" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="PartiesJoueesJoueur">
     <End Role="Joueur" Type="Model.Store.Joueurs" Multiplicity="1" />
@@ -200,6 +215,30 @@
       </Principal>
       <Dependent Role="JoueurPartieDe">
         <PropertyRef Name="DesMain_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PartieCarte_Partie">
+    <End Role="Partie" Type="Model.Store.Parties" Multiplicity="1" />
+    <End Role="PartieCarte" Type="Model.Store.PartieCarte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partie">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PartieCarte">
+        <PropertyRef Name="Partie_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PartieCarte_Carte">
+    <End Role="PartieCarte" Type="Model.Store.PartieCarte" Multiplicity="*" />
+    <End Role="Carte" Type="Model.Store.Cartes" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Carte">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PartieCarte">
+        <PropertyRef Name="Carte_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -427,6 +466,14 @@
         <ScalarProperty Name="Id" ColumnName="Id" />
       </EndProperty>
       <Condition ColumnName="JoueurCourant_Id" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PartieCarte" TypeName="Model.PartieCarte" StoreEntitySet="PartieCarte">
+      <EndProperty Name="Partie">
+        <ScalarProperty Name="Id" ColumnName="Partie_Id" />
+      </EndProperty>
+      <EndProperty Name="Carte">
+        <ScalarProperty Name="Id" ColumnName="Carte_Id" />
+      </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
