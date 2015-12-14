@@ -32,6 +32,12 @@ namespace TestApplication
             else
                 Console.WriteLine("Joueur Déjà Inscrit! : "+joueur2);
 
+            if (proxy.ConnexionJoueur("milene", "ee") == null)
+                Console.WriteLine("Connexion de milene fail");
+            else
+                Console.WriteLine("Joueur milene connecté!");
+
+
             ServiceReference2.GestionPartieClient proxy2 = new ServiceReference2.GestionPartieClient();
             ok = proxy2.CreerPartie(partie,joueur1);
             if (ok)
