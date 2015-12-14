@@ -20,7 +20,7 @@ namespace Domain
         [OperationContract]
         bool CommencerPartie();
         [OperationContract]
-        string GetPartie();
+        string GetPartieDebug();
 
         [OperationContract]
         List<PartieDto> VoirPartie(string pseudo);
