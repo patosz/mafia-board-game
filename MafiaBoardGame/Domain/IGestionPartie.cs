@@ -33,5 +33,9 @@ namespace Domain
 
         void initDe(int IdJoueurPartie);
 
+        [OperationContract]
+        JoueurPartieDto getJoueurPartieDto(int IdJoueurPartie);
+        [OperationContract]
+        List<JoueurPartieDto> getListJoueurPartieDto(int IdPartie);
     }
 }

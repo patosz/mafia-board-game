@@ -295,5 +295,37 @@ namespace Domain
             dbcontext.SaveChanges();
 
         }
+
+        //Service des Get Objet
+
+        public JoueurPartieDto getJoueurPartieDto(int IdJoueurPartie)
+        {
+            JoueurPartie joueurPartie = (from JoueurPartie j in dbcontext.JoueurParties
+                                         where j.Id.Equals(IdJoueurPartie)
+                                         select j).FirstOrDefault();
+
+            return BizToDto.ToJoueurPartieDto(joueurPartie);
+
+        }
+
+        public List<JoueurPartieDto> getListJoueurPartieDto(int IdPartie)
+        {
+            List<JoueurPartieDto> listJoueurPartie = new List<JoueurPartieDto>();
+           var list = (from JoueurPartie j in dbcontext.JoueurParties
+                       where j.PartieId.Equals(IdPartie)
+                       select j);
+            foreach (JoueurPartie joueurPartie in list)
+            {
+                listJoueurPartie.Add(BizToDto.ToJoueurPartieDto(joueurPartie));
+            }
+
+
+            return listJoueurPartie;
+        }
+
+        
+
+
+
     }
 }
