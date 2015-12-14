@@ -42,6 +42,7 @@
 				</xs:element>
 			</xs:sequence>
 			<xs:attribute name="cout" type="xs:int" use="required" />
+      <xs:attribute name="nombreCarte" type="xs:int" use="required" />
 			<xs:attribute name="effet" type="xs:string" use="required" />
 			<xs:attribute name="codeEffet" type="xs:integer" use="required" />
 			<xs:attribute name="src" type="xs:string" />

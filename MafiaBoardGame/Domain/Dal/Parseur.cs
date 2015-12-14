@@ -25,8 +25,14 @@ namespace Domain.Dal
             // Read cartes
             foreach (var carte in cartes)
             {
+                int nombreCarte = int.Parse(carte.Attribute("nombreCarte").Value);
 
-                list.Add(new Carte(int.Parse(carte.Attribute("codeEffet").Value), int.Parse(carte.Attribute("cout").Value), carte.Attribute("effet").Value,carte.Value));
+                for(int i = 0; i < nombreCarte; i++)
+                {
+                    list.Add(new Carte(int.Parse(carte.Attribute("codeEffet").Value), int.Parse(carte.Attribute("cout").Value), carte.Attribute("effet").Value, carte.Value));
+                }
+
+                
                 //Console.WriteLine(carte);
             }
             return list;

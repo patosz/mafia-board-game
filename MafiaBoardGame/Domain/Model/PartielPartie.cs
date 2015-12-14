@@ -47,12 +47,12 @@ namespace Domain.Model
             maxJoueur = cartesInfo.ElementAt(3);
 
             List<Carte> listeTypeCarte = parseur.loadCarte();
-
-            for (int i = 0; i < nbCartesTotal; i++)
+            this.CartesPioche = listeTypeCarte;
+           /* for (int i = 0; i < nbCartesTotal; i++)
              {
                 Carte carte = new Carte(listeTypeCarte.ElementAt(i%10).CodeEffet, listeTypeCarte.ElementAt(i%10).Cout,listeTypeCarte.ElementAt(i%10).Effet, listeTypeCarte.ElementAt(i % 10).EffetComplet);
                 this.CartesPioche.Add(carte);       
-             }
+             }*/
         }
       
         public bool CommencerPartie()
