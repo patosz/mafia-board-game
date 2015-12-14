@@ -29,6 +29,8 @@ namespace Domain.Model
             get; set;
         }
         private Parseur parseur=new Parseur();
+
+        private static Random rng = new Random();
         //ajout du parametre String nom
         public Partie(String nom)
         {
@@ -59,9 +61,21 @@ namespace Domain.Model
             return true;
         }
 
-       
 
-        
+        public void Shuffle<Carte>(IList<Carte> list)
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                Carte value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
+
+
     }
     
 }
