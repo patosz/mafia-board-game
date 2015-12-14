@@ -56,7 +56,6 @@ namespace TestApplication
             }
 
 
-            
             Console.ReadLine();
         }
     }

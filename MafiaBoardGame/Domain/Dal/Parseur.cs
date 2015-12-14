@@ -25,7 +25,7 @@ namespace Domain.Dal
             // Read cartes
             foreach (var carte in cartes)
             {
-                int nombreCarte = int.Parse(carte.Attribute("nombreCarte").Value);
+                int nombreCarte = int.Parse(carte.Attribute("nb").Value);
 
                 for(int i = 0; i < nombreCarte; i++)
                 {
@@ -39,7 +39,7 @@ namespace Domain.Dal
         }
         public List<int> loadInfoCartes()
         {
-            XElement cartes = (from xml2 in xdoc.Descendants("cartes")
+            XElement cartes = (from xml2 in xdoc.Elements("wazabi")
                                select xml2).FirstOrDefault();
 
             List<int> list = new List<int>();

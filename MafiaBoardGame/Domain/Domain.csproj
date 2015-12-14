@@ -163,7 +163,6 @@
     </None>
     <None Include="Xml\wazabi.xsd">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
