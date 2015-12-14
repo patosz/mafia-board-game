@@ -14,20 +14,8 @@ namespace Domain.Model
     
     public partial class Carte
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Carte()
-        {
-            this.JoueurParties = new HashSet<JoueurPartie>();
-            this.Partie = new HashSet<Partie>();
-        }
-    
         public int Id { get; set; }
         public int CodeEffet { get; set; }
         public int Cout { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<JoueurPartie> JoueurParties { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Partie> Partie { get; set; }
     }
 }

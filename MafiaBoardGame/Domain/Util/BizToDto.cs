@@ -41,7 +41,6 @@ namespace Domain.Util
             carteDto.Id = carte.Id;
             carteDto.CodeEffet = carte.CodeEffet;
             carteDto.Cout = carte.Cout;
-            carteDto.PartieId = carte.PartieId;
             carteDto.Effet = carte.Effet;
             carteDto.EffetComplet = carte.EffetComplet;
             
@@ -70,6 +69,12 @@ namespace Domain.Util
             return joueurDto;
         }
 
-        //Pas encore de De on verra plus tard
+        public static DeDto ToDeDto(De de)
+        {
+            DeDto deDto = new DeDto();
+            deDto.Id = de.Id;
+            deDto.Valeur = de.Valeur;
+            return deDto;
+        }
     }
 }

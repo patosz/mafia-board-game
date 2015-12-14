@@ -13,7 +13,6 @@ namespace Domain.Dto
         public int Id { get; set; }
         [DataMember]
         public string Valeur { get; set; }
-        [DataMember]
-        public List<JoueurPartieDto> JoueurParties { get; set; }
+      
     }
 }
