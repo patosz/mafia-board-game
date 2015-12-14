@@ -18,8 +18,8 @@ namespace Domain.Model
         public Partie()
         {
             this.Sens = true;
-            this.CartesPioche = new HashSet<Carte>();
             this.JoueursParticipants = new HashSet<JoueurPartie>();
+            this.CartePartie = new HashSet<CartePartie>();
         }
     
         public int Id { get; set; }
@@ -29,10 +29,10 @@ namespace Domain.Model
         public Nullable<int> JoueurId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Carte> CartesPioche { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JoueurPartie> JoueursParticipants { get; set; }
         public virtual Joueur Vainqueur { get; set; }
         public virtual JoueurPartie JoueurCourant { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CartePartie> CartePartie { get; set; }
     }
 }
