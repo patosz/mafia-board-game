@@ -12,7 +12,7 @@ namespace UI.Controllers
         // GET: Partie
         public ActionResult Index(String pseudo)
         {
-            if (Session[pseudo] == null)
+            if (Session["user"] == null)
                 throw new Exception("Session is null :p");
 
             return View((JoueurDto) Session["user"]);
