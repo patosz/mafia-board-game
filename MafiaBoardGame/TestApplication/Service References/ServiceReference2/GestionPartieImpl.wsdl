@@ -4,6 +4,8 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Domain.Dto" />
+      <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Domain" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGestionPartie_CreerPartie_InputMessage">
@@ -30,6 +32,12 @@
   <wsdl:message name="IGestionPartie_GetPartie_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetPartieResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionPartie_VoirPartie_InputMessage">
+    <wsdl:part name="parameters" element="tns:VoirPartie" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_VoirPartie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VoirPartieResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionPartie">
     <wsdl:operation name="CreerPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/CreerPartie" message="tns:IGestionPartie_CreerPartie_InputMessage" />
@@ -46,6 +54,10 @@
     <wsdl:operation name="GetPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/GetPartie" message="tns:IGestionPartie_GetPartie_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/GetPartieResponse" message="tns:IGestionPartie_GetPartie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="VoirPartie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/VoirPartie" message="tns:IGestionPartie_VoirPartie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/VoirPartieResponse" message="tns:IGestionPartie_VoirPartie_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGestionPartie" type="tns:IGestionPartie">
@@ -79,6 +91,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetPartie">
       <soap:operation soapAction="http://tempuri.org/IGestionPartie/GetPartie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="VoirPartie">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/VoirPartie" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

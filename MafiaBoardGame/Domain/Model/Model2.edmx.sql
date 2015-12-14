@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/13/2015 10:43:43
--- Generated from EDMX file: D:\projet13\MafiaBoardGame\Domain\Model\Model2.edmx
+-- Date Created: 12/14/2015 09:45:31
+-- Generated from EDMX file: C:\Users\Giordano\Source\Repos\mafia-board-game\MafiaBoardGame\Domain\Model\Model2.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -23,9 +23,6 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_PartiesJoueesJoueur]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[JoueurParties] DROP CONSTRAINT [FK_PartiesJoueesJoueur];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PartieJoueurPartie]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[JoueurParties] DROP CONSTRAINT [FK_PartieJoueurPartie];
-GO
 IF OBJECT_ID(N'[dbo].[FK_JoueursParticipantsJoueurPartie]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[JoueurParties] DROP CONSTRAINT [FK_JoueursParticipantsJoueurPartie];
 GO
@@ -43,6 +40,9 @@ IF OBJECT_ID(N'[dbo].[FK_JoueurPartieDe_De]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_JoueurPartie1]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Parties] DROP CONSTRAINT [FK_JoueurPartie1];
+GO
+IF OBJECT_ID(N'[dbo].[FK_JoueurPartiePartie]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Parties] DROP CONSTRAINT [FK_JoueurPartiePartie];
 GO
 
 -- --------------------------------------------------
@@ -89,7 +89,8 @@ CREATE TABLE [dbo].[Parties] (
     [Nom] nvarchar(max)  NOT NULL,
     [DateHeureCreation] datetime  NOT NULL,
     [Sens] bit  NOT NULL,
-    [JoueurId] int  NULL
+    [JoueurId] int  NULL,
+    [JoueurCourant_Id] int  NULL
 );
 GO
 
@@ -107,8 +108,7 @@ CREATE TABLE [dbo].[JoueurParties] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [JoueurId] int  NOT NULL,
     [OrdreJoueur] int  NOT NULL,
-    [PartieId] int  NOT NULL,
-    [PartieCourant_Id] int  NOT NULL
+    [PartieId] int  NOT NULL
 );
 GO
 
@@ -213,21 +213,6 @@ ON [dbo].[JoueurParties]
     ([JoueurId]);
 GO
 
--- Creating foreign key on [PartieCourant_Id] in table 'JoueurParties'
-ALTER TABLE [dbo].[JoueurParties]
-ADD CONSTRAINT [FK_PartieJoueurPartie]
-    FOREIGN KEY ([PartieCourant_Id])
-    REFERENCES [dbo].[Parties]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PartieJoueurPartie'
-CREATE INDEX [IX_FK_PartieJoueurPartie]
-ON [dbo].[JoueurParties]
-    ([PartieCourant_Id]);
-GO
-
 -- Creating foreign key on [PartieId] in table 'JoueurParties'
 ALTER TABLE [dbo].[JoueurParties]
 ADD CONSTRAINT [FK_JoueursParticipantsJoueurPartie]
@@ -304,6 +289,21 @@ GO
 CREATE INDEX [IX_FK_JoueurPartie1]
 ON [dbo].[Parties]
     ([JoueurId]);
+GO
+
+-- Creating foreign key on [JoueurCourant_Id] in table 'Parties'
+ALTER TABLE [dbo].[Parties]
+ADD CONSTRAINT [FK_JoueurPartiePartie]
+    FOREIGN KEY ([JoueurCourant_Id])
+    REFERENCES [dbo].[JoueurParties]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_JoueurPartiePartie'
+CREATE INDEX [IX_FK_JoueurPartiePartie]
+ON [dbo].[Parties]
+    ([JoueurCourant_Id]);
 GO
 
 -- --------------------------------------------------

@@ -20,6 +20,12 @@ namespace TestApplication.ServiceReference1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionJoueur/InscriptionJoueur", ReplyAction="http://tempuri.org/IGestionJoueur/InscriptionJoueurResponse")]
         System.Threading.Tasks.Task<bool> InscriptionJoueurAsync(string pseudo, string mdp);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionJoueur/ConnexionJoueur", ReplyAction="http://tempuri.org/IGestionJoueur/ConnexionJoueurResponse")]
+        Domain.JoueurDto ConnexionJoueur(string pseudo, string mdp);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionJoueur/ConnexionJoueur", ReplyAction="http://tempuri.org/IGestionJoueur/ConnexionJoueurResponse")]
+        System.Threading.Tasks.Task<Domain.JoueurDto> ConnexionJoueurAsync(string pseudo, string mdp);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace TestApplication.ServiceReference1 {
         
         public System.Threading.Tasks.Task<bool> InscriptionJoueurAsync(string pseudo, string mdp) {
             return base.Channel.InscriptionJoueurAsync(pseudo, mdp);
+        }
+        
+        public Domain.JoueurDto ConnexionJoueur(string pseudo, string mdp) {
+            return base.Channel.ConnexionJoueur(pseudo, mdp);
+        }
+        
+        public System.Threading.Tasks.Task<Domain.JoueurDto> ConnexionJoueurAsync(string pseudo, string mdp) {
+            return base.Channel.ConnexionJoueurAsync(pseudo, mdp);
         }
     }
 }

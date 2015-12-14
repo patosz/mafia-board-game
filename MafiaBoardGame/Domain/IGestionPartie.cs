@@ -1,4 +1,5 @@
-﻿using Domain.Model;
+﻿using Domain.Dto;
+using Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace Domain
         bool CommencerPartie();
         [OperationContract]
         string GetPartie();
+
+        [OperationContract]
+        List<PartieDto> VoirPartie(string pseudo);
 
 
     }

@@ -63,12 +63,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\DataSources\Domain.Dto.PartieDto.datasource" />
+    <None Include="Properties\DataSources\Domain.JoueurDto.datasource" />
     <None Include="Properties\DataSources\Domain.Model.Partie.datasource" />
     <None Include="Service References\ServiceReference1\GestionJoueurImpl.wsdl" />
     <None Include="Service References\ServiceReference1\GestionJoueurImpl.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference1\GestionJoueurImpl1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference1\GestionJoueurImpl2.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ServiceReference2\GestionPartieImpl.wsdl" />
@@ -117,6 +122,12 @@
     <None Include="Service References\ServiceReference2\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ServiceReference2\GestionPartieImpl2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceReference2\GestionPartieImpl21.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ServiceReference2\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

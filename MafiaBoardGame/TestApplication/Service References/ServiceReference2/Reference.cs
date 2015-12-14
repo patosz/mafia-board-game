@@ -38,6 +38,12 @@ namespace TestApplication.ServiceReference2 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/GetPartie", ReplyAction="http://tempuri.org/IGestionPartie/GetPartieResponse")]
         System.Threading.Tasks.Task<string> GetPartieAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/VoirPartie", ReplyAction="http://tempuri.org/IGestionPartie/VoirPartieResponse")]
+        Domain.Dto.PartieDto[] VoirPartie(string pseudo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/VoirPartie", ReplyAction="http://tempuri.org/IGestionPartie/VoirPartieResponse")]
+        System.Threading.Tasks.Task<Domain.Dto.PartieDto[]> VoirPartieAsync(string pseudo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -97,6 +103,14 @@ namespace TestApplication.ServiceReference2 {
         
         public System.Threading.Tasks.Task<string> GetPartieAsync() {
             return base.Channel.GetPartieAsync();
+        }
+        
+        public Domain.Dto.PartieDto[] VoirPartie(string pseudo) {
+            return base.Channel.VoirPartie(pseudo);
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Dto.PartieDto[]> VoirPartieAsync(string pseudo) {
+            return base.Channel.VoirPartieAsync(pseudo);
         }
     }
 }

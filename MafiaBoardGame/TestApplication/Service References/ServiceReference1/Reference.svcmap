@@ -26,6 +26,7 @@
     <MetadataFile FileName="GestionJoueurImpl.wsdl" MetadataType="Wsdl" ID="01efac39-b674-4de0-9d4e-00834639f9df" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?wsdl" />
     <MetadataFile FileName="GestionJoueurImpl.xsd" MetadataType="Schema" ID="c76a80bc-0273-4604-9bad-23e621b22b8f" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?xsd=xsd1" />
     <MetadataFile FileName="GestionJoueurImpl1.xsd" MetadataType="Schema" ID="4c5b6e32-38c8-45d2-a77e-f77e009bace0" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?xsd=xsd0" />
+    <MetadataFile FileName="GestionJoueurImpl2.xsd" MetadataType="Schema" ID="56b962ca-3b8f-4bee-aa65-7f626bae3a69" SourceId="1" SourceUrl="http://localhost:50368/GestionJoueurImpl.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
