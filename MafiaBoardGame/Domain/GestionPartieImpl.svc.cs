@@ -155,7 +155,7 @@ namespace Domain
 
                 //est ce que je dois vraiment mettre la JoueurCourant courante?
                 partie.JoueursParticipants.Add(joueurPartie);
-                partie.JoueurCourant = joueurPartie;
+                //partie.JoueurCourant = joueurPartie;
 
                 joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
 

@@ -45,6 +45,7 @@ namespace Domain.Util
             carteDto.Effet = carte.Effet;
             carteDto.EffetComplet = carte.EffetComplet;
             
+
             return carteDto;
         }
         public static JoueurPartieDto ToJoueurPartieDto(JoueurPartie joueurPartie)
