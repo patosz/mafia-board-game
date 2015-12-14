@@ -258,6 +258,16 @@ namespace Domain
 
         public Carte piocherCarte(int idJoueurPartie)
         {
+
+            JoueurPartie joueurPartie= (from JoueurPartie j in dbcontext.JoueurParties
+                                        where j.Id.Equals(idJoueurPartie)
+                                        select j).FirstOrDefault();
+
+            CartePartie cartePartie = partie.CartePartie.First();
+            Carte carte= cartePartie.Carte;
+
+            partie.CartePartie.Remove(cartePartie);
+
             return null;
         }
     }

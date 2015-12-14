@@ -1,4 +1,5 @@
 ﻿using Domain.Model;
+using Domain.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,7 +44,6 @@ namespace Domain
         }
         public JoueurDto ConnexionJoueur(string pseudo, string mdp)
         {
-            JoueurDto j;
             mdp = EncryptPassword(mdp);
             Joueur joueur = (from Joueur jo in dbcontext.Joueurs
                            where jo.Pseudo.Equals(pseudo)
@@ -56,11 +56,8 @@ namespace Domain
             {
                 if (joueur.Mdp != mdp)
                     return null;
-                j = new JoueurDto();
-                j.Mdp = joueur.Mdp;
-                j.Pseudo = joueur.Pseudo;
+                return BizToDto.ToJoueurDto(joueur);
             }
-            return j;
         }
     }
 }

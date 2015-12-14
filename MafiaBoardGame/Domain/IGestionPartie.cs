@@ -28,5 +28,7 @@ namespace Domain
         [OperationContract]
         PartieDto LancerPartie();
 
+
+
     }
 }
