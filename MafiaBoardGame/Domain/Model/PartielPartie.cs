@@ -12,7 +12,7 @@ namespace Domain.Model
         
         public enum ETAT { INSCRIPTION = 0, EN_COURS = 1, TERMINE = 2 };
         public ETAT etat { get; set; }
-        private int nbCartesParJoueur
+        public int nbCartesParJoueur
         {
             get; set;
         }

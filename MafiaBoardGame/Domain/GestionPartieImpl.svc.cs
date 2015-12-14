@@ -241,12 +241,23 @@ namespace Domain
             for (int i= 0; i < listeJoueurPartie.Count; i++)
             {
                 JoueurPartie joueurPartie =listeJoueurPartie.ElementAt(i);
-             //recupere le nombre de carte
-                //  int numCarteParjoueur = partie.
-                //joueurPartie.
+                //recupere le nombre de carte
+                int numCarteParjoueur = partie.nbCartesParJoueur;
+                for(int j=0; j < numCarteParjoueur; j++)
+                {
+                    //piocher Carte
+                    //joueurPartie.
+
+                }
+                
             }
             
 
+            return null;
+        }
+
+        public Carte piocherCarte(int idJoueurPartie)
+        {
             return null;
         }
     }
