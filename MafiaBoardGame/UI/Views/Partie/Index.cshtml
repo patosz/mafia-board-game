@@ -6,27 +6,40 @@
 
 <h2>Mafia Game Board</h2>
 <h3>Bienvenue @Model.Pseudo</h3>
-
-<div class="alert alert-danger">
-    <h1>!!! ACHTUNG !!!</h1>
-    <p>
-        Ne pas clicker sur les liens. Ils sont en cours d'implémentation !!!
-    </p>
+<div class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="javascript:showCreer()"> Créer partie </a>
+                </li>
+                <li>
+                    @Html.ActionLink("Rejoindre", "Partie", new { pseudo = Model.Pseudo })
+                </li>
+                <li>
+                    <a href="javascript:showVoirParties()"> Voir Parties </a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
+<div id="Creer">
+    @{Html.RenderAction("Creer", new { controller = "Partie" });}
+</div>
 
-@using (Html.BeginForm("Creer", "Partie", FormMethod.Post))
-{
-    <div class="form-group">
-        @Html.Label("Nom partie")
-        @Html.TextBox("nomPartie", "", new { @id = "nomPartie", @class = "form - control" })
-    </div>
-    <input type="submit" value="Creer Partie" />
-}
+<div id="VoirParties" style="display:none;">
+    @{Html.RenderAction("VoirParties", new { controller = "Partie" });}
+</div>
 
+<script type="text/javascript">
+    function showCreer() {
+        $('#VoirParties').hide();
+        $('#Creer').show();
+    }
 
-<br />
-<button onclick="@Url.Action("Rejoindre","Partie",new { pseudo = Model.Pseudo})"> Rejoindre Partie</button>
-<br />
-<button> Voir parties</button>
-
+    function showVoirParties() {
+        $('#Creer').hide();
+        $('#VoirParties').show();
+    }
+</script>
