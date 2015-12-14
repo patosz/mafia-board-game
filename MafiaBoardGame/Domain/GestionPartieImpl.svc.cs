@@ -222,9 +222,9 @@ namespace Domain
 
             for (int i = 0; i < jp.Count; i++)
             {
-                var 
+                int idJp = jp.ElementAt(i).PartieId;
                 Partie partie = (from Partie p in dbcontext.Parties
-                                 where p.Id == jp.ElementAt(i).PartieId
+                                 where p.Id == idJp
                                  select p).FirstOrDefault();
 
                 PartieDto partieDto = BizToDto.ToPartieDto(partie);
