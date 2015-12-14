@@ -27,10 +27,11 @@ namespace Domain.Dal
             dico.Add(cartes.Attribute("minJoueurs").Name.ToString(), int.Parse(cartes.Attribute("minJoueurs").Value));
             dico.Add(cartes.Attribute("maxJoueurs").Name.ToString(), int.Parse(cartes.Attribute("maxJoueurs").Value));
 
-            XElement des = (from xml in xdoc.Elements("de")
-                            select xml).FirstOrDefault();
-            dico.Add(des.Attribute("nbParJoueur").Name.ToString(), int.Parse(des.Attribute("nbParJoueur").Value));
-            dico.Add(des.Attribute("nbTotalDes").Name.ToString(), int.Parse(des.Attribute("nbTotalDes").Value));
+            XElement des = (from xml2 in xdoc.Descendants("de")
+                            select xml2).FirstOrDefault();
+            
+                dico.Add(des.Attribute("nbParJoueur").Name.ToString(), int.Parse(des.Attribute("nbParJoueur").Value));
+                dico.Add(des.Attribute("nbTotalDes").Name.ToString(), int.Parse(des.Attribute("nbTotalDes").Value));
 
             IEnumerable<XElement> faces = from face in xdoc.Descendants("face") select face;
             foreach(var face in faces)

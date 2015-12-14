@@ -44,6 +44,18 @@ namespace TestApplication.ServiceReference2 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/VoirPartie", ReplyAction="http://tempuri.org/IGestionPartie/VoirPartieResponse")]
         System.Threading.Tasks.Task<Domain.Dto.PartieDto[]> VoirPartieAsync(string pseudo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/LancerPartie", ReplyAction="http://tempuri.org/IGestionPartie/LancerPartieResponse")]
+        Domain.Dto.PartieDto LancerPartie();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/LancerPartie", ReplyAction="http://tempuri.org/IGestionPartie/LancerPartieResponse")]
+        System.Threading.Tasks.Task<Domain.Dto.PartieDto> LancerPartieAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/piocherCarte", ReplyAction="http://tempuri.org/IGestionPartie/piocherCarteResponse")]
+        Domain.Dto.CarteDto piocherCarte(int IdJoueurPartie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/piocherCarte", ReplyAction="http://tempuri.org/IGestionPartie/piocherCarteResponse")]
+        System.Threading.Tasks.Task<Domain.Dto.CarteDto> piocherCarteAsync(int IdJoueurPartie);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -111,6 +123,22 @@ namespace TestApplication.ServiceReference2 {
         
         public System.Threading.Tasks.Task<Domain.Dto.PartieDto[]> VoirPartieAsync(string pseudo) {
             return base.Channel.VoirPartieAsync(pseudo);
+        }
+        
+        public Domain.Dto.PartieDto LancerPartie() {
+            return base.Channel.LancerPartie();
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Dto.PartieDto> LancerPartieAsync() {
+            return base.Channel.LancerPartieAsync();
+        }
+        
+        public Domain.Dto.CarteDto piocherCarte(int IdJoueurPartie) {
+            return base.Channel.piocherCarte(IdJoueurPartie);
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Dto.CarteDto> piocherCarteAsync(int IdJoueurPartie) {
+            return base.Channel.piocherCarteAsync(IdJoueurPartie);
         }
     }
 }

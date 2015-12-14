@@ -68,4 +68,30 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="LancerPartie">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LancerPartieResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="LancerPartieResult" nillable="true" type="q2:PartieDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="piocherCarte">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdJoueurPartie" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="piocherCarteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="piocherCarteResult" nillable="true" type="q3:CarteDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

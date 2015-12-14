@@ -50,7 +50,7 @@ namespace Domain.Model
             nbCartesParJoueur = dico["nbCartesParJoueur"];
             nbCartesTotal = dico["nbCartesTotal"];
             minJoueurs = dico["minJoueurs"];
-            maxJoueur = dico["maxJoueur"];
+            maxJoueur = dico["maxJoueurs"];
             nbParJoueur = dico["nbParJoueur"];
             nbTotalDes = dico["nbTotalDes"];
             List<Carte> listeTypeCarte = parseur.loadCarte();

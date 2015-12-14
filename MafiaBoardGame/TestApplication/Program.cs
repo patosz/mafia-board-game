@@ -15,10 +15,10 @@ namespace TestApplication
         static void Main(string[] args)
         {
             ServiceReference1.GestionJoueurClient proxy = new ServiceReference1.GestionJoueurClient();
-            string joueur1 = "milene";
-            string joueur2 = "patou";
+            string joueur1 = "gio";
+            string joueur2 = "gary";
             string mdp = "ee";
-            string partie = "guerre";
+            string partie = "love";
 
             bool ok = proxy.InscriptionJoueur(joueur1,mdp);
             if (ok)
@@ -60,11 +60,9 @@ namespace TestApplication
             {
                 Console.WriteLine("Partie n° " + i + " : " + list.ElementAt(i).Nom);
             }
-
+            PartieDto pDto = proxy2.LancerPartie();
+            Console.WriteLine(pDto.Nom + " " + pDto.DateHeureCreation);
             
-
-
-
             Console.ReadLine();
         }
     }

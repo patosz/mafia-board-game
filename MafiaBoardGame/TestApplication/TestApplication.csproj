@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\DataSources\Domain.Dto.CarteDto.datasource" />
     <None Include="Properties\DataSources\Domain.Dto.PartieDto.datasource" />
     <None Include="Properties\DataSources\Domain.JoueurDto.datasource" />
     <None Include="Properties\DataSources\Domain.Model.Partie.datasource" />

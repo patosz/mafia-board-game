@@ -38,6 +38,18 @@
   <wsdl:message name="IGestionPartie_VoirPartie_OutputMessage">
     <wsdl:part name="parameters" element="tns:VoirPartieResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionPartie_LancerPartie_InputMessage">
+    <wsdl:part name="parameters" element="tns:LancerPartie" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_LancerPartie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LancerPartieResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_piocherCarte_InputMessage">
+    <wsdl:part name="parameters" element="tns:piocherCarte" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_piocherCarte_OutputMessage">
+    <wsdl:part name="parameters" element="tns:piocherCarteResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionPartie">
     <wsdl:operation name="CreerPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/CreerPartie" message="tns:IGestionPartie_CreerPartie_InputMessage" />
@@ -58,6 +70,14 @@
     <wsdl:operation name="VoirPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/VoirPartie" message="tns:IGestionPartie_VoirPartie_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/VoirPartieResponse" message="tns:IGestionPartie_VoirPartie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LancerPartie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/LancerPartie" message="tns:IGestionPartie_LancerPartie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/LancerPartieResponse" message="tns:IGestionPartie_LancerPartie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="piocherCarte">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/piocherCarte" message="tns:IGestionPartie_piocherCarte_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/piocherCarteResponse" message="tns:IGestionPartie_piocherCarte_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGestionPartie" type="tns:IGestionPartie">
@@ -100,6 +120,24 @@
     </wsdl:operation>
     <wsdl:operation name="VoirPartie">
       <soap:operation soapAction="http://tempuri.org/IGestionPartie/VoirPartie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LancerPartie">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/LancerPartie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="piocherCarte">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/piocherCarte" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

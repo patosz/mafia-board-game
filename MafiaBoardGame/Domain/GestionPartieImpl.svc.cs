@@ -271,9 +271,12 @@ namespace Domain
 
             partie.CartesPoubelle.Add(carte);
 
+            joueurPartie.CartesMain.Add(carte);
+
+            
             dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
-
+            
             dbcontext.SaveChanges();
             CarteDto carteDto = BizToDto.ToCarteDto(carte);
             return carteDto;
