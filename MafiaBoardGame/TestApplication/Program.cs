@@ -62,6 +62,7 @@ namespace TestApplication
             }
             PartieDto pDto = proxy2.LancerPartie();
             Console.WriteLine(pDto.Nom + " " + pDto.DateHeureCreation);
+            
             Console.ReadLine();
         }
     }
