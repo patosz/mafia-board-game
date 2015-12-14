@@ -234,5 +234,20 @@ namespace Domain
             return list;
 
         }
+
+        public PartieDto LancerPartie()
+        {
+            List<JoueurPartie> listeJoueurPartie =partie.JoueursParticipants.ToList();
+            for (int i= 0; i < listeJoueurPartie.Count; i++)
+            {
+                JoueurPartie joueurPartie =listeJoueurPartie.ElementAt(i);
+             //recupere le nombre de carte
+                //  int numCarteParjoueur = partie.
+                //joueurPartie.
+            }
+            
+
+            return null;
+        }
     }
 }

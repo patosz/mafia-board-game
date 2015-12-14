@@ -25,6 +25,8 @@ namespace Domain
         [OperationContract]
         List<PartieDto> VoirPartie(string pseudo);
 
+        [OperationContract]
+        PartieDto LancerPartie();
 
     }
 }

@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="GestionJoueurImpl.svc" />
+    <Content Include="GestionJoueurPartieImpl.svc" />
     <Content Include="GestionPartieImpl.svc" />
     <Content Include="Model\Model2.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -100,10 +101,14 @@
     <Compile Include="GestionJoueurImpl.svc.cs">
       <DependentUpon>GestionJoueurImpl.svc</DependentUpon>
     </Compile>
+    <Compile Include="GestionJoueurPartieImpl.svc.cs">
+      <DependentUpon>GestionJoueurPartieImpl.svc</DependentUpon>
+    </Compile>
     <Compile Include="GestionPartieImpl.svc.cs">
       <DependentUpon>GestionPartieImpl.svc</DependentUpon>
     </Compile>
     <Compile Include="IGestionJoueur.cs" />
+    <Compile Include="IGestionJoueurPartie.cs" />
     <Compile Include="IGestionPartie.cs" />
     <Compile Include="Dto\JoueurDto.cs" />
     <Compile Include="Model\Carte.cs">
