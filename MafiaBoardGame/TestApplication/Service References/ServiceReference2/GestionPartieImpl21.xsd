@@ -34,7 +34,6 @@
       <xs:element minOccurs="0" name="EffetComplet" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="JoueurParties" nillable="true" type="tns:ArrayOfJoueurPartieDto" />
-      <xs:element minOccurs="0" name="Partie" nillable="true" type="tns:PartieDto" />
       <xs:element minOccurs="0" name="PartieId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>

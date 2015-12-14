@@ -61,6 +61,9 @@ namespace TestApplication
                 Console.WriteLine("Partie n° " + i + " : " + list.ElementAt(i).Nom);
             }
 
+            
+
+
 
             Console.ReadLine();
         }
