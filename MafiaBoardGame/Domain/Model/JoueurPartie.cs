@@ -32,6 +32,5 @@ namespace Domain.Model
         public virtual ICollection<Carte> CartesMain { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<De> DesMain { get; set; }
-        public virtual Partie PartieCourant { get; set; }
     }
 }

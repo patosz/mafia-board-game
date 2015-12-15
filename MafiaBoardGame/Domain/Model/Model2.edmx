@@ -371,7 +371,6 @@
           <Property Name="PartieId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CartesMain" Relationship="Model.JoueurPartieCarte" FromRole="JoueurPartie" ToRole="Carte" />
           <NavigationProperty Name="DesMain" Relationship="Model.JoueurPartieDe" FromRole="JoueurPartie" ToRole="De" />
-          <NavigationProperty Name="PartieCourant" Relationship="Model.JoueurPartiePartie" FromRole="JoueurPartie" ToRole="Partie" />
         </EntityType>
         <Association Name="PartiesJoueesJoueur">
           <End Type="Model.Joueur" Role="Joueur" Multiplicity="1" />
