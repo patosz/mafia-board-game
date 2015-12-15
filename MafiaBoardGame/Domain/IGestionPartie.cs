@@ -43,17 +43,24 @@ namespace Domain
         List<CarteDto> getListCartesDto(int IdJoueurPartie);
         [OperationContract]
         JoueurDto getJoueurDto(int IdJoueurPartie);
+
         [OperationContract]
         List<DeDto> lancerDes(int IdJoueurPartie);
+
+        [OperationContract]
+        bool autoriserCarte(JoueurPartie joueurPartie, int cout);
+
+        [OperationContract]
+        bool donnerDe(int IdJoueurPartie, int IdJoueurCible);
 
         [OperationContract]
         void supprimerUnDe(int IdJoueurPartie,int IdDe);
 
         [OperationContract]
-        void supprimerDeuxDes(int IdJoueurPartie, int IdDe);
+        void supprimerDeuxDes(int IdJoueurPartie, int IdDe1, int IdDe2);
 
         [OperationContract]
-        void donnerDeAGaucheOuDroite(int IdJoueurPartie, bool sens);
+        void donnerDeAGaucheOuDroite(int IdJoueurPartie);
 
         [OperationContract]
         void rejouerEtChangementDeSens(int IdJoueurPartie);

@@ -378,25 +378,98 @@ namespace Domain
                                          where jp.Id.Equals(IdJoueurPartie)
                                          select jp).FirstOrDefault();
 
+
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
                              where j.Id.Equals(joueurPartie.JoueurId)
                              select j).FirstOrDefault();
             return BizToDto.ToJoueurDto(joueur);
         }
 
+        public bool autoriserCarte(JoueurPartie joueurPartie, int cout)
+        {
+            int compteur = 0;
+            foreach (De de in joueurPartie.DesMain)
+            {
+                if (de.Valeur.Equals("M"))
+                {
+                    compteur++;
+                }
+            }
+            if (compteur >= cout)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        public bool donnerDe(int IdJoueurPartie, int IdJoueurCible)
+        {
+            JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartie)
+                                         select jp).FirstOrDefault();
+            JoueurPartie joueurPartieCible = (from JoueurPartie jpc in dbcontext.JoueurParties
+                                              where jpc.Id.Equals(IdJoueurCible)
+                                              select jpc).FirstOrDefault();
+
+            foreach (De de in joueurPartie.DesMain)
+            {
+                if (de.Valeur.Equals("D"))
+                {
+                    joueurPartie.DesMain.Remove(de);
+                    joueurPartieCible.DesMain.Add(de);
+                    dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+                    dbcontext.Entry(joueurPartieCible).State = System.Data.Entity.EntityState.Modified;
+
+                    dbcontext.SaveChanges();
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void supprimerUnDe(int IdJoueurPartie, int IdDe)
         {
-            throw new NotImplementedException();
+            JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartie)
+                                         select jp).FirstOrDefault();
+            De de = (from De d in dbcontext.Des
+                     where d.Id.Equals(IdDe)
+                     select j).FirstOrDefault();
+            joueurPartie.DesMain.Remove(de);
+
+            dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.SaveChanges();
+            
         }
 
-        public void supprimerDeuxDes(int IdJoueurPartie, int IdDe)
+        public void supprimerDeuxDes(int IdJoueurPartie, int IdDe1, int IdDe2)
         {
-            throw new NotImplementedException();
+            JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartie)
+                                         select jp).FirstOrDefault();
+            De de = (from De d in dbcontext.Des
+                     where d.Id.Equals(IdDe1)
+                     select j).FirstOrDefault();
+
+            De de2 = (from De d in dbcontext.Des
+                     where d.Id.Equals(IdDe1)
+                     select j).FirstOrDefault();
+            joueurPartie.DesMain.Remove(de);
+            joueurPartie.DesMain.Remove(de2);
+            dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+
+            dbcontext.SaveChanges();
         }
 
-        public void donnerDeAGaucheOuDroite(int IdJoueurPartie, bool sens)
+        public void donnerDeAGaucheOuDroite(int IdJoueurPartie)
         {
-            throw new NotImplementedException();
+            JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartie)
+                                         select jp).FirstOrDefault();
+
+
         }
 
         public void rejouerEtChangementDeSens(int IdJoueurPartie)
@@ -406,7 +479,29 @@ namespace Domain
 
         public void prendreUneCarteDUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible)
         {
-            throw new NotImplementedException();
+            JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartie)
+                                         select jp).FirstOrDefault();
+
+            JoueurPartie joueurPartieCible = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartieCible)
+                                         select jp).FirstOrDefault();
+
+
+            List<Carte> list = joueurPartieCible.CartesMain.ToList();
+            Random random = new Random();
+       
+            int rand = random.Next(list.Count);
+            Carte carte = list.ElementAt(rand);
+            joueurPartie.CartesMain.Add(carte);
+            joueurPartieCible.CartesMain.Remove(carte);
+
+            dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.Entry(joueurPartieCible).State = System.Data.Entity.EntityState.Modified;
+
+            dbcontext.SaveChanges();
+
+
         }
 
         public void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe)
