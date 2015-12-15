@@ -16,6 +16,7 @@ namespace Domain.Util
             partieDto.Nom = partie.Nom;
             partieDto.DateHeureCreation = partie.DateHeureCreation;
             partieDto.Sens = partie.Sens;
+            partieDto.JoueurCourant = BizToDto.ToJoueurPartieDto(partie.JoueurCourant);
            // partieDto.CartesPioche = BizToDto.ToCarteDtoList(partie.CartesPioche.ToList());
           //  partieDto.JoueurCourant = BizToDto.ToJoueurPartieDto(partie.JoueurCourant);
           //  partieDto.JoueursParticipants = partie.JoueursParticipants;

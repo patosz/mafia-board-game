@@ -16,14 +16,8 @@ namespace Domain.Dto
         [DataMember]
         public int Cout { get; set; }
         [DataMember]
-        public string Effet
-        {
-            get; set;
-        }
+        public string Effet{get; set;}
         [DataMember]
-        public string EffetComplet
-        {
-            get; set;
-        }
+        public string EffetComplet{get; set;}
     }
 }
