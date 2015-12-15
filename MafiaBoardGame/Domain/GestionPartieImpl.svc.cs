@@ -283,9 +283,10 @@ namespace Domain
 
             partie.CartesPioche.Remove(carte);
 
-            partie.CartesPoubelle.Add(carte);
+            //partie.CartesPoubelle.Add(carte);
 
             joueurPartie.CartesMain.Add(carte);
+            
 
 
             dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
@@ -615,9 +616,27 @@ namespace Domain
             dbcontext.SaveChanges();
         }
 
-        public void ciblerJoueurQUUneCarte(int IdJoueurPartie, int IdJoueurPartieCible)
+        public void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte)
         {
-            throw new NotImplementedException();
+           
+            JoueurPartie joueurPartieCible = (from JoueurPartie jp in dbcontext.JoueurParties
+                                              where jp.Id.Equals(IdJoueurPartieCible)
+                                              select jp).FirstOrDefault();
+
+            int nbCarte = joueurPartieCible.CartesMain.Count;
+            foreach(Carte c in joueurPartieCible.CartesMain)
+            {
+                if(c.Id == IdCarte)
+                {
+                    continue;
+                }
+                else
+                {
+                    jeterCartePoubelle(IdJoueurPartieCible, c.Id);
+                }
+            }
+
+
         }
 
         public void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible)
@@ -636,6 +655,25 @@ namespace Domain
         public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie)
         {
             throw new NotImplementedException();
+        }
+
+        public void jeterCartePoubelle(int IdJoueurPartie, int IdCarte)
+        {
+            JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartie)
+                                         select jp).FirstOrDefault();
+
+            Carte carte = (from Carte ca in dbcontext.Cartes
+                                         where ca.Id.Equals(IdCarte)
+                                         select ca).FirstOrDefault();
+
+
+            joueurPartie.CartesMain.Remove(carte);
+            partie.CartesPoubelle.Add(carte);
+            dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.SaveChanges();
+
         }
     }
 }

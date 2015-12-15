@@ -75,7 +75,7 @@ namespace Domain
         void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe);
 
         [OperationContract]
-        void ciblerJoueurQUUneCarte(int IdJoueurPartie,int IdJoueurPartieCible);
+        void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte);
 
         [OperationContract]
         void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible);
@@ -85,6 +85,8 @@ namespace Domain
 
         [OperationContract]
         void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
+        [OperationContract]
+        void jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
 
 
     }
