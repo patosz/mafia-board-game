@@ -10,13 +10,14 @@ namespace UI.Controllers
     public class PlateauController : Controller
     {
         // GET: Plateau
-        public ActionResult Index(string nomPartie)
+        public ActionResult Index(string nomPartie = "Test")
         {
-            if (nomPartie.Length == 0 || nomPartie == null)
+           /* if (nomPartie == null || nomPartie.Length == 0)
             {
                 return RedirectToAction("Index", "Index");
-            }
+            }*/
             //(new UccPartieRef.GestionPartieClient)
+            ViewData["partie"] = nomPartie;
             return View();
         }
     }
