@@ -13,14 +13,20 @@ namespace Domain
     [ServiceContract]
     public interface IGestionPartie
     {
+
         [OperationContract]
-        JoueurDto CreerPartie(String nomPartie,String nomJoueur);
+        JoueurDto CreerPartie(String nomPartie, String nomJoueur);
+
+
         [OperationContract]
         bool RejoindrePartie(String pseudo);
+
         [OperationContract]
         bool CommencerPartie();
+
         [OperationContract]
         string GetPartieDebug();
+
 
         [OperationContract]
         List<PartieDto> VoirPartie(string pseudo);
@@ -35,56 +41,80 @@ namespace Domain
 
         [OperationContract]
         JoueurPartieDto getJoueurParticipantDto(int IdJoueurPartie);
+
         [OperationContract]
         List<JoueurPartieDto> getListJoueurParticipantsDto(int IdPartie);
+
         [OperationContract]
         List<DeDto> getListDesDto(int IdJoueurPartie);
+
         [OperationContract]
         List<CarteDto> getListCartesDto(int IdJoueurPartie);
+
         [OperationContract]
         JoueurDto getJoueurDto(int IdJoueurPartie);
 
         [OperationContract]
         List<DeDto> lancerDes(int IdJoueurPartie);
 
-        [OperationContract]
-        bool autoriserCarte(JoueurPartie joueurPartie, int cout);
+        /*
+          [OperationContract]
+          bool autoriserCarte(JoueurPartie joueurPartie, int cout);
+        */
+        
+           [OperationContract]
+           bool donnerDe(int IdJoueurPartie, int IdJoueurCible);
+        
+        /*
+           [OperationContract]
+           JoueurPartie next();
+        */
+        
+           [OperationContract]
+           void supprimerUnDe(int IdJoueurPartie,int IdDe);
+        
+        
+           [OperationContract]
+           void supprimerDeuxDes(int IdJoueurPartie, int IdDe1, int IdDe2);
+         
 
-        [OperationContract]
-        bool donnerDe(int IdJoueurPartie, int IdJoueurCible);
+        
+           [OperationContract]
+           void donnerDeAGaucheOuDroite(int IdJoueurPartie);
+        
 
-        [OperationContract]
-        JoueurPartie next();
+        
+           [OperationContract]
+           void rejouerEtChangementDeSens(int IdJoueurPartie);
+        
 
-        [OperationContract]
-        void supprimerUnDe(int IdJoueurPartie,int IdDe);
+        
+          [OperationContract]
+          void prendreUneCarteDUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible);
+       
 
-        [OperationContract]
-        void supprimerDeuxDes(int IdJoueurPartie, int IdDe1, int IdDe2);
+       
+           [OperationContract]
+           void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe);
+        
 
-        [OperationContract]
-        void donnerDeAGaucheOuDroite(int IdJoueurPartie);
+        
+           [OperationContract]
+           void ciblerJoueurQUUneCarte(int IdJoueurPartie,int IdJoueurPartieCible);
+         
 
-        [OperationContract]
-        void rejouerEtChangementDeSens(int IdJoueurPartie);
-
-        [OperationContract]
-        void prendreUneCarteDUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible);
-
-        [OperationContract]
-        void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe);
-
-        [OperationContract]
-        void ciblerJoueurQUUneCarte(int IdJoueurPartie,int IdJoueurPartieCible);
-
-        [OperationContract]
-        void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible);
-
-        [OperationContract]
-        void piocheTroisCartes(int IdJoueurPartie);
-
-        [OperationContract]
-        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
+        
+           [OperationContract]
+           void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible);
+        
+        
+           [OperationContract]
+           void piocheTroisCartes(int IdJoueurPartie);
+        
+        
+           [OperationContract]
+           void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
+        
 
 
     }

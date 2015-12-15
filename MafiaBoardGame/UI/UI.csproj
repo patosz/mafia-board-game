@@ -109,6 +109,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\StylePlateau.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -119,6 +120,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Images\dos_carte.png" />
     <Content Include="Properties\DataSources\Domain.JoueurDto.datasource" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -202,6 +204,8 @@
     <Content Include="Views\Partie\VoirPartiesDisponibles.cshtml" />
     <Content Include="Views\Joueur\ConfirmRegistration.cshtml" />
     <Content Include="Views\Joueur\Register.cshtml" />
+    <Content Include="Views\Plateau\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -212,7 +216,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Plateau\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
