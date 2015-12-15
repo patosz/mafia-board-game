@@ -13,9 +13,15 @@ namespace Domain.Model
             this.Valeur = "M";
         }
 
-        public int LancerDe()
+        public void LancerDe()
         {
-            return random.Next(6) + 1;
+            int rand = random.Next(6) + 1;
+
+            if (rand <= 3)
+                this.Valeur = "M";
+            else if (rand <= 5)
+                this.Valeur = "P";
+            else this.Valeur = "D";
         }
 
     }

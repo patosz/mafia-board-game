@@ -132,7 +132,7 @@ namespace Domain
         //on donne quoi le string un objet??
         public bool RejoindrePartie(string pseudo)
         {
-            if (partie.maxJoueur>=partie.JoueursParticipants.Count)
+            if (partie.maxJoueur >= partie.JoueursParticipants.Count)
             {
                 return false;
             }
@@ -240,13 +240,13 @@ namespace Domain
 
         public PartieDto LancerPartie()
         {
-            List<JoueurPartie> listeJoueurPartie =partie.JoueursParticipants.ToList();
-            for (int i= 0; i < listeJoueurPartie.Count; i++)
+            List<JoueurPartie> listeJoueurPartie = partie.JoueursParticipants.ToList();
+            for (int i = 0; i < listeJoueurPartie.Count; i++)
             {
-                JoueurPartie joueurPartie =listeJoueurPartie.ElementAt(i);
+                JoueurPartie joueurPartie = listeJoueurPartie.ElementAt(i);
                 //recupere le nombre de carte
                 int numCarteParjoueur = partie.nbCartesParJoueur;
-                for(int j=0; j < numCarteParjoueur; j++)
+                for (int j = 0; j < numCarteParjoueur; j++)
                 {
                     piocherCarte(joueurPartie.Id);
                 }
@@ -276,10 +276,10 @@ namespace Domain
 
             joueurPartie.CartesMain.Add(carte);
 
-            
+
             dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
-            
+
             dbcontext.SaveChanges();
             CarteDto carteDto = BizToDto.ToCarteDto(carte);
             return carteDto;
@@ -308,10 +308,10 @@ namespace Domain
             //shuffle
             foreach (De de in joueurPartie.DesMain)
             {
-                //que faire une fois qu'on a le numéro
-              int valeurDe=de.LancerDe();
+                de.LancerDe();
+                listDeLance.Add(BizToDto.ToDeDto(de));
             }
-
+            dbcontext.SaveChanges();
             return listDeLance;
         }
 
@@ -330,9 +330,9 @@ namespace Domain
         public List<JoueurPartieDto> getListJoueurParticipantsDto(int IdPartie)
         {
             List<JoueurPartieDto> listJoueurPartie = new List<JoueurPartieDto>();
-           var list = (from JoueurPartie j in dbcontext.JoueurParties
-                       where j.PartieId.Equals(IdPartie)
-                       select j);
+            var list = (from JoueurPartie j in dbcontext.JoueurParties
+                        where j.PartieId.Equals(IdPartie)
+                        select j);
             foreach (JoueurPartie joueurPartie in list)
             {
                 listJoueurPartie.Add(BizToDto.ToJoueurPartieDto(joueurPartie));
@@ -379,11 +379,11 @@ namespace Domain
                                          select jp).FirstOrDefault();
 
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
-                                         where j.Id.Equals(joueurPartie.JoueurId)
-                                         select j).FirstOrDefault();
+                             where j.Id.Equals(joueurPartie.JoueurId)
+                             select j).FirstOrDefault();
             return BizToDto.ToJoueurDto(joueur);
         }
 
-       
+
     }
 }
