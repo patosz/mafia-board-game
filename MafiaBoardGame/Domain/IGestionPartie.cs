@@ -43,6 +43,8 @@ namespace Domain
         List<CarteDto> getListCartesDto(int IdJoueurPartie);
         [OperationContract]
         JoueurDto getJoueurDto(int IdJoueurPartie);
+        [OperationContract]
+        List<DeDto> lancerDes(int IdJoueurPartie);
 
     }
 }

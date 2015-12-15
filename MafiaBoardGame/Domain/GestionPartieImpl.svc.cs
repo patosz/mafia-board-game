@@ -132,7 +132,10 @@ namespace Domain
         //on donne quoi le string un objet??
         public bool RejoindrePartie(string pseudo)
         {
-
+            if (partie.maxJoueur>=partie.JoueursParticipants.Count)
+            {
+                return false;
+            }
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
                              where j.Pseudo.Equals(pseudo)
                              select j).FirstOrDefault();
@@ -296,6 +299,22 @@ namespace Domain
 
         }
 
+        public List<DeDto> lancerDes(int IdJoueurPartie)
+        {
+            List<DeDto> listDeLance = new List<DeDto>();
+            JoueurPartie joueurPartie = (from JoueurPartie j in dbcontext.JoueurParties
+                                         where j.Id.Equals(IdJoueurPartie)
+                                         select j).FirstOrDefault();
+            //shuffle
+            foreach (De de in joueurPartie.DesMain)
+            {
+                //que faire une fois qu'on a le numéro
+              int valeurDe=de.LancerDe();
+            }
+
+            return listDeLance;
+        }
+
         //Service des Get Objet
 
         public JoueurPartieDto getJoueurParticipantDto(int IdJoueurPartie)
@@ -364,5 +383,7 @@ namespace Domain
                                          select j).FirstOrDefault();
             return BizToDto.ToJoueurDto(joueur);
         }
+
+       
     }
 }
