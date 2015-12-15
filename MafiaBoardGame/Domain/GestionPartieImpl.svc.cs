@@ -160,7 +160,7 @@ namespace Domain
 
                 joueur.PartiesJouees.Add(joueurPartie);
                 partie.JoueursParticipants.Add(joueurPartie);
-
+                partie.JoueurCourant=joueurPartie;
                 joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
                 //est ce que je dois vraiment mettre la partie courante?
                 joueurPartie.Partie = partie;
