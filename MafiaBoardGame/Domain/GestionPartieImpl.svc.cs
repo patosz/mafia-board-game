@@ -384,6 +384,54 @@ namespace Domain
             return BizToDto.ToJoueurDto(joueur);
         }
 
+        public void supprimerUnDe(int IdJoueurPartie, int IdDe)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void supprimerDeuxDes(int IdJoueurPartie, int IdDe)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void donnerDeAGaucheOuDroite(int IdJoueurPartie, bool sens)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void rejouerEtChangementDeSens(int IdJoueurPartie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void prendreUneCarteDUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ciblerJoueurQUUneCarte(int IdJoueurPartie, int IdJoueurPartieCible)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void piocheTroisCartes(int IdJoueurPartie)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -46,5 +46,36 @@ namespace Domain
         [OperationContract]
         List<DeDto> lancerDes(int IdJoueurPartie);
 
+        [OperationContract]
+        void supprimerUnDe(int IdJoueurPartie,int IdDe);
+
+        [OperationContract]
+        void supprimerDeuxDes(int IdJoueurPartie, int IdDe);
+
+        [OperationContract]
+        void donnerDeAGaucheOuDroite(int IdJoueurPartie, bool sens);
+
+        [OperationContract]
+        void rejouerEtChangementDeSens(int IdJoueurPartie);
+
+        [OperationContract]
+        void prendreUneCarteDUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible);
+
+        [OperationContract]
+        void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe);
+
+        [OperationContract]
+        void ciblerJoueurQUUneCarte(int IdJoueurPartie,int IdJoueurPartieCible);
+
+        [OperationContract]
+        void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible);
+
+        [OperationContract]
+        void piocheTroisCartes(int IdJoueurPartie);
+
+        [OperationContract]
+        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
+
+
     }
 }
