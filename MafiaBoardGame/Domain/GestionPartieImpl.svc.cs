@@ -30,7 +30,7 @@ namespace Domain
             throw new NotImplementedException();
         }
 
-        public bool CreerPartie(String nomPartie, String nomJoueur)
+        public JoueurDto CreerPartie(String nomPartie, String nomJoueur)
         {
 
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
@@ -40,12 +40,12 @@ namespace Domain
             if (joueur == null)
             {
                 //TODO erreur a géré 
-                return false;
+                return null;
             }
 
             if (partie != null && (int)partie.etat == (int)Partie.ETAT.EN_COURS)
             {
-                return false;
+                return null;
             }
 
             if (partie == null || (int)partie.etat == (int)Partie.ETAT.TERMINE)
@@ -109,7 +109,7 @@ namespace Domain
 
                  }*/
             }
-            return true;
+            return BizToDto.ToJoueurDto(joueur);
         }
 
 
@@ -436,7 +436,7 @@ namespace Domain
                                          select jp).FirstOrDefault();
             De de = (from De d in dbcontext.Des
                      where d.Id.Equals(IdDe)
-                     select j).FirstOrDefault();
+                     select d).FirstOrDefault();
             joueurPartie.DesMain.Remove(de);
 
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
@@ -451,11 +451,11 @@ namespace Domain
                                          select jp).FirstOrDefault();
             De de = (from De d in dbcontext.Des
                      where d.Id.Equals(IdDe1)
-                     select j).FirstOrDefault();
+                     select d).FirstOrDefault();
 
             De de2 = (from De d in dbcontext.Des
                      where d.Id.Equals(IdDe1)
-                     select j).FirstOrDefault();
+                     select d).FirstOrDefault();
             joueurPartie.DesMain.Remove(de);
             joueurPartie.DesMain.Remove(de2);
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;

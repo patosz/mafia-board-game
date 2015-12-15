@@ -14,7 +14,7 @@ namespace Domain
     public interface IGestionPartie
     {
         [OperationContract]
-        bool CreerPartie(String nomPartie,String nomJoueur);
+        JoueurDto CreerPartie(String nomPartie,String nomJoueur);
         [OperationContract]
         bool RejoindrePartie(String pseudo);
         [OperationContract]
