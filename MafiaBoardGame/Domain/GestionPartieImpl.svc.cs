@@ -459,20 +459,17 @@ namespace Domain
 
         }
 
-        public void supprimerDeuxDes(int IdJoueurPartie, int IdDe1, int IdDe2)
+        public void supprimerDeuxDes(int IdJoueurPartie)
         {
             JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
                                          where jp.Id.Equals(IdJoueurPartie)
                                          select jp).FirstOrDefault();
-            De de = (from De d in dbcontext.Des
-                     where d.Id.Equals(IdDe1)
-                     select d).FirstOrDefault();
-
-            De de2 = (from De d in dbcontext.Des
-                      where d.Id.Equals(IdDe1)
-                      select d).FirstOrDefault();
-            joueurPartie.DesMain.Remove(de);
-            joueurPartie.DesMain.Remove(de2);
+           
+            foreach(De de in joueurPartie.DesMain)
+            {
+                joueurPartie.DesMain.Remove(de);
+            }
+          
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
 
             dbcontext.SaveChanges();
@@ -652,9 +649,51 @@ namespace Domain
             }
         }
 
-        public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie)
+        public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, Dictionary<int,List<int>> dico)
         {
-            throw new NotImplementedException();
+            List<JoueurPartie> listJoueurPartie = partie.JoueursParticipants.ToList();
+            
+
+            foreach(JoueurPartie joueurPartie in listJoueurPartie)
+            {
+                int nombreCarteJoueur = joueurPartie.CartesMain.Count;
+                List<int> list = dico[joueurPartie.Id];
+                if ( nombreCarteJoueur<= 2)
+                {
+                    continue;
+                }
+                if (nombreCarteJoueur == 3)
+                {
+                    //enlever1
+                    for(int i = 0; i < nombreCarteJoueur; i++)
+                    {
+                        Carte carte = joueurPartie.CartesMain.ElementAt(i);
+                        if(carte.Id!=list.First() && carte.Id != list.Last())
+                        {
+                            jeterCartePoubelle(joueurPartie.Id,carte.Id);
+                            break;
+                        }
+                    }
+                    
+                }
+                else
+                {
+                    //enlever2ou+
+                    for (int i = 0; i < nombreCarteJoueur; i++)
+                    {
+                        Carte carte = joueurPartie.CartesMain.ElementAt(i);
+                        if (carte.Id != list.First() && carte.Id != list.Last())
+                        {
+                            jeterCartePoubelle(joueurPartie.Id, carte.Id);
+                        }
+                    }
+                }
+
+
+
+            }
+
+
         }
 
         public void jeterCartePoubelle(int IdJoueurPartie, int IdCarte)

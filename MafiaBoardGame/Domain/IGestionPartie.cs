@@ -60,7 +60,7 @@ namespace Domain
         void supprimerUnDe(int IdJoueurPartie,int IdDe);
 
         [OperationContract]
-        void supprimerDeuxDes(int IdJoueurPartie, int IdDe1, int IdDe2);
+        void supprimerDeuxDes(int IdJoueurPartie,Dictionary<int,List<int>> liste);
 
         [OperationContract]
         void donnerDeAGaucheOuDroite();
@@ -84,7 +84,7 @@ namespace Domain
         void piocheTroisCartes(int IdJoueurPartie);
 
         [OperationContract]
-        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
+        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, Dictionary<int, List<int>> dico);
         [OperationContract]
         void jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
 
