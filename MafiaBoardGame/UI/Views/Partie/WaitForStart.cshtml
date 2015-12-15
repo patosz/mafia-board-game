@@ -32,7 +32,8 @@
         i -= 1;
         if (i === 0) {
             window.clearInterval(intervalID);
-            $('#counter').text("La partie devrait commencer");
+            
+            window.location.href = @Url.Action("Index", "Plateau", new { nomPartie = Model.Nom});
         }
     }, 1000);
 
