@@ -48,13 +48,13 @@ namespace Domain
         List<DeDto> lancerDes(int IdJoueurPartie);
 
         [OperationContract]
-        bool autoriserCarte(JoueurPartie joueurPartie, int cout);
+        bool autoriserCarte(int idJoueurPartie, int cout);
 
         [OperationContract]
         bool donnerDe(int IdJoueurPartie, int IdJoueurCible);
 
         [OperationContract]
-        JoueurPartie next();
+        JoueurPartieDto next();
 
         [OperationContract]
         void supprimerUnDe(int IdJoueurPartie,int IdDe);

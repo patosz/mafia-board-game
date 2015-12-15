@@ -385,9 +385,12 @@ namespace Domain
             return BizToDto.ToJoueurDto(joueur);
         }
 
-        public bool autoriserCarte(JoueurPartie joueurPartie, int cout)
+        public bool autoriserCarte(int  IdJoueurPartie, int cout)
         {
             int compteur = 0;
+            JoueurPartie joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                         where jp.Id.Equals(IdJoueurPartie)
+                                         select jp).FirstOrDefault();
             foreach (De de in joueurPartie.DesMain)
             {
                 if (de.Valeur.Equals("M"))
@@ -473,7 +476,7 @@ namespace Domain
 
         }
 
-        public JoueurPartie next()
+        public JoueurPartieDto next()
         {
             int ordreJoueur = partie.JoueurCourant.OrdreJoueur;
             int nbJoueur = partie.JoueursParticipants.Count;
@@ -496,7 +499,7 @@ namespace Domain
 
             partie.JoueurCourant = joueurPartie;
 
-            return joueurPartie;
+            return BizToDto.ToJoueurPartieDto(joueurPartie);
         }
 
         public void rejouerEtChangementDeSens(int IdJoueurPartie)
