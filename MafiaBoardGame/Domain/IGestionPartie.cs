@@ -60,7 +60,7 @@ namespace Domain
         void supprimerUnDe(int IdJoueurPartie,int IdDe);
 
         [OperationContract]
-        void supprimerDeuxDes(int IdJoueurPartie,Dictionary<int,List<int>> liste);
+        void supprimerDeuxDes(int IdJoueurPartie);
 
         [OperationContract]
         void donnerDeAGaucheOuDroite();
