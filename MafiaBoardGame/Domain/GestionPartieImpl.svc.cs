@@ -30,7 +30,7 @@ namespace Domain
             throw new NotImplementedException();
         }
 
-        public JoueurDto CreerPartie(String nomPartie, String nomJoueur)
+        public PartieDto CreerPartie(String nomPartie, String nomJoueur)
         {
 
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
@@ -53,13 +53,13 @@ namespace Domain
                 partie = new Partie(nomPartie);
                 partie.etat = (int)Partie.ETAT.INSCRIPTION;
                 // relation PartieJoueur 0..1 sinon EF demandera une référence joueur pour ce champ
-                //partie.JoueurCourant = joueur;
+              
 
                 /*try
                 {*/
 
                 JoueurPartie joueurPartie = new JoueurPartie();
-
+                partie.JoueurCourant = joueurPartie;
                 //Joueur
                 joueur.PartiesJouees.Add(joueurPartie);
                 //joueur.PartiesGagnees.Add(partie);
@@ -109,7 +109,7 @@ namespace Domain
 
                  }*/
             }
-            return BizToDto.ToJoueurDto(joueur);
+            return BizToDto.ToPartieDto(partie);
         }
 
 
@@ -160,7 +160,6 @@ namespace Domain
 
                 joueur.PartiesJouees.Add(joueurPartie);
                 partie.JoueursParticipants.Add(joueurPartie);
-                partie.JoueurCourant=joueurPartie;
                 joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
                 //est ce que je dois vraiment mettre la partie courante?
                 joueurPartie.Partie = partie;

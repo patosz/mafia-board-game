@@ -17,11 +17,12 @@ namespace Domain.Dto
         public DateTime DateHeureCreation { get; set; }
         [DataMember]
         public bool Sens { get; set; }
-       
+        [DataMember]
+        public JoueurPartieDto JoueurCourant { get; set; }
         [DataMember]
         public JoueurDto Vainqueur { get; set; }
-        
-        
+
+
 
     }
 }

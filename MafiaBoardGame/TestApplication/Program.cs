@@ -32,21 +32,21 @@ namespace TestApplication
             else
                 Console.WriteLine("Joueur Déjà Inscrit! : "+joueur2);
 
-            if (proxy.ConnexionJoueur("milene", "ee") == null)
+            if (proxy.ConnexionJoueur(joueur2, mdp) == null)
                 Console.WriteLine("Connexion de milene fail");
             else
                 Console.WriteLine("Joueur milene connecté!");
 
 
             ServiceReference2.GestionPartieClient proxy2 = new ServiceReference2.GestionPartieClient();
-            ok = proxy2.CreerPartie(partie,joueur1);
-            if (ok)
+            PartieDto partieDto = proxy2.CreerPartie(partie, joueur1);
+            if (partieDto != null)
                 Console.WriteLine("Partie crée correctement : "+partie+ " / "+joueur1);
             else
                 Console.WriteLine("Echec création de partie");
 
-            string str = proxy2.GetPartie();
-            Console.WriteLine(str);
+           // string str = proxy2.GetPartie();
+           // Console.WriteLine(str);
 
             ok = proxy2.RejoindrePartie(joueur2);
             if(ok)
@@ -62,7 +62,11 @@ namespace TestApplication
             }
             PartieDto pDto = proxy2.LancerPartie();
             Console.WriteLine(pDto.Nom + " " + pDto.DateHeureCreation);
-            
+
+            Console.WriteLine(partieDto.JoueurCourant.Id);
+            proxy2.next();
+            Console.WriteLine(partieDto.JoueurCourant.Id);
+
             Console.ReadLine();
         }
     }
