@@ -109,7 +109,6 @@
     </Compile>
     <Compile Include="IGestionJoueur.cs" />
     <Compile Include="IGestionJoueurPartie.cs" />
-    <Compile Include="IGestionJoueurPartieImpl.cs" />
     <Compile Include="IGestionPartie.cs" />
     <Compile Include="Dto\JoueurDto.cs" />
     <Compile Include="Model\Carte.cs">
