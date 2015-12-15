@@ -30,9 +30,20 @@
                 <td>
                     @p.DateHeureCreation.Hour : @p.DateHeureCreation.Minute @p.DateHeureCreation.Day / @p.DateHeureCreation.Month / @p.DateHeureCreation.Year
                 </td>
-                <td>
-                    @p.Vainqueur.Pseudo
-                </td>
+
+                @if (@p.Vainqueur.Pseudo != null)
+                {
+                    <td>
+                        @p.Vainqueur.Pseudo
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Pas de vainqueur
+                    </td>
+                }
+
             </tr>
         }
     </tbody>
