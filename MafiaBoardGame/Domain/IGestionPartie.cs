@@ -54,6 +54,9 @@ namespace Domain
         bool donnerDe(int IdJoueurPartie, int IdJoueurCible);
 
         [OperationContract]
+        JoueurPartie next();
+
+        [OperationContract]
         void supprimerUnDe(int IdJoueurPartie,int IdDe);
 
         [OperationContract]

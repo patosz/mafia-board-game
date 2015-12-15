@@ -470,6 +470,33 @@ namespace Domain
                                          select jp).FirstOrDefault();
 
 
+
+        }
+
+        public JoueurPartie next()
+        {
+            int ordreJoueur = partie.JoueurCourant.OrdreJoueur;
+            int nbJoueur = partie.JoueursParticipants.Count;
+            JoueurPartie joueurPartie = null;
+
+            if (nbJoueur == ordreJoueur)
+            {
+                ordreJoueur = 1;
+                joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                             where jp.Id.Equals(ordreJoueur)
+                                             select jp).FirstOrDefault();
+            }
+            else
+            {
+                ordreJoueur++;
+                joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
+                                             where jp.Id.Equals(ordreJoueur)
+                                             select jp).FirstOrDefault();
+            }
+
+            partie.JoueurCourant = joueurPartie;
+
+            return joueurPartie;
         }
 
         public void rejouerEtChangementDeSens(int IdJoueurPartie)
