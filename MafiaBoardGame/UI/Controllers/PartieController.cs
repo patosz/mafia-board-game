@@ -48,21 +48,41 @@ namespace UI.Controllers
         public ViewResult WaitForStart()
         {
             //TODO passer le nom de la partie à la vue
-            return View();   
-        }
-
-        public ViewResult Rejoindre(string pseudo)
-        {
             return View();
         }
 
+        public ActionResult Rejoindre(string pseudo)
+        {
+            //TODO ajouter un param avec l'id de la partie à rejondre
+            bool res = UccPartie.RejoindrePartie(pseudo);
+            if (res)
+            {
+                //TODO need méthode pour avoir le nom/id de la partie
+                //Session["partie"] = UccPartie.GetPartie();
+                return RedirectToAction("WaitForStart");
+            }
+            else
+            {
+                TempData["error"] = "Un problème est servenu lors de la création de la partie";
+                return RedirectToAction("VoirPartiesDisponibles");
+            }
+        }
 
-        public ActionResult VoirParties()
+
+        public ActionResult VoirPartiesJouees()
         {
             JoueurDto j = (JoueurDto)Session["user"];
             List<PartieDto> parties = new List<PartieDto>();
-            //= UccJoueur.GetPartiesJouees(j.Pseudo);
-            return PartialView("VoirParties", parties);
+            //TODO recevoir une liste = UccJoueur.GetPartiesJouees(j.Pseudo);
+            return PartialView("VoirPartiesJouees", parties);
+        }
+
+        public ActionResult VoirPartiesDisponibles()
+        {
+            JoueurDto j = (JoueurDto)Session["user"];
+            List<PartieDto> parties = new List<PartieDto>();
+            //TODO recevoir une  liste = UccJoueur.GetPartiesJouees(j.Pseudo);
+            return PartialView("VoirPartiesDisponibles", parties);
         }
     }
 }

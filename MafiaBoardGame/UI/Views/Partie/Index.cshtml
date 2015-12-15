@@ -14,10 +14,10 @@
                     <a href="javascript:showCreer()"> Créer partie </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Rejoindre", "Partie", new { pseudo = Model.Pseudo })
+                    <a href="javascript:showVoirPartiesDisponibles()"> Voir Parties Disponibles</a>
                 </li>
                 <li>
-                    <a href="javascript:showVoirParties()"> Voir Parties </a>
+                    <a href="javascript:showVoirPartiesJouees()"> Voir Parties Jouees</a>
                 </li>
             </ul>
         </div>
@@ -28,18 +28,30 @@
     @{Html.RenderAction("Creer", new { controller = "Partie" });}
 </div>
 
-<div id="VoirParties" style="display:none;">
-    @{Html.RenderAction("VoirParties", new { controller = "Partie" });}
+<div id="VoirPartiesDisponibles" style="display:none;">
+    @{Html.RenderAction("VoirPartiesDisponibles", new { controller = "Partie" });}
+</div>
+
+<div id="VoirPartiesJouees" style="display:none;">
+    @{Html.RenderAction("VoirPartiesJouees", new { controller = "Partie" });}
 </div>
 
 <script type="text/javascript">
     function showCreer() {
-        $('#VoirParties').hide();
+        $('#VoirPartiesJouees').hide();
+        $('#VoirPartiesDisponibles').hide();
         $('#Creer').show();
     }
 
-    function showVoirParties() {
+    function showVoirPartiesJouees() {
         $('#Creer').hide();
-        $('#VoirParties').show();
+        $('#VoirPartiesDisponibles').hide();
+        $('#VoirPartiesJouees').show();
+    }
+
+    function showVoirPartiesDisponibles() {
+        $('#Creer').hide();
+        $('#VoirPartiesJouees').hide();
+        $('#VoirPartiesDisponibles').show();
     }
 </script>

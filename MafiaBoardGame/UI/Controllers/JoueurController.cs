@@ -33,5 +33,31 @@ namespace UI.Controllers
             Session.Abandon();
             return RedirectToAction("Index", new { controller = "Index" });
         }
+
+        public ViewResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        //TODO modifier pour correspondre à la situation actuelle
+        public ActionResult Register(JoueurDto j)
+        {
+
+            bool res = uccJoueur.InscriptionJoueur(j.Pseudo, j.Mdp);
+            if (!res)
+            {
+                ViewData["errorMessage"] = "Erreur lors de l'inscription du joueur";
+                return View();
+            }
+            else {
+                return RedirectToAction("ConfirmRegistration");
+            }
+        }
+
+        public ViewResult ConfirmRegistration()
+        {
+            return View();
+        }
     }
 }
