@@ -54,7 +54,7 @@ namespace Domain.Model
             nbParJoueur = dico["nbParJoueur"];
             nbTotalDes = dico["nbTotalDes"];
             List<Carte> listeTypeCarte = parseur.loadCarte();
-
+            //Shuffle(listeTypeCarte);
 
             this.CartesPioche = listeTypeCarte;
 
@@ -66,7 +66,7 @@ namespace Domain.Model
         }
 
 
-        public void Shuffle<Carte>(IList<Carte> list)
+        public void Shuffle<Carte>(List<Carte> list)
         {
             int n = list.Count;
             while (n > 1)

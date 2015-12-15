@@ -353,7 +353,6 @@ namespace Domain
 
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.SaveChanges();
-
         }
 
         public void supprimerDeuxDes(int IdJoueurPartie)
@@ -364,7 +363,7 @@ namespace Domain
             {
                 joueurPartie.DesMain.Remove(de);
             }
-          
+
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
 
             dbcontext.SaveChanges();
