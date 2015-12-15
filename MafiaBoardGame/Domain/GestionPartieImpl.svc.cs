@@ -52,38 +52,48 @@ namespace Domain
             {
                 partie = new Partie(nomPartie);
                 partie.etat = (int)Partie.ETAT.INSCRIPTION;
+
+                JoueurPartie joueurPartie = new JoueurPartie();
+                joueurPartie.Partie = partie;
+               
+                joueurPartie.Joueur = joueur;
+                dbcontext.JoueurParties.Add(joueurPartie);
+                dbcontext.Parties.Add(partie);
+                dbcontext.SaveChanges();
+                joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
+
+                partie.JoueurCourant = joueurPartie;
+                dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+                dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                dbcontext.SaveChanges();
+
                 // relation PartieJoueur 0..1 sinon EF demandera une référence joueur pour ce champ
-              
+
 
                 /*try
                 {*/
 
-                JoueurPartie joueurPartie = new JoueurPartie();
-                partie.JoueurCourant = joueurPartie;
+
                 //Joueur
                 joueur.PartiesJouees.Add(joueurPartie);
                 //joueur.PartiesGagnees.Add(partie);
 
                 //JoueurPartie
-                joueurPartie.Partie = partie;
-                joueurPartie.Joueur = joueur;
                 //joueurPartie.PartieCourant = partie;
                 //joueurPartie.JoueurId = joueur.Id;
 
 
                 //Partie
-                partie.JoueursParticipants.Add(joueurPartie);
+//                partie.JoueursParticipants.Add(joueurPartie);
                 //partie.JoueurCourant = joueurPartie;
                 //partie.JoueurId = joueur.Id;
 
                 //JoueurPartie
-                joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
                 //joueurPartie.JoueurId = joueur.Id;
 
-                dbcontext.JoueurParties.Add(joueurPartie);
                 //dbcontext.Joueurs.Add(joueur);
                 dbcontext.Entry(joueur).State = System.Data.Entity.EntityState.Modified;
-                dbcontext.Parties.Add(partie);
+                
 
 
                 dbcontext.SaveChanges();
@@ -132,10 +142,10 @@ namespace Domain
         //on donne quoi le string un objet??
         public bool RejoindrePartie(string pseudo)
         {
-            if (partie.maxJoueur >= partie.JoueursParticipants.Count)
+           /* if (partie.maxJoueur >= partie.JoueursParticipants.Count)
             {
                 return false;
-            }
+            }*/
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
                              where j.Pseudo.Equals(pseudo)
                              select j).FirstOrDefault();
@@ -160,7 +170,6 @@ namespace Domain
 
                 joueur.PartiesJouees.Add(joueurPartie);
                 partie.JoueursParticipants.Add(joueurPartie);
-                joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
                 //est ce que je dois vraiment mettre la partie courante?
                 joueurPartie.Partie = partie;
                 joueurPartie.Joueur = joueur;
@@ -168,12 +177,15 @@ namespace Domain
 
                 //est ce que je dois vraiment mettre la JoueurCourant courante?
                 partie.JoueursParticipants.Add(joueurPartie);
-                joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
 
                 dbcontext.JoueurParties.Add(joueurPartie);
                 //dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
                 dbcontext.Entry(joueur).State = System.Data.Entity.EntityState.Modified;
                 dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                dbcontext.SaveChanges();
+
+                dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+                joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
 
                 dbcontext.SaveChanges();
 
@@ -485,19 +497,20 @@ namespace Domain
             {
                 ordreJoueur = 1;
                 joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
-                                             where jp.Id.Equals(ordreJoueur)
+                                             where jp.OrdreJoueur.Equals(ordreJoueur)
                                              select jp).FirstOrDefault();
             }
             else
             {
                 ordreJoueur++;
                 joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
-                                             where jp.Id.Equals(ordreJoueur)
+                                             where jp.OrdreJoueur.Equals(ordreJoueur)
                                              select jp).FirstOrDefault();
             }
 
             partie.JoueurCourant = joueurPartie;
-
+            dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.SaveChanges();
             return BizToDto.ToJoueurPartieDto(joueurPartie);
         }
 

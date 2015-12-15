@@ -64,9 +64,10 @@ namespace TestApplication
             Console.WriteLine(pDto.Nom + " " + pDto.DateHeureCreation);
 
             Console.WriteLine(partieDto.JoueurCourant.Id);
-            proxy2.next();
-            Console.WriteLine(partieDto.JoueurCourant.Id);
+            JoueurPartieDto pjd = proxy2.next();
+            Console.WriteLine(pjd.Id);
 
+            
             Console.ReadLine();
         }
     }
