@@ -88,6 +88,8 @@ namespace Domain
         [OperationContract]
         void jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
 
+        JoueurPartie getJoueurPartie(int IdJoueurPartie);
+
 
     }
 }
