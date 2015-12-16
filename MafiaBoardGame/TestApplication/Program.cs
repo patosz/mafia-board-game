@@ -18,6 +18,7 @@ namespace TestApplication
             string joueur1 = "gio";
             string joueur2 = "gary";
             string joueur3 = "kev";
+            string joueur4 = "milene";
             string mdp = "ee";
             string partie = "love";
 
@@ -38,6 +39,11 @@ namespace TestApplication
                 Console.WriteLine("Joueur Inscrit : " + joueur3);
             else
                 Console.WriteLine("Joueur Déjà Inscrit! " + joueur3);
+            inscription = joueurClient.InscriptionJoueur(joueur4, mdp);
+            if (inscription)
+                Console.WriteLine("Joueur Inscrit : " + joueur4);
+            else
+                Console.WriteLine("Joueur Déjà Inscrit! " + joueur4);
 
             //Test connexionJoueur 
             if (joueurClient.ConnexionJoueur(joueur2, mdp) == null)
@@ -49,6 +55,11 @@ namespace TestApplication
                 Console.WriteLine("Connexion de " + joueur3 + " fail");
             else
                 Console.WriteLine("Joueur " + joueur3 + " connecté!");
+
+            if (joueurClient.ConnexionJoueur(joueur4, mdp) == null)
+                Console.WriteLine("Connexion de " + joueur4 + " fail");
+            else
+                Console.WriteLine("Joueur " + joueur4 + " connecté!");
 
 
             ServiceReference2.GestionPartieClient partieClient = new ServiceReference2.GestionPartieClient();
@@ -69,6 +80,12 @@ namespace TestApplication
             rejoindre = partieClient.RejoindrePartie(joueur3);
             if (rejoindre)
                 Console.WriteLine("Rejoindre OK : " + joueur3);
+            else
+                Console.WriteLine("Rejoindre KO");
+
+            rejoindre = partieClient.RejoindrePartie(joueur4);
+            if (rejoindre)
+                Console.WriteLine("Rejoindre OK : " + joueur4);
             else
                 Console.WriteLine("Rejoindre KO");
 
@@ -187,7 +204,15 @@ namespace TestApplication
             pjd = partieClient.next();
             Console.WriteLine("Id joueur suivant : " + pjd.Id);
 
-            
+            //Quitter partie
+            partieClient.quitterPartie(4);
+            partieClient.supprimerUnDe(3);
+            partieClient.supprimerUnDe(3);
+            partieClient.supprimerUnDe(3);
+            partieClient.supprimerUnDe(3);
+            partieClient.vainqueur(3);
+
+
 
 
 

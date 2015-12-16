@@ -176,6 +176,24 @@ namespace TestApplication.ServiceReference2 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/jeterCartePoubelle", ReplyAction="http://tempuri.org/IGestionPartie/jeterCartePoubelleResponse")]
         System.Threading.Tasks.Task jeterCartePoubelleAsync(int IdJoueurPartie, int IdCarte);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/quitterPartie", ReplyAction="http://tempuri.org/IGestionPartie/quitterPartieResponse")]
+        Domain.Dto.JoueurPartieDto quitterPartie(int IdJoueurPartie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/quitterPartie", ReplyAction="http://tempuri.org/IGestionPartie/quitterPartieResponse")]
+        System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto> quitterPartieAsync(int IdJoueurPartie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/vainqueurParForfait", ReplyAction="http://tempuri.org/IGestionPartie/vainqueurParForfaitResponse")]
+        Domain.Dto.JoueurPartieDto vainqueurParForfait();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/vainqueurParForfait", ReplyAction="http://tempuri.org/IGestionPartie/vainqueurParForfaitResponse")]
+        System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto> vainqueurParForfaitAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/vainqueur", ReplyAction="http://tempuri.org/IGestionPartie/vainqueurResponse")]
+        Domain.Dto.JoueurPartieDto vainqueur(int IdJoueurPartie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/vainqueur", ReplyAction="http://tempuri.org/IGestionPartie/vainqueurResponse")]
+        System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto> vainqueurAsync(int IdJoueurPartie);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -419,6 +437,30 @@ namespace TestApplication.ServiceReference2 {
         
         public System.Threading.Tasks.Task jeterCartePoubelleAsync(int IdJoueurPartie, int IdCarte) {
             return base.Channel.jeterCartePoubelleAsync(IdJoueurPartie, IdCarte);
+        }
+        
+        public Domain.Dto.JoueurPartieDto quitterPartie(int IdJoueurPartie) {
+            return base.Channel.quitterPartie(IdJoueurPartie);
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto> quitterPartieAsync(int IdJoueurPartie) {
+            return base.Channel.quitterPartieAsync(IdJoueurPartie);
+        }
+        
+        public Domain.Dto.JoueurPartieDto vainqueurParForfait() {
+            return base.Channel.vainqueurParForfait();
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto> vainqueurParForfaitAsync() {
+            return base.Channel.vainqueurParForfaitAsync();
+        }
+        
+        public Domain.Dto.JoueurPartieDto vainqueur(int IdJoueurPartie) {
+            return base.Channel.vainqueur(IdJoueurPartie);
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto> vainqueurAsync(int IdJoueurPartie) {
+            return base.Channel.vainqueurAsync(IdJoueurPartie);
         }
     }
 }

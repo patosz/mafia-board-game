@@ -171,6 +171,24 @@
   <wsdl:message name="IGestionPartie_jeterCartePoubelle_OutputMessage">
     <wsdl:part name="parameters" element="tns:jeterCartePoubelleResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionPartie_quitterPartie_InputMessage">
+    <wsdl:part name="parameters" element="tns:quitterPartie" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_quitterPartie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:quitterPartieResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_vainqueurParForfait_InputMessage">
+    <wsdl:part name="parameters" element="tns:vainqueurParForfait" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_vainqueurParForfait_OutputMessage">
+    <wsdl:part name="parameters" element="tns:vainqueurParForfaitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_vainqueur_InputMessage">
+    <wsdl:part name="parameters" element="tns:vainqueur" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_vainqueur_OutputMessage">
+    <wsdl:part name="parameters" element="tns:vainqueurResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionPartie">
     <wsdl:operation name="CreerPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/CreerPartie" message="tns:IGestionPartie_CreerPartie_InputMessage" />
@@ -279,6 +297,18 @@
     <wsdl:operation name="jeterCartePoubelle">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/jeterCartePoubelle" message="tns:IGestionPartie_jeterCartePoubelle_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/jeterCartePoubelleResponse" message="tns:IGestionPartie_jeterCartePoubelle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="quitterPartie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/quitterPartie" message="tns:IGestionPartie_quitterPartie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/quitterPartieResponse" message="tns:IGestionPartie_quitterPartie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="vainqueurParForfait">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/vainqueurParForfait" message="tns:IGestionPartie_vainqueurParForfait_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/vainqueurParForfaitResponse" message="tns:IGestionPartie_vainqueurParForfait_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="vainqueur">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/vainqueur" message="tns:IGestionPartie_vainqueur_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/vainqueurResponse" message="tns:IGestionPartie_vainqueur_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGestionPartie" type="tns:IGestionPartie">
@@ -519,6 +549,33 @@
     </wsdl:operation>
     <wsdl:operation name="jeterCartePoubelle">
       <soap:operation soapAction="http://tempuri.org/IGestionPartie/jeterCartePoubelle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="quitterPartie">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/quitterPartie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vainqueurParForfait">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/vainqueurParForfait" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vainqueur">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/vainqueur" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

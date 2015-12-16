@@ -413,7 +413,7 @@ namespace Domain
         public JoueurPartieDto next()
         {
             int ordreJoueur = partie.JoueurCourant.OrdreJoueur;
-            int nbJoueur = partie.JoueursParticipants.Count;
+            int nbJoueur = partie.JoueursParticipants.Where(s => s.EnPartie == true).Count();
             JoueurPartie joueurPartie = null;
 
             int i = partie.JoueurCourant.OrdreJoueur;
@@ -423,14 +423,14 @@ namespace Domain
                 {
                     ordreJoueur = 1;
                     joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
-                                    where jp.OrdreJoueur.Equals(ordreJoueur)
+                                    where jp.OrdreJoueur.Equals(ordreJoueur) && jp.EnPartie == true
                                     select jp).FirstOrDefault();
                 }
                 else
                 {
                     ordreJoueur++;
                     joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
-                                    where jp.OrdreJoueur.Equals(ordreJoueur)
+                                    where jp.OrdreJoueur.Equals(ordreJoueur) && jp.EnPartie==true
                                     select jp).FirstOrDefault();
                 }
             }
@@ -440,14 +440,14 @@ namespace Domain
                 {
                     ordreJoueur = nbJoueur;
                     joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
-                                    where jp.OrdreJoueur.Equals(ordreJoueur)
+                                    where jp.OrdreJoueur.Equals(ordreJoueur) && jp.EnPartie == true
                                     select jp).FirstOrDefault();
                 }
                 else
                 {
                     ordreJoueur--;
                     joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
-                                    where jp.OrdreJoueur.Equals(ordreJoueur)
+                                    where jp.OrdreJoueur.Equals(ordreJoueur) && jp.EnPartie == true
                                     select jp).FirstOrDefault();
                 }
             }
@@ -527,10 +527,6 @@ namespace Domain
 
         }
 
-        public void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible)
-        {
-            throw new NotImplementedException();
-        }
 
         public void piocheTroisCartes(int IdJoueurPartie)
         {
@@ -621,55 +617,52 @@ namespace Domain
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
 
-            int nbJoueurs = partie.JoueursParticipants.Count;
-        
-
-            List<Carte> listeCarte = joueurPartie.CartesMain.ToList();
-            List<De> listeDe = joueurPartie.DesMain.ToList();
-
-            foreach (Carte c in listeCarte)
-            {
-                joueurPartie.CartesMain.Remove(c);
-                partie.CartesPoubelle.Add(c);
-            }
-
-            foreach (De d in listeDe)
-            {
-                joueurPartie.DesMain.Remove(d);
-            }
-
-
-
+            int nbJoueurs = partie.JoueursParticipants.Where(s => s.EnPartie == true).Count();
+       
             //Si dernier
             if (joueurPartie.OrdreJoueur == nbJoueurs)
             {
-                partie.JoueursParticipants.Remove(joueurPartie);
+                joueurPartie.EnPartie = false;
+                joueurPartie.OrdreJoueur = 0;
+                dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                dbcontext.SaveChanges();
             }
             //Si premier
             else if (joueurPartie.OrdreJoueur == 1)
             {
-                int ordreJoueur;
-                for (int i = 1; i < nbJoueurs; i++)
+                for (int i = 0; i < nbJoueurs; i++)
                 {
-                    ordreJoueur = partie.JoueursParticipants.ElementAt(i).OrdreJoueur;
-                    partie.JoueursParticipants.ElementAt(i).OrdreJoueur = ordreJoueur - 1;
+                    JoueurPartie  jp = partie.JoueursParticipants.ElementAt(i);
+                    partie.JoueursParticipants.ElementAt(i).OrdreJoueur = jp.OrdreJoueur- 1;
+                    dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+                    dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                    dbcontext.SaveChanges();
                 }
-                partie.JoueursParticipants.Remove(joueurPartie);
+                joueurPartie.EnPartie = false;
+                joueurPartie.OrdreJoueur = 0;
+                dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                
+                dbcontext.SaveChanges();
             }
             //sinon milieu de list
             else
             {
                 int ordreJoueur;
-                for (int i = joueurPartie.OrdreJoueur + 1; i < nbJoueurs; i++)
+                for (int i = joueurPartie.OrdreJoueur; i < nbJoueurs; i++)
                 {
                     ordreJoueur = partie.JoueursParticipants.ElementAt(i).OrdreJoueur;
                     partie.JoueursParticipants.ElementAt(i).OrdreJoueur = ordreJoueur - 1;
+
+                    dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
+                    dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                    dbcontext.SaveChanges();
                 }
-                partie.JoueursParticipants.Remove(joueurPartie);
+                joueurPartie.EnPartie = false;
+                joueurPartie.OrdreJoueur = 0;
+                dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                dbcontext.SaveChanges();
             }
-            dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
-            dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
-            dbcontext.SaveChanges();
+
 
 
             
@@ -678,24 +671,38 @@ namespace Domain
 
         }
 
-        public JoueurPartieDto vainqueurParForfait()
+        public JoueurDto vainqueurParForfait()
         {
             //TODO verifier ElementAt(0)
-            if (partie.JoueursParticipants.Count == 1)
+            if (partie.JoueursParticipants.Where(s => s.EnPartie == true).Count() == 1)
             {
-                JoueurPartie joueurVainqueur = partie.JoueursParticipants.ElementAt(0);
-                return BizToDto.ToJoueurPartieDto(joueurVainqueur);
+                JoueurPartie joueurVainqueur = partie.JoueursParticipants.Where(s => s.EnPartie == true).FirstOrDefault();
+                Joueur joueur = (from Joueur jp in dbcontext.Joueurs
+                                   where jp.Id.Equals(joueurVainqueur.Id)
+                                   select jp).FirstOrDefault();
+                partie.Vainqueur = joueur;
+                dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                dbcontext.SaveChanges();
+
+
+                return BizToDto.ToJoueurDto(joueur);
 
             }
             return null;
         }
-        public JoueurPartieDto vainqueur(int IdJoueurPartie)
+        public JoueurDto vainqueur(int IdJoueurPartie)
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
-
+            
             if (joueurPartie.DesMain.Count == 0)
             {
-                return BizToDto.ToJoueurPartieDto(joueurPartie);
+                Joueur joueur = (from Joueur jp in dbcontext.Joueurs
+                                 where jp.Id.Equals(IdJoueurPartie)
+                                 select jp).FirstOrDefault();
+                partie.Vainqueur = joueur;
+                dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+                dbcontext.SaveChanges();
+                return BizToDto.ToJoueurDto(joueur);
             }
 
             return null;

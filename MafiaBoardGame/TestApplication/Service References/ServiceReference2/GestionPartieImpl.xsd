@@ -358,4 +358,44 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="quitterPartie">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdJoueurPartie" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="quitterPartieResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="quitterPartieResult" nillable="true" type="q13:JoueurPartieDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vainqueurParForfait">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vainqueurParForfaitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="vainqueurParForfaitResult" nillable="true" type="q14:JoueurPartieDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vainqueur">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdJoueurPartie" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vainqueurResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="vainqueurResult" nillable="true" type="q15:JoueurPartieDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
