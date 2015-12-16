@@ -40,10 +40,10 @@ namespace TestApplication.ServiceReference2 {
         System.Threading.Tasks.Task<string> GetPartieDebugAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/VoirPartie", ReplyAction="http://tempuri.org/IGestionPartie/VoirPartieResponse")]
-        Domain.Dto.PartieDto[] VoirPartie(string pseudo);
+        System.Collections.Generic.List<Domain.Dto.PartieDto> VoirPartie(string pseudo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/VoirPartie", ReplyAction="http://tempuri.org/IGestionPartie/VoirPartieResponse")]
-        System.Threading.Tasks.Task<Domain.Dto.PartieDto[]> VoirPartieAsync(string pseudo);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.PartieDto>> VoirPartieAsync(string pseudo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/LancerPartie", ReplyAction="http://tempuri.org/IGestionPartie/LancerPartieResponse")]
         Domain.Dto.PartieDto LancerPartie();
@@ -64,22 +64,22 @@ namespace TestApplication.ServiceReference2 {
         System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto> getJoueurParticipantDtoAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getListJoueurParticipantsDto", ReplyAction="http://tempuri.org/IGestionPartie/getListJoueurParticipantsDtoResponse")]
-        Domain.Dto.JoueurPartieDto[] getListJoueurParticipantsDto(int IdPartie);
+        System.Collections.Generic.List<Domain.Dto.JoueurPartieDto> getListJoueurParticipantsDto(int IdPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getListJoueurParticipantsDto", ReplyAction="http://tempuri.org/IGestionPartie/getListJoueurParticipantsDtoResponse")]
-        System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto[]> getListJoueurParticipantsDtoAsync(int IdPartie);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.JoueurPartieDto>> getListJoueurParticipantsDtoAsync(int IdPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getListDesDto", ReplyAction="http://tempuri.org/IGestionPartie/getListDesDtoResponse")]
-        Domain.Dto.DeDto[] getListDesDto(int IdJoueurPartie);
+        System.Collections.Generic.List<Domain.Dto.DeDto> getListDesDto(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getListDesDto", ReplyAction="http://tempuri.org/IGestionPartie/getListDesDtoResponse")]
-        System.Threading.Tasks.Task<Domain.Dto.DeDto[]> getListDesDtoAsync(int IdJoueurPartie);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.DeDto>> getListDesDtoAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getListCartesDto", ReplyAction="http://tempuri.org/IGestionPartie/getListCartesDtoResponse")]
-        Domain.Dto.CarteDto[] getListCartesDto(int IdJoueurPartie);
+        System.Collections.Generic.List<Domain.Dto.CarteDto> getListCartesDto(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getListCartesDto", ReplyAction="http://tempuri.org/IGestionPartie/getListCartesDtoResponse")]
-        System.Threading.Tasks.Task<Domain.Dto.CarteDto[]> getListCartesDtoAsync(int IdJoueurPartie);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.CarteDto>> getListCartesDtoAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getJoueurDto", ReplyAction="http://tempuri.org/IGestionPartie/getJoueurDtoResponse")]
         Domain.JoueurDto getJoueurDto(int IdJoueurPartie);
@@ -88,10 +88,10 @@ namespace TestApplication.ServiceReference2 {
         System.Threading.Tasks.Task<Domain.JoueurDto> getJoueurDtoAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/lancerDes", ReplyAction="http://tempuri.org/IGestionPartie/lancerDesResponse")]
-        Domain.Dto.DeDto[] lancerDes(int IdJoueurPartie);
+        System.Collections.Generic.List<Domain.Dto.DeDto> lancerDes(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/lancerDes", ReplyAction="http://tempuri.org/IGestionPartie/lancerDesResponse")]
-        System.Threading.Tasks.Task<Domain.Dto.DeDto[]> lancerDesAsync(int IdJoueurPartie);
+        System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.DeDto>> lancerDesAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/autoriserCarte", ReplyAction="http://tempuri.org/IGestionPartie/autoriserCarteResponse")]
         bool autoriserCarte(int idJoueurPartie, int cout);
@@ -112,22 +112,22 @@ namespace TestApplication.ServiceReference2 {
         System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto> nextAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/supprimerUnDe", ReplyAction="http://tempuri.org/IGestionPartie/supprimerUnDeResponse")]
-        void supprimerUnDe(int IdJoueurPartie, int IdDe);
+        void supprimerUnDe(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/supprimerUnDe", ReplyAction="http://tempuri.org/IGestionPartie/supprimerUnDeResponse")]
-        System.Threading.Tasks.Task supprimerUnDeAsync(int IdJoueurPartie, int IdDe);
+        System.Threading.Tasks.Task supprimerUnDeAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/supprimerDeuxDes", ReplyAction="http://tempuri.org/IGestionPartie/supprimerDeuxDesResponse")]
-        void supprimerDeuxDes(int IdJoueurPartie, int IdDe1, int IdDe2);
+        void supprimerDeuxDes(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/supprimerDeuxDes", ReplyAction="http://tempuri.org/IGestionPartie/supprimerDeuxDesResponse")]
-        System.Threading.Tasks.Task supprimerDeuxDesAsync(int IdJoueurPartie, int IdDe1, int IdDe2);
+        System.Threading.Tasks.Task supprimerDeuxDesAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroite", ReplyAction="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroiteResponse")]
-        void donnerDeAGaucheOuDroite(int IdJoueurPartie);
+        void donnerDeAGaucheOuDroite();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroite", ReplyAction="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroiteResponse")]
-        System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync(int IdJoueurPartie);
+        System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/rejouerEtChangementDeSens", ReplyAction="http://tempuri.org/IGestionPartie/rejouerEtChangementDeSensResponse")]
         void rejouerEtChangementDeSens(int IdJoueurPartie);
@@ -142,16 +142,16 @@ namespace TestApplication.ServiceReference2 {
         System.Threading.Tasks.Task prendreUneCarteDUnJoueurAsync(int IdJoueurPartie, int IdJoueurPartieCible);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/donnerUnDeAUnJoueur", ReplyAction="http://tempuri.org/IGestionPartie/donnerUnDeAUnJoueurResponse")]
-        void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe);
+        void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/donnerUnDeAUnJoueur", ReplyAction="http://tempuri.org/IGestionPartie/donnerUnDeAUnJoueurResponse")]
-        System.Threading.Tasks.Task donnerUnDeAUnJoueurAsync(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe);
+        System.Threading.Tasks.Task donnerUnDeAUnJoueurAsync(int IdJoueurPartie, int IdJoueurPartieCible);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarte", ReplyAction="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarteResponse")]
-        void ciblerJoueurQUUneCarte(int IdJoueurPartie, int IdJoueurPartieCible);
+        void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarte", ReplyAction="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarteResponse")]
-        System.Threading.Tasks.Task ciblerJoueurQUUneCarteAsync(int IdJoueurPartie, int IdJoueurPartieCible);
+        System.Threading.Tasks.Task ciblerJoueurQUUneCarteAsync(int IdJoueurPartieCible, int IdCarte);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/passeSonTour", ReplyAction="http://tempuri.org/IGestionPartie/passeSonTourResponse")]
         void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible);
@@ -166,10 +166,16 @@ namespace TestApplication.ServiceReference2 {
         System.Threading.Tasks.Task piocheTroisCartesAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutres", ReplyAction="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutresResponse")]
-        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
+        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<int>> dico);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutres", ReplyAction="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutresResponse")]
-        System.Threading.Tasks.Task plusQueDeuxCartesPourLesAutresAsync(int IdJoueurPartie);
+        System.Threading.Tasks.Task plusQueDeuxCartesPourLesAutresAsync(int IdJoueurPartie, System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<int>> dico);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/jeterCartePoubelle", ReplyAction="http://tempuri.org/IGestionPartie/jeterCartePoubelleResponse")]
+        void jeterCartePoubelle(int IdJoueurPartie, int IdCarte);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/jeterCartePoubelle", ReplyAction="http://tempuri.org/IGestionPartie/jeterCartePoubelleResponse")]
+        System.Threading.Tasks.Task jeterCartePoubelleAsync(int IdJoueurPartie, int IdCarte);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -231,11 +237,11 @@ namespace TestApplication.ServiceReference2 {
             return base.Channel.GetPartieDebugAsync();
         }
         
-        public Domain.Dto.PartieDto[] VoirPartie(string pseudo) {
+        public System.Collections.Generic.List<Domain.Dto.PartieDto> VoirPartie(string pseudo) {
             return base.Channel.VoirPartie(pseudo);
         }
         
-        public System.Threading.Tasks.Task<Domain.Dto.PartieDto[]> VoirPartieAsync(string pseudo) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.PartieDto>> VoirPartieAsync(string pseudo) {
             return base.Channel.VoirPartieAsync(pseudo);
         }
         
@@ -263,27 +269,27 @@ namespace TestApplication.ServiceReference2 {
             return base.Channel.getJoueurParticipantDtoAsync(IdJoueurPartie);
         }
         
-        public Domain.Dto.JoueurPartieDto[] getListJoueurParticipantsDto(int IdPartie) {
+        public System.Collections.Generic.List<Domain.Dto.JoueurPartieDto> getListJoueurParticipantsDto(int IdPartie) {
             return base.Channel.getListJoueurParticipantsDto(IdPartie);
         }
         
-        public System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto[]> getListJoueurParticipantsDtoAsync(int IdPartie) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.JoueurPartieDto>> getListJoueurParticipantsDtoAsync(int IdPartie) {
             return base.Channel.getListJoueurParticipantsDtoAsync(IdPartie);
         }
         
-        public Domain.Dto.DeDto[] getListDesDto(int IdJoueurPartie) {
+        public System.Collections.Generic.List<Domain.Dto.DeDto> getListDesDto(int IdJoueurPartie) {
             return base.Channel.getListDesDto(IdJoueurPartie);
         }
         
-        public System.Threading.Tasks.Task<Domain.Dto.DeDto[]> getListDesDtoAsync(int IdJoueurPartie) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.DeDto>> getListDesDtoAsync(int IdJoueurPartie) {
             return base.Channel.getListDesDtoAsync(IdJoueurPartie);
         }
         
-        public Domain.Dto.CarteDto[] getListCartesDto(int IdJoueurPartie) {
+        public System.Collections.Generic.List<Domain.Dto.CarteDto> getListCartesDto(int IdJoueurPartie) {
             return base.Channel.getListCartesDto(IdJoueurPartie);
         }
         
-        public System.Threading.Tasks.Task<Domain.Dto.CarteDto[]> getListCartesDtoAsync(int IdJoueurPartie) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.CarteDto>> getListCartesDtoAsync(int IdJoueurPartie) {
             return base.Channel.getListCartesDtoAsync(IdJoueurPartie);
         }
         
@@ -295,11 +301,11 @@ namespace TestApplication.ServiceReference2 {
             return base.Channel.getJoueurDtoAsync(IdJoueurPartie);
         }
         
-        public Domain.Dto.DeDto[] lancerDes(int IdJoueurPartie) {
+        public System.Collections.Generic.List<Domain.Dto.DeDto> lancerDes(int IdJoueurPartie) {
             return base.Channel.lancerDes(IdJoueurPartie);
         }
         
-        public System.Threading.Tasks.Task<Domain.Dto.DeDto[]> lancerDesAsync(int IdJoueurPartie) {
+        public System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.DeDto>> lancerDesAsync(int IdJoueurPartie) {
             return base.Channel.lancerDesAsync(IdJoueurPartie);
         }
         
@@ -327,28 +333,28 @@ namespace TestApplication.ServiceReference2 {
             return base.Channel.nextAsync();
         }
         
-        public void supprimerUnDe(int IdJoueurPartie, int IdDe) {
-            base.Channel.supprimerUnDe(IdJoueurPartie, IdDe);
+        public void supprimerUnDe(int IdJoueurPartie) {
+            base.Channel.supprimerUnDe(IdJoueurPartie);
         }
         
-        public System.Threading.Tasks.Task supprimerUnDeAsync(int IdJoueurPartie, int IdDe) {
-            return base.Channel.supprimerUnDeAsync(IdJoueurPartie, IdDe);
+        public System.Threading.Tasks.Task supprimerUnDeAsync(int IdJoueurPartie) {
+            return base.Channel.supprimerUnDeAsync(IdJoueurPartie);
         }
         
-        public void supprimerDeuxDes(int IdJoueurPartie, int IdDe1, int IdDe2) {
-            base.Channel.supprimerDeuxDes(IdJoueurPartie, IdDe1, IdDe2);
+        public void supprimerDeuxDes(int IdJoueurPartie) {
+            base.Channel.supprimerDeuxDes(IdJoueurPartie);
         }
         
-        public System.Threading.Tasks.Task supprimerDeuxDesAsync(int IdJoueurPartie, int IdDe1, int IdDe2) {
-            return base.Channel.supprimerDeuxDesAsync(IdJoueurPartie, IdDe1, IdDe2);
+        public System.Threading.Tasks.Task supprimerDeuxDesAsync(int IdJoueurPartie) {
+            return base.Channel.supprimerDeuxDesAsync(IdJoueurPartie);
         }
         
-        public void donnerDeAGaucheOuDroite(int IdJoueurPartie) {
-            base.Channel.donnerDeAGaucheOuDroite(IdJoueurPartie);
+        public void donnerDeAGaucheOuDroite() {
+            base.Channel.donnerDeAGaucheOuDroite();
         }
         
-        public System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync(int IdJoueurPartie) {
-            return base.Channel.donnerDeAGaucheOuDroiteAsync(IdJoueurPartie);
+        public System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync() {
+            return base.Channel.donnerDeAGaucheOuDroiteAsync();
         }
         
         public void rejouerEtChangementDeSens(int IdJoueurPartie) {
@@ -367,20 +373,20 @@ namespace TestApplication.ServiceReference2 {
             return base.Channel.prendreUneCarteDUnJoueurAsync(IdJoueurPartie, IdJoueurPartieCible);
         }
         
-        public void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe) {
-            base.Channel.donnerUnDeAUnJoueur(IdJoueurPartie, IdJoueurPartieCible, IdDe);
+        public void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible) {
+            base.Channel.donnerUnDeAUnJoueur(IdJoueurPartie, IdJoueurPartieCible);
         }
         
-        public System.Threading.Tasks.Task donnerUnDeAUnJoueurAsync(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe) {
-            return base.Channel.donnerUnDeAUnJoueurAsync(IdJoueurPartie, IdJoueurPartieCible, IdDe);
+        public System.Threading.Tasks.Task donnerUnDeAUnJoueurAsync(int IdJoueurPartie, int IdJoueurPartieCible) {
+            return base.Channel.donnerUnDeAUnJoueurAsync(IdJoueurPartie, IdJoueurPartieCible);
         }
         
-        public void ciblerJoueurQUUneCarte(int IdJoueurPartie, int IdJoueurPartieCible) {
-            base.Channel.ciblerJoueurQUUneCarte(IdJoueurPartie, IdJoueurPartieCible);
+        public void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte) {
+            base.Channel.ciblerJoueurQUUneCarte(IdJoueurPartieCible, IdCarte);
         }
         
-        public System.Threading.Tasks.Task ciblerJoueurQUUneCarteAsync(int IdJoueurPartie, int IdJoueurPartieCible) {
-            return base.Channel.ciblerJoueurQUUneCarteAsync(IdJoueurPartie, IdJoueurPartieCible);
+        public System.Threading.Tasks.Task ciblerJoueurQUUneCarteAsync(int IdJoueurPartieCible, int IdCarte) {
+            return base.Channel.ciblerJoueurQUUneCarteAsync(IdJoueurPartieCible, IdCarte);
         }
         
         public void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible) {
@@ -399,12 +405,20 @@ namespace TestApplication.ServiceReference2 {
             return base.Channel.piocheTroisCartesAsync(IdJoueurPartie);
         }
         
-        public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie) {
-            base.Channel.plusQueDeuxCartesPourLesAutres(IdJoueurPartie);
+        public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<int>> dico) {
+            base.Channel.plusQueDeuxCartesPourLesAutres(IdJoueurPartie, dico);
         }
         
-        public System.Threading.Tasks.Task plusQueDeuxCartesPourLesAutresAsync(int IdJoueurPartie) {
-            return base.Channel.plusQueDeuxCartesPourLesAutresAsync(IdJoueurPartie);
+        public System.Threading.Tasks.Task plusQueDeuxCartesPourLesAutresAsync(int IdJoueurPartie, System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<int>> dico) {
+            return base.Channel.plusQueDeuxCartesPourLesAutresAsync(IdJoueurPartie, dico);
+        }
+        
+        public void jeterCartePoubelle(int IdJoueurPartie, int IdCarte) {
+            base.Channel.jeterCartePoubelle(IdJoueurPartie, IdCarte);
+        }
+        
+        public System.Threading.Tasks.Task jeterCartePoubelleAsync(int IdJoueurPartie, int IdCarte) {
+            return base.Channel.jeterCartePoubelleAsync(IdJoueurPartie, IdCarte);
         }
     }
 }

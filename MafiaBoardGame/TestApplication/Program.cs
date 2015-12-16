@@ -17,6 +17,7 @@ namespace TestApplication
             ServiceReference1.GestionJoueurClient joueurClient = new ServiceReference1.GestionJoueurClient();
             string joueur1 = "gio";
             string joueur2 = "gary";
+            string joueur3 = "kev";
             string mdp = "ee";
             string partie = "love";
 
@@ -32,12 +33,23 @@ namespace TestApplication
                 Console.WriteLine("Joueur Inscrit : " + joueur2);
             else
                 Console.WriteLine("Joueur Déjà Inscrit! " + joueur2);
+            inscription = joueurClient.InscriptionJoueur(joueur3, mdp);
+            if (inscription)
+                Console.WriteLine("Joueur Inscrit : " + joueur3);
+            else
+                Console.WriteLine("Joueur Déjà Inscrit! " + joueur3);
 
             //Test connexionJoueur 
             if (joueurClient.ConnexionJoueur(joueur2, mdp) == null)
                 Console.WriteLine("Connexion de "+joueur2+" fail");
             else
                 Console.WriteLine("Joueur "+joueur2+" connecté!");
+
+            if (joueurClient.ConnexionJoueur(joueur3, mdp) == null)
+                Console.WriteLine("Connexion de " + joueur3 + " fail");
+            else
+                Console.WriteLine("Joueur " + joueur3 + " connecté!");
+
 
             ServiceReference2.GestionPartieClient partieClient = new ServiceReference2.GestionPartieClient();
 
@@ -52,6 +64,11 @@ namespace TestApplication
             bool rejoindre = partieClient.RejoindrePartie(joueur2);
             if (rejoindre)
                 Console.WriteLine("Rejoindre OK : " + joueur2);
+            else
+                Console.WriteLine("Rejoindre KO");
+            rejoindre = partieClient.RejoindrePartie(joueur3);
+            if (rejoindre)
+                Console.WriteLine("Rejoindre OK : " + joueur3);
             else
                 Console.WriteLine("Rejoindre KO");
 
@@ -127,28 +144,52 @@ namespace TestApplication
                else
                 {
                     Console.WriteLine("Symbole Mafia \n");
-                    partieClient.supprimerUnDe(partieDto.JoueurCourant.Id,listeDe.ElementAt(i).Id);
+                    //partieClient.supprimerUnDe(partieDto.JoueurCourant.Id);
+                    //partieClient.prendreUneCarteDUnJoueur(partieDto.JoueurCourant.Id,3);
+                    //partieClient.donnerUnDeAUnJoueur(partieDto.JoueurCourant.Id, 3);
+                    Dictionary<int, List<int>> dico = new Dictionary<int, List<int>>();
+                    List<int> listJoueur2 = new List<int>();
+                    listJoueur2.Add(4);
+                    listJoueur2.Add(5);
 
-                    //MAJ des des
-                    List<DeDto> NewlisteDe = partieClient.getListDesDto(partieDto.JoueurCourant.Id).ToList();
-                    for (int j = 0; j < NewlisteDe.Count; j++)
+                    List<int> listJoueur3 = new List<int>();
+                    listJoueur3.Add(7);
+                    listJoueur3.Add(8);
+
+                    dico.Add(2,listJoueur2);
+                    dico.Add(3, listJoueur3);
+
+
+                    partieClient.plusQueDeuxCartesPourLesAutres(1, dico);
+
+
+
+                    List<CarteDto> NewlisteCarte = partieClient.getListCartesDto(partieDto.JoueurCourant.Id).ToList();
+                    //MAJ des cartes de la main
+                    for (int j = 0; j < NewlisteCarte.Count; j++)
                     {
-                        Console.WriteLine("New De , ID : " + NewlisteDe.ElementAt(j).Id + ", valeur : " + NewlisteDe.ElementAt(j).Valeur);
+                        Console.WriteLine("MAJ de la main, carte ID : " + NewlisteCarte.ElementAt(j).Id + ", effet : " + NewlisteCarte.ElementAt(j).Effet + ", cout : " + NewlisteCarte.ElementAt(j).Cout);
                     }
                 }
             }
 
 
-            
 
 
-
+             //Test changement de sens
+            Console.WriteLine("TEST changement de sens");
+            partieClient.rejouerEtChangementDeSens(partieDto.JoueurCourant.Id);
 
             //Test next
-            /*JoueurPartieDto pjd = partieClient.next();
-            Console.WriteLine(""+pjd.Id);*/
+            Console.WriteLine("TEST next()");
+            JoueurPartieDto pjd = partieClient.next();
+            Console.WriteLine("Id joueur : "+pjd.Id);
+            pjd = partieClient.next();
+            Console.WriteLine("Id joueur suivant : " + pjd.Id);
 
             
+
+
 
             Console.ReadLine();
         }

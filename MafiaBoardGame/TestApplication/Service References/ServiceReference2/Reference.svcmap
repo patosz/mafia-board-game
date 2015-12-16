@@ -9,7 +9,9 @@
     <GenerateInternalTypes>false</GenerateInternalTypes>
     <GenerateMessageContracts>false</GenerateMessageContracts>
     <NamespaceMappings />
-    <CollectionMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
     <GenerateSerializableTypes>true</GenerateSerializableTypes>
     <Serializer>Auto</Serializer>
     <UseSerializerForFaults>true</UseSerializerForFaults>
@@ -24,6 +26,7 @@
   <Metadata>
     <MetadataFile FileName="GestionPartieImpl.wsdl" MetadataType="Wsdl" ID="8180299a-b475-4ac8-98f6-580cd29413ca" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?wsdl" />
     <MetadataFile FileName="GestionPartieImpl.disco" MetadataType="Disco" ID="2590371c-debe-4eca-b149-4e3a56ffb52b" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?disco" />
+    <MetadataFile FileName="GestionPartieImpl3.xsd" MetadataType="Schema" ID="59f72093-b580-445d-99e2-c30921245605" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd4" />
     <MetadataFile FileName="GestionPartieImpl2.xsd" MetadataType="Schema" ID="3f7ec986-97a8-4e64-bbcf-6ff2e0f9b1d1" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd3" />
     <MetadataFile FileName="GestionPartieImpl21.xsd" MetadataType="Schema" ID="b6138454-e69c-4def-9682-fd59585b3090" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd2" />
     <MetadataFile FileName="GestionPartieImpl1.xsd" MetadataType="Schema" ID="89325713-fc11-403c-b3d7-f375d4b0db1b" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd1" />
