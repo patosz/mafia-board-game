@@ -617,7 +617,7 @@ namespace Domain
             return joueurPartie;
         }
 
-        public void quitterPartie(int IdJoueurPartie)
+        public JoueurPartieDto quitterPartie(int IdJoueurPartie)
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
 
@@ -672,20 +672,33 @@ namespace Domain
             dbcontext.SaveChanges();
 
 
-            if (partie.JoueursParticipants.Count == 1)
-            {
-                JvainqueurParForfait();
-            }
- 
+            
 
+            return BizToDto.ToJoueurPartieDto(joueurPartie);
 
         }
 
         public JoueurPartieDto vainqueurParForfait()
         {
             //TODO verifier ElementAt(0)
-            JoueurPartie joueurVainqueur= partie.JoueursParticipants.ElementAt(0);
-            return BizToDto.ToJoueurPartieDto(joueurVainqueur);
+            if (partie.JoueursParticipants.Count == 1)
+            {
+                JoueurPartie joueurVainqueur = partie.JoueursParticipants.ElementAt(0);
+                return BizToDto.ToJoueurPartieDto(joueurVainqueur);
+
+            }
+            return null;
+        }
+        public JoueurPartieDto vainqueur(int IdJoueurPartie)
+        {
+            JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
+
+            if (joueurPartie.DesMain.Count == 0)
+            {
+                return BizToDto.ToJoueurPartieDto(joueurPartie);
+            }
+
+            return null;
         }
     }
 }

@@ -89,10 +89,12 @@ namespace Domain
         void jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
 
         [OperationContract]
-        void quitterPartie(int IdJoueurPartie);
+        JoueurPartieDto quitterPartie(int IdJoueurPartie);
 
         [OperationContract]
         JoueurPartieDto vainqueurParForfait();
+        [OperationContract]
+        JoueurPartieDto vainqueur(int IdJoueurPartie);
 
         JoueurPartie getJoueurPartie(int IdJoueurPartie);
 
