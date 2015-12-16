@@ -335,7 +335,6 @@
           <Property Name="Pseudo" Type="String" Nullable="false" />
           <Property Name="Mdp" Type="String" Nullable="false" />
           <NavigationProperty Name="PartiesJouees" Relationship="Model.PartiesJoueesJoueur" FromRole="Joueur" ToRole="PartieJoueur" />
-          <NavigationProperty Name="PartiesGagnees" Relationship="Model.JoueurPartie1" FromRole="Joueur" ToRole="Partie" />
         </EntityType>
         <EntityType Name="Partie">
           <Key>
@@ -557,12 +556,17 @@
         <EntityTypeShape EntityType="Model.Partie" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Carte" Width="1.5" PointX="10" PointY="2.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.JoueurPartie" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.De" Width="1.5" PointX="5.25" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.De" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <AssociationConnector Association="Model.PartiesJoueesJoueur" ManuallyRouted="false" />
         <AssociationConnector ManuallyRouted="false" Association="Model.JoueursParticipantsJoueurPartie" />
         <AssociationConnector Association="Model.JoueurPartieCarte" ManuallyRouted="false" />
         <AssociationConnector Association="Model.JoueurPartieDe" ManuallyRouted="false" />
-        <AssociationConnector Association="Model.JoueurPartie1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.JoueurPartie1" ManuallyRouted="true" >
+          <ConnectorPoint PointX="1.4605850206057962" PointY="4.4129850260416665" />
+          <ConnectorPoint PointX="1.4605850206057962" PointY="7.6512350724316853" />
+          <ConnectorPoint PointX="5.9530923317268538" PointY="7.6512350724316853" />
+          <ConnectorPoint PointX="5.9530923317268538" PointY="5.1917936197916656" />
+        </AssociationConnector>
         <AssociationConnector Association="Model.JoueurPartiePartie" />
         <AssociationConnector Association="Model.PartieCarte" ManuallyRouted="false" >
         </AssociationConnector>

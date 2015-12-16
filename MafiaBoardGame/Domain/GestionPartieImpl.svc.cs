@@ -51,7 +51,7 @@ namespace Domain
             if (partie == null || (int)partie.etat == (int)Partie.ETAT.TERMINE)
             {
                 partie = new Partie(nomPartie);
-                partie.etat = (int)Partie.ETAT.INSCRIPTION;
+                partie.etat = Partie.ETAT.INSCRIPTION;
 
                 JoueurPartie joueurPartie = new JoueurPartie();
                 joueurPartie.Partie = partie;
@@ -98,10 +98,10 @@ namespace Domain
         //on donne quoi le string un objet??
         public bool RejoindrePartie(string pseudo)
         {
-            /* if (partie.maxJoueur >= partie.JoueursParticipants.Count)
+             if (partie.maxJoueur <= partie.JoueursParticipants.Count)
              {
                  return false;
-             }*/
+             }
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
                              where j.Pseudo.Equals(pseudo)
                              select j).FirstOrDefault();
@@ -174,6 +174,7 @@ namespace Domain
         public PartieDto LancerPartie()
         {
             List<JoueurPartie> listeJoueurPartie = partie.JoueursParticipants.ToList();
+            partie.etat = Partie.ETAT.EN_COURS;
             for (int i = 0; i < listeJoueurPartie.Count; i++)
             {
                 JoueurPartie joueurPartie = listeJoueurPartie.ElementAt(i);
@@ -676,6 +677,7 @@ namespace Domain
             //TODO verifier ElementAt(0)
             if (partie.JoueursParticipants.Where(s => s.EnPartie == true).Count() == 1)
             {
+                partie.etat = Partie.ETAT.TERMINE;
                 JoueurPartie joueurVainqueur = partie.JoueursParticipants.Where(s => s.EnPartie == true).FirstOrDefault();
                 Joueur joueur = (from Joueur jp in dbcontext.Joueurs
                                    where jp.Id.Equals(joueurVainqueur.Id)
@@ -696,6 +698,7 @@ namespace Domain
             
             if (joueurPartie.DesMain.Count == 0)
             {
+                partie.etat = Partie.ETAT.TERMINE;
                 Joueur joueur = (from Joueur jp in dbcontext.Joueurs
                                  where jp.Id.Equals(IdJoueurPartie)
                                  select jp).FirstOrDefault();
@@ -704,7 +707,6 @@ namespace Domain
                 dbcontext.SaveChanges();
                 return BizToDto.ToJoueurDto(joueur);
             }
-
             return null;
         }
     }

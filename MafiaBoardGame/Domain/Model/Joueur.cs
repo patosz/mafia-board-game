@@ -18,7 +18,6 @@ namespace Domain.Model
         public Joueur()
         {
             this.PartiesJouees = new HashSet<JoueurPartie>();
-            this.PartiesGagnees = new HashSet<Partie>();
         }
     
         public int Id { get; set; }
@@ -27,7 +26,5 @@ namespace Domain.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<JoueurPartie> PartiesJouees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Partie> PartiesGagnees { get; set; }
     }
 }
