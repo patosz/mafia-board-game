@@ -217,6 +217,7 @@
     <Content Include="Views\Joueur\Register.cshtml" />
     <Content Include="Views\Plateau\Index.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Plateau\Index - Copy.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
