@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/15/2015 12:06:33
--- Generated from EDMX file: C:\Users\pdolega15\Source\Repos\mafia-board-game\MafiaBoardGame\Domain\Model\Model2.edmx
+-- Date Created: 12/16/2015 14:10:55
+-- Generated from EDMX file: C:\Users\Giordano\Source\Repos\mafia-board-game\MafiaBoardGame\Domain\Model\Model2.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -122,7 +122,8 @@ CREATE TABLE [dbo].[JoueurParties] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [JoueurId] int  NOT NULL,
     [OrdreJoueur] int  NOT NULL,
-    [PartieId] int  NOT NULL
+    [PartieId] int  NOT NULL,
+    [EnPartie] bit  NOT NULL
 );
 GO
 

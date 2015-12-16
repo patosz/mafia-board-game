@@ -99,6 +99,7 @@
     <Property Name="JoueurId" Type="int" Nullable="false" />
     <Property Name="OrdreJoueur" Type="int" Nullable="false" />
     <Property Name="PartieId" Type="int" Nullable="false" />
+    <Property Name="EnPartie" Type="bit" Nullable="false" DefaultValue="true" />
   </EntityType>
   <EntityType Name="Des">
     <Key>
@@ -371,6 +372,7 @@
           <Property Name="PartieId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CartesMain" Relationship="Model.JoueurPartieCarte" FromRole="JoueurPartie" ToRole="Carte" />
           <NavigationProperty Name="DesMain" Relationship="Model.JoueurPartieDe" FromRole="JoueurPartie" ToRole="De" />
+          <Property Name="EnPartie" Type="Boolean" Nullable="false" DefaultValue="True" />
         </EntityType>
         <Association Name="PartiesJoueesJoueur">
           <End Type="Model.Joueur" Role="Joueur" Multiplicity="1" />
@@ -477,6 +479,7 @@
           <ScalarProperty Name="JoueurId" ColumnName="JoueurId" />
           <ScalarProperty Name="OrdreJoueur" ColumnName="OrdreJoueur" />
           <ScalarProperty Name="PartieId" ColumnName="PartieId" />
+          <ScalarProperty Name="EnPartie" ColumnName="EnPartie" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -549,7 +552,7 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f7968c05e6f441c2a7293d1faafd58a4" Name="Diagram1" ZoomLevel="82">
+      <Diagram DiagramId="f7968c05e6f441c2a7293d1faafd58a4" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="Model.Joueur" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Partie" Width="1.5" PointX="5.25" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Carte" Width="1.5" PointX="10" PointY="2.5" IsExpanded="true" />

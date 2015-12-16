@@ -23,6 +23,11 @@ namespace Domain.Model
             this.Effet = effet;
             this.EffetComplet = effetComplet;
         }
+
+        public Carte()
+        {
+
+        }
         
 
         

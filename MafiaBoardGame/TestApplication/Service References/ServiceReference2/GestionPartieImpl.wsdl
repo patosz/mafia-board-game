@@ -6,6 +6,7 @@
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Domain.Dto" />
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Domain" />
+      <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGestionPartie_CreerPartie_InputMessage">
@@ -164,6 +165,30 @@
   <wsdl:message name="IGestionPartie_plusQueDeuxCartesPourLesAutres_OutputMessage">
     <wsdl:part name="parameters" element="tns:plusQueDeuxCartesPourLesAutresResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionPartie_jeterCartePoubelle_InputMessage">
+    <wsdl:part name="parameters" element="tns:jeterCartePoubelle" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_jeterCartePoubelle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:jeterCartePoubelleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_quitterPartie_InputMessage">
+    <wsdl:part name="parameters" element="tns:quitterPartie" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_quitterPartie_OutputMessage">
+    <wsdl:part name="parameters" element="tns:quitterPartieResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_vainqueurParForfait_InputMessage">
+    <wsdl:part name="parameters" element="tns:vainqueurParForfait" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_vainqueurParForfait_OutputMessage">
+    <wsdl:part name="parameters" element="tns:vainqueurParForfaitResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_vainqueur_InputMessage">
+    <wsdl:part name="parameters" element="tns:vainqueur" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_vainqueur_OutputMessage">
+    <wsdl:part name="parameters" element="tns:vainqueurResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionPartie">
     <wsdl:operation name="CreerPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/CreerPartie" message="tns:IGestionPartie_CreerPartie_InputMessage" />
@@ -268,6 +293,22 @@
     <wsdl:operation name="plusQueDeuxCartesPourLesAutres">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutres" message="tns:IGestionPartie_plusQueDeuxCartesPourLesAutres_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutresResponse" message="tns:IGestionPartie_plusQueDeuxCartesPourLesAutres_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="jeterCartePoubelle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/jeterCartePoubelle" message="tns:IGestionPartie_jeterCartePoubelle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/jeterCartePoubelleResponse" message="tns:IGestionPartie_jeterCartePoubelle_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="quitterPartie">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/quitterPartie" message="tns:IGestionPartie_quitterPartie_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/quitterPartieResponse" message="tns:IGestionPartie_quitterPartie_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="vainqueurParForfait">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/vainqueurParForfait" message="tns:IGestionPartie_vainqueurParForfait_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/vainqueurParForfaitResponse" message="tns:IGestionPartie_vainqueurParForfait_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="vainqueur">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/vainqueur" message="tns:IGestionPartie_vainqueur_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/vainqueurResponse" message="tns:IGestionPartie_vainqueur_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGestionPartie" type="tns:IGestionPartie">
@@ -499,6 +540,42 @@
     </wsdl:operation>
     <wsdl:operation name="plusQueDeuxCartesPourLesAutres">
       <soap:operation soapAction="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutres" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="jeterCartePoubelle">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/jeterCartePoubelle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="quitterPartie">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/quitterPartie" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vainqueurParForfait">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/vainqueurParForfait" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="vainqueur">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/vainqueur" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

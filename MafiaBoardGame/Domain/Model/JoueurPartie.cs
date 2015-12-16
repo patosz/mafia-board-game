@@ -17,6 +17,7 @@ namespace Domain.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public JoueurPartie()
         {
+            this.EnPartie = true;
             this.CartesMain = new HashSet<Carte>();
             this.DesMain = new HashSet<De>();
         }
@@ -25,6 +26,7 @@ namespace Domain.Model
         public int JoueurId { get; set; }
         public int OrdreJoueur { get; set; }
         public int PartieId { get; set; }
+        public bool EnPartie { get; set; }
     
         public virtual Joueur Joueur { get; set; }
         public virtual Partie Partie { get; set; }

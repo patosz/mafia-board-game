@@ -57,7 +57,7 @@ namespace Domain
         JoueurPartieDto next();
 
         [OperationContract]
-        void supprimerUnDe(int IdJoueurPartie,int IdDe);
+        void supprimerUnDe(int IdJoueurPartie);
 
         [OperationContract]
         void supprimerDeuxDes(int IdJoueurPartie);
@@ -72,13 +72,10 @@ namespace Domain
         void prendreUneCarteDUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible);
 
         [OperationContract]
-        void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible, int IdDe);
+        void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible);
 
         [OperationContract]
         void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte);
-
-        [OperationContract]
-        void passeSonTour(int IdJoueurPartie, int IdJoueurPartieCible);
 
         [OperationContract]
         void piocheTroisCartes(int IdJoueurPartie);
@@ -87,6 +84,14 @@ namespace Domain
         void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, Dictionary<int, List<int>> dico);
         [OperationContract]
         void jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
+
+        [OperationContract]
+        JoueurPartieDto quitterPartie(int IdJoueurPartie);
+
+        [OperationContract]
+        JoueurDto vainqueurParForfait();
+        [OperationContract]
+        JoueurDto vainqueur(int IdJoueurPartie);
 
         JoueurPartie getJoueurPartie(int IdJoueurPartie);
 
