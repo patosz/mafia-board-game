@@ -95,6 +95,8 @@ namespace Domain
 
         JoueurPartie getJoueurPartie(int IdJoueurPartie);
 
+        [OperationContract]
+        GameStateDto getGameState(string nomJoueur);
 
     }
 }
