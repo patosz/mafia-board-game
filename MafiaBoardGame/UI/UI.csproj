@@ -121,6 +121,14 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Images\dos_carte.png" />
+    <Content Include="PAT TEST FILES\Inkscape\card_model.svg" />
+    <Content Include="PAT TEST FILES\Inkscape\dos_carte.png" />
+    <Content Include="PAT TEST FILES\Inkscape\dos_carte.svg" />
+    <Content Include="PAT TEST FILES\Plateau\images\dos_carte.png" />
+    <Content Include="PAT TEST FILES\Plateau\images\dos_carte.svg" />
+    <Content Include="PAT TEST FILES\Plateau\index.html" />
+    <Content Include="PAT TEST FILES\Plateau\index2.html" />
+    <Content Include="PAT TEST FILES\Plateau\styles.css" />
     <Content Include="Properties\DataSources\Domain.JoueurDto.datasource" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
