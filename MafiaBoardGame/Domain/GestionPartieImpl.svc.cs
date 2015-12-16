@@ -98,26 +98,27 @@ namespace Domain
         //on donne quoi le string un objet??
         public bool RejoindrePartie(string pseudo)
         {
-             if (partie.maxJoueur <= partie.JoueursParticipants.Count)
-             {
-                 return false;
-             }
-            Joueur joueur = (from Joueur j in dbcontext.Joueurs
-                             where j.Pseudo.Equals(pseudo)
-                             select j).FirstOrDefault();
             //Pas de création!
             if (partie == null)
             {
                 return false;
             }
-            if (partie != null && (int)partie.etat == (int)Partie.ETAT.EN_COURS)
+          
+            if (partie != null && (partie.etat == Partie.ETAT.EN_COURS || partie.etat == Partie.ETAT.TERMINE))
             {
                 return false;
             }
 
-            if ((int)partie.etat == (int)Partie.ETAT.INSCRIPTION)
+            if (partie.maxJoueur <= partie.JoueursParticipants.Count)
             {
+                return false;
+            }
 
+            if (partie.etat == Partie.ETAT.INSCRIPTION)
+            {
+                Joueur joueur = (from Joueur j in dbcontext.Joueurs
+                                 where j.Pseudo.Equals(pseudo)
+                                 select j).FirstOrDefault();
                 JoueurPartie joueurPartie = new JoueurPartie();
                 joueurPartie.Partie = partie;
                 dbcontext.JoueurParties.Add(joueurPartie);
@@ -287,8 +288,6 @@ namespace Domain
             {
                 listDeDto.Add(BizToDto.ToCarteDto(carte));
             }
-
-
             return listDeDto;
         }
 
