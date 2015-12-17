@@ -63,7 +63,7 @@ namespace Domain
         void supprimerDeuxDes(int IdJoueurPartie);
 
         [OperationContract]
-        void donnerDeAGaucheOuDroite();
+        void donnerDeAGaucheOuDroite(bool sens);
 
         [OperationContract]
         void rejouerEtChangementDeSens(int IdJoueurPartie);

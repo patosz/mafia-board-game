@@ -1,4 +1,5 @@
-﻿using Domain.Dto;
+﻿using Domain;
+using Domain.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace TestApplication
 {
-    public class TestDeBase
+    class TestDonnerDeVainqueur
     {
-        public TestDeBase()
+        public TestDonnerDeVainqueur()
         {
             ServiceReference1.GestionJoueurClient joueurClient = new ServiceReference1.GestionJoueurClient();
             ServiceReference2.GestionPartieClient partieClient = new ServiceReference2.GestionPartieClient();
@@ -55,7 +56,7 @@ namespace TestApplication
                 Console.WriteLine("Joueur " + joueur3 + " connecté!");
 
 
-            
+
 
             //Test creerPartie
             PartieDto partieDto = partieClient.CreerPartie(partie, joueur1);
@@ -67,35 +68,64 @@ namespace TestApplication
 
             //Test rejoindrePartie
             PartieDto rejoindre = partieClient.RejoindrePartie(joueur2);
-            if (rejoindre!=null)
+            if (rejoindre != null)
                 Console.WriteLine("Rejoindre OK : " + joueur2);
             else
                 Console.WriteLine("Rejoindre KO");
             rejoindre = partieClient.RejoindrePartie(joueur3);
-            if (rejoindre!=null)
+            if (rejoindre != null)
                 Console.WriteLine("Rejoindre OK : " + joueur3);
             else
                 Console.WriteLine("Rejoindre KO");
 
-
-
-            //Test VoirPartie
-            List<PartieDto> list = partieClient.VoirPartie(joueur2).ToList();
-
-            for (int i = 0; i < list.Count; i++)
-            {
-                Console.WriteLine("Partie n° " + i + " : " + list.ElementAt(i).Nom);
-            }
-
             //Test lancerPartie + getJoueurDto
             PartieDto pDto = partieClient.LancerPartie();
-            Console.WriteLine(pDto.Nom + " " + pDto.DateHeureCreation);
-            Console.WriteLine("ID du createur: " + partieDto.JoueurCourant.Id);
-            Console.WriteLine("Pseudo du createur: " + partieClient.getJoueurDto(partieDto.JoueurCourant.Id).Pseudo);
+            Console.WriteLine("Nom de la partie crée : " + pDto.Nom + ", date de la creation : " + pDto.DateHeureCreation);
+            Console.WriteLine("ID du createur :  : " + partieDto.JoueurCourant.Id);
+            Console.WriteLine("Pseudo du createur : " + partieClient.getJoueurDto(partieDto.JoueurCourant.Id).Pseudo);
+
+
+
+            Console.WriteLine("Test vainqueur()");
+            Console.WriteLine("Le joueur 1 supprimer 4 fois un de");
+            Console.WriteLine("Main de à la base : \n");
+            List<DeDto> listeDe = partieClient.lancerDes(1).ToList();
+
+            for (int i = 0; i < listeDe.Count; i++)
+            {
+            
+                Console.WriteLine("De ID : " + listeDe.ElementAt(i).Id + ", valeur : " + listeDe.ElementAt(i).Valeur + "\n");
+            }
+
+            partieClient.supprimerUnDe(1);
+            partieClient.supprimerUnDe(1);
+            partieClient.supprimerUnDe(1);
+            partieClient.supprimerUnDe(1);
+
+
+            Console.WriteLine("Appel de la mathode supprimerUnDe (4 fois): \n");
+
+
+            Console.WriteLine("Main de apres l'appel : \n");
+            listeDe = partieClient.getListDesDto(1);
+
+            for (int i = 0; i < listeDe.Count; i++)
+            { 
+                Console.WriteLine("De ID : " + listeDe.ElementAt(i).Id + ", valeur : " + listeDe.ElementAt(i).Valeur + "\n");
+            }
+
+          
+
+
+            Console.WriteLine("Appel de la methode vainqueur() sur joueur 1: \n");
+            JoueurDto vainqueur = partieClient.vainqueur(1);
+            Console.WriteLine("Pseudo vainqueur : " + vainqueur.Pseudo);
+            Console.WriteLine("Id vainqueur : " + vainqueur.Id);
 
 
             Console.ReadLine();
+
+
         }
     }
-
 }
