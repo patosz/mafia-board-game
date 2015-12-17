@@ -124,10 +124,10 @@ namespace UI.UccPartieRef {
         System.Threading.Tasks.Task supprimerDeuxDesAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroite", ReplyAction="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroiteResponse")]
-        void donnerDeAGaucheOuDroite();
+        void donnerDeAGaucheOuDroite(bool sens);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroite", ReplyAction="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroiteResponse")]
-        System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync();
+        System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync(bool sens);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/rejouerEtChangementDeSens", ReplyAction="http://tempuri.org/IGestionPartie/rejouerEtChangementDeSensResponse")]
         void rejouerEtChangementDeSens(int IdJoueurPartie);
@@ -206,6 +206,12 @@ namespace UI.UccPartieRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getDeDto", ReplyAction="http://tempuri.org/IGestionPartie/getDeDtoResponse")]
         System.Threading.Tasks.Task<Domain.Dto.DeDto> getDeDtoAsync(int IdDe);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/annuler", ReplyAction="http://tempuri.org/IGestionPartie/annulerResponse")]
+        void annuler(int IdPartie);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/annuler", ReplyAction="http://tempuri.org/IGestionPartie/annulerResponse")]
+        System.Threading.Tasks.Task annulerAsync(int IdPartie);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -379,12 +385,12 @@ namespace UI.UccPartieRef {
             return base.Channel.supprimerDeuxDesAsync(IdJoueurPartie);
         }
         
-        public void donnerDeAGaucheOuDroite() {
-            base.Channel.donnerDeAGaucheOuDroite();
+        public void donnerDeAGaucheOuDroite(bool sens) {
+            base.Channel.donnerDeAGaucheOuDroite(sens);
         }
         
-        public System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync() {
-            return base.Channel.donnerDeAGaucheOuDroiteAsync();
+        public System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync(bool sens) {
+            return base.Channel.donnerDeAGaucheOuDroiteAsync(sens);
         }
         
         public void rejouerEtChangementDeSens(int IdJoueurPartie) {
@@ -489,6 +495,14 @@ namespace UI.UccPartieRef {
         
         public System.Threading.Tasks.Task<Domain.Dto.DeDto> getDeDtoAsync(int IdDe) {
             return base.Channel.getDeDtoAsync(IdDe);
+        }
+        
+        public void annuler(int IdPartie) {
+            base.Channel.annuler(IdPartie);
+        }
+        
+        public System.Threading.Tasks.Task annulerAsync(int IdPartie) {
+            return base.Channel.annulerAsync(IdPartie);
         }
     }
 }

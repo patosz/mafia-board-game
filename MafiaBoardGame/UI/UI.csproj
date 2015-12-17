@@ -58,6 +58,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
@@ -174,6 +178,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\ScriptJouerCarte.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -230,10 +235,12 @@
     <Content Include="Views\Partie\VoirPartiesDisponibles.cshtml" />
     <Content Include="Views\Joueur\ConfirmRegistration.cshtml" />
     <Content Include="Views\Joueur\Register.cshtml" />
-    <Content Include="Views\Plateau\Index.cshtml" />
+    <Content Include="Views\Plateau\IndexBackup.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Plateau\Index - Copy.cshtml" />
     <Content Include="Views\Partie\RefreshLoadScreen.cshtml" />
+    <Content Include="Views\Plateau\Index.cshtml" />
+    <Content Include="Views\Plateau\Index2.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -51,7 +51,7 @@ namespace UI.Controllers
             model.Partie = partie;
             List<JoueurPartieDto> participants = UccPartie.getListJoueurParticipantsDto(partie.Id).ToList();
             foreach(JoueurPartieDto jp in participants){
-            model.Participants = ;
+           // model.Participants;// = ;
             }
             return View(model);
         }
@@ -64,7 +64,7 @@ namespace UI.Controllers
         public ActionResult Rejoindre(string pseudo)
         {
             //TODO ajouter un param avec l'id de la partie à rejondre
-            bool res = UccPartie.RejoindrePartie(pseudo);
+            bool res = true;// UccPartie.RejoindrePartie(pseudo);
             if (res)
             {
                 return RedirectToAction("WaitForStart");
