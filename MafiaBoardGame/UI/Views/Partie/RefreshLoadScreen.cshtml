@@ -1,0 +1,21 @@
+﻿@model List<Domain.Dto.JoueurPartieDto>
+<h3>
+    Joueurs inscrits :
+    <ul>
+        @if (Model != null)
+        {
+            foreach (var jp in Model)
+            {
+                if (jp != null)
+                {
+                    <li>@jp.Joueur.Pseudo</li>
+                }
+            }
+        }
+    </ul>
+</h3>
+
+<h4>
+    En attente d'autres joueurs...
+</h4>
+

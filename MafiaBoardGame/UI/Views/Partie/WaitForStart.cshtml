@@ -1,40 +1,14 @@
-﻿@model Domain.Dto.PartieDto
-
-@{
+﻿@{
     ViewBag.Title = "En attente des joueurs";
 }
 
+@model UI.Models.LoadScreenModel
+
 <h2>
-    Nouvelle partie - Kikoo partie
+    Nouvelle partie - @Model.Partie.Nom
+
 </h2>
-<h3>
-    Joueurs inscrits :
-</h3>
 
-<h4>
-    En attente d'autres joueurs...
-</h4>
-
-<p id="counter">
-
-</p>
-
-<script>
-    var i = 30;
-
-    var intitCounterDiv = function () {
-        $('#counter').text(i);
-    };
-
-    var intervalID = setInterval(function () {
-
-        $('#counter').text(i);
-        i -= 1;
-        if (i === 0) {
-            window.clearInterval(intervalID);
-            
-            window.location.href = @Url.Action("Index", "Plateau", new { nomPartie = Model.Nom});
-        }
-    }, 1000);
-
-</script>
+@{
+    Html.RenderPartial("RefreshLoadScreen", Model.Participants);
+}
