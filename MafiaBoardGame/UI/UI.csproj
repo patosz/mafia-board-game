@@ -160,6 +160,7 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\ScriptJouerCarte.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Domain.Dto;
+using System.Web.Services;
 
 namespace UI.Controllers
 {
@@ -19,6 +20,13 @@ namespace UI.Controllers
             //(new UccPartieRef.GestionPartieClient)
             ViewData["partie"] = nomPartie;
             return View();
+        }
+
+        [WebMethod]
+        public ActionResult JouerCarte(string s = "ha")
+        {
+
+            return Json(new { success = true, message = "Order updated successfully" }, JsonRequestBehavior.AllowGet);
         }
     }
 }
