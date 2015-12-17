@@ -133,6 +133,11 @@
     <Content Include="PAT TEST FILES\Plateau\index2.html" />
     <Content Include="PAT TEST FILES\Plateau\styles.css" />
     <Content Include="Properties\DataSources\Domain.JoueurDto.datasource" />
+    <Content Include="Properties\DataSources\Domain.Dto.CarteDto.datasource" />
+    <Content Include="Properties\DataSources\Domain.Dto.DeDto.datasource" />
+    <Content Include="Properties\DataSources\Domain.Dto.GameStateDto.datasource" />
+    <Content Include="Properties\DataSources\Domain.Dto.JoueurPartieDto.datasource" />
+    <Content Include="Properties\DataSources\Domain.Dto.PartieDto.datasource" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -156,6 +161,12 @@
     <None Include="Service References\UccPartieRef\GestionPartieImpl.disco" />
     <None Include="Service References\UccPartieRef\configuration91.svcinfo" />
     <None Include="Service References\UccPartieRef\configuration.svcinfo" />
+    <None Include="Service References\UccPartieRef\GestionPartieImpl2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UccPartieRef\GestionPartieImpl21.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\UccPartieRef\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

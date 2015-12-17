@@ -100,16 +100,16 @@
                                 <div class="item">
                                     <div class="row">
                                         <div class="col-sm-3">
-                                            <a href="#x" class="thumbnail"><img src="~/Images/dos_carte.svg" alt="Image" class="img-responsive"></a>
+                                            <img src="~/Images/dos_carte.svg" alt="Image" data-id="1" class="img-responsive carte-en-main" />
                                         </div>
                                         <div class="col-sm-3">
-                                            <a href="#x" class="thumbnail"><img src="~/Images/dos_carte.svg" alt="Image" class="img-responsive"></a>
+                                            <img src="~/Images/dos_carte.svg" alt="Image" data-id="2" class="img-responsive carte-en-main" />
                                         </div>
                                         <div class="col-sm-3">
-                                            <a href="#x" class="thumbnail"><img src="~/Images/dos_carte.svg" alt="Image" class="img-responsive"></a>
+                                            <img src="~/Images/dos_carte.svg" alt="Image" data-id="3" class="img-responsive carte-en-main" />
                                         </div>
                                         <div class="col-sm-3">
-                                            <a href="#x" class="thumbnail"><img src="~/Images/dos_carte.svg" alt="Image" class="img-responsive"></a>
+                                            <img src="~/Images/dos_carte.svg" alt="Image" data-id="4" class="img-responsive carte-en-main" />
                                         </div>
                                     </div>
                                     <!--/row-->
@@ -135,22 +135,5 @@
 
 </div>
 <script type="text/javascript">
-    $(document).ready(
-        function () {
-            console.log($(this).attr('src'))
-            $('#pioche').popover({
-                html: true,
-                trigger: "click",
-                placement: "right",
-                title: "Carte pioche",
-                content: '<img src="/Images/dos_carte.svg"/>'
-            });
-            $('#defausse').popover({
-                html: true,
-                trigger: "click",
-                placement: "left",
-                title: "Carte pioche",
-                content: '<img src="/Images/dos_carte.svg"/>'
-            });
-        });
+    
 </script>

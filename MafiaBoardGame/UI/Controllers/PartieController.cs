@@ -31,7 +31,7 @@ namespace UI.Controllers
         public ActionResult Creer(string nomPartie)
         {
             string pseudo = ((JoueurDto)Session["user"]).Pseudo;
-            bool res = UccPartie.CreerPartie(nomPartie, pseudo);
+            bool res = true;// UccPartie.CreerPartie(nomPartie, pseudo);
             if (res)
             {
                 //TODO need méthode pour avoir le nom/id de la partie
@@ -54,7 +54,7 @@ namespace UI.Controllers
         public ActionResult Rejoindre(string pseudo)
         {
             //TODO ajouter un param avec l'id de la partie à rejondre
-            bool res = UccPartie.RejoindrePartie(pseudo);
+            bool res = true;// UccPartie.RejoindrePartie(pseudo);
             if (res)
             {
                 //TODO need méthode pour avoir le nom/id de la partie
