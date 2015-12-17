@@ -24,9 +24,8 @@
   <Metadata>
     <MetadataFile FileName="GestionPartieImpl.wsdl" MetadataType="Wsdl" ID="94760b09-085d-4ffa-9190-a1492aea179a" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?wsdl" />
     <MetadataFile FileName="GestionPartieImpl.disco" MetadataType="Disco" ID="a92e6977-168c-4ee5-b911-ba4473250115" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?disco" />
-    <MetadataFile FileName="GestionPartieImpl2.xsd" MetadataType="Schema" ID="45d9590a-480a-4a58-babd-c1d572d4383d" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd4" />
-    <MetadataFile FileName="GestionPartieImpl21.xsd" MetadataType="Schema" ID="423e6988-446a-4ec6-b2e1-72accfac4f07" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd3" />
-    <MetadataFile FileName="GestionPartieImpl22.xsd" MetadataType="Schema" ID="ee72f087-822e-4372-a010-da47eab45464" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd2" />
+    <MetadataFile FileName="GestionPartieImpl2.xsd" MetadataType="Schema" ID="d3e1312c-caac-488f-ba59-7b4c2cf95e19" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd3" />
+    <MetadataFile FileName="GestionPartieImpl21.xsd" MetadataType="Schema" ID="f627fe53-ad0e-433b-81a4-f9ebfe826a24" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd2" />
     <MetadataFile FileName="GestionPartieImpl1.xsd" MetadataType="Schema" ID="6d06592c-3d31-4e4b-9b2c-b2ec45e8cd87" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd1" />
     <MetadataFile FileName="GestionPartieImpl.xsd" MetadataType="Schema" ID="dfc515dc-d028-4539-900e-505c1f5d7ad3" SourceId="1" SourceUrl="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd0" />
   </Metadata>

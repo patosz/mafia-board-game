@@ -63,9 +63,10 @@
                 </div>
                 <div class="panel-body">
                     <div class="well vos-des col-lg-4">
-                        <img src="~/Images/de_wazabi.svg" />
-                        <img src="~/Images/de_wazabi.svg" />
-                        <img src="~/Images/de_wazabi.svg" />
+                        @foreach (var d in Model.Des)
+                        {
+                            <img src="~/Images/de_wazabi.svg" data-id="@d.Id" />
+                        }
                     </div>
 
                     <div class="well vos-cartes col-lg-8">
@@ -79,31 +80,36 @@
                                     var j = 0;
                                 }
 
-                                @if (j < 4)
-                                {
-                                    <div class="item active">
-                                        <div class="row">
-                                            @for (; j < NbCartes && j < 4; j++)
-                                            {
-                                                <div class="col-sm-3">
-                                                    <a href="#x"><img src="~/Images/dos_carte.svg" alt="Image" class="img-responsive"></a>
-                                                </div>
-                                            }
-                                        </div>
+                                <div class="item active">
+                                    <div class="row">
+                                        @for (; j < NbCartes && j < 4; j++)
+                                        {
+                                            <div class="col-sm-3">
+                                                <img src="~/Images/dos_carte.svg" alt="Image" data-id="@Model.Cartes.ElementAt(j).Id" class="img-responsive carte-en-main" />
+                                            </div>
+                                        }
                                     </div>
+                                </div>
+
+
+                                @{
+                                    var NbCartesRestantes = NbCartes - j;
                                 }
-                                else
+
+                                @for (var i = 0; NbCartesRestantes > 0; i++)
                                 {
                                     <div class="item">
                                         <div class="row">
-                                            @for (; j < NbCartes; j++)
+                                            @for (j = 0; j < NbCartesRestantes && j < 4; j++)
                                             {
                                                 <div class="col-sm-3">
-                                                    <a href="#x" class="thumbnail"><img src="~/Images/dos_carte.svg" alt="Image" class="img-responsive"></a>
+                                                    <img src="~/Images/dos_carte.svg" alt="Image" data-id="@Model.Cartes.ElementAt((i*4)+j).Id" class="img-responsive carte-en-main" />
                                                 </div>
                                             }
                                         </div>
                                     </div>
+                                    @{NbCartesRestantes -= j;}
+                                }
                                 }
 
                                 <!-- Left and right controls -->
@@ -125,23 +131,3 @@
 
 
 </div>
-<script type="text/javascript">
-    $(document).ready(
-        function () {
-            console.log($(this).attr('src'))
-            $('#pioche').popover({
-                html: true,
-                trigger: "click",
-                placement: "right",
-                title: "Carte pioche",
-                content: '<img src="/Images/dos_carte.svg"/>'
-            });
-            $('#defausse').popover({
-                html: true,
-                trigger: "click",
-                placement: "left",
-                title: "Carte pioche",
-                content: '<img src="/Images/dos_carte.svg"/>'
-            });
-        });
-</script>

@@ -6,7 +6,6 @@
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Domain.Dto" />
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Domain" />
-      <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGestionPartie_CreerPartie_InputMessage">
@@ -189,6 +188,18 @@
   <wsdl:message name="IGestionPartie_getGameState_OutputMessage">
     <wsdl:part name="parameters" element="tns:getGameStateResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionPartie_getCarteDto_InputMessage">
+    <wsdl:part name="parameters" element="tns:getCarteDto" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_getCarteDto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getCarteDtoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_getDeDto_InputMessage">
+    <wsdl:part name="parameters" element="tns:getDeDto" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_getDeDto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getDeDtoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionPartie">
     <wsdl:operation name="CreerPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/CreerPartie" message="tns:IGestionPartie_CreerPartie_InputMessage" />
@@ -309,6 +320,14 @@
     <wsdl:operation name="getGameState">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/getGameState" message="tns:IGestionPartie_getGameState_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/getGameStateResponse" message="tns:IGestionPartie_getGameState_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getCarteDto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/getCarteDto" message="tns:IGestionPartie_getCarteDto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/getCarteDtoResponse" message="tns:IGestionPartie_getCarteDto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDeDto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/getDeDto" message="tns:IGestionPartie_getDeDto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/getDeDtoResponse" message="tns:IGestionPartie_getDeDto_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGestionPartie" type="tns:IGestionPartie">
@@ -576,6 +595,24 @@
     </wsdl:operation>
     <wsdl:operation name="getGameState">
       <soap:operation soapAction="http://tempuri.org/IGestionPartie/getGameState" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCarteDto">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/getCarteDto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDeDto">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/getDeDto" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

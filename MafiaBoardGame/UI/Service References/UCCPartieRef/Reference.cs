@@ -22,10 +22,10 @@ namespace UI.UccPartieRef {
         System.Threading.Tasks.Task<Domain.Dto.PartieDto> CreerPartieAsync(string nomPartie, string nomJoueur);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/RejoindrePartie", ReplyAction="http://tempuri.org/IGestionPartie/RejoindrePartieResponse")]
-        bool RejoindrePartie(string pseudo);
+        Domain.Dto.PartieDto RejoindrePartie(string pseudo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/RejoindrePartie", ReplyAction="http://tempuri.org/IGestionPartie/RejoindrePartieResponse")]
-        System.Threading.Tasks.Task<bool> RejoindrePartieAsync(string pseudo);
+        System.Threading.Tasks.Task<Domain.Dto.PartieDto> RejoindrePartieAsync(string pseudo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/CommencerPartie", ReplyAction="http://tempuri.org/IGestionPartie/CommencerPartieResponse")]
         bool CommencerPartie();
@@ -148,10 +148,10 @@ namespace UI.UccPartieRef {
         System.Threading.Tasks.Task donnerUnDeAUnJoueurAsync(int IdJoueurPartie, int IdJoueurPartieCible);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarte", ReplyAction="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarteResponse")]
-        void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte);
+        void ciblerJoueurQUUneCarte(int IdJoueurPartieCible);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarte", ReplyAction="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarteResponse")]
-        System.Threading.Tasks.Task ciblerJoueurQUUneCarteAsync(int IdJoueurPartieCible, int IdCarte);
+        System.Threading.Tasks.Task ciblerJoueurQUUneCarteAsync(int IdJoueurPartieCible);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/piocheTroisCartes", ReplyAction="http://tempuri.org/IGestionPartie/piocheTroisCartesResponse")]
         void piocheTroisCartes(int IdJoueurPartie);
@@ -160,10 +160,10 @@ namespace UI.UccPartieRef {
         System.Threading.Tasks.Task piocheTroisCartesAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutres", ReplyAction="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutresResponse")]
-        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, System.Collections.Generic.Dictionary<int, int[]> dico);
+        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutres", ReplyAction="http://tempuri.org/IGestionPartie/plusQueDeuxCartesPourLesAutresResponse")]
-        System.Threading.Tasks.Task plusQueDeuxCartesPourLesAutresAsync(int IdJoueurPartie, System.Collections.Generic.Dictionary<int, int[]> dico);
+        System.Threading.Tasks.Task plusQueDeuxCartesPourLesAutresAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/jeterCartePoubelle", ReplyAction="http://tempuri.org/IGestionPartie/jeterCartePoubelleResponse")]
         void jeterCartePoubelle(int IdJoueurPartie, int IdCarte);
@@ -194,6 +194,18 @@ namespace UI.UccPartieRef {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getGameState", ReplyAction="http://tempuri.org/IGestionPartie/getGameStateResponse")]
         System.Threading.Tasks.Task<Domain.Dto.GameStateDto> getGameStateAsync(string nomJoueur);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getCarteDto", ReplyAction="http://tempuri.org/IGestionPartie/getCarteDtoResponse")]
+        Domain.Dto.CarteDto getCarteDto(int IdCarte);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getCarteDto", ReplyAction="http://tempuri.org/IGestionPartie/getCarteDtoResponse")]
+        System.Threading.Tasks.Task<Domain.Dto.CarteDto> getCarteDtoAsync(int IdCarte);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getDeDto", ReplyAction="http://tempuri.org/IGestionPartie/getDeDtoResponse")]
+        Domain.Dto.DeDto getDeDto(int IdDe);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getDeDto", ReplyAction="http://tempuri.org/IGestionPartie/getDeDtoResponse")]
+        System.Threading.Tasks.Task<Domain.Dto.DeDto> getDeDtoAsync(int IdDe);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -231,11 +243,11 @@ namespace UI.UccPartieRef {
             return base.Channel.CreerPartieAsync(nomPartie, nomJoueur);
         }
         
-        public bool RejoindrePartie(string pseudo) {
+        public Domain.Dto.PartieDto RejoindrePartie(string pseudo) {
             return base.Channel.RejoindrePartie(pseudo);
         }
         
-        public System.Threading.Tasks.Task<bool> RejoindrePartieAsync(string pseudo) {
+        public System.Threading.Tasks.Task<Domain.Dto.PartieDto> RejoindrePartieAsync(string pseudo) {
             return base.Channel.RejoindrePartieAsync(pseudo);
         }
         
@@ -399,12 +411,12 @@ namespace UI.UccPartieRef {
             return base.Channel.donnerUnDeAUnJoueurAsync(IdJoueurPartie, IdJoueurPartieCible);
         }
         
-        public void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte) {
-            base.Channel.ciblerJoueurQUUneCarte(IdJoueurPartieCible, IdCarte);
+        public void ciblerJoueurQUUneCarte(int IdJoueurPartieCible) {
+            base.Channel.ciblerJoueurQUUneCarte(IdJoueurPartieCible);
         }
         
-        public System.Threading.Tasks.Task ciblerJoueurQUUneCarteAsync(int IdJoueurPartieCible, int IdCarte) {
-            return base.Channel.ciblerJoueurQUUneCarteAsync(IdJoueurPartieCible, IdCarte);
+        public System.Threading.Tasks.Task ciblerJoueurQUUneCarteAsync(int IdJoueurPartieCible) {
+            return base.Channel.ciblerJoueurQUUneCarteAsync(IdJoueurPartieCible);
         }
         
         public void piocheTroisCartes(int IdJoueurPartie) {
@@ -415,12 +427,12 @@ namespace UI.UccPartieRef {
             return base.Channel.piocheTroisCartesAsync(IdJoueurPartie);
         }
         
-        public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, System.Collections.Generic.Dictionary<int, int[]> dico) {
-            base.Channel.plusQueDeuxCartesPourLesAutres(IdJoueurPartie, dico);
+        public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie) {
+            base.Channel.plusQueDeuxCartesPourLesAutres(IdJoueurPartie);
         }
         
-        public System.Threading.Tasks.Task plusQueDeuxCartesPourLesAutresAsync(int IdJoueurPartie, System.Collections.Generic.Dictionary<int, int[]> dico) {
-            return base.Channel.plusQueDeuxCartesPourLesAutresAsync(IdJoueurPartie, dico);
+        public System.Threading.Tasks.Task plusQueDeuxCartesPourLesAutresAsync(int IdJoueurPartie) {
+            return base.Channel.plusQueDeuxCartesPourLesAutresAsync(IdJoueurPartie);
         }
         
         public void jeterCartePoubelle(int IdJoueurPartie, int IdCarte) {
@@ -461,6 +473,22 @@ namespace UI.UccPartieRef {
         
         public System.Threading.Tasks.Task<Domain.Dto.GameStateDto> getGameStateAsync(string nomJoueur) {
             return base.Channel.getGameStateAsync(nomJoueur);
+        }
+        
+        public Domain.Dto.CarteDto getCarteDto(int IdCarte) {
+            return base.Channel.getCarteDto(IdCarte);
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Dto.CarteDto> getCarteDtoAsync(int IdCarte) {
+            return base.Channel.getCarteDtoAsync(IdCarte);
+        }
+        
+        public Domain.Dto.DeDto getDeDto(int IdDe) {
+            return base.Channel.getDeDto(IdDe);
+        }
+        
+        public System.Threading.Tasks.Task<Domain.Dto.DeDto> getDeDtoAsync(int IdDe) {
+            return base.Channel.getDeDtoAsync(IdDe);
         }
     }
 }

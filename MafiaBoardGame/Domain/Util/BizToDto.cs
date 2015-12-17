@@ -55,7 +55,7 @@ namespace Domain.Util
             joueurPartieDto.JoueurId = joueurPartie.JoueurId;
             joueurPartieDto.OrdreJoueur = joueurPartie.OrdreJoueur;
             joueurPartieDto.PartieId = joueurPartie.PartieId;
-
+            joueurPartieDto.Joueur = ToJoueurDto(joueurPartie.Joueur);
             return joueurPartieDto;
         }
 

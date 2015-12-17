@@ -16,7 +16,7 @@ namespace Domain
         [OperationContract]
         PartieDto CreerPartie(String nomPartie,String nomJoueur);
         [OperationContract]
-        bool RejoindrePartie(String pseudo);
+        PartieDto RejoindrePartie(String pseudo);
         [OperationContract]
         bool CommencerPartie();
         [OperationContract]
@@ -75,13 +75,13 @@ namespace Domain
         void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible);
 
         [OperationContract]
-        void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte);
+        void ciblerJoueurQUUneCarte(int IdJoueurPartieCible);
 
         [OperationContract]
         void piocheTroisCartes(int IdJoueurPartie);
 
         [OperationContract]
-        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, Dictionary<int, List<int>> dico);
+        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
         [OperationContract]
         void jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
 
@@ -97,6 +97,17 @@ namespace Domain
 
         [OperationContract]
         GameStateDto getGameState(string nomJoueur);
+        [OperationContract]
+        CarteDto getCarteDto(int IdCarte);
+        [OperationContract]
+        DeDto getDeDto(int IdDe);
+
+        [OperationContract]
+        void annuler(int IdPartie);
 
     }
+
+
+
+
 }
