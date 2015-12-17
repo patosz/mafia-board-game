@@ -40,7 +40,7 @@ namespace TestApplication
 
 
             //Test connexionJoueur 
-            if (joueurClient.ConnexionJoueur(joueur2, mdp) == null)
+            if (joueurClient.ConnexionJoueur(joueur1, mdp) == null)
                 Console.WriteLine("Connexion de " + joueur1 + " fail");
             else
                 Console.WriteLine("Joueur " + joueur1 + " connecté!");
