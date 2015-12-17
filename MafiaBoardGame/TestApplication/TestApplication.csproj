@@ -61,7 +61,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="TestCiblerJoueurUneCarte.cs" />
     <Compile Include="TestDeBase.cs" />
+    <Compile Include="TestDonnerDeVainqueur.cs" />
+    <Compile Include="TestDonnerUnEtGouD.cs" />
+    <Compile Include="TestNextEtQuitter.cs" />
+    <Compile Include="TestNextRejouezChangeSens.cs" />
+    <Compile Include="TestPiocher.cs" />
+    <Compile Include="TestPrendreUneCarteAUnJoueur.cs" />
+    <Compile Include="TestQueDeuxCartesPourLesAutres.cs" />
+    <Compile Include="TestQuitterEtVainParFor.cs" />
+    <Compile Include="TestSupp1Ou2De.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

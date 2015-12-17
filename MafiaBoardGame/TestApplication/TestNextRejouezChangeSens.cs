@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TestApplication
 {
-    public class TestDeBase
+    public class TestNextRejouezChangeSens
     {
-        public TestDeBase()
+        public TestNextRejouezChangeSens()
         {
             ServiceReference1.GestionJoueurClient joueurClient = new ServiceReference1.GestionJoueurClient();
             ServiceReference2.GestionPartieClient partieClient = new ServiceReference2.GestionPartieClient();
@@ -55,7 +55,7 @@ namespace TestApplication
                 Console.WriteLine("Joueur " + joueur3 + " connecté!");
 
 
-            
+
 
             //Test creerPartie
             PartieDto partieDto = partieClient.CreerPartie(partie, joueur1);
@@ -67,35 +67,57 @@ namespace TestApplication
 
             //Test rejoindrePartie
             PartieDto rejoindre = partieClient.RejoindrePartie(joueur2);
-            if (rejoindre!=null)
+            if (rejoindre != null)
                 Console.WriteLine("Rejoindre OK : " + joueur2);
             else
                 Console.WriteLine("Rejoindre KO");
             rejoindre = partieClient.RejoindrePartie(joueur3);
-            if (rejoindre!=null)
+            if (rejoindre != null)
                 Console.WriteLine("Rejoindre OK : " + joueur3);
             else
                 Console.WriteLine("Rejoindre KO");
 
 
 
-            //Test VoirPartie
-            List<PartieDto> list = partieClient.VoirPartie(joueur2).ToList();
 
-            for (int i = 0; i < list.Count; i++)
-            {
-                Console.WriteLine("Partie n° " + i + " : " + list.ElementAt(i).Nom);
-            }
 
             //Test lancerPartie + getJoueurDto
             PartieDto pDto = partieClient.LancerPartie();
             Console.WriteLine(pDto.Nom + " " + pDto.DateHeureCreation);
-            Console.WriteLine("ID du createur: " + partieDto.JoueurCourant.Id);
-            Console.WriteLine("Pseudo du createur: " + partieClient.getJoueurDto(partieDto.JoueurCourant.Id).Pseudo);
+            Console.WriteLine("ID : " + partieDto.JoueurCourant.Id);
+            Console.WriteLine("Pseudo : " + partieClient.getJoueurDto(partieDto.JoueurCourant.Id).Pseudo);
+
+            //Test next
+
+            //Affichage premier JoueurCourant
+            Console.WriteLine("Avant le next \n");
+            string nom=partieDto.JoueurCourant.Joueur.Pseudo;
+            int id= partieDto.JoueurCourant.Id;
+            int ordre= partieDto.JoueurCourant.OrdreJoueur;
+            Console.WriteLine("Pseudo : " + nom+"  ID JoueurPartieCourant : "+id+" Ordre de joueur : " +ordre);
+            Console.WriteLine("Apres le next => Joueur 2 \n");
+           JoueurPartieDto joueurSuivant= partieClient.next();
+            Console.WriteLine("Pseudo : " + joueurSuivant.Joueur.Pseudo + "  ID JoueurPartieCourant : " + joueurSuivant.Id+ " Ordre de joueur : "+joueurSuivant.OrdreJoueur );
+            Console.WriteLine("Apres le next => Joueur 3 \n");
+            joueurSuivant = partieClient.next();
+            Console.WriteLine("Pseudo : " + joueurSuivant.Joueur.Pseudo + "  ID JoueurPartieCourant : " + joueurSuivant.Id + " Ordre de joueur : " + joueurSuivant.OrdreJoueur);
+            Console.WriteLine("Apres le next => Joueur 1 \n");
+            joueurSuivant = partieClient.next();
+            Console.WriteLine("Pseudo : " + joueurSuivant.Joueur.Pseudo + "  ID JoueurPartieCourant : " + joueurSuivant.Id + " Ordre de joueur : " + joueurSuivant.OrdreJoueur);
+            Console.WriteLine("on joue la carte changement de sens et rejouez , le rejouez est géré dans le Front End\n");
+            //Changement de sens
+            partieClient.rejouerEtChangementDeSens(joueurSuivant.Id);
+
+            Console.WriteLine("Apres le next => Joueur 3 \n");
+            joueurSuivant = partieClient.next();
+            Console.WriteLine("Pseudo : " + joueurSuivant.Joueur.Pseudo + "  ID JoueurPartieCourant : " + joueurSuivant.Id + " Ordre de joueur : " + joueurSuivant.OrdreJoueur);
+
+            Console.WriteLine("Apres le next => Joueur 2 \n");
+            joueurSuivant = partieClient.next();
+            Console.WriteLine("Pseudo : " + joueurSuivant.Joueur.Pseudo + "  ID JoueurPartieCourant : " + joueurSuivant.Id + " Ordre de joueur : " + joueurSuivant.OrdreJoueur);
 
 
             Console.ReadLine();
         }
     }
-
 }

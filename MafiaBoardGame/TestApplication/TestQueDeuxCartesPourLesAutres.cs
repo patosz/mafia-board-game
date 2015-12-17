@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TestApplication
 {
-    public class TestDeBase
+   public class TestQueDeuxCartesPourLesAutres
     {
-        public TestDeBase()
+        public TestQueDeuxCartesPourLesAutres()
         {
             ServiceReference1.GestionJoueurClient joueurClient = new ServiceReference1.GestionJoueurClient();
             ServiceReference2.GestionPartieClient partieClient = new ServiceReference2.GestionPartieClient();
@@ -55,7 +55,7 @@ namespace TestApplication
                 Console.WriteLine("Joueur " + joueur3 + " connecté!");
 
 
-            
+
 
             //Test creerPartie
             PartieDto partieDto = partieClient.CreerPartie(partie, joueur1);
@@ -67,35 +67,72 @@ namespace TestApplication
 
             //Test rejoindrePartie
             PartieDto rejoindre = partieClient.RejoindrePartie(joueur2);
-            if (rejoindre!=null)
+            if (rejoindre != null)
                 Console.WriteLine("Rejoindre OK : " + joueur2);
             else
                 Console.WriteLine("Rejoindre KO");
             rejoindre = partieClient.RejoindrePartie(joueur3);
-            if (rejoindre!=null)
+            if (rejoindre != null)
                 Console.WriteLine("Rejoindre OK : " + joueur3);
             else
                 Console.WriteLine("Rejoindre KO");
 
 
 
-            //Test VoirPartie
-            List<PartieDto> list = partieClient.VoirPartie(joueur2).ToList();
 
-            for (int i = 0; i < list.Count; i++)
-            {
-                Console.WriteLine("Partie n° " + i + " : " + list.ElementAt(i).Nom);
-            }
 
             //Test lancerPartie + getJoueurDto
             PartieDto pDto = partieClient.LancerPartie();
             Console.WriteLine(pDto.Nom + " " + pDto.DateHeureCreation);
-            Console.WriteLine("ID du createur: " + partieDto.JoueurCourant.Id);
-            Console.WriteLine("Pseudo du createur: " + partieClient.getJoueurDto(partieDto.JoueurCourant.Id).Pseudo);
+            Console.WriteLine("ID : " + partieDto.JoueurCourant.Id);
+            Console.WriteLine("Pseudo : " + partieClient.getJoueurDto(partieDto.JoueurCourant.Id).Pseudo);
 
+            //Test lister Joueur une carte
+
+            Console.WriteLine("Le joueur 1 va joueur la carte qui oblige ses adversaire à ne garder que 2 cartes \n");
+            Console.WriteLine("Affichage des carte du joueur 2 \n");
+
+            int id2 = 2;
+            List<CarteDto> listeCarteDe = partieClient.getListCartesDto(id2);
+            int i = 1;
+            foreach (CarteDto carteDto in listeCarteDe)
+            {
+                Console.WriteLine("carte num " + i + ": " + " Id carte: " + carteDto.Id + " Valeur de la carte :" + carteDto.Effet);
+                i++;
+            }
+
+              Console.WriteLine("Affichage des carte du joueur 3 \n");
+
+            int id3 = 3;
+            List<CarteDto> listeCarteDe3 = partieClient.getListCartesDto(id3);
+             i = 1;
+            foreach (CarteDto carteDto in listeCarteDe3)
+            {
+                Console.WriteLine("carte num " + i + ": " + " Id carte: " + carteDto.Id + " Valeur de la carte :" + carteDto.Effet);
+                i++;
+            }
+            partieClient.plusQueDeuxCartesPourLesAutres(1);
+            listeCarteDe = partieClient.getListCartesDto(id2);
+            i = 1;
+
+            Console.WriteLine("Affichage des carte du joueur 2 apres la supression  \n");
+
+            foreach (CarteDto carteDto in listeCarteDe)
+            {
+                Console.WriteLine("carte num " + i + ": " + " Id carte: " + carteDto.Id + " Valeur de la carte :" + carteDto.Effet);
+                i++;
+            }
+            Console.WriteLine("Affichage des carte du joueur 3 apres la supression  \n");
+            listeCarteDe3 = partieClient.getListCartesDto(id3);
+            i = 1;
+            foreach (CarteDto carteDto in listeCarteDe3)
+            {
+                Console.WriteLine("carte num " + i + ": " + " Id carte: " + carteDto.Id + " Valeur de la carte :" + carteDto.Effet);
+                i++;
+            }
 
             Console.ReadLine();
+
         }
     }
-
 }

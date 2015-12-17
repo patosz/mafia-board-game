@@ -124,10 +124,10 @@ namespace UI.UccPartieRef {
         System.Threading.Tasks.Task supprimerDeuxDesAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroite", ReplyAction="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroiteResponse")]
-        void donnerDeAGaucheOuDroite();
+        void donnerDeAGaucheOuDroite(bool sens);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroite", ReplyAction="http://tempuri.org/IGestionPartie/donnerDeAGaucheOuDroiteResponse")]
-        System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync();
+        System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync(bool sens);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/rejouerEtChangementDeSens", ReplyAction="http://tempuri.org/IGestionPartie/rejouerEtChangementDeSensResponse")]
         void rejouerEtChangementDeSens(int IdJoueurPartie);
@@ -385,12 +385,12 @@ namespace UI.UccPartieRef {
             return base.Channel.supprimerDeuxDesAsync(IdJoueurPartie);
         }
         
-        public void donnerDeAGaucheOuDroite() {
-            base.Channel.donnerDeAGaucheOuDroite();
+        public void donnerDeAGaucheOuDroite(bool sens) {
+            base.Channel.donnerDeAGaucheOuDroite(sens);
         }
         
-        public System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync() {
-            return base.Channel.donnerDeAGaucheOuDroiteAsync();
+        public System.Threading.Tasks.Task donnerDeAGaucheOuDroiteAsync(bool sens) {
+            return base.Channel.donnerDeAGaucheOuDroiteAsync(sens);
         }
         
         public void rejouerEtChangementDeSens(int IdJoueurPartie) {
