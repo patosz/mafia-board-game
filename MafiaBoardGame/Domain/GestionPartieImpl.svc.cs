@@ -105,7 +105,7 @@ namespace Domain
                 return null;
             }
 
-            if (partie != null && (partie.etat == Partie.ETAT.EN_COURS || partie.etat == Partie.ETAT.TERMINE))
+            if (partie != null && (partie.etat == Partie.ETAT.EN_COURS || partie.etat == Partie.ETAT.TERMINE || partie.etat == Partie.ETAT.ANNULE))
             {
                 return null;
             }
@@ -334,7 +334,7 @@ namespace Domain
         }
 
 
-        public bool donnerDe(int IdJoueurPartie, int IdJoueurCible)
+        public bool donnerDe(int IdJoueurPartie, int IdJoueurCible) //Effet du de
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
             JoueurPartie joueurPartieCible = getJoueurPartie(IdJoueurCible);
@@ -370,16 +370,9 @@ namespace Domain
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
 
-            if (joueurPartie.DesMain.Count >= 2)
-            {
-                joueurPartie.DesMain.Remove(joueurPartie.DesMain.ElementAt(0));
-                joueurPartie.DesMain.Remove(joueurPartie.DesMain.ElementAt(1));
-            }
-            else
-            {
-                //TODO vainqueur
-            }
-
+            joueurPartie.DesMain.Remove(joueurPartie.DesMain.ElementAt(0));
+            joueurPartie.DesMain.Remove(joueurPartie.DesMain.ElementAt(1));
+            
 
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
 
@@ -387,7 +380,7 @@ namespace Domain
         }
 
         //TODO verifier persistence dans db
-        public void donnerDeAGaucheOuDroite()
+        public void donnerDeAGaucheOuDroite(bool sens)
         {
 
             List<JoueurPartie> listParticipants = partie.JoueursParticipants.ToList();
@@ -395,7 +388,7 @@ namespace Domain
             JoueurPartie joueurCourant = partie.JoueursParticipants.ElementAt(0);
             List<De> listDe = joueurCourant.DesMain.ToList();
 
-            if (partie.Sens)
+            if (sens)
             {
                 for (int i = 0; i < listParticipants.Count - 1; i++)
                 {
@@ -478,6 +471,8 @@ namespace Domain
         public void rejouerEtChangementDeSens(int IdJoueurPartie)
         {
             partie.Sens = !partie.Sens;
+            dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.SaveChanges();
         }
 
         public void prendreUneCarteDUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible)

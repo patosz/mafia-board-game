@@ -62,6 +62,10 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
     <Compile Include="TestDeBase.cs" />
+    <Compile Include="TestDonnerDeVainqueur.cs" />
+    <Compile Include="TestDonnerUnEtGouD.cs" />
+    <Compile Include="TestQuitterEtVainParFor.cs" />
+    <Compile Include="TestSupp1Ou2De.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
