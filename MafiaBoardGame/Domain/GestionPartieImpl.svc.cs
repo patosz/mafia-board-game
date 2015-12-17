@@ -1,4 +1,5 @@
-﻿using Domain.Dto;
+﻿
+using Domain.Dto;
 using Domain.Model;
 using Domain.Util;
 using System;
@@ -752,7 +753,15 @@ namespace Domain
             return state;
         }
 
-            
-        
+        public void annuler(int IdPartie)
+        {
+            Partie partie = (from Partie p in dbcontext.Parties
+                             where p.Id.Equals(IdPartie)
+                             select p).FirstOrDefault();
+            partie.etat = Partie.ETAT.ANNULE;
+            dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
+            dbcontext.SaveChanges();
+
+        }
     }
 }

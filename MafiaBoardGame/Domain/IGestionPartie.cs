@@ -102,5 +102,12 @@ namespace Domain
         [OperationContract]
         DeDto getDeDto(int IdDe);
 
+        [OperationContract]
+        void annuler(int IdPartie);
+
     }
+
+
+
+
 }

@@ -10,7 +10,7 @@ namespace Domain.Model
     public partial class Partie
     {
         
-        public enum ETAT { INSCRIPTION = 0, EN_COURS = 1, TERMINE = 2 };
+        public enum ETAT { INSCRIPTION = 0, EN_COURS = 1, TERMINE = 2, ANNULE = 3 };
         public ETAT etat { get; set; }
         public int nbCartesParJoueur
         {
