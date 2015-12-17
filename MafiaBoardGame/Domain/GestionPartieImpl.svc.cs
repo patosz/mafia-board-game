@@ -114,12 +114,20 @@ namespace Domain
             {
                 return null;
             }
-
+            Joueur joueur = (from Joueur j in dbcontext.Joueurs
+                             where j.Pseudo.Equals(pseudo)
+                             select j).FirstOrDefault();
+            List<JoueurPartie>list=partie.JoueursParticipants.ToList();
+            foreach (JoueurPartie jp in list)
+            {
+                if (jp.JoueurId == joueur.Id)
+                {
+                    return null;
+                }
+            }
             if (partie.etat == Partie.ETAT.INSCRIPTION)
             {
-                Joueur joueur = (from Joueur j in dbcontext.Joueurs
-                                 where j.Pseudo.Equals(pseudo)
-                                 select j).FirstOrDefault();
+                
                 JoueurPartie joueurPartie = new JoueurPartie();
                 joueurPartie.Partie = partie;
                 dbcontext.JoueurParties.Add(joueurPartie);
