@@ -730,18 +730,18 @@ namespace Domain
                         state.Cartes.Add(BizToDto.ToCarteDto(c));
                     }
 
-                    foreach(De d in jp.DesMain)
+                    foreach (De d in jp.DesMain)
                     {
                         state.Des.Add(BizToDto.ToDeDto(d));
                     }
 
-                    return state;
+         
                 }
             }
-
-
-
-            GameStateDto gameStateDto =
+            return state;
         }
+
+            
+        
     }
 }
