@@ -95,6 +95,7 @@
     <Compile Include="Dal\Parseur.cs" />
     <Compile Include="Dto\CarteDto.cs" />
     <Compile Include="Dto\DeDto.cs" />
+    <Compile Include="Dto\GameStateDto.cs" />
     <Compile Include="Dto\JoueurPartieDto.cs" />
     <Compile Include="Dto\PartieDto.cs" />
     <Compile Include="GestionJoueurImpl.svc.cs">

@@ -20,4 +20,18 @@ namespace Domain
         [DataMember]
         public string Mdp { get; set; }
     }
+
+
+    [DataContract]
+    public class JoueurStateDto
+    {
+        [DataMember]
+        public string Pseudo { get; set; }
+        [DataMember]
+        public int NbCartes { get; set; }
+        [DataMemberAttribute]
+        public int NbDes { get; set; }
+
+    }
+
 }
