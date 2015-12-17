@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Domain;
 using Domain.Dto;
+using UI.Models;
 
 namespace UI.Controllers
 {
@@ -31,12 +32,11 @@ namespace UI.Controllers
         public ActionResult Creer(string nomPartie)
         {
             string pseudo = ((JoueurDto)Session["user"]).Pseudo;
-            bool res = UccPartie.CreerPartie(nomPartie, pseudo);
-            if (res)
+            PartieDto part = UccPartie.CreerPartie(nomPartie, pseudo);
+            if (part != null)
             {
-                //TODO need méthode pour avoir le nom/id de la partie
-                //Session["partie"] = UccPartie.GetPartie();
-                return RedirectToAction("WaitForStart");
+                //TODO lancer timer
+                return RedirectToAction("WaitForStart", part);
             }
             else
             {
@@ -45,10 +45,20 @@ namespace UI.Controllers
             }
         }
 
-        public ViewResult WaitForStart()
+        public ViewResult WaitForStart(PartieDto partie)
         {
-            //TODO passer le nom de la partie à la vue
-            return View();
+            LoadScreenModel model = new LoadScreenModel();
+            model.Partie = partie;
+            List<JoueurPartieDto> participants = UccPartie.getListJoueurParticipantsDto(partie.Id).ToList();
+            foreach(JoueurPartieDto jp in participants){
+            model.Participants = ;
+            }
+            return View(model);
+        }
+
+        public PartialViewResult RefreshLoadScreen(PartieDto p)
+        {
+            return PartialView(UccPartie.getListJoueurParticipantsDto(p.Id).ToList());
         }
 
         public ActionResult Rejoindre(string pseudo)
@@ -57,8 +67,6 @@ namespace UI.Controllers
             bool res = UccPartie.RejoindrePartie(pseudo);
             if (res)
             {
-                //TODO need méthode pour avoir le nom/id de la partie
-                //Session["partie"] = UccPartie.GetPartie();
                 return RedirectToAction("WaitForStart");
             }
             else
