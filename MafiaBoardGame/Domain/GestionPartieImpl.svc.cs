@@ -30,7 +30,7 @@ namespace Domain
             throw new NotImplementedException();
         }
 
-        public string CreerPartie(String nomPartie, String nomJoueur)
+        public PartieDto CreerPartie(String nomPartie, String nomJoueur)
         {
 
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
@@ -75,7 +75,7 @@ namespace Domain
 
 
             }
-            return partie.Nom;
+            return BizToDto.ToPartieDto(partie);
         }
 
 
@@ -96,7 +96,7 @@ namespace Domain
         }
 
         //on donne quoi le string un objet??
-        public string RejoindrePartie(string pseudo)
+        public PartieDto RejoindrePartie(string pseudo)
         {
             //Pas de création!
             if (partie == null)
@@ -144,7 +144,7 @@ namespace Domain
 
             }
 
-            return partie.Nom;
+            return BizToDto.ToPartieDto(partie);
         }
 
         public List<PartieDto> VoirPartie(string pseudo)
