@@ -1,4 +1,7 @@
 ﻿@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+@{
     ViewBag.Title = "En attente des joueurs";
 }
 
@@ -8,7 +11,18 @@
     Nouvelle partie - @Model.Partie.Nom
 
 </h2>
+<div id="infos">
+    @{
+        Html.RenderPartial("RefreshLoadScreen", Model.Participants);
+    }
+</div>
 
-@{
-    Html.RenderPartial("RefreshLoadScreen", Model.Participants);
-}
+<script>
+    $(document).ready(function () {
+        setInterval(function () {
+            var html = $('#infos').get('/Partie/CheckPartieLancee');
+            if (html !== null || html !== 'undefined')
+                $('#infos').html(html);
+        }, 2000);
+    });
+</script>

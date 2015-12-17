@@ -182,6 +182,8 @@
     <Compile Include="Controllers\JoueurController.cs" />
     <Compile Include="Controllers\PartieController.cs" />
     <Compile Include="Controllers\PlateauController.cs" />
+    <Compile Include="Controllers\UCCJoueur.cs" />
+    <Compile Include="Controllers\UCCPartie.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

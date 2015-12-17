@@ -424,4 +424,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="annuler">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IdPartie" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="annulerResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

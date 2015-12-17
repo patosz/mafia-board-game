@@ -6,13 +6,12 @@ using System.Web.Mvc;
 using Domain;
 using Domain.Dto;
 using UI.Models;
+using System.Web.UI;
 
 namespace UI.Controllers
 {
     public class PartieController : Controller
     {
-        private UccPartieRef.GestionPartieClient UccPartie = new UccPartieRef.GestionPartieClient();
-        private UccJoueurRef.GestionJoueurClient UccJoueur = new UccJoueurRef.GestionJoueurClient();
 
         // GET: Partie
         public ActionResult Index(String pseudo)
@@ -32,10 +31,12 @@ namespace UI.Controllers
         public ActionResult Creer(string nomPartie)
         {
             string pseudo = ((JoueurDto)Session["user"]).Pseudo;
-            PartieDto part = UccPartie.CreerPartie(nomPartie, pseudo);
+            PartieDto part = UCCPartie.Instance.CreerPartie(nomPartie, pseudo);
             if (part != null)
             {
                 //TODO lancer timer
+
+                Session["partie"] = part.Id;
                 return RedirectToAction("WaitForStart", part);
             }
             else
@@ -49,29 +50,47 @@ namespace UI.Controllers
         {
             LoadScreenModel model = new LoadScreenModel();
             model.Partie = partie;
-            List<JoueurPartieDto> participants = UccPartie.getListJoueurParticipantsDto(partie.Id).ToList();
-            foreach(JoueurPartieDto jp in participants){
-            model.Participants = ;
-            }
+            model.Participants = UCCPartie.Instance.getListJoueurParticipantsDto(partie.Id).ToList();
             return View(model);
         }
 
-        public PartialViewResult RefreshLoadScreen(PartieDto p)
-        {
-            return PartialView(UccPartie.getListJoueurParticipantsDto(p.Id).ToList());
-        }
 
-        public ActionResult Rejoindre(string pseudo)
-        {
-            //TODO ajouter un param avec l'id de la partie à rejondre
-            bool res = UccPartie.RejoindrePartie(pseudo);
-            if (res)
+        public ActionResult CheckPartieLancee(){
+            JoueurDto jd = (JoueurDto)Session["user"];
+            GameStateDto gs = UCCPartie.Instance.getGameState(jd.Pseudo);
+            if (gs.Etat == 1)
             {
-                return RedirectToAction("WaitForStart");
+                return RedirectToAction("RefreshLoadScreen");
             }
             else
             {
-                TempData["error"] = "Un problème est servenu lors de la création de la partie";
+                return RedirectToAction("Index", new { controller = "Plateau"});
+            }
+        }
+
+
+        public PartialViewResult RefreshLoadScreen(List<JoueurPartieDto> liste)
+        {
+            if (liste == null)
+            {
+                int idPartie = (int)Session["partie"];
+                liste = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList();
+            }
+            return PartialView(liste);
+        }
+
+        public ActionResult Rejoindre()
+        {
+            JoueurDto j = (JoueurDto)Session["user"];
+            PartieDto p = UCCPartie.Instance.RejoindrePartie(j.Pseudo);
+            if (p != null)
+            {
+                Session["partie"] = p.Id;
+                return RedirectToAction("WaitForStart", p);
+            }
+            else
+            {
+                TempData["error"] = "Un problème est servenu lors de la tentative de rejoindre la partie";
                 return RedirectToAction("VoirPartiesDisponibles");
             }
         }
@@ -81,7 +100,7 @@ namespace UI.Controllers
         {
             JoueurDto j = (JoueurDto)Session["user"];
             List<PartieDto> parties = new List<PartieDto>();
-            //TODO recevoir une liste = UccJoueur.GetPartiesJouees(j.Pseudo);
+            //TODO recevoir une liste = UCCJoueur.Instance.GetPartiesJouees(j.Pseudo);
             return PartialView("VoirPartiesJouees", parties);
         }
 
@@ -89,7 +108,7 @@ namespace UI.Controllers
         {
             JoueurDto j = (JoueurDto)Session["user"];
             List<PartieDto> parties = new List<PartieDto>();
-            //TODO recevoir une  liste = UccJoueur.GetPartiesJouees(j.Pseudo);
+            //TODO recevoir une  liste = UCCJoueur.Instance.GetPartiesJouees(j.Pseudo);
             return PartialView("VoirPartiesDisponibles", parties);
         }
     }
