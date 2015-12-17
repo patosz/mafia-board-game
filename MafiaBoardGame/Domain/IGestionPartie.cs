@@ -97,6 +97,10 @@ namespace Domain
 
         [OperationContract]
         GameStateDto getGameState(string nomJoueur);
+        [OperationContract]
+        CarteDto getCarteDto(int IdCarte);
+        [OperationContract]
+        DeDto getDeDto(int IdDe);
 
     }
 }

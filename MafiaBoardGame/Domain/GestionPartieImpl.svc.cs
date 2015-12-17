@@ -279,7 +279,13 @@ namespace Domain
 
             return listDeDto;
         }
-
+        public DeDto getDeDto(int IdDe)
+        {
+            De de = (from De d in dbcontext.Des
+                           where d.Id.Equals(IdDe)
+                           select d).FirstOrDefault();
+            return BizToDto.ToDeDto(de);
+        }
         public List<CarteDto> getListCartesDto(int IdJoueurPartie)
         {
             List<CarteDto> listDeDto = new List<CarteDto>();
@@ -290,7 +296,13 @@ namespace Domain
             }
             return listDeDto;
         }
-
+        public CarteDto getCarteDto(int IdCarte)
+        {
+            Carte carte = (from Carte c in dbcontext.Cartes
+                                           where c.Id.Equals(IdCarte)
+                                           select c).FirstOrDefault();
+            return BizToDto.ToCarteDto(carte);
+        }
         public JoueurDto getJoueurDto(int IdJoueurPartie)
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
