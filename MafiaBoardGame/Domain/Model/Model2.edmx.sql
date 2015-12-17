@@ -93,7 +93,7 @@ GO
 -- Creating table 'Joueurs'
 CREATE TABLE [dbo].[Joueurs] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Pseudo] nvarchar(max)  NOT NULL,
+    [Pseudo] nvarchar(max)  UNIQUE NOT NULL,
     [Mdp] nvarchar(max)  NOT NULL
 );
 GO

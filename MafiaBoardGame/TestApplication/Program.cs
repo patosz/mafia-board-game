@@ -70,6 +70,8 @@ namespace TestApplication
                 Console.WriteLine("Partie crée correctement : " + partie + " par " + joueur1);
             else
                 Console.WriteLine("Echec création de partie");
+            //Test creerPartie
+           
 
             //Test rejoindrePartie
             bool rejoindre = partieClient.RejoindrePartie(joueur2);
@@ -83,11 +85,6 @@ namespace TestApplication
             else
                 Console.WriteLine("Rejoindre KO");
 
-            rejoindre = partieClient.RejoindrePartie(joueur4);
-            if (rejoindre)
-                Console.WriteLine("Rejoindre OK : " + joueur4);
-            else
-                Console.WriteLine("Rejoindre KO");
 
             //Test VoirPartie
             List<PartieDto> list = partieClient.VoirPartie(joueur2).ToList();
@@ -205,12 +202,23 @@ namespace TestApplication
             Console.WriteLine("Id joueur suivant : " + pjd.Id);
 
             //Quitter partie
-            partieClient.quitterPartie(4);
+            partieClient.quitterPartie(1);
             partieClient.supprimerUnDe(3);
             partieClient.supprimerUnDe(3);
             partieClient.supprimerUnDe(3);
             partieClient.supprimerUnDe(3);
             partieClient.vainqueur(3);
+
+
+            Console.WriteLine("Creer 2eme partie");
+
+            PartieDto partieDto1 = partieClient.CreerPartie(partie, joueur4);
+            if (partieDto != null)
+                Console.WriteLine("Partie crée correctement : " + partie + " par " + joueur4);
+            else
+                Console.WriteLine("Echec création de partie");
+
+            Console.WriteLine("Heure de creation : " + partieDto1.DateHeureCreation);
 
 
 
