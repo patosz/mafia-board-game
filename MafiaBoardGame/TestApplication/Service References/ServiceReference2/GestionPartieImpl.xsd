@@ -2,7 +2,6 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Domain.Dto" />
   <xs:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Domain" />
-  <xs:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:element name="CreerPartie">
     <xs:complexType>
       <xs:sequence>
@@ -298,24 +297,10 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="IdJoueurPartieCible" type="xs:int" />
-        <xs:element minOccurs="0" name="IdCarte" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ciblerJoueurQUUneCarteResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="passeSonTour">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="IdJoueurPartie" type="xs:int" />
-        <xs:element minOccurs="0" name="IdJoueurPartieCible" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="passeSonTourResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -336,7 +321,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="IdJoueurPartie" type="xs:int" />
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="dico" nillable="true" type="q12:ArrayOfKeyValueOfintArrayOfintty7Ep6D1" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -368,7 +352,7 @@
   <xs:element name="quitterPartieResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="quitterPartieResult" nillable="true" type="q13:JoueurPartieDto" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="quitterPartieResult" nillable="true" type="q12:JoueurPartieDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -380,7 +364,7 @@
   <xs:element name="vainqueurParForfaitResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="vainqueurParForfaitResult" nillable="true" type="q14:JoueurPartieDto" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="vainqueurParForfaitResult" nillable="true" type="q13:JoueurDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -394,7 +378,21 @@
   <xs:element name="vainqueurResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="vainqueurResult" nillable="true" type="q15:JoueurPartieDto" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="vainqueurResult" nillable="true" type="q14:JoueurDto" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getGameState">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="nomJoueur" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getGameStateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="getGameStateResult" nillable="true" type="q15:GameStateDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

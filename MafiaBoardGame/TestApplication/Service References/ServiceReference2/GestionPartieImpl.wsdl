@@ -6,7 +6,6 @@
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Domain.Dto" />
       <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Domain" />
-      <xsd:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IGestionPartie_CreerPartie_InputMessage">
@@ -147,12 +146,6 @@
   <wsdl:message name="IGestionPartie_ciblerJoueurQUUneCarte_OutputMessage">
     <wsdl:part name="parameters" element="tns:ciblerJoueurQUUneCarteResponse" />
   </wsdl:message>
-  <wsdl:message name="IGestionPartie_passeSonTour_InputMessage">
-    <wsdl:part name="parameters" element="tns:passeSonTour" />
-  </wsdl:message>
-  <wsdl:message name="IGestionPartie_passeSonTour_OutputMessage">
-    <wsdl:part name="parameters" element="tns:passeSonTourResponse" />
-  </wsdl:message>
   <wsdl:message name="IGestionPartie_piocheTroisCartes_InputMessage">
     <wsdl:part name="parameters" element="tns:piocheTroisCartes" />
   </wsdl:message>
@@ -188,6 +181,12 @@
   </wsdl:message>
   <wsdl:message name="IGestionPartie_vainqueur_OutputMessage">
     <wsdl:part name="parameters" element="tns:vainqueurResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_getGameState_InputMessage">
+    <wsdl:part name="parameters" element="tns:getGameState" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_getGameState_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getGameStateResponse" />
   </wsdl:message>
   <wsdl:portType name="IGestionPartie">
     <wsdl:operation name="CreerPartie">
@@ -282,10 +281,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarte" message="tns:IGestionPartie_ciblerJoueurQUUneCarte_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/ciblerJoueurQUUneCarteResponse" message="tns:IGestionPartie_ciblerJoueurQUUneCarte_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="passeSonTour">
-      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/passeSonTour" message="tns:IGestionPartie_passeSonTour_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/passeSonTourResponse" message="tns:IGestionPartie_passeSonTour_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="piocheTroisCartes">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/piocheTroisCartes" message="tns:IGestionPartie_piocheTroisCartes_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/piocheTroisCartesResponse" message="tns:IGestionPartie_piocheTroisCartes_OutputMessage" />
@@ -309,6 +304,10 @@
     <wsdl:operation name="vainqueur">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/vainqueur" message="tns:IGestionPartie_vainqueur_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/vainqueurResponse" message="tns:IGestionPartie_vainqueur_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getGameState">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/getGameState" message="tns:IGestionPartie_getGameState_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/getGameStateResponse" message="tns:IGestionPartie_getGameState_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGestionPartie" type="tns:IGestionPartie">
@@ -520,15 +519,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="passeSonTour">
-      <soap:operation soapAction="http://tempuri.org/IGestionPartie/passeSonTour" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="piocheTroisCartes">
       <soap:operation soapAction="http://tempuri.org/IGestionPartie/piocheTroisCartes" style="document" />
       <wsdl:input>
@@ -576,6 +566,15 @@
     </wsdl:operation>
     <wsdl:operation name="vainqueur">
       <soap:operation soapAction="http://tempuri.org/IGestionPartie/vainqueur" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getGameState">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/getGameState" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

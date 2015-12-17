@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/16/2015 15:45:58
+-- Date Created: 12/17/2015 11:29:31
 -- Generated from EDMX file: C:\Users\Giordano\Source\Repos\mafia-board-game\MafiaBoardGame\Domain\Model\Model2.edmx
 -- --------------------------------------------------
 
@@ -93,7 +93,7 @@ GO
 -- Creating table 'Joueurs'
 CREATE TABLE [dbo].[Joueurs] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Pseudo] nvarchar(max)  UNIQUE NOT NULL,
+    [Pseudo] nvarchar(max)  NOT NULL,
     [Mdp] nvarchar(max)  NOT NULL
 );
 GO

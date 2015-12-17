@@ -30,7 +30,7 @@ namespace Domain
             throw new NotImplementedException();
         }
 
-        public PartieDto CreerPartie(String nomPartie, String nomJoueur)
+        public string CreerPartie(String nomPartie, String nomJoueur)
         {
 
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
@@ -75,7 +75,7 @@ namespace Domain
 
 
             }
-            return BizToDto.ToPartieDto(partie);
+            return partie.Nom;
         }
 
 
@@ -96,22 +96,22 @@ namespace Domain
         }
 
         //on donne quoi le string un objet??
-        public bool RejoindrePartie(string pseudo)
+        public string RejoindrePartie(string pseudo)
         {
             //Pas de création!
             if (partie == null)
             {
-                return false;
+                return null;
             }
 
             if (partie != null && (partie.etat == Partie.ETAT.EN_COURS || partie.etat == Partie.ETAT.TERMINE))
             {
-                return false;
+                return null;
             }
 
             if (partie.maxJoueur <= partie.JoueursParticipants.Count)
             {
-                return false;
+                return null;
             }
 
             if (partie.etat == Partie.ETAT.INSCRIPTION)
@@ -144,7 +144,7 @@ namespace Domain
 
             }
 
-            return true;
+            return partie.Nom;
         }
 
         public List<PartieDto> VoirPartie(string pseudo)
@@ -412,6 +412,8 @@ namespace Domain
 
         public JoueurPartieDto next()
         {
+
+
             int ordreJoueur = partie.JoueurCourant.OrdreJoueur;
             int nbJoueur = partie.JoueursParticipants.Where(s => s.EnPartie == true).Count();
             JoueurPartie joueurPartie = null;
@@ -505,16 +507,20 @@ namespace Domain
             dbcontext.SaveChanges();
         }
 
-        public void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte)
+        public void ciblerJoueurQUUneCarte(int IdJoueurPartieCible)
         {
 
             JoueurPartie joueurPartieCible = getJoueurPartie(IdJoueurPartieCible);
 
             int nbCarte = joueurPartieCible.CartesMain.Count;
             List<Carte> list = joueurPartieCible.CartesMain.ToList();
+            Random random = new Random();
+
+            int rand = random.Next(list.Count);
+            Carte carte = list.ElementAt(rand);
             foreach (Carte c in list)
             {
-                if (c.Id == IdCarte)
+                if (c.Id == carte.Id)
                 {
                     continue;
                 }
@@ -536,52 +542,45 @@ namespace Domain
             }
         }
 
-        public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, Dictionary<int, List<int>> dico)
+        public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie)
         {
             List<JoueurPartie> listJoueurPartie = partie.JoueursParticipants.ToList();
-
+            Random random = new Random();
 
             foreach (JoueurPartie joueurPartie in listJoueurPartie)
             {
-                if (dico.ContainsKey(joueurPartie.Id))
+                if (joueurPartie.Id != IdJoueurPartie)
                 {
-
-
-                    int nombreCarteJoueur = joueurPartie.CartesMain.Count;
-                    List<int> list = dico[joueurPartie.Id];
+                    
+                    List<Carte> listCarte = joueurPartie.CartesMain.ToList();
+                    int nombreCarteJoueur = listCarte.Count;
                     if (nombreCarteJoueur <= 2)
                     {
                         continue;
                     }
-                    if (nombreCarteJoueur == 3)
+                    else if(nombreCarteJoueur == 3)
                     {
+                        int rand = random.Next(nombreCarteJoueur);
+                        Carte carte = listCarte.ElementAt(rand);
                         //enlever1
-                        for (int i = 0; i < nombreCarteJoueur; i++)
-                        {
-                            Carte carte = joueurPartie.CartesMain.ElementAt(i);
-                            if (carte.Id != list.ElementAt(0) && carte.Id != list.ElementAt(1))
-                            {
-                                jeterCartePoubelle(joueurPartie.Id, carte.Id);
-                                break;
-                            }
-                        }
-
+                        jeterCartePoubelle(joueurPartie.Id, carte.Id);
                     }
                     else
                     {
                         //enlever2ou+
-                        for (int i = 0; i < nombreCarteJoueur; i++)
+                        while (nombreCarteJoueur != 2)
                         {
-                            Carte carte = joueurPartie.CartesMain.ElementAt(i);
-                            if (carte.Id != list.ElementAt(0) && carte.Id != list.ElementAt(1))
-                            {
-                                jeterCartePoubelle(joueurPartie.Id, carte.Id);
-                            }
+                            int rand = random.Next(nombreCarteJoueur);
+                            Carte carte = listCarte.ElementAt(rand);
+                            jeterCartePoubelle(joueurPartie.Id, carte.Id);
+                            nombreCarteJoueur--;
                         }
+                       
                     }
 
-
                 }
+
+
             }
 
 
