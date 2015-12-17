@@ -53,6 +53,7 @@ namespace Domain.Model
             maxJoueur = dico["maxJoueurs"];
             nbParJoueur = dico["nbParJoueur"];
             nbTotalDes = dico["nbTotalDes"];
+          
             List<Carte> listeTypeCarte = parseur.loadCarte();
             Shuffle(listeTypeCarte);
 

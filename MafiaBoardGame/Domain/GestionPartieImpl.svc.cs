@@ -103,7 +103,7 @@ namespace Domain
             {
                 return false;
             }
-          
+
             if (partie != null && (partie.etat == Partie.ETAT.EN_COURS || partie.etat == Partie.ETAT.TERMINE))
             {
                 return false;
@@ -430,7 +430,7 @@ namespace Domain
                 {
                     ordreJoueur++;
                     joueurPartie = (from JoueurPartie jp in dbcontext.JoueurParties
-                                    where jp.OrdreJoueur.Equals(ordreJoueur) && jp.EnPartie==true
+                                    where jp.OrdreJoueur.Equals(ordreJoueur) && jp.EnPartie == true
                                     select jp).FirstOrDefault();
                 }
             }
@@ -618,7 +618,7 @@ namespace Domain
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
 
             int nbJoueurs = partie.JoueursParticipants.Where(s => s.EnPartie == true).Count();
-       
+
             //Si dernier
             if (joueurPartie.OrdreJoueur == nbJoueurs)
             {
@@ -632,8 +632,8 @@ namespace Domain
             {
                 for (int i = 0; i < nbJoueurs; i++)
                 {
-                    JoueurPartie  jp = partie.JoueursParticipants.ElementAt(i);
-                    partie.JoueursParticipants.ElementAt(i).OrdreJoueur = jp.OrdreJoueur- 1;
+                    JoueurPartie jp = partie.JoueursParticipants.ElementAt(i);
+                    partie.JoueursParticipants.ElementAt(i).OrdreJoueur = jp.OrdreJoueur - 1;
                     dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
                     dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
                     dbcontext.SaveChanges();
@@ -641,7 +641,7 @@ namespace Domain
                 joueurPartie.EnPartie = false;
                 joueurPartie.OrdreJoueur = 0;
                 dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
-                
+
                 dbcontext.SaveChanges();
             }
             //sinon milieu de list
@@ -665,7 +665,7 @@ namespace Domain
 
 
 
-            
+
 
             return BizToDto.ToJoueurPartieDto(joueurPartie);
 
@@ -679,8 +679,8 @@ namespace Domain
                 partie.etat = Partie.ETAT.TERMINE;
                 JoueurPartie joueurVainqueur = partie.JoueursParticipants.Where(s => s.EnPartie == true).FirstOrDefault();
                 Joueur joueur = (from Joueur jp in dbcontext.Joueurs
-                                   where jp.Id.Equals(joueurVainqueur.Id)
-                                   select jp).FirstOrDefault();
+                                 where jp.Id.Equals(joueurVainqueur.Id)
+                                 select jp).FirstOrDefault();
                 partie.Vainqueur = joueur;
                 dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
                 dbcontext.SaveChanges();
@@ -694,7 +694,7 @@ namespace Domain
         public JoueurDto vainqueur(int IdJoueurPartie)
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
-            
+
             if (joueurPartie.DesMain.Count == 0)
             {
                 partie.etat = Partie.ETAT.TERMINE;
@@ -708,5 +708,40 @@ namespace Domain
             }
             return null;
         }
+
+        public GameStateDto getGameState(string nomJoueur)
+        {
+
+            GameStateDto state = new GameStateDto();
+            state.Etat = (int)partie.etat;
+            state.JoueurCourant = partie.JoueurCourant.Joueur.Pseudo;
+
+            foreach (JoueurPartie jp in partie.JoueursParticipants)
+            {
+                JoueurStateDto js = new JoueurStateDto();
+                js.NbCartes = jp.CartesMain.Count;
+                js.NbDes = jp.DesMain.Count;
+                js.Pseudo = jp.Joueur.Pseudo;
+
+                if (js.Pseudo.Equals(nomJoueur))
+                {
+                    foreach (Carte c in jp.CartesMain)
+                    {
+                        state.Cartes.Add(BizToDto.ToCarteDto(c));
+                    }
+
+                    foreach (De d in jp.DesMain)
+                    {
+                        state.Des.Add(BizToDto.ToDeDto(d));
+                    }
+
+         
+                }
+            }
+            return state;
+        }
+
+            
+        
     }
 }
