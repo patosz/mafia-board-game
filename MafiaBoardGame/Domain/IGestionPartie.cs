@@ -14,9 +14,9 @@ namespace Domain
     public interface IGestionPartie
     {
         [OperationContract]
-        PartieDto CreerPartie(String nomPartie,String nomJoueur);
+        string CreerPartie(String nomPartie,String nomJoueur);
         [OperationContract]
-        bool RejoindrePartie(String pseudo);
+        string RejoindrePartie(String pseudo);
         [OperationContract]
         bool CommencerPartie();
         [OperationContract]
@@ -75,13 +75,13 @@ namespace Domain
         void donnerUnDeAUnJoueur(int IdJoueurPartie, int IdJoueurPartieCible);
 
         [OperationContract]
-        void ciblerJoueurQUUneCarte(int IdJoueurPartieCible, int IdCarte);
+        void ciblerJoueurQUUneCarte(int IdJoueurPartieCible);
 
         [OperationContract]
         void piocheTroisCartes(int IdJoueurPartie);
 
         [OperationContract]
-        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie, Dictionary<int, List<int>> dico);
+        void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
         [OperationContract]
         void jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
 

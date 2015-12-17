@@ -84,6 +84,11 @@ namespace TestApplication
                 Console.WriteLine("Rejoindre OK : " + joueur3);
             else
                 Console.WriteLine("Rejoindre KO");
+            rejoindre = partieClient.RejoindrePartie(joueur4);
+            if (rejoindre)
+                Console.WriteLine("Rejoindre OK : " + joueur4);
+            else
+                Console.WriteLine("Rejoindre KO");
 
 
             //Test VoirPartie
@@ -109,7 +114,7 @@ namespace TestApplication
                 Console.WriteLine("Carte ID : " + listeCarte.ElementAt(i).Id + ", effet : " + listeCarte.ElementAt(i).Effet+", cout : "+ listeCarte.ElementAt(i).Cout);
             }
 
-
+            /*
             //Test LancerDe
             //TODO regarder le random au niveau des des (classe PartielDe)
             List<DeDto> listeDe = partieClient.lancerDes(partieDto.JoueurCourant.Id).ToList();
@@ -199,18 +204,18 @@ namespace TestApplication
             JoueurPartieDto pjd = partieClient.next();
             Console.WriteLine("Id joueur : "+pjd.Id);
             pjd = partieClient.next();
-            Console.WriteLine("Id joueur suivant : " + pjd.Id);
+            Console.WriteLine("Id joueur suivant : " + pjd.Id);*/
 
             //Quitter partie
-            partieClient.quitterPartie(1);
+            /*partieClient.quitterPartie(1);
             partieClient.supprimerUnDe(3);
             partieClient.supprimerUnDe(3);
             partieClient.supprimerUnDe(3);
             partieClient.supprimerUnDe(3);
-            partieClient.vainqueur(3);
+            partieClient.vainqueur(3);*/
 
 
-            Console.WriteLine("Creer 2eme partie");
+            /*Console.WriteLine("Creer 2eme partie");
 
             PartieDto partieDto1 = partieClient.CreerPartie(partie, joueur4);
             if (partieDto != null)
@@ -218,9 +223,9 @@ namespace TestApplication
             else
                 Console.WriteLine("Echec création de partie");
 
-            Console.WriteLine("Heure de creation : " + partieDto1.DateHeureCreation);
+            Console.WriteLine("Heure de creation : " + partieDto1.DateHeureCreation);*/
 
-
+            partieClient.plusQueDeuxCartesPourLesAutres(1);
 
 
 
