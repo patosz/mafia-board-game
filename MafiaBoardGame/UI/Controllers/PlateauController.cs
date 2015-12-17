@@ -37,7 +37,7 @@ namespace UI.Controllers
             {
                 case 1:
                     //Supprimer 1 des
-                    partie.supprimerUnDe
+
                     break;
                 case 2:
                     //Donner des gauche ou droite
