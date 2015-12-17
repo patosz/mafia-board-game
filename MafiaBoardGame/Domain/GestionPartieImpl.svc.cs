@@ -21,11 +21,12 @@ namespace Domain
 
         private static ModelContainer dbcontext;
         private Partie partie;
-        private PartieDto partieDto;
+
         public GestionPartieImpl()
         {
             dbcontext = new ModelContainer();
         }
+
         public bool CommencerPartie()
         {
             throw new NotImplementedException();

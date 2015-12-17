@@ -1,10 +1,11 @@
-﻿using Domain;
+﻿using Domain.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using UI.Controllers;
+using UI.Models;
 
 namespace UI.Controllers
 {
@@ -40,10 +41,8 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        //TODO modifier pour correspondre à la situation actuelle
-        public ActionResult Register(JoueurDto j)
+        public ActionResult Register(UserModel j)
         {
-
             bool res = UCCJoueur.Instance.InscriptionJoueur(j.Pseudo, j.Mdp);
             if (!res)
             {

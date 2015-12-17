@@ -17,10 +17,10 @@ namespace Domain.Util
             partieDto.DateHeureCreation = partie.DateHeureCreation;
             partieDto.Sens = partie.Sens;
             partieDto.JoueurCourant = BizToDto.ToJoueurPartieDto(partie.JoueurCourant);
-           // partieDto.CartesPioche = BizToDto.ToCarteDtoList(partie.CartesPioche.ToList());
-          //  partieDto.JoueurCourant = BizToDto.ToJoueurPartieDto(partie.JoueurCourant);
-          //  partieDto.JoueursParticipants = partie.JoueursParticipants;
-          //  partieDto.Vainqueur = partie.Vainqueur.to
+            // partieDto.CartesPioche = BizToDto.ToCarteDtoList(partie.CartesPioche.ToList());
+            //  partieDto.JoueurCourant = BizToDto.ToJoueurPartieDto(partie.JoueurCourant);
+            //  partieDto.JoueursParticipants = partie.JoueursParticipants;
+            //  partieDto.Vainqueur = partie.Vainqueur.to
             return partieDto;
         }
         //Peut-etre dans Util?
@@ -44,7 +44,7 @@ namespace Domain.Util
             carteDto.Cout = carte.Cout;
             carteDto.Effet = carte.Effet;
             carteDto.EffetComplet = carte.EffetComplet;
-            
+
 
             return carteDto;
         }
@@ -64,8 +64,6 @@ namespace Domain.Util
             JoueurDto joueurDto = new JoueurDto();
             joueurDto.Id = joueur.Id;
             joueurDto.Pseudo = joueur.Pseudo;
-            joueurDto.Mdp = joueur.Mdp;
-
 
             return joueurDto;
         }

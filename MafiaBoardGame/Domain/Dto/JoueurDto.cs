@@ -17,8 +17,6 @@ namespace Domain.Dto
         public int Id { get; set; }
         [DataMember]
         public string Pseudo { get; set; }
-        [DataMember]
-        public string Mdp { get; set; }
     }
 
 
