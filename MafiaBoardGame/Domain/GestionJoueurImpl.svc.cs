@@ -1,5 +1,6 @@
 ﻿using Domain.Model;
 using Domain.Util;
+using Domain.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

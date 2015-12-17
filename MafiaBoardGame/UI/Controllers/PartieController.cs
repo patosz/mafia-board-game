@@ -58,13 +58,13 @@ namespace UI.Controllers
         public ActionResult CheckPartieLancee(){
             JoueurDto jd = (JoueurDto)Session["user"];
             GameStateDto gs = UCCPartie.Instance.getGameState(jd.Pseudo);
-            if (gs.Etat == 1)
+            if (gs.Etat == )
             {
                 return RedirectToAction("RefreshLoadScreen");
             }
             else
             {
-                return RedirectToAction("Index", new { controller = "Plateau"});
+                return RedirectToAction("Index", "Plateau");
             }
         }
 
