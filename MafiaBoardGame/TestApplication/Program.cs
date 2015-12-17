@@ -14,7 +14,7 @@ namespace TestApplication
     {
         static void Main(string[] args)
         {
-            //TestDeBase testDeBase = new TestDeBase();
+            TestDeBase testDeBase = new TestDeBase();
             //TestSupp1Ou2De testSupp1Ou2De = new TestSupp1Ou2De();
             //TestDonnerUnEtGouD testDonnerDe = new TestDonnerUnEtGouD();
             //TestQuitterEtVainParFor testQuitterEtVain = new TestQuitterEtVainParFor();

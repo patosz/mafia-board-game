@@ -58,11 +58,31 @@ namespace Domain
                 joueurPartie.Partie = partie;
 
                 joueurPartie.Joueur = joueur;
-                dbcontext.JoueurParties.Add(joueurPartie);
-                dbcontext.Parties.Add(partie);
-                dbcontext.SaveChanges();
+                IQueryable<Carte> listeCarte = (from Carte c in dbcontext.Cartes
+                                         select c);
+                if (listeCarte.Count() == 0)
+                {
+                    dbcontext.JoueurParties.Add(joueurPartie);
+                    dbcontext.Parties.Add(partie);
+                    dbcontext.SaveChanges();
+                }
+                else
+                {
+                    List<Carte> listeC = new List<Carte>();
+                    foreach (Carte c in listeCarte)
+                    {
+                        listeC.Add(c);
+                    }
+                    partie.CartesPioche = listeC;
+                    dbcontext.JoueurParties.Add(joueurPartie);
+                    dbcontext.Parties.Add(partie);
+                    dbcontext.SaveChanges();
+                }
+                
+
                 joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
 
+                //TODO
                 partie.JoueurCourant = joueurPartie;
                 dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
                 dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
@@ -185,7 +205,13 @@ namespace Domain
         {
             List<JoueurPartie> listeJoueurPartie = partie.JoueursParticipants.ToList();
             partie.etat = Partie.ETAT.EN_COURS;
-            for (int i = 0; i < listeJoueurPartie.Count; i++)
+            int nombreDeJoueur = listeJoueurPartie.Count;
+            Random random = new Random();
+
+            int rand = random.Next(nombreDeJoueur);
+            partie.JoueurCourant = listeJoueurPartie.ElementAt(rand);
+
+            for (int i = 0; i < nombreDeJoueur; i++)
             {
                 JoueurPartie joueurPartie = listeJoueurPartie.ElementAt(i);
                 //recupere le nombre de carte

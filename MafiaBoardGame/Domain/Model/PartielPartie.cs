@@ -9,7 +9,7 @@ namespace Domain.Model
 {
     public partial class Partie
     {
-        
+
         public enum ETAT { INSCRIPTION = 0, EN_COURS = 1, TERMINE = 2, ANNULE = 3 };
         public ETAT etat { get; set; }
         public int nbCartesParJoueur
@@ -36,9 +36,7 @@ namespace Domain.Model
         private static Random rng = new Random();
         //ajout du parametre String nom
         public Partie(String nom)
-        {
-            // ligne du contructeur généré
-            
+        {            
             this.JoueursParticipants = new HashSet<JoueurPartie>();
             this.CartesPoubelle = new List<Carte>();
             this.CartesPioche = new List<Carte>();
@@ -53,6 +51,7 @@ namespace Domain.Model
             maxJoueur = dico["maxJoueurs"];
             nbParJoueur = dico["nbParJoueur"];
             nbTotalDes = dico["nbTotalDes"];
+            
           
             List<Carte> listeTypeCarte = parseur.loadCarte();
             Shuffle(listeTypeCarte);
