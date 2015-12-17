@@ -61,7 +61,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="TestCiblerJoueurUneCarte.cs" />
     <Compile Include="TestDeBase.cs" />
+    <Compile Include="TestNextEtQuitter.cs" />
+    <Compile Include="TestNextRejouezChangeSens.cs" />
+    <Compile Include="TestPiocher.cs" />
+    <Compile Include="TestPrendreUneCarteAUnJoueur.cs" />
+    <Compile Include="TestQueDeuxCartesPourLesAutres.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
