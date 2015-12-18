@@ -729,7 +729,7 @@ namespace Domain
         {
 
             GameStateDto state = new GameStateDto();
-            state.Etat = (int)partie.etat;
+            state.Etat = partie.etat;
             state.JoueurCourant = partie.JoueurCourant.Joueur.Pseudo;
 
             foreach (JoueurPartie jp in partie.JoueursParticipants)

@@ -3,7 +3,6 @@
 <h3>
     Joueurs inscrits :
 </h3>
-<h4>
     <ul>
         @foreach (var jp in Model)
         {
@@ -12,5 +11,6 @@
     </ul>
 
     En attente d'autres joueurs...
-</h4>
 
+
+<i id="status" style="display:none" data-status="@ViewBag.status"></i>

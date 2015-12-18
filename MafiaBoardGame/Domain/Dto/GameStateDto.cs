@@ -9,19 +9,19 @@ namespace Domain.Dto
     [DataContract]
     public class GameStateDto
     {
-        [DataMemberAttribute]
+        [DataMember]
         public string JoueurCourant;
-        [DataMemberAttribute]
+        [DataMember]
         public List<JoueurStateDto> Adversaires;
 
-        [DataMemberAttribute]
+        [DataMember]
         public List<CarteDto> Cartes;
 
-        [DataMemberAttribute]
+        [DataMember]
         public List<DeDto> Des;
         
-        [DataMemberAttribute]
-        public int Etat;
+        [DataMember]
+        public ETAT_PARTIE Etat;
 
     }
 }

@@ -14,8 +14,11 @@ namespace UI.Controllers
         // GET: Plateau
         public ActionResult Index(string nomPartie = "Partie aléatoire")
         {
+            //UCCPartie.Instance.getGameState(jdt.Pseudo);
             JoueurDto jdt = (JoueurDto)Session["user"];
-            GameStateDto gs = UCCPartie.Instance.getGameState(jdt.Pseudo);
+            GameStateDto gs = new GameStateDto();
+            //UCCPartie.Instance.getListJoueurParticipantsDto();
+                
 
             //TODO ajouter système check partie invalide demandée
 
@@ -29,6 +32,11 @@ namespace UI.Controllers
         {
             ViewData["partie"] = nomPartie;
             
+            return View();
+        }
+
+        public ViewResult IndexTemplate()
+        {
             return View();
         }
 

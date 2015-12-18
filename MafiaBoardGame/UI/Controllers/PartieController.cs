@@ -17,7 +17,6 @@ namespace UI.Controllers
         private readonly int LANCER_PARTIE_TIMER_INTERVAL = 15000;
 
         //infos timer : https://msdn.microsoft.com/en-us/library/system.timers.timer.elapsed%28v=vs.110%29.aspx
-        private static Timer timerLancerPartie;
 
 
         //signature spécifique pour correspondre au delegate du ElapsedEventHandler
@@ -48,16 +47,6 @@ namespace UI.Controllers
             PartieDto part = UCCPartie.Instance.CreerPartie(nomPartie, pseudo);
             if (part != null)
             {
-                timerLancerPartie = new Timer();
-                //ajouter une intervalle
-                timerLancerPartie.Interval = LANCER_PARTIE_TIMER_INTERVAL;
-                //ajouter une fonction quand l'intervalle s'écoule
-                timerLancerPartie.Tick += TimerLancerPartieEcoule;
-                //démarrer le timer
-                timerLancerPartie.Enabled = true;
-                //empecher le garbage collector de supprimer le timer avant sa fin !!!
-                GC.KeepAlive(timerLancerPartie);
-
                 Session["partie"] = part.Id;
                 Session.Add("partieCreation", DateTime.Now);
                 return RedirectToAction("WaitForStart", part);
@@ -69,26 +58,27 @@ namespace UI.Controllers
             }
         }
 
-        public ActionResult LancerPartie()
+        public void LancerPartie()
         {
-            timerLancerPartie.Enabled = false;
             int idPartie = (int)Session["partie"];
             int NbJoueurs = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).Length;
             if (NbJoueurs == 1)
             {
                 UCCPartie.Instance.annuler(idPartie);
                 TempData["error"] = "Pas assez de joueurs. Partie annulée.";
-                return RedirectToAction("Creer");
+                RedirectToAction("Index");
+                return;
             }
 
             PartieDto p = UCCPartie.Instance.LancerPartie();
             if (p == null)
             {
                 TempData["error"] = "Un problème est servenu lors du lancement de la partie";
-                return RedirectToAction("Creer");
+                RedirectToAction("Index");
+                return;
             }
 
-            return RedirectToAction("Index", "Plateau", p.Nom);
+            //return RedirectToAction("Index", "Plateau", p.Nom);
         }
 
         public ViewResult WaitForStart(PartieDto partie)
@@ -100,28 +90,28 @@ namespace UI.Controllers
         }
 
 
-        public ActionResult CheckPartieLancee()
+        public PartialViewResult RefreshLoadScreen()
         {
-
+            string status = "inscription";
+            int idPartie = (int)Session["partie"];
             if (Session["partieCreation"] != null)
             {
                 DateTime partieCreation = (DateTime)Session["partieCreation"];
                 TimeSpan ts = DateTime.Now.Subtract(partieCreation);
                 if (ts.TotalSeconds >= 15)
                 {
-                    return null;
+                    LancerPartie();
+                    status = "coucou";
+                }
+            }
+            else {
+                if (UCCPartie.Instance.getGameState(((JoueurDto)Session["user"]).Pseudo).Etat != (int)ETAT_PARTIE.INSCRIPTION)
+                {
+                    status = "plateau";
                 }
             }
 
-            JoueurDto jd = (JoueurDto)Session["user"];
-            GameStateDto gs = UCCPartie.Instance.getGameState(jd.Pseudo);
-            return RedirectToAction("RefreshLoadScreen");
-        }
-
-
-        public PartialViewResult RefreshLoadScreen()
-        {
-            int idPartie = (int)Session["partie"];
+            ViewBag.status = status;
             return PartialView(UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList());
         }
 

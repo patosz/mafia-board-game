@@ -20,12 +20,17 @@
 <script>
     $(document).ready(function () {
         setInterval(function () {
-            var myhtml = $('#infos').load('/Partie/RefreshLoadScreen');
-            if (myhtml === null || myhtml === 'undefined') {
-                location.href('/Plateau/Index');
-            } else {
-                $('#infos').html(myhtml);
-            }
+            $('#infos').load('/Partie/RefreshLoadScreen');
+            
+            /*
+            if ($('#infos').children().length == 0)
+                window.location.replace("http://"+window.location.hostname+":50359/Partie/LancerPartie");
+            */
+
+            //$('#infos').html(myhtml);
+            var status = $('#status').attr('data-status');
+            if(status !== "inscription")
+                location.href = '/Plateau/IndexTemplate';
 
         }, 2000);
     });
