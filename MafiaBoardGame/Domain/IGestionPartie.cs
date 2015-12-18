@@ -78,7 +78,7 @@ namespace Domain
         void ciblerJoueurQUUneCarte(int IdJoueurPartieCible);
 
         [OperationContract]
-        void piocheTroisCartes(int IdJoueurPartie);
+        List<CarteDto> piocheTroisCartes(int IdJoueurPartie);
 
         [OperationContract]
         void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);

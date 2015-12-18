@@ -571,12 +571,15 @@ namespace Domain
         }
 
 
-        public void piocheTroisCartes(int IdJoueurPartie)
+        public List<CarteDto> piocheTroisCartes(int IdJoueurPartie)
         {
+            List<CarteDto> list = new List<CarteDto>();
             for (int i = 0; i < 3; i++)
             {
-                piocherCarte(IdJoueurPartie);
+                CarteDto carteDto  = piocherCarte(IdJoueurPartie);
+                list.Add(carteDto);
             }
+            return list;
         }
 
         public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie)
