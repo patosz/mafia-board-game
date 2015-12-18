@@ -105,6 +105,9 @@ namespace Domain
         [OperationContract]
         void annuler(int IdPartie);
 
+        [OperationContract]
+        PartieDto getPartieDto(int IdPartie);
+
     }
 
 

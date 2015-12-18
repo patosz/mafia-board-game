@@ -791,5 +791,15 @@ namespace Domain
             dbcontext.SaveChanges();
 
         }
+
+
+        public PartieDto getPartieDto(int IdPartie)
+        {
+            Partie partie = (from Partie p in dbcontext.Parties
+                             where p.Id.Equals(IdPartie)
+                             select p).FirstOrDefault();
+            return BizToDto.ToPartieDto(partie);
+
+        }
     }
 }
