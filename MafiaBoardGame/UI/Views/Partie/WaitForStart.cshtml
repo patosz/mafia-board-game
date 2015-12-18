@@ -14,7 +14,7 @@
 </h2>
 <div id="infos">
     @{
-    Html.RenderPartial("RefreshLoadScreen", Model.Participants);
+        Html.RenderPartial("RefreshLoadScreen", Model.Participants);
     }
 </div>
 
@@ -23,14 +23,16 @@
         setInterval(function () {
             $.ajax({
                 url: '/Partie/RefreshLoadScreen',
-                type : 'GET'
+                type: 'GET'
             });
 
             //$('#infos').load('/Partie/RefreshLoadScreen');
             //var status = $('#status').attr('data-status');
-            //if(status !== "inscription")
-             //   location.href = '/Plateau/Index';
+            if (status !== "go")
+                alert("Status différent de go");
+            else
+                location.href = '/Plateau/Index';
 
-        }, 2000);
+        }, 3000);
     });
 </script>

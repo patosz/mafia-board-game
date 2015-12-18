@@ -15,7 +15,7 @@ namespace UI.Controllers
     public class PartieController : Controller
     {
         private readonly int LANCER_PARTIE_TIMER_INTERVAL = 15;
-
+        string status;
         //infos timer : https://msdn.microsoft.com/en-us/library/system.timers.timer.elapsed%28v=vs.110%29.aspx
 
 
@@ -69,14 +69,22 @@ namespace UI.Controllers
                 RedirectToAction("Index");
                 return;
             }*/
-
-            PartieDto p = UCCPartie.Instance.LancerPartie();
-            if (p == null)
+            PartieDto p;
+            if (NbJoueurs > 1)
             {
-                TempData["error"] = "Un problème est servenu lors du lancement de la partie";
-                RedirectToAction("Index");
+                p = UCCPartie.Instance.LancerPartie();
+                if (p == null)
+                    status = "inscription";
+                else
+                    status = "go";
                 return;
             }
+            /*  if (p == null)
+              {
+                  TempData["error"] = "Un problème est servenu lors du lancement de la partie";
+                  RedirectToAction("Index");
+                  return;
+              }*/
 
             //return RedirectToAction("Index", "Plateau", p.Nom);
         }
@@ -92,24 +100,23 @@ namespace UI.Controllers
 
         public PartialViewResult RefreshLoadScreen()
         {
-            string status = "inscription";
+            
             int idPartie = (int)Session["partie"];
-            if (Session["partieCreation"] != null)
-            {
-                DateTime partieCreation = (DateTime)Session["partieCreation"];
-                TimeSpan ts = DateTime.Now.Subtract(partieCreation);
-                if (ts.TotalSeconds >= LANCER_PARTIE_TIMER_INTERVAL)
-                {
-                    LancerPartie();
-                    status = "coucou";
-                }
-            }
-           /* else {
-                if (UCCPartie.Instance.getGameState(((JoueurDto)Session["user"]).Pseudo).Etat != (int)ETAT_PARTIE.INSCRIPTION)
-                {
-                    status = "plateau";
-                }
-            }*/
+            //if (Session["partieCreation"] != null)
+            //{
+            DateTime partieCreation = (DateTime)Session["partieCreation"];
+            TimeSpan ts = DateTime.Now.Subtract(partieCreation);
+            string status = "inscription";
+            LancerPartie();
+            //status = "coucou";
+
+            //   }
+            /* else {
+                 if (UCCPartie.Instance.getGameState(((JoueurDto)Session["user"]).Pseudo).Etat != (int)ETAT_PARTIE.INSCRIPTION)
+                 {
+                     status = "plateau";
+                 }
+             }*/
 
             ViewBag.status = status;
             return PartialView(UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList());
