@@ -83,7 +83,7 @@ namespace Domain
         [OperationContract]
         void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
         [OperationContract]
-        void jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
+        CarteDto jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
 
         [OperationContract]
         JoueurPartieDto quitterPartie(int IdJoueurPartie);

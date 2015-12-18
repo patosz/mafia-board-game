@@ -623,7 +623,7 @@ namespace Domain
 
         }
 
-        public void jeterCartePoubelle(int IdJoueurPartie, int IdCarte)
+        public CarteDto jeterCartePoubelle(int IdJoueurPartie, int IdCarte)
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
 
@@ -638,6 +638,7 @@ namespace Domain
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.SaveChanges();
+            return BizToDto.ToCarteDto(carte);
 
         }
 

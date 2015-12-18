@@ -27,7 +27,7 @@ namespace Domain.Dto
         public string Pseudo { get; set; }
         [DataMember]
         public int NbCartes { get; set; }
-        [DataMemberAttribute]
+        [DataMember]
         public int NbDes { get; set; }
 
     }
