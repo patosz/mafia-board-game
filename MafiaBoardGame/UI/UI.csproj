@@ -182,7 +182,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdversaireModel.cs" />
     <Compile Include="Models\LoadScreenModel.cs" />
+    <Compile Include="Models\ModelPlateau.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\UccJoueurRef\Reference.cs">

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Domain.Dto;
 using System.Web.Services;
+using UI.Models;
 using Newtonsoft.Json;
 
 namespace UI.Controllers
@@ -16,9 +17,35 @@ namespace UI.Controllers
         {
             //UCCPartie.Instance.getGameState(jdt.Pseudo);
             JoueurDto jdt = (JoueurDto)Session["user"];
-            GameStateDto gs = new GameStateDto();
-            //UCCPartie.Instance.getListJoueurParticipantsDto();
-                
+            int idPartie = (int)Session["partie"];
+
+            List<JoueurPartieDto> participants = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList();
+
+            JoueurPartieDto jp = participants.First();
+
+            ModelPlateau plateau = new ModelPlateau();
+            PartieDto p = UCCPartie.Instance.getPartiedto(idPartie);
+
+
+            plateau.Etat =;
+            plateau.DerniereCarteJouee;
+            plateau.Adversaires;
+            plateau.JoueurCourant;
+            plateau.MesCartes;
+            plateau.MesDes;
+        
+            //defausse          - OK
+            //acces a la pioche - OK
+            //des joueurCourant - OK
+            
+            //joueursParticipants
+            ////nbCartes adversaire
+            ////nbDes adversaire
+
+
+
+
+
 
             //TODO ajouter système check partie invalide demandée
 
