@@ -108,6 +108,9 @@ namespace Domain
         [OperationContract]
         PartieDto getPartieDto(int IdPartie);
 
+        [OperationContract]
+        CarteDto getLastCartePoubelle();
+
     }
 
 

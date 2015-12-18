@@ -801,5 +801,11 @@ namespace Domain
             return BizToDto.ToPartieDto(partie);
 
         }
+
+
+        public CarteDto getLastCartePoubelle()
+        {
+            return BizToDto.ToCarteDto(partie.CartesPoubelle.Last());
+        }
     }
 }
