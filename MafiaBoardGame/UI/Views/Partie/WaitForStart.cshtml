@@ -9,10 +9,9 @@
 @model UI.Models.LoadScreenModel
 
 <h2>
-    Nouvelle partie - @Model.Partie.Nom
+    Nouvelle partie - @Model.Partie.Nom - @(TempData["statut"])
 
 </h2>
-<p>@ViewBag.status</p>
 <div id="infos">
     @{
         Html.RenderPartial("RefreshLoadScreen", Model.Participants);
@@ -21,21 +20,21 @@
 
 <script>
     $(document).ready(function () {
-        setTimeout(function () {
-            $.ajax({
-                url: '/Partie/RefreshLoadScreen',
-                type: 'GET'
-            });
+        setInterval(function () {
+           // $.ajax({
+             //   url: '/Partie/RefreshLoadScreen',
+               // type: 'GET'
+            //});
 
-            //$('#infos').load('/Partie/RefreshLoadScreen');
-            //var status = $('#status').attr('data-status');
-            var ha = $("#status").attr('data-status');
-
-            if (ha !== "go")
-                alert(status.toString() + "");
+            $('#infos').load('/Partie/RefreshLoadScreen');
+            var status = $('#status').attr('data-status');
+           
+           // var donnee = @(TempData["statut"]);
+            if (status !== "go")
+                alert("status different de go");
             else
                 location.href = '/Plateau/Index';
 
-        }, 4000);
+        }, 10000);
     });
 </script>

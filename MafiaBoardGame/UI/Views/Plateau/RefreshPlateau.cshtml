@@ -80,7 +80,7 @@
                 <div class="well vos-des col-lg-4">
                     @foreach (var d in Model.MesDes)
                     {
-                        var de = @d.Valeur;
+                        
                         <img src="~/Images/de_wazabi.svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur" />
                     }
                 </div>
@@ -103,7 +103,7 @@
                                         var c = Model.MesCartes[j];
 
                                         <div class="col-sm-3">
-                                            <img src="~/Images/dos_carte\" @c.CodeEffet \".svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                                            <img src="~/Images/carte_+@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
                                                  data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" class="img-responsive carte-en-main" />
                                         </div>
                                     }
@@ -125,7 +125,7 @@
                                             var c = Model.MesCartes[(i * 4) + j];
 
                                             <div class="col-sm-3">
-                                                <img src="~/Images/dos_carte.svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                                                <img src="~/Images/carte_+(@c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
                                                      data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" class="img-responsive carte-en-main" />
                                             </div>
                                         }
