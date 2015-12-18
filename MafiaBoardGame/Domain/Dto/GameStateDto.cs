@@ -9,6 +9,15 @@ namespace Domain.Dto
     [DataContract]
     public class GameStateDto
     {
+
+        public GameStateDto()
+        {
+            Adversaires = new List<JoueurStateDto>();
+            Cartes = new List<CarteDto>();
+            Des = new List<DeDto>();
+
+        }
+
         [DataMember]
         public string JoueurCourant;
         [DataMember]
@@ -24,4 +33,8 @@ namespace Domain.Dto
         public ETAT_PARTIE Etat;
 
     }
+
+    
+
+
 }

@@ -21,10 +21,15 @@
 <script>
     $(document).ready(function () {
         setInterval(function () {
-            $('#infos').load('/Partie/RefreshLoadScreen');
-            var status = $('#status').attr('data-status');
-            if(status !== "inscription")
-                location.href = '/Plateau/Index';
+            $.ajax({
+                url: '/Partie/RefreshLoadScreen',
+                type : 'GET'
+            });
+
+            //$('#infos').load('/Partie/RefreshLoadScreen');
+            //var status = $('#status').attr('data-status');
+            //if(status !== "inscription")
+             //   location.href = '/Plateau/Index';
 
         }, 2000);
     });

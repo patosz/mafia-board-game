@@ -62,13 +62,13 @@ namespace UI.Controllers
         {
             int idPartie = (int)Session["partie"];
             int NbJoueurs = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).Length;
-            if (NbJoueurs == 1)
+            /*if (NbJoueurs == 1)
             {
                 UCCPartie.Instance.annuler(idPartie);
                 TempData["error"] = "Pas assez de joueurs. Partie annulée.";
                 RedirectToAction("Index");
                 return;
-            }
+            }*/
 
             PartieDto p = UCCPartie.Instance.LancerPartie();
             if (p == null)
@@ -104,12 +104,12 @@ namespace UI.Controllers
                     status = "coucou";
                 }
             }
-            else {
+           /* else {
                 if (UCCPartie.Instance.getGameState(((JoueurDto)Session["user"]).Pseudo).Etat != (int)ETAT_PARTIE.INSCRIPTION)
                 {
                     status = "plateau";
                 }
-            }
+            }*/
 
             ViewBag.status = status;
             return PartialView(UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList());
