@@ -236,6 +236,7 @@
     <Content Include="Views\Partie\RefreshLoadScreen.cshtml" />
     <Content Include="Views\Plateau\Index.cshtml" />
     <Content Include="Views\Plateau\Index2.cshtml" />
+    <Content Include="Views\Plateau\RefreshPlateau.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

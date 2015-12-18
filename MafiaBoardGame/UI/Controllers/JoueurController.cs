@@ -11,7 +11,12 @@ namespace UI.Controllers
 {
     public class JoueurController : Controller
     {
-        
+
+        public void Session_OnEnd()
+        {
+            throw new Exception("Session timed OUT !");
+        }
+
         [HttpPost]
         public ActionResult LogIn(string pseudo, string mdp)
         {
@@ -23,7 +28,8 @@ namespace UI.Controllers
                 return RedirectToAction("Index", new { controller = "Index" });
             }
 
-            Session["user"] = jDto;
+            Session.Add("user",jDto);
+            Session.Timeout = 40;
 
             return RedirectToAction("Index", "Partie");
         }

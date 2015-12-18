@@ -13,16 +13,20 @@
 </h2>
 <div id="infos">
     @{
-        Html.RenderPartial("RefreshLoadScreen", Model.Participants);
+    Html.RenderPartial("RefreshLoadScreen", Model.Participants);
     }
 </div>
 
 <script>
     $(document).ready(function () {
         setInterval(function () {
-            var html = $('#infos').get('/Partie/CheckPartieLancee');
-            if (html !== null || html !== 'undefined')
-                $('#infos').html(html);
+            var myhtml = $('#infos').load('/Partie/RefreshLoadScreen');
+            if (myhtml === null || myhtml === 'undefined') {
+                location.href('/Plateau/Index');
+            } else {
+                $('#infos').html(myhtml);
+            }
+
         }, 2000);
     });
 </script>
