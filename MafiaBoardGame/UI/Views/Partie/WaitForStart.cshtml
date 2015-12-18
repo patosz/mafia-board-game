@@ -13,16 +13,25 @@
 </h2>
 <div id="infos">
     @{
-        Html.RenderPartial("RefreshLoadScreen", Model.Participants);
+    Html.RenderPartial("RefreshLoadScreen", Model.Participants);
     }
 </div>
 
 <script>
     $(document).ready(function () {
         setInterval(function () {
-            var html = $('#infos').get('/Partie/CheckPartieLancee');
-            if (html !== null || html !== 'undefined')
-                $('#infos').html(html);
+            $('#infos').load('/Partie/RefreshLoadScreen');
+            
+            /*
+            if ($('#infos').children().length == 0)
+                window.location.replace("http://"+window.location.hostname+":50359/Partie/LancerPartie");
+            */
+
+            //$('#infos').html(myhtml);
+            var status = $('#status').attr('data-status');
+            if(status !== "inscription")
+                location.href = '/Plateau/IndexTemplate';
+
         }, 2000);
     });
 </script>

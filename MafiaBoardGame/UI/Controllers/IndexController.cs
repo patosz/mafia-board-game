@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Domain.Dto;
+using UI.Models;
 
 namespace UI.Controllers
 {
     public class IndexController : Controller
     {
         // GET: Index
-        public ActionResult Index(JoueurDto j)
+        public ActionResult Index(UserModel model)
         {
             if (Session["user"] != null)
                 return RedirectToAction("Index", new { controller = "Partie" });
 
-            return View(j);
+            return View(model);
         }
     }
 }

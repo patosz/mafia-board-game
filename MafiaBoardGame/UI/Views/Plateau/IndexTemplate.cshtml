@@ -2,10 +2,9 @@
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-@model Domain.Dto.PartieDto
 
 @{
-    ViewBag.Title = "Partie" + ViewData["partie"];
+    ViewBag.Title = "Partie test";
 }
 
 <h2>Index</h2>
@@ -140,12 +139,15 @@
     </div>
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
-            <div class="well col-lg-3 col-lg-offset-2 pioche">
+            <div class="well col-lg-3 col-lg-offset-1 pioche">
                 <a data-toggle="popover">
                     <img src="~/Images/dos_carte.svg" id="pioche" />
                 </a>
             </div>
-            <div class="well col-lg-3 col-lg-offset-2 defausse">
+            <div class="well col-lg-3 col-lg-offset-1 defausse">
+                <img src="~/Images/dos_carte.svg" id="defausse" />
+            </div>
+            <div class="well col-lg-3 col-lg-offset-1 defausse">
                 <img src="~/Images/dos_carte.svg" id="defausse" />
             </div>
         </div>

@@ -6,20 +6,33 @@ using System.Web.Mvc;
 using Domain;
 using Domain.Dto;
 using UI.Models;
+using System.Text;
 using System.Web.UI;
 
 namespace UI.Controllers
 {
+
     public class PartieController : Controller
     {
+        private readonly int LANCER_PARTIE_TIMER_INTERVAL = 15000;
+
+        //infos timer : https://msdn.microsoft.com/en-us/library/system.timers.timer.elapsed%28v=vs.110%29.aspx
+
+
+        //signature spécifique pour correspondre au delegate du ElapsedEventHandler
+        private void TimerLancerPartieEcoule(object sender, EventArgs e)
+        {
+            LancerPartie();
+        }
 
         // GET: Partie
-        public ActionResult Index(String pseudo)
+        public ActionResult Index()
         {
             if (Session["user"] == null)
                 return RedirectToAction("Index", new { controller = "Index" });
 
-            return View((JoueurDto)Session["user"]);
+            ViewData["username"] = ((JoueurDto)Session["user"]).Pseudo;
+            return View();
         }
 
         public ActionResult Creer()
@@ -34,9 +47,8 @@ namespace UI.Controllers
             PartieDto part = UCCPartie.Instance.CreerPartie(nomPartie, pseudo);
             if (part != null)
             {
-                //TODO lancer timer
-
                 Session["partie"] = part.Id;
+                Session.Add("partieCreation", DateTime.Now);
                 return RedirectToAction("WaitForStart", part);
             }
             else
@@ -44,6 +56,29 @@ namespace UI.Controllers
                 TempData["error"] = "Un problème est servenu lors de la création de la partie";
                 return RedirectToAction("Creer");
             }
+        }
+
+        public void LancerPartie()
+        {
+            int idPartie = (int)Session["partie"];
+            int NbJoueurs = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).Length;
+            if (NbJoueurs == 1)
+            {
+                UCCPartie.Instance.annuler(idPartie);
+                TempData["error"] = "Pas assez de joueurs. Partie annulée.";
+                RedirectToAction("Index");
+                return;
+            }
+
+            PartieDto p = UCCPartie.Instance.LancerPartie();
+            if (p == null)
+            {
+                TempData["error"] = "Un problème est servenu lors du lancement de la partie";
+                RedirectToAction("Index");
+                return;
+            }
+
+            //return RedirectToAction("Index", "Plateau", p.Nom);
         }
 
         public ViewResult WaitForStart(PartieDto partie)
@@ -55,31 +90,29 @@ namespace UI.Controllers
         }
 
 
-        public ActionResult CheckPartieLancee(){
-            JoueurDto jd = (JoueurDto)Session["user"];
-            GameStateDto gs = UCCPartie.Instance.getGameState(jd.Pseudo);
-            if (gs.Etat == (int)ETAT_PARTIE.INSCRIPTION)
-            {
-                return RedirectToAction("RefreshLoadScreen");
-            } else if ( gs.Etat == (int)ETAT_PARTIE.EN_COURS)
-            {
-                return RedirectToAction("Index", "Plateau");
-            }
-            else
-            {
-                return RedirectToAction("Index", "Index");
-            }
-        }
-
-
-        public PartialViewResult RefreshLoadScreen(List<JoueurPartieDto> liste)
+        public PartialViewResult RefreshLoadScreen()
         {
-            if (liste == null)
+            string status = "inscription";
+            int idPartie = (int)Session["partie"];
+            if (Session["partieCreation"] != null)
             {
-                int idPartie = (int)Session["partie"];
-                liste = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList();
+                DateTime partieCreation = (DateTime)Session["partieCreation"];
+                TimeSpan ts = DateTime.Now.Subtract(partieCreation);
+                if (ts.TotalSeconds >= 15)
+                {
+                    LancerPartie();
+                    status = "coucou";
+                }
             }
-            return PartialView(liste);
+            else {
+                if (UCCPartie.Instance.getGameState(((JoueurDto)Session["user"]).Pseudo).Etat != (int)ETAT_PARTIE.INSCRIPTION)
+                {
+                    status = "plateau";
+                }
+            }
+
+            ViewBag.status = status;
+            return PartialView(UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList());
         }
 
         public ActionResult Rejoindre()
@@ -93,7 +126,7 @@ namespace UI.Controllers
             }
             else
             {
-                TempData["error"] = "Un problème est servenu lors de la tentative de rejoindre la partie";
+                TempData["error"] = "Impossible de rejoindre la partie en cours";
                 return RedirectToAction("VoirPartiesDisponibles");
             }
         }

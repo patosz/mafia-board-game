@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Domain.Dto" />
-  <xs:import schemaLocation="http://localhost:50368/GestionPartieImpl.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Domain" />
   <xs:element name="CreerPartie">
     <xs:complexType>
       <xs:sequence>
@@ -161,7 +160,7 @@
   <xs:element name="getJoueurDtoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="getJoueurDtoResult" nillable="true" type="q10:JoueurDto" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="getJoueurDtoResult" nillable="true" type="q10:JoueurDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -366,7 +365,7 @@
   <xs:element name="vainqueurParForfaitResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="vainqueurParForfaitResult" nillable="true" type="q14:JoueurDto" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="vainqueurParForfaitResult" nillable="true" type="q14:JoueurDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -380,7 +379,7 @@
   <xs:element name="vainqueurResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Domain" minOccurs="0" name="vainqueurResult" nillable="true" type="q15:JoueurDto" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Domain.Dto" minOccurs="0" name="vainqueurResult" nillable="true" type="q15:JoueurDto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

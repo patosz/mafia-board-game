@@ -12,16 +12,19 @@ namespace UI.Controllers
     public class PlateauController : Controller
     {
         // GET: Plateau
-        public ActionResult Index(string nomPartie = "Test")
+        public ActionResult Index(string nomPartie = "Partie aléatoire")
         {
-            //TODO uncomment
-           /* if (nomPartie == null || nomPartie.Length == 0)
-            {
-                return RedirectToAction("Index", "Index");
-            }*/
-            ViewData["partie"] = nomPartie;
+            //UCCPartie.Instance.getGameState(jdt.Pseudo);
             JoueurDto jdt = (JoueurDto)Session["user"];
-            GameStateDto gs = UCCPartie.Instance.getGameState(jdt.Pseudo);
+            GameStateDto gs = new GameStateDto();
+            //UCCPartie.Instance.getListJoueurParticipantsDto();
+                
+
+            //TODO ajouter système check partie invalide demandée
+
+            //TODO ajouter checks sur l'état de la partie !!!
+
+            ViewData["partie"] = nomPartie;
             return View(gs);
         }
 
@@ -29,6 +32,11 @@ namespace UI.Controllers
         {
             ViewData["partie"] = nomPartie;
             
+            return View();
+        }
+
+        public ViewResult IndexTemplate()
+        {
             return View();
         }
 
