@@ -34,6 +34,8 @@ namespace Domain.Dto
         public JoueurPartieDto JoueurCourant { get; set; }
         [DataMember]
         public JoueurDto Vainqueur { get; set; }
+        [DataMember]
+        public ETAT_PARTIE Etat { get; set; }
 
     }
 }
