@@ -82,7 +82,7 @@ namespace Domain
 
                 joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
 
-               
+
 
                 partie.JoueurCourant = joueurPartie;
                 dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
@@ -576,7 +576,7 @@ namespace Domain
             List<CarteDto> list = new List<CarteDto>();
             for (int i = 0; i < 3; i++)
             {
-                CarteDto carteDto  = piocherCarte(IdJoueurPartie);
+                CarteDto carteDto = piocherCarte(IdJoueurPartie);
                 list.Add(carteDto);
             }
             return list;
@@ -805,7 +805,7 @@ namespace Domain
 
         public CarteDto getLastCartePoubelle()
         {
-            return BizToDto.ToCarteDto(partie.CartesPoubelle.Last());
+            return partie.CartesPoubelle.Count == 0 ? null : BizToDto.ToCarteDto(partie.CartesPoubelle.Last());
         }
     }
 }

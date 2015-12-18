@@ -8,6 +8,12 @@ namespace UI.Models
 {
     public class AdversaireModel
     {
+        public AdversaireModel()
+        {
+            Cartes = new List<CarteDto>();
+            Des = new List<DeDto>();
+        }
+
         public string Pseudo { get; set; }
 
         public List<CarteDto> Cartes { get; set; }

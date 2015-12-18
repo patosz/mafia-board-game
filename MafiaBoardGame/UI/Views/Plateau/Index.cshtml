@@ -1,15 +1,22 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout3.cshtml";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
-@model Domain.Dto.GameStateDto
+@model UI.Models.ModelPlateau
 
 @{
     ViewBag.Title = "Partie" + ViewData["partie"];
 }
 
-<div class="container game-container">
-    @{
-    Html.RenderPartial("RefreshPlateau", Model);
-    }
+<div id="affichage-plateau" class="container game-container">
+    @{Html.RenderPartial("RefreshPlateau", Model);}
 </div>
+
+<script>
+    $(document).ready(function () {
+        setInterval(function () {
+            $('#affichage-plateau').load('/Plateau/RefreshPlateau');
+
+        }, 2000);
+    });
+</script>

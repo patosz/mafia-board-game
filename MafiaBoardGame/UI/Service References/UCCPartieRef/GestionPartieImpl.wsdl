@@ -205,6 +205,18 @@
   <wsdl:message name="IGestionPartie_annuler_OutputMessage">
     <wsdl:part name="parameters" element="tns:annulerResponse" />
   </wsdl:message>
+  <wsdl:message name="IGestionPartie_getPartieDto_InputMessage">
+    <wsdl:part name="parameters" element="tns:getPartieDto" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_getPartieDto_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getPartieDtoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_getLastCartePoubelle_InputMessage">
+    <wsdl:part name="parameters" element="tns:getLastCartePoubelle" />
+  </wsdl:message>
+  <wsdl:message name="IGestionPartie_getLastCartePoubelle_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getLastCartePoubelleResponse" />
+  </wsdl:message>
   <wsdl:portType name="IGestionPartie">
     <wsdl:operation name="CreerPartie">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/CreerPartie" message="tns:IGestionPartie_CreerPartie_InputMessage" />
@@ -337,6 +349,14 @@
     <wsdl:operation name="annuler">
       <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/annuler" message="tns:IGestionPartie_annuler_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/annulerResponse" message="tns:IGestionPartie_annuler_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getPartieDto">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/getPartieDto" message="tns:IGestionPartie_getPartieDto_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/getPartieDtoResponse" message="tns:IGestionPartie_getPartieDto_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getLastCartePoubelle">
+      <wsdl:input wsaw:Action="http://tempuri.org/IGestionPartie/getLastCartePoubelle" message="tns:IGestionPartie_getLastCartePoubelle_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IGestionPartie/getLastCartePoubelleResponse" message="tns:IGestionPartie_getLastCartePoubelle_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IGestionPartie" type="tns:IGestionPartie">
@@ -631,6 +651,24 @@
     </wsdl:operation>
     <wsdl:operation name="annuler">
       <soap:operation soapAction="http://tempuri.org/IGestionPartie/annuler" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPartieDto">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/getPartieDto" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLastCartePoubelle">
+      <soap:operation soapAction="http://tempuri.org/IGestionPartie/getLastCartePoubelle" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -14,7 +14,7 @@ namespace UI.Controllers
 
     public class PartieController : Controller
     {
-        private readonly int LANCER_PARTIE_TIMER_INTERVAL = 15000;
+        private readonly int LANCER_PARTIE_TIMER_INTERVAL = 15;
 
         //infos timer : https://msdn.microsoft.com/en-us/library/system.timers.timer.elapsed%28v=vs.110%29.aspx
 
@@ -98,7 +98,7 @@ namespace UI.Controllers
             {
                 DateTime partieCreation = (DateTime)Session["partieCreation"];
                 TimeSpan ts = DateTime.Now.Subtract(partieCreation);
-                if (ts.TotalSeconds >= 15)
+                if (ts.TotalSeconds >= LANCER_PARTIE_TIMER_INTERVAL)
                 {
                     LancerPartie();
                     status = "coucou";
@@ -148,4 +148,6 @@ namespace UI.Controllers
             return PartialView("VoirPartiesDisponibles", parties);
         }
     }
+
+    //comment to push sync
 }

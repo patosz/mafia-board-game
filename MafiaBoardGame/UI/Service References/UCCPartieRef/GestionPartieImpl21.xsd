@@ -3,6 +3,7 @@
   <xs:complexType name="PartieDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="DateHeureCreation" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Etat" type="tns:ETAT_PARTIE" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="JoueurCourant" nillable="true" type="tns:JoueurPartieDto" />
       <xs:element minOccurs="0" name="Nom" nillable="true" type="xs:string" />
@@ -11,6 +12,15 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PartieDto" nillable="true" type="tns:PartieDto" />
+  <xs:simpleType name="ETAT_PARTIE">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INSCRIPTION" />
+      <xs:enumeration value="EN_COURS" />
+      <xs:enumeration value="TERMINE" />
+      <xs:enumeration value="ANNULE" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ETAT_PARTIE" nillable="true" type="tns:ETAT_PARTIE" />
   <xs:complexType name="JoueurPartieDto">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
@@ -94,13 +104,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="JoueurStateDto" nillable="true" type="tns:JoueurStateDto" />
-  <xs:simpleType name="ETAT_PARTIE">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="INSCRIPTION" />
-      <xs:enumeration value="EN_COURS" />
-      <xs:enumeration value="TERMINE" />
-      <xs:enumeration value="ANNULE" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="ETAT_PARTIE" nillable="true" type="tns:ETAT_PARTIE" />
 </xs:schema>

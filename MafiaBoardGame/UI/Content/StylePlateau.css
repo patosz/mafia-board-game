@@ -66,3 +66,8 @@
 .carousel-control {
     width: 5%;
 }
+
+.adversaire-actif{
+    color:lightslategray;
+    border:2px dotted lightslategray;
+}

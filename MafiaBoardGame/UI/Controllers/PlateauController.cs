@@ -15,50 +15,87 @@ namespace UI.Controllers
         // GET: Plateau
         public ActionResult Index(string nomPartie = "Partie aléatoire")
         {
-            //UCCPartie.Instance.getGameState(jdt.Pseudo);
-            JoueurDto jdt = (JoueurDto)Session["user"];
-            int idPartie = (int)Session["partie"];
-
-            List<JoueurPartieDto> participants = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList();
-
-            JoueurPartieDto jp = participants.First();
-
-            ModelPlateau plateau = new ModelPlateau();
-            PartieDto p = UCCPartie.Instance.getPartiedto(idPartie);
-
-
-            plateau.Etat =;
-            plateau.DerniereCarteJouee;
-            plateau.Adversaires;
-            plateau.JoueurCourant;
-            plateau.MesCartes;
-            plateau.MesDes;
-        
-            //defausse          - OK
-            //acces a la pioche - OK
-            //des joueurCourant - OK
-            
-            //joueursParticipants
-            ////nbCartes adversaire
-            ////nbDes adversaire
-
-
-
-
-
 
             //TODO ajouter système check partie invalide demandée
 
             //TODO ajouter checks sur l'état de la partie !!!
 
+            JoueurDto jdt = (JoueurDto)Session["user"];
+            int idPartie = (int)Session["partie"];
+
+            List<JoueurPartieDto> participants = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList();
+
+            ModelPlateau plateau = new ModelPlateau();
+            plateau.Adversaires = new List<AdversaireModel>();
+
+            PartieDto p = UCCPartie.Instance.getPartieDto(idPartie);
+
+            plateau.Etat = p.Etat;
+            plateau.JoueurCourant = p.JoueurCourant.Joueur;
+            plateau.DerniereCarteJouee = UCCPartie.Instance.getLastCartePoubelle();
+
+            foreach (JoueurPartieDto jp in participants)
+            {
+                AdversaireModel adv = new AdversaireModel();
+                adv.Pseudo = jp.Joueur.Pseudo;
+                adv.Des = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
+                adv.Cartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
+                if (adv.Pseudo.Equals(plateau.JoueurCourant.Pseudo))
+                {
+                    plateau.MesDes = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
+                    plateau.DesCourant = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
+                    plateau.MesCartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
+                }
+                plateau.Adversaires.Add(adv);
+            }
+
             ViewData["partie"] = nomPartie;
-            return View(gs);
+            return View(plateau);
+        }
+
+        public PartialViewResult RefreshPlateau(string nomPartie = "Partie aléatoire")
+        {
+            //TODO ajouter système check partie invalide demandée
+
+            //TODO ajouter checks sur l'état de la partie !!!
+
+            JoueurDto jdt = (JoueurDto)Session["user"];
+            int idPartie = (int)Session["partie"];
+
+            List<JoueurPartieDto> participants = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList();
+
+            ModelPlateau plateau = new ModelPlateau();
+            plateau.Adversaires = new List<AdversaireModel>();
+
+            PartieDto p = UCCPartie.Instance.getPartieDto(idPartie);
+
+            plateau.Etat = p.Etat;
+            plateau.JoueurCourant = p.JoueurCourant.Joueur;
+            plateau.DerniereCarteJouee = UCCPartie.Instance.getLastCartePoubelle();
+
+            foreach (JoueurPartieDto jp in participants)
+            {
+                AdversaireModel adv = new AdversaireModel();
+                adv.Pseudo = jp.Joueur.Pseudo;
+                adv.Des = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
+                adv.Cartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
+                if (adv.Pseudo.Equals(plateau.JoueurCourant.Pseudo))
+                {
+                    plateau.MesDes = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
+                    plateau.DesCourant = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
+                    plateau.MesCartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
+                }
+                plateau.Adversaires.Add(adv);
+            }
+
+            ViewData["partie"] = nomPartie;
+            return PartialView(plateau);
         }
 
         public ActionResult Index2(string nomPartie = "Test")
         {
             ViewData["partie"] = nomPartie;
-            
+
             return View();
         }
 
@@ -73,7 +110,7 @@ namespace UI.Controllers
             if (json == "")
                 return Json(new { success = false, message = "Problème param methode" }, JsonRequestBehavior.AllowGet);
 
-            Dictionary<string, string> dataJq = (Dictionary<string,string>)JsonConvert.DeserializeObject(json);
+            Dictionary<string, string> dataJq = (Dictionary<string, string>)JsonConvert.DeserializeObject(json);
             int idCarte = int.Parse(dataJq["carteId"]);
             int cible = int.Parse(dataJq["cible"]);
             int deChoisi = int.Parse(dataJq["deChoisi"]);
@@ -138,7 +175,7 @@ namespace UI.Controllers
                     UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 default: return Json(new { success = false, message = "Probleme switch methode" }, JsonRequestBehavior.AllowGet);
-         
+
             }
             return Json(new { success = true, message = "Order updated successfully" }, JsonRequestBehavior.AllowGet);
         }

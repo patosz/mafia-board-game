@@ -1,8 +1,5 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout2.cshtml";
-}
-
-@model Domain.Dto.GameStateDto
+﻿
+@model UI.Models.ModelPlateau
 
 @{
     ViewBag.Title = "Partie" + ViewData["partie"];
@@ -10,43 +7,62 @@
 <div class="row">
     @foreach (var adv in Model.Adversaires)
     {
-    <div class="col-lg-2 col-lg-offset-1">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title adversaire">
-                    @adv.Pseudo
-                </h3>
-            </div>
-            <div class="panel-body">
-                <div class="well opponent-des">
-                    @for (var i = 0; i < adv.NbDes; i++)
+        <div class="col-lg-2 col-lg-offset-1">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    @if (Model.JoueurCourant.Equals(adv.Pseudo))
                     {
-                    <img src="~/Images/de_wazabi_mini.svg" />
+                        <h3 class="panel-title adversaire-actif">
+                            @adv.Pseudo
+                        </h3>
+                    }
+                    else
+                    {
+                        <h3 class="panel-title adversaire">
+                            @adv.Pseudo
+                        </h3>
                     }
                 </div>
+                <div class="panel-body">
+                    <div class="well des-adversaire">
+                        @foreach (var d in adv.Des)
+                        {
+                            <img src="~/Images/de_wazabi_mini.svg" data-id="@d.Id" data-valeur="@d.Valeur" />
+                        }
+                    </div>
 
-                <hr />
-                <div class="well opponent-cartes">
-                    @for (var i = 0; i < adv.NbDes; i++)
-                    {
-                    <img src="~/Images/dos_carte_mini.svg" />
-                    }
+                    <hr />
+                    <div class="well cartes-adversaire">
+                        @foreach (var c in adv.Cartes)
+                        {
+                            <img src="~/Images/dos_carte_mini.svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                                 data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" />
+                        }
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     }
 </div>
 
 <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
-        <div class="well col-lg-3 col-lg-offset-2 pioche">
+        <div id="pioche" class="well col-lg-3 col-lg-offset-1">
             <a data-toggle="popover">
                 <img src="~/Images/dos_carte.svg" id="pioche" />
             </a>
         </div>
-        <div class="well col-lg-3 col-lg-offset-2 defausse">
+        <div class="well col-lg-3 col-lg-offset-1">
+            @if(Model.DerniereCarteJouee != null){
             <img src="~/Images/dos_carte.svg" id="defausse" />
+            }
+        </div>
+
+        <div class="well col-lg-3 col-lg-offset-1" id="des-joueur-courant">
+            @foreach (var d in Model.DesCourant)
+            {
+                <img src="~/Images/de_wazabi_mini.svg" data-id="@d.Id" data-valeur="@d.Valeur" />
+            }
         </div>
     </div>
 </div>
@@ -61,9 +77,9 @@
             </div>
             <div class="panel-body">
                 <div class="well vos-des col-lg-4">
-                    @foreach (var d in Model.Des)
+                    @foreach (var d in Model.MesDes)
                     {
-                    <img src="~/Images/de_wazabi.svg" data-id="@d.Id" />
+                        <img src="~/Images/de_wazabi.svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur" />
                     }
                 </div>
 
@@ -74,39 +90,46 @@
                         <div class="carousel-inner">
 
                             @{
-                            var NbCartes = Model.Cartes.Count;
-                            var j = 0;
+                                var NbCartes = Model.MesCartes.Count;
+                                var j = 0;
                             }
 
                             <div class="item active">
                                 <div class="row">
                                     @for (; j < NbCartes && j < 4; j++)
                                     {
-                                    <div class="col-sm-3">
-                                        <img src="~/Images/dos_carte.svg" alt="Image" data-id="@Model.Cartes.ElementAt(j).Id" class="img-responsive carte-en-main" />
-                                    </div>
+                                        var c = Model.MesCartes[j];
+
+                                        <div class="col-sm-3">
+                                            <img src="~/Images/dos_carte.svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                                                 data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" class="img-responsive carte-en-main" />
+                                        </div>
                                     }
                                 </div>
                             </div>
 
 
                             @{
-                            var NbCartesRestantes = NbCartes - j;
+                             var NbCartesRestantes = NbCartes - j;
                             }
 
                             @for (var i = 0; NbCartesRestantes > 0; i++)
                             {
-                            <div class="item">
-                                <div class="row">
-                                    @for (j = 0; j < NbCartesRestantes && j < 4; j++)
-                                    {
-                                    <div class="col-sm-3">
-                                        <img src="~/Images/dos_carte.svg" alt="Image" data-id="@Model.Cartes.ElementAt((i*4)+j).Id" class="img-responsive carte-en-main" />
+                                <div class="item">
+                                    <div class="row">
+                                        @for (j = 0; j < NbCartesRestantes && j < 4; j++)
+                                        {
+
+                                            var c = Model.MesCartes[(i * 4) + j];
+
+                                            <div class="col-sm-3">
+                                                <img src="~/Images/dos_carte.svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                                                     data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" class="img-responsive carte-en-main" />
+                                            </div>
+                                        }
                                     </div>
-                                    }
                                 </div>
-                            </div>
-                            NbCartesRestantes -= j;
+                                        NbCartesRestantes -= j;
                             }
                             }
 

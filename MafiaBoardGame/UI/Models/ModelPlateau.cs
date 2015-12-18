@@ -8,9 +8,17 @@ namespace UI.Models
 {
     public class ModelPlateau
     {
+        public ModelPlateau()
+        {
+            DesCourant = new List<DeDto>();
+            Adversaires = new List<AdversaireModel>();
+            MesCartes = new List<CarteDto>();
+            MesCartes = new List<CarteDto>();
+        }
 
+        public JoueurDto JoueurCourant { get; set; }
 
-        public string JoueurCourant { get; set; }
+        public List<DeDto> DesCourant { get; set; }
 
         public List<AdversaireModel> Adversaires { get; set; }
 
