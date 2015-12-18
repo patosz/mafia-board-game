@@ -571,12 +571,15 @@ namespace Domain
         }
 
 
-        public void piocheTroisCartes(int IdJoueurPartie)
+        public List<CarteDto> piocheTroisCartes(int IdJoueurPartie)
         {
+            List<CarteDto> list = new List<CarteDto>();
             for (int i = 0; i < 3; i++)
             {
-                piocherCarte(IdJoueurPartie);
+                CarteDto carteDto  = piocherCarte(IdJoueurPartie);
+                list.Add(carteDto);
             }
+            return list;
         }
 
         public void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie)
@@ -623,7 +626,7 @@ namespace Domain
 
         }
 
-        public void jeterCartePoubelle(int IdJoueurPartie, int IdCarte)
+        public CarteDto jeterCartePoubelle(int IdJoueurPartie, int IdCarte)
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
 
@@ -638,6 +641,7 @@ namespace Domain
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.SaveChanges();
+            return BizToDto.ToCarteDto(carte);
 
         }
 
@@ -785,6 +789,16 @@ namespace Domain
             partie.etat = ETAT_PARTIE.ANNULE;
             dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.SaveChanges();
+
+        }
+
+
+        public PartieDto getPartieDto(int IdPartie)
+        {
+            Partie partie = (from Partie p in dbcontext.Parties
+                             where p.Id.Equals(IdPartie)
+                             select p).FirstOrDefault();
+            return BizToDto.ToPartieDto(partie);
 
         }
     }

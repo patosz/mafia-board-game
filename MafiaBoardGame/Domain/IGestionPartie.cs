@@ -78,12 +78,12 @@ namespace Domain
         void ciblerJoueurQUUneCarte(int IdJoueurPartieCible);
 
         [OperationContract]
-        void piocheTroisCartes(int IdJoueurPartie);
+        List<CarteDto> piocheTroisCartes(int IdJoueurPartie);
 
         [OperationContract]
         void plusQueDeuxCartesPourLesAutres(int IdJoueurPartie);
         [OperationContract]
-        void jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
+        CarteDto jeterCartePoubelle(int IdJoueurPartie,int IdCarte);
 
         [OperationContract]
         JoueurPartieDto quitterPartie(int IdJoueurPartie);
@@ -104,6 +104,9 @@ namespace Domain
 
         [OperationContract]
         void annuler(int IdPartie);
+
+        [OperationContract]
+        PartieDto getPartieDto(int IdPartie);
 
     }
 
