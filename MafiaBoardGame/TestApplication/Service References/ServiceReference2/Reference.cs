@@ -82,10 +82,10 @@ namespace TestApplication.ServiceReference2 {
         System.Threading.Tasks.Task<System.Collections.Generic.List<Domain.Dto.CarteDto>> getListCartesDtoAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getJoueurDto", ReplyAction="http://tempuri.org/IGestionPartie/getJoueurDtoResponse")]
-        Domain.JoueurDto getJoueurDto(int IdJoueurPartie);
+        Domain.Dto.JoueurDto getJoueurDto(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getJoueurDto", ReplyAction="http://tempuri.org/IGestionPartie/getJoueurDtoResponse")]
-        System.Threading.Tasks.Task<Domain.JoueurDto> getJoueurDtoAsync(int IdJoueurPartie);
+        System.Threading.Tasks.Task<Domain.Dto.JoueurDto> getJoueurDtoAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/lancerDes", ReplyAction="http://tempuri.org/IGestionPartie/lancerDesResponse")]
         System.Collections.Generic.List<Domain.Dto.DeDto> lancerDes(int IdJoueurPartie);
@@ -178,16 +178,16 @@ namespace TestApplication.ServiceReference2 {
         System.Threading.Tasks.Task<Domain.Dto.JoueurPartieDto> quitterPartieAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/vainqueurParForfait", ReplyAction="http://tempuri.org/IGestionPartie/vainqueurParForfaitResponse")]
-        Domain.JoueurDto vainqueurParForfait();
+        Domain.Dto.JoueurDto vainqueurParForfait();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/vainqueurParForfait", ReplyAction="http://tempuri.org/IGestionPartie/vainqueurParForfaitResponse")]
-        System.Threading.Tasks.Task<Domain.JoueurDto> vainqueurParForfaitAsync();
+        System.Threading.Tasks.Task<Domain.Dto.JoueurDto> vainqueurParForfaitAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/vainqueur", ReplyAction="http://tempuri.org/IGestionPartie/vainqueurResponse")]
-        Domain.JoueurDto vainqueur(int IdJoueurPartie);
+        Domain.Dto.JoueurDto vainqueur(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/vainqueur", ReplyAction="http://tempuri.org/IGestionPartie/vainqueurResponse")]
-        System.Threading.Tasks.Task<Domain.JoueurDto> vainqueurAsync(int IdJoueurPartie);
+        System.Threading.Tasks.Task<Domain.Dto.JoueurDto> vainqueurAsync(int IdJoueurPartie);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IGestionPartie/getGameState", ReplyAction="http://tempuri.org/IGestionPartie/getGameStateResponse")]
         Domain.Dto.GameStateDto getGameState(string nomJoueur);
@@ -329,11 +329,11 @@ namespace TestApplication.ServiceReference2 {
             return base.Channel.getListCartesDtoAsync(IdJoueurPartie);
         }
         
-        public Domain.JoueurDto getJoueurDto(int IdJoueurPartie) {
+        public Domain.Dto.JoueurDto getJoueurDto(int IdJoueurPartie) {
             return base.Channel.getJoueurDto(IdJoueurPartie);
         }
         
-        public System.Threading.Tasks.Task<Domain.JoueurDto> getJoueurDtoAsync(int IdJoueurPartie) {
+        public System.Threading.Tasks.Task<Domain.Dto.JoueurDto> getJoueurDtoAsync(int IdJoueurPartie) {
             return base.Channel.getJoueurDtoAsync(IdJoueurPartie);
         }
         
@@ -457,19 +457,19 @@ namespace TestApplication.ServiceReference2 {
             return base.Channel.quitterPartieAsync(IdJoueurPartie);
         }
         
-        public Domain.JoueurDto vainqueurParForfait() {
+        public Domain.Dto.JoueurDto vainqueurParForfait() {
             return base.Channel.vainqueurParForfait();
         }
         
-        public System.Threading.Tasks.Task<Domain.JoueurDto> vainqueurParForfaitAsync() {
+        public System.Threading.Tasks.Task<Domain.Dto.JoueurDto> vainqueurParForfaitAsync() {
             return base.Channel.vainqueurParForfaitAsync();
         }
         
-        public Domain.JoueurDto vainqueur(int IdJoueurPartie) {
+        public Domain.Dto.JoueurDto vainqueur(int IdJoueurPartie) {
             return base.Channel.vainqueur(IdJoueurPartie);
         }
         
-        public System.Threading.Tasks.Task<Domain.JoueurDto> vainqueurAsync(int IdJoueurPartie) {
+        public System.Threading.Tasks.Task<Domain.Dto.JoueurDto> vainqueurAsync(int IdJoueurPartie) {
             return base.Channel.vainqueurAsync(IdJoueurPartie);
         }
         

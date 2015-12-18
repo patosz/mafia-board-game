@@ -128,14 +128,6 @@
     <Content Include="Images\de_wazabi_mini.svg" />
     <Content Include="Images\dos_carte.svg" />
     <Content Include="Images\dos_carte_mini.svg" />
-    <Content Include="PAT TEST FILES\Inkscape\card_model.svg" />
-    <Content Include="PAT TEST FILES\Inkscape\dos_carte.png" />
-    <Content Include="PAT TEST FILES\Inkscape\dos_carte.svg" />
-    <Content Include="PAT TEST FILES\Plateau\images\dos_carte.png" />
-    <Content Include="PAT TEST FILES\Plateau\images\dos_carte.svg" />
-    <Content Include="PAT TEST FILES\Plateau\index.html" />
-    <Content Include="PAT TEST FILES\Plateau\index2.html" />
-    <Content Include="PAT TEST FILES\Plateau\styles.css" />
     <Content Include="Properties\DataSources\Domain.JoueurDto.datasource" />
     <Content Include="Properties\DataSources\Domain.Dto.CarteDto.datasource" />
     <Content Include="Properties\DataSources\Domain.Dto.DeDto.datasource" />
@@ -193,6 +185,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\LoadScreenModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\UccJoueurRef\Reference.cs">
       <AutoGen>True</AutoGen>

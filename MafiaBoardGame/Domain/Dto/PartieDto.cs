@@ -7,6 +7,19 @@ using System.Web;
 namespace Domain.Dto
 {
     [DataContract]
+    public enum ETAT_PARTIE
+    {
+        [EnumMember]
+        INSCRIPTION = 0,
+        [EnumMember]
+        EN_COURS = 1,
+        [EnumMember]
+        TERMINE = 2,
+        [EnumMember]
+        ANNULE = 3
+    };
+
+    [DataContract]
     public class PartieDto
     {
         [DataMember]
@@ -21,8 +34,5 @@ namespace Domain.Dto
         public JoueurPartieDto JoueurCourant { get; set; }
         [DataMember]
         public JoueurDto Vainqueur { get; set; }
-
-
-
     }
 }

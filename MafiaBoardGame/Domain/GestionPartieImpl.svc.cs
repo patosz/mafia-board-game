@@ -21,11 +21,12 @@ namespace Domain
 
         private static ModelContainer dbcontext;
         private Partie partie;
-        private PartieDto partieDto;
+
         public GestionPartieImpl()
         {
             dbcontext = new ModelContainer();
         }
+
         public bool CommencerPartie()
         {
             throw new NotImplementedException();
@@ -44,22 +45,22 @@ namespace Domain
                 return null;
             }
 
-            if (partie != null && (int)partie.etat == (int)Partie.ETAT.EN_COURS)
+            if (partie != null && (int)partie.etat == (int)ETAT_PARTIE.EN_COURS)
             {
                 return null;
             }
 
-            if (partie == null || (int)partie.etat == (int)Partie.ETAT.TERMINE)
+            if (partie == null || (int)partie.etat == (int)ETAT_PARTIE.TERMINE)
             {
                 partie = new Partie(nomPartie);
-                partie.etat = Partie.ETAT.INSCRIPTION;
+                partie.etat = ETAT_PARTIE.INSCRIPTION;
 
                 JoueurPartie joueurPartie = new JoueurPartie();
                 joueurPartie.Partie = partie;
 
                 joueurPartie.Joueur = joueur;
                 IQueryable<Carte> listeCarte = (from Carte c in dbcontext.Cartes
-                                         select c);
+                                                select c);
                 if (listeCarte.Count() == 0)
                 {
                     dbcontext.JoueurParties.Add(joueurPartie);
@@ -78,11 +79,11 @@ namespace Domain
                     dbcontext.Parties.Add(partie);
                     dbcontext.SaveChanges();
                 }
-                
 
                 joueurPartie.OrdreJoueur = partie.JoueursParticipants.Count;
 
-                //TODO
+               
+
                 partie.JoueurCourant = joueurPartie;
                 dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
                 dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
@@ -125,7 +126,7 @@ namespace Domain
                 return null;
             }
 
-            if (partie != null && (partie.etat == Partie.ETAT.EN_COURS || partie.etat == Partie.ETAT.TERMINE || partie.etat == Partie.ETAT.ANNULE))
+            if (partie != null && (partie.etat == ETAT_PARTIE.EN_COURS || partie.etat == ETAT_PARTIE.TERMINE || partie.etat == ETAT_PARTIE.ANNULE))
             {
                 return null;
             }
@@ -137,7 +138,7 @@ namespace Domain
             Joueur joueur = (from Joueur j in dbcontext.Joueurs
                              where j.Pseudo.Equals(pseudo)
                              select j).FirstOrDefault();
-            List<JoueurPartie>list=partie.JoueursParticipants.ToList();
+            List<JoueurPartie> list = partie.JoueursParticipants.ToList();
             foreach (JoueurPartie jp in list)
             {
                 if (jp.JoueurId == joueur.Id)
@@ -145,9 +146,9 @@ namespace Domain
                     return null;
                 }
             }
-            if (partie.etat == Partie.ETAT.INSCRIPTION)
+            if (partie.etat == ETAT_PARTIE.INSCRIPTION)
             {
-                
+
                 JoueurPartie joueurPartie = new JoueurPartie();
                 joueurPartie.Partie = partie;
                 dbcontext.JoueurParties.Add(joueurPartie);
@@ -204,14 +205,8 @@ namespace Domain
         public PartieDto LancerPartie()
         {
             List<JoueurPartie> listeJoueurPartie = partie.JoueursParticipants.ToList();
-            partie.etat = Partie.ETAT.EN_COURS;
-            int nombreDeJoueur = listeJoueurPartie.Count;
-            Random random = new Random();
-
-            int rand = random.Next(nombreDeJoueur);
-            partie.JoueurCourant = listeJoueurPartie.ElementAt(rand);
-
-            for (int i = 0; i < nombreDeJoueur; i++)
+            partie.etat = ETAT_PARTIE.EN_COURS;
+            for (int i = 0; i < listeJoueurPartie.Count; i++)
             {
                 JoueurPartie joueurPartie = listeJoueurPartie.ElementAt(i);
                 //recupere le nombre de carte
@@ -317,8 +312,8 @@ namespace Domain
         public DeDto getDeDto(int IdDe)
         {
             De de = (from De d in dbcontext.Des
-                           where d.Id.Equals(IdDe)
-                           select d).FirstOrDefault();
+                     where d.Id.Equals(IdDe)
+                     select d).FirstOrDefault();
             return BizToDto.ToDeDto(de);
         }
         public List<CarteDto> getListCartesDto(int IdJoueurPartie)
@@ -334,8 +329,8 @@ namespace Domain
         public CarteDto getCarteDto(int IdCarte)
         {
             Carte carte = (from Carte c in dbcontext.Cartes
-                                           where c.Id.Equals(IdCarte)
-                                           select c).FirstOrDefault();
+                           where c.Id.Equals(IdCarte)
+                           select c).FirstOrDefault();
             return BizToDto.ToCarteDto(carte);
         }
         public JoueurDto getJoueurDto(int IdJoueurPartie)
@@ -406,7 +401,7 @@ namespace Domain
 
             joueurPartie.DesMain.Remove(joueurPartie.DesMain.ElementAt(0));
             joueurPartie.DesMain.Remove(joueurPartie.DesMain.ElementAt(1));
-            
+
 
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
 
@@ -593,14 +588,14 @@ namespace Domain
             {
                 if (joueurPartie.Id != IdJoueurPartie)
                 {
-                    
+
                     List<Carte> listCarte = joueurPartie.CartesMain.ToList();
                     int nombreCarteJoueur = listCarte.Count;
                     if (nombreCarteJoueur <= 2)
                     {
                         continue;
                     }
-                    else if(nombreCarteJoueur == 3)
+                    else if (nombreCarteJoueur == 3)
                     {
                         int rand = random.Next(nombreCarteJoueur);
                         Carte carte = listCarte.ElementAt(rand);
@@ -617,7 +612,7 @@ namespace Domain
                             jeterCartePoubelle(joueurPartie.Id, carte.Id);
                             nombreCarteJoueur--;
                         }
-                       
+
                     }
 
                 }
@@ -717,7 +712,7 @@ namespace Domain
             //TODO verifier ElementAt(0)
             if (partie.JoueursParticipants.Where(s => s.EnPartie == true).Count() == 1)
             {
-                partie.etat = Partie.ETAT.TERMINE;
+                partie.etat = ETAT_PARTIE.TERMINE;
                 JoueurPartie joueurVainqueur = partie.JoueursParticipants.Where(s => s.EnPartie == true).FirstOrDefault();
                 Joueur joueur = (from Joueur jp in dbcontext.Joueurs
                                  where jp.Id.Equals(joueurVainqueur.Id)
@@ -738,7 +733,7 @@ namespace Domain
 
             if (joueurPartie.DesMain.Count == 0)
             {
-                partie.etat = Partie.ETAT.TERMINE;
+                partie.etat = ETAT_PARTIE.TERMINE;
                 Joueur joueur = (from Joueur jp in dbcontext.Joueurs
                                  where jp.Id.Equals(IdJoueurPartie)
                                  select jp).FirstOrDefault();
@@ -776,7 +771,7 @@ namespace Domain
                         state.Des.Add(BizToDto.ToDeDto(d));
                     }
 
-         
+
                 }
             }
             return state;
@@ -787,7 +782,7 @@ namespace Domain
             Partie partie = (from Partie p in dbcontext.Parties
                              where p.Id.Equals(IdPartie)
                              select p).FirstOrDefault();
-            partie.etat = Partie.ETAT.ANNULE;
+            partie.etat = ETAT_PARTIE.ANNULE;
             dbcontext.Entry(partie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.SaveChanges();
 

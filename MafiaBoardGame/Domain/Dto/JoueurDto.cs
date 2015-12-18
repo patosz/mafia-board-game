@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace Domain
+namespace Domain.Dto
 {
 
     //TODO ID useless ?
@@ -17,8 +17,6 @@ namespace Domain
         public int Id { get; set; }
         [DataMember]
         public string Pseudo { get; set; }
-        [DataMember]
-        public string Mdp { get; set; }
     }
 
 

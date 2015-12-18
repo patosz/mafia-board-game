@@ -3,15 +3,16 @@ using Domain.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace Domain.Model
 {
+
     public partial class Partie
     {
 
-        public enum ETAT { INSCRIPTION = 0, EN_COURS = 1, TERMINE = 2, ANNULE = 3 };
-        public ETAT etat { get; set; }
+        public ETAT_PARTIE etat { get; set; }
         public int nbCartesParJoueur
         {
             get; set;
@@ -31,12 +32,14 @@ namespace Domain.Model
         public int nbParJoueur { get; set; }
 
         public int nbTotalDes { get; set; }
-        private Parseur parseur=new Parseur();
+        private Parseur parseur = new Parseur();
 
         private static Random rng = new Random();
         //ajout du parametre String nom
         public Partie(String nom)
-        {            
+        {
+            // ligne du contructeur généré
+
             this.JoueursParticipants = new HashSet<JoueurPartie>();
             this.CartesPoubelle = new List<Carte>();
             this.CartesPioche = new List<Carte>();
@@ -44,22 +47,21 @@ namespace Domain.Model
             this.Sens = true;
             this.DateHeureCreation = DateTime.Now;
             Dictionary<string, int> dico = parseur.loadInfos();
-           
+
             nbCartesParJoueur = dico["nbCartesParJoueur"];
             nbCartesTotal = dico["nbCartesTotal"];
             minJoueurs = dico["minJoueurs"];
             maxJoueur = dico["maxJoueurs"];
             nbParJoueur = dico["nbParJoueur"];
             nbTotalDes = dico["nbTotalDes"];
-            
-          
+
             List<Carte> listeTypeCarte = parseur.loadCarte();
             Shuffle(listeTypeCarte);
 
             this.CartesPioche = listeTypeCarte;
 
         }
-      
+
         public bool CommencerPartie()
         {
             return true;
@@ -81,5 +83,5 @@ namespace Domain.Model
 
 
     }
-    
+
 }

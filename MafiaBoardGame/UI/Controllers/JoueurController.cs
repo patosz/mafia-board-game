@@ -1,20 +1,21 @@
-﻿using Domain;
+﻿using Domain.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using UI.Controllers;
+using UI.Models;
 
 namespace UI.Controllers
 {
     public class JoueurController : Controller
     {
-        private UccJoueurRef.GestionJoueurClient uccJoueur = new UccJoueurRef.GestionJoueurClient();
-
+        
         [HttpPost]
         public ActionResult LogIn(string pseudo, string mdp)
         {
-            JoueurDto jDto = uccJoueur.ConnexionJoueur(pseudo, mdp);
+            JoueurDto jDto = UCCJoueur.Instance.ConnexionJoueur(pseudo, mdp);
 
             if (jDto == null)
             {
@@ -40,11 +41,9 @@ namespace UI.Controllers
         }
 
         [HttpPost]
-        //TODO modifier pour correspondre à la situation actuelle
-        public ActionResult Register(JoueurDto j)
+        public ActionResult Register(UserModel j)
         {
-
-            bool res = uccJoueur.InscriptionJoueur(j.Pseudo, j.Mdp);
+            bool res = UCCJoueur.Instance.InscriptionJoueur(j.Pseudo, j.Mdp);
             if (!res)
             {
                 ViewData["errorMessage"] = "Erreur lors de l'inscription du joueur";

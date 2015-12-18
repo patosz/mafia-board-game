@@ -11,18 +11,18 @@ namespace UI.Controllers
 {
     public class PlateauController : Controller
     {
-        UccPartieRef.GestionPartieClient partie = new UccPartieRef.GestionPartieClient();
         // GET: Plateau
         public ActionResult Index(string nomPartie = "Test")
         {
+            //TODO uncomment
            /* if (nomPartie == null || nomPartie.Length == 0)
             {
                 return RedirectToAction("Index", "Index");
             }*/
-            //(new UccPartieRef.GestionPartieClient)
             ViewData["partie"] = nomPartie;
-            
-            return View();
+            JoueurDto jdt = (JoueurDto)Session["user"];
+            GameStateDto gs = UCCPartie.Instance.getGameState(jdt.Pseudo);
+            return View(gs);
         }
 
         public ActionResult Index2(string nomPartie = "Test")
@@ -45,62 +45,62 @@ namespace UI.Controllers
             string sens = dataJq["sensChoisi"];
             int joueur = int.Parse(dataJq["joueurCourant"]);
 
-            CarteDto carteDto = partie.getCarteDto(idCarte);
+            CarteDto carteDto = UCCPartie.Instance.getCarteDto(idCarte);
             int typeCarte = carteDto.CodeEffet;
             switch (typeCarte)
             {
                 case 1:
                     //Supprimer 1 des
-                    partie.supprimerUnDe(joueur);
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                    UCCPartie.Instance.supprimerUnDe(joueur);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 case 2:
                     //Donner des gauche ou droite
                     if (sens == "G")
-                        partie.donnerDeAGaucheOuDroite(false);
+                        UCCPartie.Instance.donnerDeAGaucheOuDroite(false);
                     else
-                        partie.donnerDeAGaucheOuDroite(true);
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                        UCCPartie.Instance.donnerDeAGaucheOuDroite(true);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 case 3:
                     //Supprimer 2 des
-                    partie.supprimerDeuxDes(joueur);
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                    UCCPartie.Instance.supprimerDeuxDes(joueur);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 case 4:
                     //Donner 1 dé
-                    partie.donnerUnDeAUnJoueur(joueur, deChoisi);
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                    UCCPartie.Instance.donnerUnDeAUnJoueur(joueur, deChoisi);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 case 5:
                     //Prendre 1 carte au joueur de mon choix
-                    partie.prendreUneCarteDUnJoueur(joueur, cible);
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                    UCCPartie.Instance.prendreUneCarteDUnJoueur(joueur, cible);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 case 6:
                     //Joueur de mon choix n'a plus qu'une carte
-                    partie.ciblerJoueurQUUneCarte(cible);
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                    UCCPartie.Instance.ciblerJoueurQUUneCarte(cible);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 case 7:
                     //Piocher 3 cartes
-                    partie.piocheTroisCartes(joueur);
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                    UCCPartie.Instance.piocheTroisCartes(joueur);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 case 8:
                     //Tous les joueurs sauf moi n'ont plus que 2 cartes
-                    partie.plusQueDeuxCartesPourLesAutres(joueur);
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                    UCCPartie.Instance.plusQueDeuxCartesPourLesAutres(joueur);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 case 9:
                     //Joueur de mon choix passe son tour
 
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 case 10:
                     //Rejouer et changer de tour
-                    partie.rejouerEtChangementDeSens(joueur);
-                    partie.jeterCartePoubelle(joueur, idCarte);
+                    UCCPartie.Instance.rejouerEtChangementDeSens(joueur);
+                    UCCPartie.Instance.jeterCartePoubelle(joueur, idCarte);
                     break;
                 default: return Json(new { success = false, message = "Probleme switch methode" }, JsonRequestBehavior.AllowGet);
          
