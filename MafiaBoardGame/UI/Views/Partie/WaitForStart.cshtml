@@ -12,6 +12,7 @@
     Nouvelle partie - @Model.Partie.Nom
 
 </h2>
+<p>@ViewBag.status</p>
 <div id="infos">
     @{
         Html.RenderPartial("RefreshLoadScreen", Model.Participants);
@@ -20,7 +21,7 @@
 
 <script>
     $(document).ready(function () {
-        setInterval(function () {
+        setTimeout(function () {
             $.ajax({
                 url: '/Partie/RefreshLoadScreen',
                 type: 'GET'
@@ -28,11 +29,13 @@
 
             //$('#infos').load('/Partie/RefreshLoadScreen');
             //var status = $('#status').attr('data-status');
-            if (status !== "go")
-                alert("Status différent de go");
+            var ha = $("#status").attr('data-status');
+
+            if (ha !== "go")
+                alert(status.toString() + "");
             else
                 location.href = '/Plateau/Index';
 
-        }, 3000);
+        }, 4000);
     });
 </script>

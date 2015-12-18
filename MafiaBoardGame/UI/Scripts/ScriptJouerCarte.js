@@ -9,9 +9,8 @@
 
 
     $(".carte-en-main").dblclick(function () {
-        var typeid = $("this").attr("data-type-id");
-        var carteChoisie = $("this").attr("data-carte-id");
-        var joueurPartie = $(".joueurCourant").val();
+        var typeid = $("this").attr("data-code-effet");
+        var carteChoisie = $("this").attr("data-id");
         var cible = "";
         var deChoisi = "";
         var sensChoisi = "";

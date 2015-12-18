@@ -61,7 +61,7 @@ namespace UI.Controllers
         public void LancerPartie()
         {
             int idPartie = (int)Session["partie"];
-            int NbJoueurs = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).Length;
+            int NbJoueurs = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).Count();
             /*if (NbJoueurs == 1)
             {
                 UCCPartie.Instance.annuler(idPartie);
@@ -74,9 +74,9 @@ namespace UI.Controllers
             {
                 p = UCCPartie.Instance.LancerPartie();
                 if (p == null)
-                    status = "inscription";
+                    ViewBag.status = "go";
                 else
-                    status = "go";
+                    ViewBag.status = "go";
                 return;
             }
             /*  if (p == null)
@@ -100,17 +100,18 @@ namespace UI.Controllers
 
         public PartialViewResult RefreshLoadScreen()
         {
-            
-            int idPartie = (int)Session["partie"];
-            //if (Session["partieCreation"] != null)
-            //{
-            DateTime partieCreation = (DateTime)Session["partieCreation"];
-            TimeSpan ts = DateTime.Now.Subtract(partieCreation);
-            string status = "inscription";
-            LancerPartie();
-            //status = "coucou";
 
-            //   }
+            int idPartie = (int)Session["partie"];
+            if (Session["partieCreation"] != null)
+            {
+                //DateTime partieCreation = (DateTime)Session["partieCreation"];
+                //TimeSpan ts = DateTime.Now.Subtract(partieCreation);
+                ViewBag.status = "go";
+                LancerPartie();
+                //status = "coucou";
+
+            }else
+                ViewBag.status = "go";
             /* else {
                  if (UCCPartie.Instance.getGameState(((JoueurDto)Session["user"]).Pseudo).Etat != (int)ETAT_PARTIE.INSCRIPTION)
                  {

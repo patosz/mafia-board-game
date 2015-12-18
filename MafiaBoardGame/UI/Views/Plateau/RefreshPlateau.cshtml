@@ -53,8 +53,9 @@
             </a>
         </div>
         <div class="well col-lg-3 col-lg-offset-1">
-            @if(Model.DerniereCarteJouee != null){
-            <img src="~/Images/dos_carte.svg" id="defausse" />
+            @if (Model.DerniereCarteJouee != null)
+            {
+                <img src="~/Images/dos_carte.svg" id="defausse" />
             }
         </div>
 
@@ -79,6 +80,7 @@
                 <div class="well vos-des col-lg-4">
                     @foreach (var d in Model.MesDes)
                     {
+                        var de = @d.Valeur;
                         <img src="~/Images/de_wazabi.svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur" />
                     }
                 </div>
@@ -101,7 +103,7 @@
                                         var c = Model.MesCartes[j];
 
                                         <div class="col-sm-3">
-                                            <img src="~/Images/dos_carte.svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                                            <img src="~/Images/dos_carte\" @c.CodeEffet \".svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
                                                  data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" class="img-responsive carte-en-main" />
                                         </div>
                                     }
@@ -110,7 +112,7 @@
 
 
                             @{
-                             var NbCartesRestantes = NbCartes - j;
+                                var NbCartesRestantes = NbCartes - j;
                             }
 
                             @for (var i = 0; NbCartesRestantes > 0; i++)
@@ -129,7 +131,7 @@
                                         }
                                     </div>
                                 </div>
-                                        NbCartesRestantes -= j;
+                                NbCartesRestantes -= j;
                             }
                             }
 
