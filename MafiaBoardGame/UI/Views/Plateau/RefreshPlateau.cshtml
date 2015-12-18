@@ -103,7 +103,7 @@
                                         var c = Model.MesCartes[j];
 
                                         <div class="col-sm-3">
-                                            <img src="~/Images/carte_+@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                                            <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@(c.CodeEffet)"
                                                  data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" class="img-responsive carte-en-main" />
                                         </div>
                                     }
@@ -117,7 +117,7 @@
 
                             @for (var i = 0; NbCartesRestantes > 0; i++)
                             {
-                                <div class="item">
+                                <div class="item active">
                                     <div class="row">
                                         @for (j = 0; j < NbCartesRestantes && j < 4; j++)
                                         {
@@ -125,7 +125,7 @@
                                             var c = Model.MesCartes[(i * 4) + j];
 
                                             <div class="col-sm-3">
-                                                <img src="~/Images/carte_+(@c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                                                <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
                                                      data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" class="img-responsive carte-en-main" />
                                             </div>
                                         }
@@ -133,7 +133,7 @@
                                 </div>
                                 NbCartesRestantes -= j;
                             }
-                            }
+                            
 
                             <!-- Left and right controls -->
                             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">

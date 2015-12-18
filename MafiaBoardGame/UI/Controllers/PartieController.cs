@@ -106,19 +106,19 @@ namespace UI.Controllers
             {
                 //DateTime partieCreation = (DateTime)Session["partieCreation"];
                 //TimeSpan ts = DateTime.Now.Subtract(partieCreation);
-                
+
                 LancerPartie();
                 //status = "coucou";
 
             }
-            /* else {
-                 if (UCCPartie.Instance.getGameState(((JoueurDto)Session["user"]).Pseudo).Etat != (int)ETAT_PARTIE.INSCRIPTION)
-                 {
-                     status = "plateau";
-                 }
-             }*/
+            else {
+                if (UCCPartie.Instance.getGameState(((JoueurDto)Session["user"]).Pseudo).Etat != (int)ETAT_PARTIE.INSCRIPTION)
+                {
+                    TempData["statut"] = "go";
+                }
+            }
 
-            
+
             return PartialView(UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList());
         }
 

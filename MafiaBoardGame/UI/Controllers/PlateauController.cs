@@ -108,18 +108,21 @@ namespace UI.Controllers
         public ActionResult JouerCarte(string json = "")
         {
             if (json == "")
-                return Json(new { success = false, message = "Problème param methode" }, JsonRequestBehavior.AllowGet);
-
-            Dictionary<string, string> dataJq = (Dictionary<string, string>)JsonConvert.DeserializeObject(json);
-            int idCarte = int.Parse(dataJq["carteId"]);
-            int cible = int.Parse(dataJq["cible"]);
-            int deChoisi = int.Parse(dataJq["deChoisi"]);
-            string sens = dataJq["sensChoisi"];
+                return Json(new { success = false, res = "Prob param" }, JsonRequestBehavior.AllowGet);
+            string sens = "";
+            int cible = 0;
+            string[] tab= json.Split(':');
+            int typeCarte = int.Parse(tab[0]);
+            int idCarte = int.Parse(tab[1]);
+            if(tab[2] != "")
+                cible = int.Parse(tab[2]);
+            if(tab[3] != "")
+                 sens = tab[3];
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
-
+           
             CarteDto carteDto = UCCPartie.Instance.getCarteDto(idCarte);
-            int typeCarte = carteDto.CodeEffet;
+            
             switch (typeCarte)
             {
                 case 1:
@@ -142,7 +145,7 @@ namespace UI.Controllers
                     break;
                 case 4:
                     //Donner 1 dé
-                    UCCPartie.Instance.donnerUnDeAUnJoueur(joueurPartie, deChoisi);
+                    UCCPartie.Instance.donnerUnDeAUnJoueur(joueurPartie, cible);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
                     break;
                 case 5:
@@ -175,10 +178,10 @@ namespace UI.Controllers
                     UCCPartie.Instance.rejouerEtChangementDeSens(joueurPartie);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
                     break;
-                default: return Json(new { success = false, message = "Probleme switch methode" }, JsonRequestBehavior.AllowGet);
+                default: return Json(new { success = false, res = "Prob Switch Case" }, JsonRequestBehavior.AllowGet);
 
             }
-            return Json(new { success = true, message = "Order updated successfully" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, res = "Order updated successfully" }, JsonRequestBehavior.AllowGet);
         }
     }
 }
