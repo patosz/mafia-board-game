@@ -43,6 +43,7 @@ namespace UI.Controllers
                 adv.Cartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
                 if (adv.Pseudo.Equals(jdt.Pseudo))
                 {
+                    Session["monNom"] = jdt.Pseudo;
                     plateau.MesDes = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
                     plateau.DesCourant = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
                     plateau.MesCartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
@@ -83,6 +84,7 @@ namespace UI.Controllers
                 adv.Cartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
                 if (adv.Pseudo.Equals(jdt.Pseudo))
                 {
+                    Session["monNom"] = jdt.Pseudo;
                     plateau.MesDes = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
                     plateau.DesCourant = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
                     plateau.MesCartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
@@ -104,23 +106,19 @@ namespace UI.Controllers
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
-            List<DeDto> listDe = UCCPartie.Instance.lancerDes(joueurPartie).ToList();
-            plateau.MesDes = listDe;
-            RefreshPlateau();
-
+            UCCPartie.Instance.lancerDes(joueurPartie);
+            PiocherCarte();
         }
 
         public void PiocherCarte()
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
-            foreach (DeDto dedto in plateau.MesDes)
+            List<DeDto> list = UCCPartie.Instance.getListDesDto(joueurPartie).ToList();
+            foreach(DeDto de in list)
             {
-                if (dedto.Valeur.Equals("P"))
-                {
-                    CarteDto carteDto = UCCPartie.Instance.piocherCarte(joueurPartie);
-                    plateau.MesCartes.Add(carteDto);
-                }
+                if(de.Valeur.Equals("P"))
+                    UCCPartie.Instance.piocherCarte(joueurPartie);
             }
             RefreshPlateau();
         }

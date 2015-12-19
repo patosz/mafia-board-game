@@ -261,13 +261,17 @@ namespace Domain
         public List<DeDto> lancerDes(int IdJoueurPartie)
         {
             List<DeDto> listDeLance = new List<DeDto>();
+            List<De> list = new List<De>();
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
             //shuffle
             foreach (De de in joueurPartie.DesMain)
             {
                 de.LancerDe();
+                list.Add(de);
                 listDeLance.Add(BizToDto.ToDeDto(de));
             }
+            joueurPartie.DesMain = list;
+            dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.SaveChanges();
             return listDeLance;
         }

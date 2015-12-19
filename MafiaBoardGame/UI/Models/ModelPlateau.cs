@@ -15,7 +15,7 @@ namespace UI.Models
             MesCartes = new List<CarteDto>();
             MesDes = new List<DeDto>();
         }
-
+        public string monNom { get; set; }
         public JoueurDto JoueurCourant { get; set; }
 
         public List<DeDto> DesCourant { get; set; }

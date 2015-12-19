@@ -7,6 +7,14 @@ $(function () {
     AddPopoverDefausse();
 });
 
+function disableCards() {
+    $('vos-cartes').prop('disabled', true);
+}
+
+function enableCards() {
+    $('vos-cartes').prop('disabled', false);
+}
+
 function DonnerDe() {
     /* version test */
     $(".de-en-main").click(function () {
@@ -40,9 +48,9 @@ function DonnerDe() {
 
 function RefreshInterval() {
     setInterval(function () {
-        var html = $('#game-container').get('/Plateau/RefreshPlateau');
+        var html = $.get('/Plateau/RefreshPlateau');
         if (html !== null || html !== 'undefined') {
-            $('#game-container').html(html);
+            $('#game-container').replaceWith(html);
             console.log("Refresh");
         }
     }, 2000);
@@ -65,18 +73,18 @@ function AddPopoverDefausse() {
 
 function AddJouerCarteCartesMain() {
     $(".carte-en-main").dblclick(function () {
-        
+
         //stop refresh
         clearInterval(interval);
 
         alert("hahaha");
-        
+
         //get clicked object info
         var typeCarte = $(this).attr("data-code-effet");
         var typeCarteInt = Number.parseInt(typeCarte);
         var idCarte = $(this).attr("data-id");
         alert('Type : ' + typeCarte + ' // Id : ' + idCarte);
-        
+
         //init JSON container        
         var data = {};
         data["typeCarte"] = typeCarte;
@@ -108,7 +116,8 @@ function AddJouerCarteCartesMain() {
         $.ajax({
             type: "POST",
             url: "/Plateau/JouerCarte",
-            data: "json="+aPasser,
+            data: "json=" + aPasser,
+            cache: false,
             success: interval(),
             error: function () {
                 alert("FAIL");
@@ -116,4 +125,19 @@ function AddJouerCarteCartesMain() {
         })
 
     });
+}
+function LancerDes() {
+    $(this).hide();
+    enableCards();
+    $.ajax({
+        type: "GET",
+        url: "/Plateau/LancerDes",
+    }).done(function () {
+        location.reload(true);
+    }).fail(
+        function (jqCHR, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    );
+    location.reload(true);
 }

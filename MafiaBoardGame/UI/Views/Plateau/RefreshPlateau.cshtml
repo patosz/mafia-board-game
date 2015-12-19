@@ -80,8 +80,8 @@
                     <p class="panel-title">Dés du joueur courant</p>
                 </div>
                 <div class="panel-body">
-                    @if(Model.JoueurCourant.Pseudo.Equals(ViewBag.User)){
-                        <a href="/Plateau/LancerDes" class="btn btn-primary">Lancer dés</a>
+                    @if(Model.JoueurCourant.Pseudo.Equals(Session["monNom"])){
+                        <a onclick="LancerDes()" class="btn btn-primary">Lancer dés</a>
                     }
                     @foreach (var d in Model.DesCourant)
                     {

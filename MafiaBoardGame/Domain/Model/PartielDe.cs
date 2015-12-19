@@ -7,7 +7,7 @@ namespace Domain.Model
 {
     public partial class De
     {
-        Random random = new Random();
+        static Random random = new Random(1);
         public De()
         {
             this.Valeur = "M";
@@ -15,8 +15,7 @@ namespace Domain.Model
 
         public void LancerDe()
         {
-            int rand = random.Next(6) + 1;
-
+            int rand = random.Next(1, 6);
             if (rand <= 3)
                 this.Valeur = "M";
             else if (rand <= 5)
