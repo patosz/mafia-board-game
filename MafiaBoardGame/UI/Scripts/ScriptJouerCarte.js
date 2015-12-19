@@ -63,7 +63,7 @@ function DonnerDe() {
             $.ajax({
                 type: "GET",
                 url: "/Plateau/DonnerDe",
-                data: "?cible=" + cible + "&deId=" + $(this).attr('data-id'),
+                data: "?cible=" + cible,
                 success: function () {
                     alert("SUCCESS");
                 },
