@@ -13,7 +13,7 @@ namespace UI.Models
             DesCourant = new List<DeDto>();
             Adversaires = new List<AdversaireModel>();
             MesCartes = new List<CarteDto>();
-            MesCartes = new List<CarteDto>();
+            MesDes = new List<DeDto>();
         }
 
         public JoueurDto JoueurCourant { get; set; }
