@@ -37,7 +37,7 @@
             type: "GET",
             url: "/Plateau/JouerCarte?json="+donnees.toString(),
             data: donnees,
-            contentType: "application/json; charset=utf-8",
+            contentType: "application/json",
             dataType: "json",
             async: true,
             cache: false,
