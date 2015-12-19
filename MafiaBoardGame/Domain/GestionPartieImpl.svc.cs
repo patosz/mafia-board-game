@@ -806,5 +806,17 @@ namespace Domain
         {
             return partie.CartesPoubelle.Count == 0 ? null : BizToDto.ToCarteDto(partie.CartesPoubelle.Last());
         }
+
+
+        public JoueurPartieDto getJoueurPartie(string pseudo, int idPartie)
+        {
+
+            JoueurPartie joueurPartie = (from JoueurPartie p in dbcontext.JoueurParties
+                                        where p.PartieId == idPartie && p.Joueur.Pseudo.Equals(pseudo)
+                                        select p).FirstOrDefault();
+
+            return BizToDto.ToJoueurPartieDto(joueurPartie);
+        }
+
     }
 }
