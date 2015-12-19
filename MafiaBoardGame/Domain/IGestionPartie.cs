@@ -111,6 +111,9 @@ namespace Domain
         [OperationContract]
         CarteDto getLastCartePoubelle();
 
+        [OperationContract]
+        JoueurPartieDto getJoueurPartie(string pseudo, int idPartie);
+
     }
 
 
