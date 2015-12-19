@@ -129,6 +129,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Images\card_model.svg" />
     <Content Include="Images\carte_1.svg" />
     <Content Include="Images\carte_10.svg" />
     <Content Include="Images\carte_2.svg" />
@@ -140,8 +141,11 @@
     <Content Include="Images\carte_8.svg" />
     <Content Include="Images\carte_9.svg" />
     <Content Include="Images\de_D.svg" />
+    <Content Include="Images\de_D_mini.svg" />
+    <Content Include="Images\de_M_mini.svg" />
     <Content Include="Images\de_P.svg" />
     <Content Include="Images\de_M.svg" />
+    <Content Include="Images\de_P_mini.svg" />
     <Content Include="Images\de_wazabi_mini.svg" />
     <Content Include="Images\dos_carte.svg" />
     <Content Include="Images\dos_carte_mini.svg" />
