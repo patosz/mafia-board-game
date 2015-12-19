@@ -814,9 +814,11 @@ namespace Domain
 
         public JoueurPartieDto getJoueurPartie(string pseudo, int idPartie)
         {
-
+            Joueur joueur = (from Joueur j in dbcontext.Joueurs
+                             where  j.Pseudo.Equals(pseudo)
+                             select j).FirstOrDefault();
             JoueurPartie joueurPartie = (from JoueurPartie p in dbcontext.JoueurParties
-                                        where p.PartieId == idPartie && p.Joueur.Pseudo.Equals(pseudo)
+                                         where p.PartieId == idPartie && p.JoueurId == joueur.Id
                                         select p).FirstOrDefault();
 
             return BizToDto.ToJoueurPartieDto(joueurPartie);
