@@ -7,6 +7,30 @@
             $('#game-container').html(html);
     }, 2000);
 
+    $(".de-en-main").click(function () {
+        if ($(this).attr("data-valeur") == "D") {
+            var cible = prompt("A qui voulez vous donner ce dé?");
+            $.ajax({
+                type: "GET",
+                url: "/Plateau/DonnerDe?cible="+cible,
+                data: cible,
+                contentType: "application/json",
+                dataType: "json",
+                async: true,
+                cache: false,
+                success: function () {
+                    alert("SUCCESS");
+                },
+                error: function () {
+                    alert("FAIL");
+                }
+            })
+        }
+        
+
+
+
+    });
     $(".carte-en-main").dblclick(function () {
         alert("hahaha");
         var typeid = $(this).attr("data-code-effet");
@@ -35,7 +59,7 @@
 
         $.ajax({
             type: "GET",
-            url: "/Plateau/JouerCarte?json="+donnees.toString(),
+            url: "/Plateau/JouerCarte",
             data: donnees,
             contentType: "application/json",
             dataType: "json",
