@@ -139,5 +139,4 @@ function LancerDes() {
             alert(errorThrown);
         }
     );
-    location.reload(true);
 }
