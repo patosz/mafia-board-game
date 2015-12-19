@@ -9,13 +9,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="50"
-   height="50"
-   viewBox="0 0 49.999998 49.999998"
+   width="20"
+   height="20"
+   viewBox="0 0 19.999999 19.999999"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="de_P.svg">
+   sodipodi:docname="de_P_mini.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.959798"
-     inkscape:cx="11.305601"
-     inkscape:cy="33.582006"
+     inkscape:zoom="31.678384"
+     inkscape:cx="17.536904"
+     inkscape:cy="8.4342419"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -53,19 +53,19 @@
      inkscape:label="Calque 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-1002.3622)" />
+     transform="translate(0,-1032.3622)" />
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Layer 1"
-     transform="translate(0,-1002.3622)"
+     transform="translate(0,-1032.3622)"
      style="display:inline;opacity:1" />
   <g
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Layer 2"
      style="display:inline"
-     transform="translate(0,-50)">
+     transform="translate(0,-80)">
     <flowRoot
        xml:space="preserve"
        id="flowRoot4152"
@@ -78,8 +78,8 @@
            y="21.46064" /></flowRegion><flowPara
          id="flowPara4158"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;font-family:Corleone;-inkscape-font-specification:Corleone;fill:#ffffff">M  </flowPara></flowRoot>    <g
-       id="g4151"
-       transform="matrix(0.49436913,0,0,0.49436913,0.92719925,49.93618)">
+       id="g4292"
+       transform="matrix(0.20517317,0,0,0.20517317,-0.15241887,79.630735)">
       <rect
          ry="4.5741181"
          rx="4.1245542"
