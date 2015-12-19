@@ -52,6 +52,8 @@ namespace UI.Controllers
             }
 
             ViewData["partie"] = nomPartie;
+            if (p.Vainqueur != null)
+                ViewData["vainqueur"] = p.Vainqueur.Pseudo;
             return View(plateau);
         }
 
@@ -93,7 +95,10 @@ namespace UI.Controllers
             }
 
             ViewData["partie"] = nomPartie;
-            ViewBag.User = jdt.Pseudo;
+            plateau.Client = jdt.Pseudo;
+            if(p.Vainqueur != null)
+                ViewData["vainqueur"] = p.Vainqueur.Pseudo;
+
             return PartialView(plateau);
         }
 
@@ -115,9 +120,9 @@ namespace UI.Controllers
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
             List<DeDto> list = UCCPartie.Instance.getListDesDto(joueurPartie).ToList();
-            foreach(DeDto de in list)
+            foreach (DeDto de in list)
             {
-                if(de.Valeur.Equals("P"))
+                if (de.Valeur.Equals("P"))
                     UCCPartie.Instance.piocherCarte(joueurPartie);
             }
             RefreshPlateau();
@@ -140,11 +145,11 @@ namespace UI.Controllers
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
 
-
+            PartieDto p = UCCPartie.Instance.getPartieDto(idPartie);
             JoueurDto vainqueur = UCCPartie.Instance.vainqueur(joueurPartie);
             if (vainqueur != null)
             {
-                //on a une vainqueur
+                ViewBag.vainqueur = p.Vainqueur.Pseudo;
             }
             else
             {
@@ -154,7 +159,7 @@ namespace UI.Controllers
 
         }
 
-        public void QuitterPartie()
+        public ActionResult QuitterPartie()
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
@@ -170,9 +175,7 @@ namespace UI.Controllers
             {
                 UCCPartie.Instance.next();
             }
-
-            RefreshPlateau();
-
+            return RedirectToAction("Index", new { controller = "Partie" });
         }
 
         public void JouerCarte()
@@ -200,7 +203,7 @@ namespace UI.Controllers
             int cible = 0;
 
             int idPartie = (int)Session["partie"];
-
+            PartieDto p = UCCPartie.Instance.getPartieDto(idPartie);
             if (cibleDico != "")
             {
                 cibleStr = dico["cible"];
@@ -252,7 +255,7 @@ namespace UI.Controllers
                     //Joueur de mon choix n'a plus qu'une carte
                     UCCPartie.Instance.ciblerJoueurQUUneCarte(cible);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception("Case 6 : Type carte 6");
+                    break;
 
                 case 7:
                     //Piocher 3 cartes

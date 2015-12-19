@@ -30,6 +30,8 @@ namespace UI.Models
 
         public CarteDto DerniereCarteJouee { get; set; }
 
+        public string Client { get; set; }
+
     }
 
 }

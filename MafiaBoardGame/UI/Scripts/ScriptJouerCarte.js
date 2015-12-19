@@ -1,32 +1,62 @@
 ﻿var interval;
 
 $(function () {
-    interval = RefreshInterval;
-    interval();
     AddPopoverDefausse();
     addPopoverCartesMain();
+    isMyTurn();
 });
-
-function checkVainqueur(){
-
-}
 
 function isMyTurn() {
     var joueurActif = $('.adversaire-actif').text();
     var moi = $('#votre-nom').text();
-    if (moi.euals(joueurActif)) {
+    
         startTurn();
-    }
+    /*} else {
+        interval = RefreshInterval;
+        interval();
+    }*/
 }
 
 function startTurn() {
-    alert("C'est votre tour.");
+    clearInterval(interval);
+    $('#btn-lancer-des').show();
+    alert("C'est votre tour");
+}
 
+function addPopoverCartesMain() {
+    var content = "";
+    content += '<img src="/Images/carte' + $(this).attr('data-code-effet') + '.svg"/>';
+    content += '<p><strong>EffetComplet : </strong><br/>' + $(this).attr('data-effet-complet') + '</p>';
+    content += '<p><strong>Cout : </strong>' + $(this).attr('data-cout') + ' M </p>';
+
+    $('#defausse').popover({
+        html: true,
+        trigger: "click",
+        placement: "top",
+        title: "" + $(this).attr('data-effect'),
+        content: content
+    });
+}
+
+
+function checkVainqueur() {
+    var vainqueur = $('#vainqueur').text();
+    if (vainqueur !== null && vainqueur !== 'undefined' && vainqueur.length > 0) {
+        alert("Le vainqueur est : ");
+        window.location = '/Partie/Index';
+    }
+}
+function disableCards() {
+    $('vos-cartes').prop('disabled', true);
+}
+
+function enableCards() {
+    $('vos-cartes').prop('disabled', false);
 }
 
 function DonnerDe() {
-    /* version test */
-    $(".de-en-main").click(function () {
+
+    $(".de-en-main").each(function () {
         if ($(this).attr("data-valeur") === "D") {
             //popupSelectAdversaire();
             var cible = prompt("A qui voulez vous donner ce dé?");
@@ -44,6 +74,9 @@ function DonnerDe() {
         }
     });
 
+    $('.game-container').load('/Plateau/RefreshPlateau');
+    AddJouerCarteCartesMain();
+
     /*
     var select = $('<select>');
     var adversaires = $('.adversaire').text();
@@ -57,24 +90,14 @@ function DonnerDe() {
 
 function RefreshInterval() {
     setInterval(function () {
-        $('.carte-en-main').load('/Plateau/RefreshPlateau');
-        console.log("Refresh");
+        var html = $.get('/Plateau/RefreshPlateau');
+        if (html !== null || html !== 'undefined') {
+            $('.game-container').html(html);
+            console.log("Refresh");
+            checkVainqueur();
+        }
     }, 2000);
-}
 
-function addPopoverCartesMain() {
-    var content = "";
-    content += '<img src="/Images/carte' + $(this).attr('data-code-effet') + '.svg"/>';
-    content += '<p><strong>EffetComplet : </strong><br/>' + $(this).attr('data-effet-complet') + '</p>';
-    content += '<p><strong>Cout : </strong>' + $(this).attr('data-cout') + ' M </p>';
-
-    $('#defausse').popover({
-        html: true,
-        trigger: "click",
-        placement: "top",
-        title: "" + $(this).attr('data-effect'),
-        content: content
-    });
 }
 
 function AddPopoverDefausse() {
@@ -96,14 +119,11 @@ function AddJouerCarteCartesMain() {
     $(".carte-en-main").dblclick(JouerCarte);
 }
 
-function DelJouerCarteCartesMain(){
+function DelJouerCarteCartesMain() {
     $(".carte-en-main").off("dblclick");
 }
 
 function JouerCarte() {
-    //stop refresh
-    clearInterval(interval);
-
     alert("hahaha");
 
     //get clicked object info
@@ -145,21 +165,25 @@ function JouerCarte() {
         url: "/Plateau/JouerCarte",
         data: "json=" + aPasser,
         cache: false,
-        success: interval(),
         error: function () {
             alert("FAIL");
         }
-    })
+    }).done(function () {
+        DelJouerCarteCartesMain();
+        location.reload(true);
+        interval();
+    });
 }
 
 function LancerDes() {
-    $(this).hide();
+    $('#btn-lancer-des').hide();
     $.ajax({
         type: "GET",
         url: "/Plateau/LancerDes",
     }).done(function () {
-        enableCards();
-        RefreshInterval();
+        //peut poser pbs
+        $('.game-container').load('/Plateau/RefreshPlateau');
+        DonnerDe();
     }).fail(
         function (jqCHR, textStatus, errorThrown) {
             alert(errorThrown);

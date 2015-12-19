@@ -15,7 +15,7 @@ namespace Domain.Model
 
         public void LancerDe()
         {
-            int rand = random.Next(1, 6);
+            int rand = random.Next(1, 6)+1;
             if (rand <= 3)
                 this.Valeur = "M";
             else if (rand <= 5)
