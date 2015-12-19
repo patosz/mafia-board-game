@@ -11,12 +11,3 @@
 <div id="affichage-plateau" class="container game-container">
     @{Html.RenderPartial("RefreshPlateau", Model);}
 </div>
-
-<script>
-    $(document).ready(function () {
-        setInterval(function () {
-            $('#affichage-plateau').load('/Plateau/RefreshPlateau');
-
-        }, 2000);
-    });
-</script>

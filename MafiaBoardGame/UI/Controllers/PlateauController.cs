@@ -26,7 +26,7 @@ namespace UI.Controllers
 
             List<JoueurPartieDto> participants = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList();
 
-             plateau = new ModelPlateau();
+            plateau = new ModelPlateau();
             plateau.Adversaires = new List<AdversaireModel>();
 
             PartieDto p = UCCPartie.Instance.getPartieDto(idPartie);
@@ -94,46 +94,40 @@ namespace UI.Controllers
             return PartialView(plateau);
         }
 
-        public ActionResult Index2(string nomPartie = "Test")
-        {
-            ViewData["partie"] = nomPartie;
-
-            return View();
-        }
-
         public ViewResult IndexTemplate()
         {
             return View();
         }
+
         [WebMethod]
         public void LancerDes()
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
-            List<DeDto> listDe=UCCPartie.Instance.lancerDes(joueurPartie).ToList();
+            List<DeDto> listDe = UCCPartie.Instance.lancerDes(joueurPartie).ToList();
             plateau.MesDes = listDe;
             RefreshPlateau();
 
         }
+
         [WebMethod]
         public void PiocherCarte()
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
-            foreach(DeDto dedto in plateau.MesDes)
+            foreach (DeDto dedto in plateau.MesDes)
             {
                 if (dedto.Valeur.Equals("P"))
                 {
-                   CarteDto carteDto = UCCPartie.Instance.piocherCarte(joueurPartie);
+                    CarteDto carteDto = UCCPartie.Instance.piocherCarte(joueurPartie);
                     plateau.MesCartes.Add(carteDto);
                 }
             }
             RefreshPlateau();
-
         }
 
         [WebMethod]
-        public void DonnerDe(string json="")
+        public void DonnerDe(string json = "")
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
@@ -152,7 +146,7 @@ namespace UI.Controllers
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
 
 
-           JoueurDto vainqueur= UCCPartie.Instance.vainqueur(joueurPartie);
+            JoueurDto vainqueur = UCCPartie.Instance.vainqueur(joueurPartie);
             if (vainqueur != null)
             {
                 //on a une vainqueur
@@ -166,14 +160,14 @@ namespace UI.Controllers
         }
 
         [WebMethod]
-        public void QuitterPatie()
+        public void QuitterPartie()
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
 
 
-             UCCPartie.Instance.quitterPartie(joueurPartie);
-           JoueurDto vainqueur= UCCPartie.Instance.vainqueurParForfait();
+            UCCPartie.Instance.quitterPartie(joueurPartie);
+            JoueurDto vainqueur = UCCPartie.Instance.vainqueurParForfait();
             if (vainqueur != null)
             {
                 //on a un vainqueur
@@ -196,15 +190,15 @@ namespace UI.Controllers
             int idPartie = (int)Session["partie"];
             string[] tab = json.Split(':');
             int cible = UCCPartie.Instance.getJoueurPartie(tab[2], idPartie).Id;
-           
+
             int typeCarte = int.Parse(tab[0]);
             int idCarte = int.Parse(tab[1]);
-            if(tab[3] != "")
-                 sens = tab[3];
+            if (tab[3] != "")
+                sens = tab[3];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
-           
+
             CarteDto carteDto = UCCPartie.Instance.getCarteDto(idCarte);
-            
+
             switch (typeCarte)
             {
                 case 1:
