@@ -12,6 +12,7 @@ namespace UI.Controllers
 {
     public class PlateauController : Controller
     {
+        ModelPlateau plateau;
         // GET: Plateau
         public ActionResult Index(string nomPartie = "Partie aléatoire")
         {
@@ -25,7 +26,7 @@ namespace UI.Controllers
 
             List<JoueurPartieDto> participants = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList();
 
-            ModelPlateau plateau = new ModelPlateau();
+             plateau = new ModelPlateau();
             plateau.Adversaires = new List<AdversaireModel>();
 
             PartieDto p = UCCPartie.Instance.getPartieDto(idPartie);
@@ -53,6 +54,7 @@ namespace UI.Controllers
             return View(plateau);
         }
 
+
         public PartialViewResult RefreshPlateau(string nomPartie = "Partie aléatoire")
         {
             //TODO ajouter système check partie invalide demandée
@@ -64,7 +66,7 @@ namespace UI.Controllers
 
             List<JoueurPartieDto> participants = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList();
 
-            ModelPlateau plateau = new ModelPlateau();
+            plateau = new ModelPlateau();
             plateau.Adversaires = new List<AdversaireModel>();
 
             PartieDto p = UCCPartie.Instance.getPartieDto(idPartie);
@@ -102,6 +104,88 @@ namespace UI.Controllers
         public ViewResult IndexTemplate()
         {
             return View();
+        }
+        [WebMethod]
+        public void LancerDes()
+        {
+            int idPartie = (int)Session["partie"];
+            int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
+            List<DeDto> listDe=UCCPartie.Instance.lancerDes(joueurPartie).ToList();
+            plateau.MesDes = listDe;
+            RefreshPlateau();
+
+        }
+        [WebMethod]
+        public void PiocherCarte()
+        {
+            int idPartie = (int)Session["partie"];
+            int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
+            foreach(DeDto dedto in plateau.MesDes)
+            {
+                if (dedto.Valeur.Equals("P"))
+                {
+                   CarteDto carteDto = UCCPartie.Instance.piocherCarte(joueurPartie);
+                    plateau.MesCartes.Add(carteDto);
+                }
+            }
+            RefreshPlateau();
+
+        }
+
+        [WebMethod]
+        public void DonnerDe(string json="")
+        {
+            int idPartie = (int)Session["partie"];
+            int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
+
+           
+
+
+            RefreshPlateau();
+
+        }
+
+        [WebMethod]
+        public void Next()
+        {
+            int idPartie = (int)Session["partie"];
+            int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
+
+
+           JoueurDto vainqueur= UCCPartie.Instance.vainqueur(joueurPartie);
+            if (vainqueur != null)
+            {
+                //on a une vainqueur
+            }
+            else
+            {
+                UCCPartie.Instance.next();
+            }
+
+           RefreshPlateau();
+
+        }
+
+        [WebMethod]
+        public void QuitterPatie()
+        {
+            int idPartie = (int)Session["partie"];
+            int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
+
+
+             UCCPartie.Instance.quitterPartie(joueurPartie);
+           JoueurDto vainqueur= UCCPartie.Instance.vainqueurParForfait();
+            if (vainqueur != null)
+            {
+                //on a un vainqueur
+            }
+            else
+            {
+                UCCPartie.Instance.next();
+            }
+
+            RefreshPlateau();
+
         }
 
         [WebMethod]
