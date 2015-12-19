@@ -139,7 +139,9 @@
     <Content Include="Images\carte_7.svg" />
     <Content Include="Images\carte_8.svg" />
     <Content Include="Images\carte_9.svg" />
-    <Content Include="Images\de_wazabi.svg" />
+    <Content Include="Images\de_D.svg" />
+    <Content Include="Images\de_P.svg" />
+    <Content Include="Images\de_M.svg" />
     <Content Include="Images\de_wazabi_mini.svg" />
     <Content Include="Images\dos_carte.svg" />
     <Content Include="Images\dos_carte_mini.svg" />

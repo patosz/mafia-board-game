@@ -56,7 +56,9 @@
         <div class="well col-lg-3 col-lg-offset-1">
             @if (Model.DerniereCarteJouee != null)
             {
-                <img src="~/Images/dos_carte.svg" id="defausse" />
+                <img src="~/Images/carte_@(Model.DerniereCarteJouee.CodeEffet).svg" id="defausse" />
+            } else {
+                <h3>Vide</h3>
             }
         </div>
 
@@ -82,7 +84,7 @@
                     @foreach (var d in Model.MesDes)
                     {
                         
-                        <img src="~/Images/de_wazabi.svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur" />
+                        <img src="~/Images/de_@(d.Valeur).svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur" />
                     }
                 </div>
 
