@@ -4,19 +4,24 @@ $(function () {
     interval = RefreshInterval;
     interval();
     AddPopoverDefausse();
+    addPopoverCartesMain();
 });
 
-function myTurn() {
+function checkVainqueur(){
+
+}
+
+function isMyTurn() {
     var joueurActif = $('.adversaire-actif').text();
-    
+    var moi = $('#votre-nom').text();
+    if (moi.euals(joueurActif)) {
+        startTurn();
+    }
 }
 
-function disableCards() {
-    $('vos-cartes').prop('disabled', true);
-}
+function startTurn() {
+    alert("C'est votre tour.");
 
-function enableCards() {
-    $('vos-cartes').prop('disabled', false);
 }
 
 function DonnerDe() {
@@ -89,6 +94,10 @@ function AddPopoverDefausse() {
 
 function AddJouerCarteCartesMain() {
     $(".carte-en-main").dblclick(JouerCarte);
+}
+
+function DelJouerCarteCartesMain(){
+    $(".carte-en-main").off("dblclick");
 }
 
 function JouerCarte() {
