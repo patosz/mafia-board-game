@@ -123,7 +123,8 @@
                     @foreach (var d in Model.MesDes)
                     {
 
-                        <img src="~/Images/de_@(d.Valeur).svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur" />
+                        <img src="~/Images/de_@(d.Valeur).svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur"
+                             onclick="JouerDe(@d.Id,&quot;@d.Valeur&quot;)" />
                     }
                 </div>
 
@@ -147,7 +148,7 @@
                                         <div class="col-sm-3">
                                             <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@(c.CodeEffet)"
                                                  data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" 
-                                                 class="img-responsive carte-en-main" ondblclick="JouerCarte()"
+                                                 class="img-responsive carte-en-main" ondblclick="JouerCarte(@c.Id,@c.CodeEffet)"
                                                  onclick="PopoverCartesMain()"/>
                                         </div>
                                     }
@@ -171,7 +172,7 @@
                                             <div class="col-sm-3">
                                                 <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
                                                      data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" 
-                                                     class="img-responsive carte-en-main" ondblclick="JouerCarte()" 
+                                                     class="img-responsive carte-en-main" ondblclick="JouerCarte(@c.Id,@c.CodeEffet)" 
                                                      onclick="PopoverCartesMain()"/>
                                             </div>
                                         }
@@ -198,5 +199,5 @@
     </div>
 </div>
 <div style="display:none" id="vainqueur">
-    @ViewData["vainqueur"]
+    @Model.Vainqueur
 </div>

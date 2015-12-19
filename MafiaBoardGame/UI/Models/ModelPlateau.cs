@@ -33,6 +33,8 @@ namespace UI.Models
 
         public string Client { get; set; }
 
+        public string Vainqueur { get; set; }
+
     }
 
 }

@@ -35,22 +35,23 @@ function PopoverDefausse() {
 }
 
 function enableCartesMain() {
-    $('#vos-cartes').prop('disabled',false);
+    $('#vos-cartes').prop('disabled', false);
 }
 
 function disableCartesMain() {
-    $('#vos-cartes').prop('disabled',true);
+    $('#vos-cartes').prop('disabled', true);
 }
 
 /*  methodes sequencement   */
 function isMyTurn() {
-    var joueurActif = $('.adversaire-actif').text();
-    var moi = $('#votre-nom').text();
+    var joueurActif = $('.adversaire-actif').val();
+    var moi = $('#votre-nom').val();
     if (moi === joueurActif) {
         clearInterval(interval);
         startTurn();
     } else {
-        alert("C'est le tour de "+joueurActif);
+        alert("C'est le tour de " + joueurActif);
+        $('#btn-lancer-des').show();
         interval = RefreshInterval;
         interval();
     }
@@ -73,11 +74,11 @@ function DonnerDe() {
     alert("in donner de");
     var nbDesADonner = $('.de-en-main[data-valeur = D]');
 
-    for(var i =0; i < nbDesADonner;i++){
+    for (var i = 0; i < nbDesADonner; i++) {
         var cible = prompt("A qui voulez vous donner ce dé?");
         $.ajax({
             type: "GET",
-            async : false,
+            async: false,
             url: "/Plateau/DonnerDe",
             data: "?cible=" + cible,
             success: function () {
@@ -97,17 +98,18 @@ function RefreshInterval() {
     setInterval(function () {
         $('.game-container').load('/Plateau/RefreshPlateau');
         console.log("Refresh");
-        checkVainqueur();
-        RefreshActions();
-     }, 2000);
+        $('#btn-lancer-des').show();
+        //  checkVainqueur();
+        //  RefreshActions();
+    }, 2000);
 }
 
-function JouerCarte() {
+function JouerCarte(idCarteI, TypeCarteI) {
 
     //get clicked object info
-    var typeCarte = $(this).attr("data-code-effet");
-    var typeCarteInt = Number.parseInt(typeCarte);
-    var idCarte = $(this).attr("data-id");
+    var typeCarte = TypeCarteI;
+    var typeCarteInt = TypeCarteI;
+    var idCarte = idCarteI;
     alert('Type : ' + typeCarte + ' // Id : ' + idCarte);
 
     //init JSON container        
@@ -118,17 +120,15 @@ function JouerCarte() {
     data["cible"] = "";
     data["sens"] = "";
 
-    var nb = 0;
-    ($(".de-en-main").attr("data-valeur") === "M").each(
-        function () {
-            nb++;
-        }
-    );
+    //var nb = $('.de-en-main [data-id = ""]').length;
 
+    /*
     if ($(this).attr("data-cout").val() < nb) {
         alert("Vous n'avez pas assez de dés mafia pour jouer cette carte!")
         return;
     }
+    */
+
     if (typeCarteInt === 4 || typeCarteInt === 5 || typeCarteInt === 6 || typeCarteInt === 9) {
         //selectAdversaire();
         var person = prompt("Entrez le nom de votre adversaire", "");
@@ -144,11 +144,11 @@ function JouerCarte() {
             data["sens"] = sens;
         }
     }
-    
+
     var aPasser = JSON.stringify(data);
 
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: "/Plateau/JouerCarte",
         data: "json=" + aPasser,
         cache: false,
@@ -156,10 +156,33 @@ function JouerCarte() {
             alert("FAIL");
         }
     }).done(function () {
-        DelJouerCarteCartesMain();
+        // DelJouerCarteCartesMain();
         location.reload(true);
         interval();
     });
+}
+
+function JouerDe(idDeI, ValeurI) {
+
+    if (ValeurI === "D") {
+        var person = prompt("Entrez le nom de votre adversaire", "");
+
+
+        $.ajax({
+            type: "GET",
+            url: "/Plateau/DonnerDe",
+            data: "cible=" + person,
+            cache: false,
+            error: function () {
+                alert("FAIL");
+            }
+        }).done(function () {
+            // DelJouerCarteCartesMain();
+            location.reload(true);
+            interval();
+        });
+
+    }
 }
 
 function LancerDes() {

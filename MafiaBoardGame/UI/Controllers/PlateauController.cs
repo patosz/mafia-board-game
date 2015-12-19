@@ -97,9 +97,9 @@ namespace UI.Controllers
 
             ViewData["partie"] = nomPartie;
             plateau.Client = jdt.Pseudo;
-            if(p.Vainqueur != null)
-                ViewData["vainqueur"] = p.Vainqueur.Pseudo;
-            if(!cible.Equals(""))
+            if (p.Vainqueur != null)
+                plateau.Vainqueur = p.Vainqueur.Pseudo;
+            if (!cible.Equals(""))
             {
                 plateau.passeTour = cible;
             }
@@ -162,11 +162,13 @@ namespace UI.Controllers
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
-
-
             UCCPartie.Instance.quitterPartie(joueurPartie);
             JoueurDto vainqueur = UCCPartie.Instance.vainqueurParForfait();
-            if (vainqueur == null)
+            if (vainqueur != null)
+            {
+                //on a un vainqueur
+            }
+            else
             {
                 UCCPartie.Instance.next();
             }
@@ -186,7 +188,7 @@ namespace UI.Controllers
             int typeCarte = Int32.Parse(dico["typeCarte"]);
             int idCarte = Int32.Parse(dico["carteChoisie"]);
             string sensDico = dico["sens"];
-          
+
             string sens = "";
             if (sensDico != "")
             {
