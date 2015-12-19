@@ -46,7 +46,7 @@ function AddRefreshInterval() {
         var html = $('#game-container').get('/Plateau/RefreshPlateau');
         if (html !== null || html !== 'undefined') {
             $('#game-container').html(html);
-            AddJouerCarteCartesMain();
+            
         }
     }, 2000);
 }
@@ -75,35 +75,43 @@ function AddJouerCarteCartesMain() {
         var cible = '';
         var sensChoisi = '';
         alert(typeid + '     ' + carteChoisie);
-        var donnees = '';
-        donnees += typeid + ':';
-        donnees += carteChoisie + ':';
-
+        var data = {};
+        data["cible"] ="";
+        data["sens"] = "";
+        
         if (typeid == 4 || typeid == 5 || typeid == 6 || typeid == 9) {
             //selectAdversaire();
             var person = prompt("Entrez le nom de votre adversaire", "");
             if (person != null) {
                 cible = person;
+                data["cible"] = cible;
             }
         }
 
-        donnees += cible + ':';
 
         if (typeid == 2) {
             //popupSelectSens();
             var sens = prompt("Entrez le sens choisi (G ou D)", "");
             if (sens != null) {
                 sensChoisi = sens;
+                data["sens"] = sens;
             }
         }
-
-        donnees += sensChoisi;
-
-
+       
+        data["typeCarte"] = typeid;
+        data["carteChoisie"] = carteChoisie;
+        alert("YOLO");
+        var aPasser;
+        try {
+            aPasser = JSON.parse(donnees);
+        } catch (e) {
+            alert("YOLO");
+        }
+       
         $.ajax({
             type: "GET",
-            url: "/Plateau/JouerCarte?donnees=" + donnees,
-            data: {},
+            url: "/Plateau/JouerCarte",
+            data: data,
             contentType: "application/json",
             dataType: "json",
             success: function () {
