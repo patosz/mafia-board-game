@@ -9,8 +9,7 @@ $(function () {
 function isMyTurn() {
     var joueurActif = $('.adversaire-actif').text();
     var moi = $('#votre-nom').text();
-    
-        startTurn();
+    startTurn();
     /*} else {
         interval = RefreshInterval;
         interval();
@@ -18,9 +17,9 @@ function isMyTurn() {
 }
 
 function startTurn() {
-    clearInterval(interval);
+    //clearInterval(interval);
     $('#btn-lancer-des').show();
-    alert("C'est votre tour");
+    //alert("C'est votre tour");
 }
 
 function addPopoverCartesMain() {
@@ -46,6 +45,7 @@ function checkVainqueur() {
         window.location = '/Partie/Index';
     }
 }
+
 function disableCards() {
     $('vos-cartes').prop('disabled', true);
 }
