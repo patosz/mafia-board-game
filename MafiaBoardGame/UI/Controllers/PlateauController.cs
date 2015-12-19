@@ -91,6 +91,7 @@ namespace UI.Controllers
             }
 
             ViewData["partie"] = nomPartie;
+            ViewBag.User = jdt.Pseudo;
             return PartialView(plateau);
         }
 
@@ -176,24 +177,38 @@ namespace UI.Controllers
 
         }
 
-        public ActionResult JouerCarte(string json = "")
+        public void JouerCarte()
         {
-            if (json == "")
-                return Json(new { success = false, res = "Prob param" }, JsonRequestBehavior.AllowGet);
-            Dictionary<string, string> dico= (Dictionary<string, string>)JsonConvert.DeserializeObject(json);
+            String json = Request.Params.Get("json");
+            if (json == null)
+            {
+                RedirectToAction("Index", new { controller = "Index" });
+            }
+
+            //recup infos de json            
+            Dictionary<string, string> dico = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            int typeCarte = Int32.Parse(dico["typeCarte"]);
+            int idCarte = Int32.Parse(dico["carteChoisie"]);
+            string sensDico = dico["sens"];
+
             string sens = "";
-            int idPartie = (int)Session["partie"];
-            string cibleStr= "";
+            if (sensDico != "")
+            {
+                sens = sensDico;
+            }
+
+            string cibleDico = dico["cible"];
+            string cibleStr = "";
             int cible = 0;
-            if (dico["cible"] != "")
+
+            int idPartie = (int)Session["partie"];
+
+            if (cibleDico != "")
             {
                 cibleStr = dico["cible"];
-               cible= UCCPartie.Instance.getJoueurPartie(cibleStr, idPartie).Id;
+                cible = UCCPartie.Instance.getJoueurPartie(cibleStr, idPartie).Id;
             }
-            int typeCarte = int.Parse(dico["typeCarte"]);
-            int idCarte = int.Parse(dico["carteChoisie"]);
-            if (dico["sens"] != "")
-                sens = dico["sens"];
+
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
 
             CarteDto carteDto = UCCPartie.Instance.getCarteDto(idCarte);
@@ -202,11 +217,11 @@ namespace UI.Controllers
             {
                 case 1:
                     //Supprimer 1 des
-                    
+
                     UCCPartie.Instance.supprimerUnDe(joueurPartie);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
-                    
+                    break;
+
                 case 2:
                     //Donner des gauche ou droite
                     if (sens == "G")
@@ -214,61 +229,62 @@ namespace UI.Controllers
                     else
                         UCCPartie.Instance.donnerDeAGaucheOuDroite(true);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
+                    break;
 
                 case 3:
                     //Supprimer 2 des
                     UCCPartie.Instance.supprimerDeuxDes(joueurPartie);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
+                    break;
 
-                    
+
                 case 4:
                     //Donner 1 dé
                     UCCPartie.Instance.donnerUnDeAUnJoueur(joueurPartie, cible);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
-                    
+                    break;
+
                 case 5:
                     //Prendre 1 carte au joueur de mon choix
                     UCCPartie.Instance.prendreUneCarteDUnJoueur(joueurPartie, cible);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
+                    break;
 
                 case 6:
                     //Joueur de mon choix n'a plus qu'une carte
                     UCCPartie.Instance.ciblerJoueurQUUneCarte(cible);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
+                    throw new Exception("Case 6 : Type carte 6");
 
                 case 7:
                     //Piocher 3 cartes
                     UCCPartie.Instance.piocheTroisCartes(joueurPartie);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
+                    break;
 
                 case 8:
                     //Tous les joueurs sauf moi n'ont plus que 2 cartes
                     UCCPartie.Instance.plusQueDeuxCartesPourLesAutres(joueurPartie);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
+                    break;
 
                 case 9:
                     //Joueur de mon choix passe son tour
 
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
+                    break;
 
                 case 10:
                     //Rejouer et changer de tour
                     UCCPartie.Instance.rejouerEtChangementDeSens(joueurPartie);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
-                    throw new Exception();
+                    break;
 
-                default: return Json(new { success = false, res = "Prob Switch Case" }, JsonRequestBehavior.AllowGet);
-
+                default:
+                    Response.StatusCode = 500;
+                    Response.Write("Type de carte non pris en charge !");
+                    break;
             }
-            //return Json(new { success = true, res = "Order updated successfully" }, JsonRequestBehavior.AllowGet);
         }
     }
 }

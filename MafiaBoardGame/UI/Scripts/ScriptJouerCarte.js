@@ -1,7 +1,8 @@
 ﻿var interval;
 
 $(function () {
-    interval = AddRefreshInterval();
+    interval = RefreshInterval;
+    interval();
     AddJouerCarteCartesMain();
     AddPopoverDefausse();
 });
@@ -14,12 +15,8 @@ function DonnerDe() {
             var cible = prompt("A qui voulez vous donner ce dé?");
             $.ajax({
                 type: "GET",
-                url: "/Plateau/DonnerDe?cible=" + cible,
-                data: cible,
-                contentType: "application/json",
-                dataType: "json",
-                async: true,
-                cache: false,
+                url: "/Plateau/DonnerDe",
+                data: "?cible=" + cible,
                 success: function () {
                     alert("SUCCESS");
                 },
@@ -41,12 +38,12 @@ function DonnerDe() {
     */
 }
 
-function AddRefreshInterval() {
+function RefreshInterval() {
     setInterval(function () {
         var html = $('#game-container').get('/Plateau/RefreshPlateau');
         if (html !== null || html !== 'undefined') {
             $('#game-container').html(html);
-            
+            console.log("Refresh");
         }
     }, 2000);
 }
@@ -68,56 +65,51 @@ function AddPopoverDefausse() {
 
 function AddJouerCarteCartesMain() {
     $(".carte-en-main").dblclick(function () {
-        clearInterval(interval);
-        alert("hahaha");
-        var typeid = $(this).attr("data-code-effet");
-        var carteChoisie = $(this).attr("data-id");
-        var cible = '';
-        var sensChoisi = '';
-        alert(typeid + '     ' + carteChoisie);
-        var data = {};
-        data["cible"] ="";
-        data["sens"] = "";
         
-        if (typeid == 4 || typeid == 5 || typeid == 6 || typeid == 9) {
+        //stop refresh
+        clearInterval(interval);
+
+        alert("hahaha");
+        
+        //get clicked object info
+        var typeCarte = $(this).attr("data-code-effet");
+        var typeCarteInt = Number.parseInt(typeCarte);
+        var idCarte = $(this).attr("data-id");
+        alert('Type : ' + typeCarte + ' // Id : ' + idCarte);
+        
+        //init JSON container        
+        var data = {};
+        data["typeCarte"] = typeCarte;
+        data["carteChoisie"] = idCarte;
+        //optional
+        data["cible"] = "";
+        data["sens"] = "";
+
+        if (typeCarteInt === 4 || typeCarteInt === 5 || typeCarteInt === 6 || typeCarteInt === 9) {
             //selectAdversaire();
             var person = prompt("Entrez le nom de votre adversaire", "");
             if (person != null) {
-                cible = person;
-                data["cible"] = cible;
+                data["cible"] = person;
             }
         }
 
-
-        if (typeid == 2) {
+        if (typeCarteInt === 2) {
             //popupSelectSens();
             var sens = prompt("Entrez le sens choisi (G ou D)", "");
             if (sens != null) {
-                sensChoisi = sens;
                 data["sens"] = sens;
             }
         }
-       
-        data["typeCarte"] = typeid;
-        data["carteChoisie"] = carteChoisie;
+
+
         alert("YOLO");
-        var aPasser;
-        try {
-            aPasser = JSON.parse(donnees);
-        } catch (e) {
-            alert("YOLO");
-        }
-       
+        var aPasser = JSON.stringify(data);
+
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/Plateau/JouerCarte",
-            data: data,
-            contentType: "application/json",
-            dataType: "json",
-            success: function () {
-                alert("SUCCESS");
-                interval();
-            },
+            data: "json="+aPasser,
+            success: interval(),
             error: function () {
                 alert("FAIL");
             }
