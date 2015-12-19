@@ -58,7 +58,7 @@ namespace UI.Controllers
         }
 
 
-        public PartialViewResult RefreshPlateau(string nomPartie = "Partie aléatoire")
+        public PartialViewResult RefreshPlateau(string nomPartie = "Partie aléatoire", string cible = "")
         {
             //TODO ajouter système check partie invalide demandée
 
@@ -98,7 +98,10 @@ namespace UI.Controllers
             plateau.Client = jdt.Pseudo;
             if(p.Vainqueur != null)
                 ViewData["vainqueur"] = p.Vainqueur.Pseudo;
-
+            if(!cible.Equals(""))
+            {
+                plateau.passeTour = cible;
+            }
             return PartialView(plateau);
         }
 
@@ -191,7 +194,7 @@ namespace UI.Controllers
             int typeCarte = Int32.Parse(dico["typeCarte"]);
             int idCarte = Int32.Parse(dico["carteChoisie"]);
             string sensDico = dico["sens"];
-
+          
             string sens = "";
             if (sensDico != "")
             {
@@ -218,7 +221,6 @@ namespace UI.Controllers
             {
                 case 1:
                     //Supprimer 1 des
-
                     UCCPartie.Instance.supprimerUnDe(joueurPartie);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
                     break;
@@ -271,13 +273,12 @@ namespace UI.Controllers
 
                 case 9:
                     //Joueur de mon choix passe son tour
-
+                    passeTour(cibleStr);
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
                     break;
-
                 case 10:
                     //Rejouer et changer de tour
-                    UCCPartie.Instance.rejouerEtChangementDeSens(joueurPartie);
+                    rejouer();
                     UCCPartie.Instance.jeterCartePoubelle(joueurPartie, idCarte);
                     break;
 
@@ -286,6 +287,20 @@ namespace UI.Controllers
                     Response.Write("Type de carte non pris en charge !");
                     break;
             }
+        }
+        public void rejouer()
+        {
+            int idPartie = (int)Session["partie"];
+            int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
+            PartieDto p = UCCPartie.Instance.getPartieDto(idPartie);
+            int nbJoueurs = UCCPartie.Instance.getListJoueurParticipantsDto(idPartie).ToList().Count;
+            for (int i = 0; i < nbJoueurs; i++)
+                UCCPartie.Instance.next();
+            UCCPartie.Instance.rejouerEtChangementDeSens(joueurPartie);
+        }
+        public void passeTour(string cible)
+        {
+            RefreshPlateau("", cible);
         }
     }
 }

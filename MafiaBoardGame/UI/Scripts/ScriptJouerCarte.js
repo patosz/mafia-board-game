@@ -124,7 +124,6 @@ function DelJouerCarteCartesMain() {
 }
 
 function JouerCarte() {
-    alert("hahaha");
 
     //get clicked object info
     var typeCarte = $(this).attr("data-code-effet");
@@ -140,6 +139,17 @@ function JouerCarte() {
     data["cible"] = "";
     data["sens"] = "";
 
+    var nb = 0;
+    ($(".de-en-main").attr("data-valeur") === "M").each(
+        function () {
+            nb++;
+        }
+    );
+
+    if ($(this).attr("data-cout").val() < nb) {
+        alert("Vous n'avez pas assez de dés mafia pour jouer cette carte!")
+        return;
+    }
     if (typeCarteInt === 4 || typeCarteInt === 5 || typeCarteInt === 6 || typeCarteInt === 9) {
         //selectAdversaire();
         var person = prompt("Entrez le nom de votre adversaire", "");
@@ -155,9 +165,7 @@ function JouerCarte() {
             data["sens"] = sens;
         }
     }
-
-
-    alert("YOLO");
+    
     var aPasser = JSON.stringify(data);
 
     $.ajax({

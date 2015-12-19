@@ -102,9 +102,16 @@
                 <h3 class="panel-title">
                     Votre main - <span id="votre-nom">@Model.Client</span>
                 </h3>
-                <a href="/Plateau/Next" class="btn btn-warning pull-right">
+               
+                <a href="/Plateau/Next" class="btn btn-warning pull-right fire">
                     Passer son tour
                 </a>
+                @if (Model.passeTour != null && Model.Client.Equals(Model.passeTour))
+                {
+                    <script type="text/javascript">
+                        $(".fire").click();
+                    </script>
+                }
 
                 <a href="/Plateau/QuitterPartie" class="btn btn-danger pull-right">
                     Quitter partie
