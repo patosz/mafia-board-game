@@ -1,29 +1,10 @@
 ﻿var interval;
 
 $(function () {
-    AddPopoverDefausse();
-    addPopoverCartesMain();
     isMyTurn();
 });
 
-function isMyTurn() {
-    var joueurActif = $('.adversaire-actif').text();
-    var moi = $('#votre-nom').text();
-    
-        startTurn();
-    /*} else {
-        interval = RefreshInterval;
-        interval();
-    }*/
-}
-
-function startTurn() {
-    clearInterval(interval);
-    $('#btn-lancer-des').show();
-    alert("C'est votre tour");
-}
-
-function addPopoverCartesMain() {
+function PopoverCartesMain() {
     var content = "";
     content += '<img src="/Images/carte' + $(this).attr('data-code-effet') + '.svg"/>';
     content += '<p><strong>EffetComplet : </strong><br/>' + $(this).attr('data-effet-complet') + '</p>';
@@ -38,69 +19,7 @@ function addPopoverCartesMain() {
     });
 }
 
-
-function checkVainqueur() {
-    var vainqueur = $('#vainqueur').text();
-    if (vainqueur !== null && vainqueur !== 'undefined' && vainqueur.length > 0) {
-        alert("Le vainqueur est : ");
-        window.location = '/Partie/Index';
-    }
-}
-function disableCards() {
-    $('vos-cartes').prop('disabled', true);
-}
-
-function enableCards() {
-    $('vos-cartes').prop('disabled', false);
-}
-
-function DonnerDe() {
-
-    $(".de-en-main").each(function () {
-        if ($(this).attr("data-valeur") === "D") {
-            //popupSelectAdversaire();
-            var cible = prompt("A qui voulez vous donner ce dé?");
-            $.ajax({
-                type: "GET",
-                url: "/Plateau/DonnerDe",
-                data: "?cible=" + cible,
-                success: function () {
-                    alert("SUCCESS");
-                },
-                error: function () {
-                    alert("FAIL");
-                }
-            })
-        }
-    });
-
-    $('.game-container').load('/Plateau/RefreshPlateau');
-    AddJouerCarteCartesMain();
-
-    /*
-    var select = $('<select>');
-    var adversaires = $('.adversaire').text();
-    for (var adv in adversaires) {
-        var option = $('<option>');
-        $(option).val(adv);
-        $(select).append(option);
-    }
-    */
-}
-
-function RefreshInterval() {
-    setInterval(function () {
-        var html = $.get('/Plateau/RefreshPlateau');
-        if (html !== null || html !== 'undefined') {
-            $('.game-container').html(html);
-            console.log("Refresh");
-            checkVainqueur();
-        }
-    }, 2000);
-
-}
-
-function AddPopoverDefausse() {
+function PopoverDefausse() {
     var content = "";
     content += '<img src="/Images/carte' + $(this).attr('data-code-effet') + '.svg"/>';
     content += '<p><strong>EffetComplet : </strong><br/>' + $(this).attr('data-effet-complet') + '</p>';
@@ -115,12 +34,72 @@ function AddPopoverDefausse() {
     });
 }
 
-function AddJouerCarteCartesMain() {
-    $(".carte-en-main").dblclick(JouerCarte);
+function enableCartesMain() {
+    $('#vos-cartes').prop('disabled',false);
 }
 
-function DelJouerCarteCartesMain() {
-    $(".carte-en-main").off("dblclick");
+function disableCartesMain() {
+    $('#vos-cartes').prop('disabled',true);
+}
+
+/*  methodes sequencement   */
+function isMyTurn() {
+    var joueurActif = $('.adversaire-actif').text();
+    var moi = $('#votre-nom').text();
+    if (moi === joueurActif) {
+        clearInterval(interval);
+        startTurn();
+    } else {
+        alert("C'est le tour de "+joueurActif);
+        interval = RefreshInterval;
+        interval();
+    }
+}
+
+function startTurn() {
+    $('#btn-lancer-des').show();
+    alert("C'est votre tour");
+}
+
+function checkVainqueur() {
+    var vainqueur = $('#vainqueur').text();
+    if (vainqueur !== null && vainqueur !== 'undefined' && vainqueur.length > 0) {
+        alert("Le vainqueur est : " + vainqueur);
+        window.location = '/Partie/Index';
+    }
+}
+
+function DonnerDe() {
+    alert("in donner de");
+    var nbDesADonner = $('.de-en-main[data-valeur = D]');
+
+    for(var i =0; i < nbDesADonner;i++){
+        var cible = prompt("A qui voulez vous donner ce dé?");
+        $.ajax({
+            type: "GET",
+            async : false,
+            url: "/Plateau/DonnerDe",
+            data: "?cible=" + cible,
+            success: function () {
+                alert("SUCCESS");
+            },
+            error: function () {
+                alert("FAIL");
+            }
+        });
+    }
+
+    $('.game-container').load('/Plateau/RefreshPlateau');
+    enableCartesMain();
+}
+
+function RefreshInterval() {
+    setInterval(function () {
+        $('.game-container').load('/Plateau/RefreshPlateau');
+        console.log("Refresh");
+        checkVainqueur();
+        RefreshActions();
+     }, 2000);
 }
 
 function JouerCarte() {

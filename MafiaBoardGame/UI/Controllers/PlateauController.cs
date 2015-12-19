@@ -49,6 +49,7 @@ namespace UI.Controllers
                     plateau.MesCartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
                 }
                 plateau.Adversaires.Add(adv);
+                plateau.Client = jdt.Pseudo;
             }
 
             ViewData["partie"] = nomPartie;
@@ -102,11 +103,6 @@ namespace UI.Controllers
             return PartialView(plateau);
         }
 
-        public ViewResult IndexTemplate()
-        {
-            return View();
-        }
-
         public void LancerDes()
         {
             int idPartie = (int)Session["partie"];
@@ -128,7 +124,7 @@ namespace UI.Controllers
             RefreshPlateau();
         }
 
-        public void DonnerDe(string json = "")
+        public void DonnerDe()
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
@@ -167,11 +163,7 @@ namespace UI.Controllers
 
             UCCPartie.Instance.quitterPartie(joueurPartie);
             JoueurDto vainqueur = UCCPartie.Instance.vainqueurParForfait();
-            if (vainqueur != null)
-            {
-                //on a un vainqueur
-            }
-            else
+            if (vainqueur == null)
             {
                 UCCPartie.Instance.next();
             }

@@ -70,7 +70,8 @@
                 <div class="panel-body">
                     @if (Model.DerniereCarteJouee != null)
                     {
-                        <img src="~/Images/carte_@(Model.DerniereCarteJouee.CodeEffet).svg" id="defausse" />
+                        <img src="~/Images/carte_@(Model.DerniereCarteJouee.CodeEffet).svg" id="defausse"
+                             onclick="PopoverDefausse()" />
                     }
                     else {
                         <p>Vide</p>
@@ -138,7 +139,9 @@
 
                                         <div class="col-sm-3">
                                             <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@(c.CodeEffet)"
-                                                 data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" class="img-responsive carte-en-main" />
+                                                 data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" 
+                                                 class="img-responsive carte-en-main" ondblclick="JouerCarte()"
+                                                 onclick="PopoverCartesMain()"/>
                                         </div>
                                     }
                                 </div>
@@ -160,7 +163,9 @@
 
                                             <div class="col-sm-3">
                                                 <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
-                                                     data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" class="img-responsive carte-en-main" />
+                                                     data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" 
+                                                     class="img-responsive carte-en-main" ondblclick="JouerCarte()" 
+                                                     onclick="PopoverCartesMain()"/>
                                             </div>
                                         }
                                     </div>

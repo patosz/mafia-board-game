@@ -14,25 +14,19 @@
 </h2>
 <div id="infos">
     @{
-        Html.RenderPartial("RefreshLoadScreen", Model.Participants);
+    Html.RenderPartial("RefreshLoadScreen", Model.Participants);
     }
 </div>
 
 <script>
     $(document).ready(function () {
         setInterval(function () {
-           // $.ajax({
-             //   url: '/Partie/RefreshLoadScreen',
-               // type: 'GET'
-            //});
-
             $('#infos').load('/Partie/RefreshLoadScreen');
             var status = $('#status').attr('data-status');
-           
-            if (status !== "go");
-                
-            else
+
+            if (status === "go") {
                 location.href = '/Plateau/Index';
+            }
 
         }, 10000);
     });
