@@ -138,15 +138,15 @@ namespace UI.Controllers
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
 
-           
-
-
+            string cibleString = Request.QueryString["cible"];
+            int cible = (UCCPartie.Instance.getJoueurPartie(cibleString, idPartie)).Id;
+            UCCPartie.Instance.donnerDe(joueurPartie, cible);
             RefreshPlateau();
 
         }
 
         [WebMethod]
-        public void Next()
+        public ActionResult Next()
         {
             int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
@@ -161,8 +161,7 @@ namespace UI.Controllers
             {
                 UCCPartie.Instance.next();
             }
-
-           RefreshPlateau();
+            return RedirectToAction("Plateau", new { controller = "Index" });
 
         }
 
@@ -194,15 +193,14 @@ namespace UI.Controllers
             if (json == "")
                 return Json(new { success = false, res = "Prob param" }, JsonRequestBehavior.AllowGet);
             string sens = "";
-            int cible = 0;
-            string[] tab= json.Split(':');
+            int idPartie = (int)Session["partie"];
+            string[] tab = json.Split(':');
+            int cible = UCCPartie.Instance.getJoueurPartie(tab[2], idPartie).Id;
+           
             int typeCarte = int.Parse(tab[0]);
             int idCarte = int.Parse(tab[1]);
-            if(tab[2] != "")
-                cible = int.Parse(tab[2]);
             if(tab[3] != "")
                  sens = tab[3];
-            int idPartie = (int)Session["partie"];
             int joueurPartie = UCCPartie.Instance.getPartieDto(idPartie).JoueurCourant.Id;
            
             CarteDto carteDto = UCCPartie.Instance.getCarteDto(idCarte);

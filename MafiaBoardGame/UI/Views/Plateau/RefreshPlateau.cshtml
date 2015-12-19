@@ -2,9 +2,10 @@
 @model UI.Models.ModelPlateau
 
 @{
-    ViewBag.Title = "Partie" + ViewData["partie"];
+    ViewBag.Title = Model.JoueurCourant.Pseudo;
 }
 <div class="row">
+    <h1>Joueur courant = @Model.JoueurCourant.Pseudo</h1>
     @foreach (var adv in Model.Adversaires)
     {
         <div class="col-lg-2 col-lg-offset-1">
@@ -69,6 +70,7 @@
     </div>
 </div>
 
+@Html.ActionLink("Passer tour", "Next", "Plateau", null, new { @class = "navbar-brand" })
 <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
         <div class="panel panel-primary">
@@ -81,7 +83,7 @@
                 <div class="well vos-des col-lg-4">
                     @foreach (var d in Model.MesDes)
                     {
-                        
+
                         <img src="~/Images/de_wazabi.svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur" />
                     }
                 </div>
@@ -134,7 +136,7 @@
                                 </div>
                                 NbCartesRestantes -= j;
                             }
-                            
+
 
                             <!-- Left and right controls -->
                             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
