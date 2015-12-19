@@ -108,6 +108,7 @@ namespace UI.Controllers
                 //TimeSpan ts = DateTime.Now.Subtract(partieCreation);
 
                 LancerPartie();
+                Session.Remove("partieCreation");
                 //status = "coucou";
 
             }

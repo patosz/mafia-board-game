@@ -161,7 +161,7 @@ namespace UI.Controllers
             {
                 UCCPartie.Instance.next();
             }
-            return RedirectToAction("Plateau", new { controller = "Index" });
+            return RedirectToAction("Index", new { controller = "Plateau" });
 
         }
 
