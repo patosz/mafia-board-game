@@ -40,7 +40,7 @@ namespace UI.Controllers
                 adv.Pseudo = jp.Joueur.Pseudo;
                 adv.Des = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
                 adv.Cartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
-                if (adv.Pseudo.Equals(plateau.JoueurCourant.Pseudo))
+                if (adv.Pseudo.Equals(jdt.Pseudo))
                 {
                     plateau.MesDes = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
                     plateau.DesCourant = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
@@ -79,7 +79,7 @@ namespace UI.Controllers
                 adv.Pseudo = jp.Joueur.Pseudo;
                 adv.Des = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
                 adv.Cartes = UCCPartie.Instance.getListCartesDto(jp.Id).ToList();
-                if (adv.Pseudo.Equals(plateau.JoueurCourant.Pseudo))
+                if (adv.Pseudo.Equals(jdt.Pseudo))
                 {
                     plateau.MesDes = UCCPartie.Instance.getListDesDto(jp.Id).ToList();
                     plateau.DesCourant = UCCPartie.Instance.getListDesDto(jp.Id).ToList();

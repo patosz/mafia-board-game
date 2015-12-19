@@ -388,9 +388,8 @@ namespace Domain
         public void supprimerUnDe(int IdJoueurPartie)
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
-
-            joueurPartie.DesMain.Remove(joueurPartie.DesMain.ElementAt(0));
-
+            joueurPartie.DesMain.Remove(joueurPartie.DesMain.First());
+         
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
             dbcontext.SaveChanges();
         }
@@ -399,8 +398,8 @@ namespace Domain
         {
             JoueurPartie joueurPartie = getJoueurPartie(IdJoueurPartie);
 
-            joueurPartie.DesMain.Remove(joueurPartie.DesMain.ElementAt(0));
-            joueurPartie.DesMain.Remove(joueurPartie.DesMain.ElementAt(1));
+            joueurPartie.DesMain.Remove(joueurPartie.DesMain.First());
+            joueurPartie.DesMain.Remove(joueurPartie.DesMain.First());
 
 
             dbcontext.Entry(joueurPartie).State = System.Data.Entity.EntityState.Modified;
