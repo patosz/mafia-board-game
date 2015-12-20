@@ -135,7 +135,7 @@ namespace UI.Controllers
             else
             {
                 TempData["error"] = "Impossible de rejoindre la partie en cours";
-                return RedirectToAction("VoirPartiesDisponibles");
+                return RedirectToAction("Index");
             }
         }
 
@@ -143,18 +143,14 @@ namespace UI.Controllers
         public ActionResult VoirPartiesJouees()
         {
             JoueurDto j = (JoueurDto)Session["user"];
-            List<PartieDto> parties = new List<PartieDto>();
-            //TODO recevoir une liste = UCCJoueur.Instance.GetPartiesJouees(j.Pseudo);
+            List<PartieDto> parties = UCCPartie.Instance.VoirPartie(j.Pseudo).ToList();
+            if (parties == null)
+            {
+                parties = new List<PartieDto>();
+            }
             return PartialView("VoirPartiesJouees", parties);
         }
 
-        public ActionResult VoirPartiesDisponibles()
-        {
-            JoueurDto j = (JoueurDto)Session["user"];
-            List<PartieDto> parties = new List<PartieDto>();
-            //TODO recevoir une  liste = UCCJoueur.Instance.GetPartiesJouees(j.Pseudo);
-            return PartialView("VoirPartiesDisponibles", parties);
-        }
     }
 
 }

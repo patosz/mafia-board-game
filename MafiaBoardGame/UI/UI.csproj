@@ -236,11 +236,9 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Views\Partie\Index.cshtml" />
-    <Content Include="Views\Partie\Rejoindre.cshtml" />
     <Content Include="Views\Partie\CreerForm.cshtml" />
     <Content Include="Views\Partie\VoirPartiesJouees.cshtml" />
     <Content Include="Views\Partie\WaitForStart.cshtml" />
-    <Content Include="Views\Partie\VoirPartiesDisponibles.cshtml" />
     <Content Include="Views\Joueur\ConfirmRegistration.cshtml" />
     <Content Include="Views\Joueur\Register.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />

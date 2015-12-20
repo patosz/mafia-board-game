@@ -19,9 +19,6 @@
                     @Html.ActionLink("Rejoindre une partie", "Rejoindre", new { controller = "Partie" })
                 </li>
                 <li>
-                    <a href="javascript:showVoirPartiesDisponibles()"> Voir Parties Disponibles</a>
-                </li>
-                <li>
                     <a href="javascript:showVoirPartiesJouees()"> Voir Parties Jouees</a>
                 </li>
             </ul>
@@ -31,10 +28,6 @@
 
 <div id="Creer">
     @{Html.RenderAction("Creer", new { controller = "Partie" });}
-</div>
-
-<div id="VoirPartiesDisponibles" style="display:none;">
-    @{Html.RenderAction("VoirPartiesDisponibles", new { controller = "Partie" });}
 </div>
 
 <div id="VoirPartiesJouees" style="display:none;">
@@ -52,11 +45,5 @@
         $('#Creer').hide();
         $('#VoirPartiesDisponibles').hide();
         $('#VoirPartiesJouees').show();
-    }
-
-    function showVoirPartiesDisponibles() {
-        $('#Creer').hide();
-        $('#VoirPartiesJouees').hide();
-        $('#VoirPartiesDisponibles').show();
     }
 </script>

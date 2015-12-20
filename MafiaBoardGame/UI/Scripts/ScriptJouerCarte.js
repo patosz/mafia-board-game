@@ -50,7 +50,6 @@ function isMyTurn() {
         clearInterval(interval);
         startTurn();
     } else {
-        alert("C'est le tour de " + joueurActif);
         $('#btn-lancer-des').show();
         interval = RefreshInterval;
         interval();
@@ -59,7 +58,6 @@ function isMyTurn() {
 
 function startTurn() {
     $('#btn-lancer-des').show();
-    alert("C'est votre tour");
 }
 
 function checkVainqueur() {
@@ -71,7 +69,6 @@ function checkVainqueur() {
 }
 
 function DonnerDe() {
-    alert("in donner de");
     var nbDesADonner = $('.de-en-main[data-valeur = D]');
 
     for (var i = 0; i < nbDesADonner; i++) {
@@ -82,10 +79,8 @@ function DonnerDe() {
             url: "/Plateau/DonnerDe",
             data: "?cible=" + cible,
             success: function () {
-                alert("SUCCESS");
             },
             error: function () {
-                alert("FAIL");
             }
         });
     }
@@ -110,7 +105,6 @@ function JouerCarte(idCarteI, TypeCarteI) {
     var typeCarte = TypeCarteI;
     var typeCarteInt = TypeCarteI;
     var idCarte = idCarteI;
-    alert('Type : ' + typeCarte + ' // Id : ' + idCarte);
 
     //init JSON container        
     var data = {};
@@ -153,7 +147,6 @@ function JouerCarte(idCarteI, TypeCarteI) {
         data: "json=" + aPasser,
         cache: false,
         error: function () {
-            alert("FAIL");
         }
     }).done(function () {
         // DelJouerCarteCartesMain();
@@ -174,7 +167,6 @@ function JouerDe(idDeI, ValeurI) {
             data: "cible=" + person,
             cache: false,
             error: function () {
-                alert("FAIL");
             }
         }).done(function () {
             // DelJouerCarteCartesMain();
@@ -196,7 +188,6 @@ function LancerDes() {
         DonnerDe();
     }).fail(
         function (jqCHR, textStatus, errorThrown) {
-            alert(errorThrown);
         }
     );
 }
