@@ -14,15 +14,15 @@
             <div class="panel-heading">
                 @if (Model.JoueurCourant.Pseudo.Equals(adv.Pseudo))
                 {
-                    <h3 class="panel-title adversaire-actif">
-                        @adv.Pseudo
-                    </h3>
+                <h3 class="panel-title adversaire-actif">
+                    @adv.Pseudo
+                </h3>
                 }
                 else
                 {
-                    <h3 class="panel-title adversaire">
-                        @adv.Pseudo
-                    </h3>
+                <h3 class="panel-title adversaire">
+                    @adv.Pseudo
+                </h3>
                 }
             </div>
             <div class="panel-body">
@@ -30,7 +30,7 @@
                     @foreach (var d in adv.Des)
                     {
 
-                        <img src="~/Images/de_@(d.Valeur)_mini.svg" data-id="@d.Id" data-valeur="@d.Valeur" />
+                    <img src="~/Images/de_@(d.Valeur)_mini.svg" data-id="@d.Id" data-valeur="@d.Valeur" />
                     }
                 </div>
 
@@ -38,8 +38,8 @@
                 <div class="well cartes-adversaire">
                     @foreach (var c in adv.Cartes)
                     {
-                        <img src="~/Images/dos_carte_mini.svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
-                             data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" />
+                    <img src="~/Images/dos_carte_mini.svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                         data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" />
                     }
                 </div>
             </div>
@@ -70,11 +70,11 @@
                 <div class="panel-body">
                     @if (Model.DerniereCarteJouee != null)
                     {
-                        <img src="~/Images/carte_@(Model.DerniereCarteJouee.CodeEffet).svg" id="defausse"
-                             onclick="PopoverDefausse()" />
+                    <img src="~/Images/carte_@(Model.DerniereCarteJouee.CodeEffet).svg" id="defausse"/>
+                         <!--onclick="PopoverDefausse()"-->
                     }
                     else {
-                        <p>Vide</p>
+                    <p>Vide</p>
                     }
                 </div>
             </div>
@@ -85,10 +85,10 @@
                     <p class="panel-title">Dés du joueur courant</p>
                 </div>
                 <div class="panel-body">
-                        <a id="btn-lancer-des" onclick="LancerDes()" class="btn btn-primary" style="display:none;">Lancer dés</a>
+                    <a id="btn-lancer-des" onclick="LancerDes()" class="btn btn-primary" style="display:none;">Lancer dés</a>
                     @foreach (var d in Model.DesCourant)
                     {
-                        <img src="~/Images/de_@(d.Valeur).svg" data-id="@d.Id" data-valeur="@d.Valeur" />
+                    <img src="~/Images/de_@(d.Valeur).svg" data-id="@d.Id" data-valeur="@d.Valeur" />
                     }
                 </div>
             </div>
@@ -103,15 +103,15 @@
                 <h3 class="panel-title">
                     Votre main - <span id="votre-nom">@Model.Client</span>
                 </h3>
-               
+
                 <a href="/Plateau/Next" class="btn btn-warning pull-right fire">
                     Passer son tour
                 </a>
                 @if (Model.passeTour != null && Model.Client.Equals(Model.passeTour))
                 {
-                    <script type="text/javascript">
-                        $(".fire").click();
-                    </script>
+                <script type="text/javascript">
+                    $(".fire").click();
+                </script>
                 }
 
                 <a href="/Plateau/QuitterPartie" class="btn btn-danger pull-right">
@@ -122,9 +122,7 @@
                 <div class="well vos-des col-lg-4">
                     @foreach (var d in Model.MesDes)
                     {
-
-                        <img src="~/Images/de_@(d.Valeur).svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur"
-                             onclick="JouerDe(@d.Id,&quot;@d.Valeur&quot;)" />
+                    <img src="~/Images/de_@(d.Valeur).svg" class="de-en-main" data-id="@d.Id" data-valeur="@d.Valeur" />
                     }
                 </div>
 
@@ -135,53 +133,60 @@
                         <div class="carousel-inner">
 
                             @{
-                                var NbCartes = Model.MesCartes.Count;
-                                var j = 0;
+                            var NbCartes = Model.MesCartes.Count;
+                            var j = 0;
                             }
 
                             <div class="item active">
                                 <div class="row">
                                     @for (; j < NbCartes && j < 4; j++)
                                     {
-                                        var c = Model.MesCartes[j];
+                                    var c = Model.MesCartes[j];
 
-                                        <div class="col-sm-3">
-                                            <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@(c.CodeEffet)"
-                                                 data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" 
-                                                 class="img-responsive carte-en-main" ondblclick="JouerCarte(@c.Id,@c.CodeEffet)"
-                                                 onclick="PopoverCartesMain()"/>
-                                        </div>
+                                    <div class="col-sm-3">
+                                        <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@(c.CodeEffet)"
+                                             data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet"
+                                             class="img-responsive carte-en-main" />
+                                        <!--
+                                        onclick="PopoverCartesMain()"/>
+                                        ondblclick="JouerCarte(@c.Id,@c.CodeEffet)"
+                                        -->
+
+                                    </div>
                                     }
                                 </div>
                             </div>
 
 
                             @{
-                                var NbCartesRestantes = NbCartes - j;
+                            var NbCartesRestantes = NbCartes - j;
                             }
 
                             @for (var i = 0; NbCartesRestantes > 0; i++)
                             {
-                                <div class="item active">
-                                    <div class="row">
-                                        @for (j = 0; j < NbCartesRestantes && j < 4; j++)
-                                        {
+                            <div class="item">
+                                <div class="row">
+                                    @for (j = 0; j < NbCartesRestantes && j < 4; j++)
+                                    {
 
-                                            var c = Model.MesCartes[(i * 4) + j];
+                                    var c = Model.MesCartes[(i * 4) + j];
 
-                                            <div class="col-sm-3">
-                                                <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
-                                                     data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet" 
-                                                     class="img-responsive carte-en-main" ondblclick="JouerCarte(@c.Id,@c.CodeEffet)" 
-                                                     onclick="PopoverCartesMain()"/>
-                                            </div>
-                                        }
+                                    <div class="col-sm-3">
+                                        <img src="~/Images/carte_@(c.CodeEffet).svg" data-id="@c.Id" data-code-effet="@c.CodeEffet"
+                                             data-cout="@c.Cout" data-effet="@c.Effet" data-effet-complet="@c.EffetComplet"
+                                             class="img-responsive carte-en-main" />
+                                        <!--
+                                        ondblclick="JouerCarte(@c.Id,@c.CodeEffet)"
+                                        onclick="PopoverCartesMain()"
+                                        -->
                                     </div>
+                                    }
                                 </div>
-                                NbCartesRestantes -= j;
+                            </div>
+                            NbCartesRestantes -= j;
                             }
 
-
+                            @if(NbCartes > 4){
                             <!-- Left and right controls -->
                             <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -191,6 +196,7 @@
                                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                                 <span class="sr-only">Next</span>
                             </a>
+                            }
                         </div>
                     </div>
                 </div>
